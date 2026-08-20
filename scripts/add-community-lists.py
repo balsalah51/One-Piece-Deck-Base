@@ -383,7 +383,7 @@ def community_section(leader: dict, lists: list[dict], tournament_html: str) -> 
             <h3>YouTube and community decklists</h3>
             <div class="muted">{len(lists)} lists</div>
           </div>
-          <p class="muted">Lists copied from recent YouTube deck profiles and public deck builders. Public X posts from those creators were also scraped for pasteable NxSET-NNN lines; recent tweets were charts, memes, and clips rather than 50-card ID lists, so X is linked as a profile when the same creator posted a YouTube list.</p>
+          <p class="muted">Public YouTube and web lists with a full 50-card ID list. Tournament tables below are from Limitless.</p>
           <ul class="list" aria-label="YouTube and community decklists">
 {chr(10).join(rows)}
           </ul>
@@ -483,7 +483,7 @@ def main() -> None:
             <h3>Tournament decklists</h3>
             <div class="muted">0 lists</div>
           </div>
-          <p class="muted">Still no Limitless tournament results for OP17-001. Use the YouTube lists above until events start posting this leader.</p>
+          <p class="muted">No Limitless standings for this leader yet. Community lists are above.</p>
         </section>
         <!-- /TOURNAMENT_DECKLISTS -->"""
         combined = community_section(leader, public, tournament_block)

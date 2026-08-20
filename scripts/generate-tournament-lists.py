@@ -101,8 +101,8 @@ LEADERS = [
         "color": "color-red-green",
         "crumb": ("/decklists/op17.html", "OP17 decklists"),
         "nav_op17": False,
-        "pool_heading": "Featured sample list",
-        "pool_note": "One older Limitless list kept on this page",
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
     },
     {
         "id": "OP11-041",
@@ -113,8 +113,8 @@ LEADERS = [
         "color": "color-blue-yellow",
         "crumb": ("/decklists/op17.html", "OP17 decklists"),
         "nav_op17": False,
-        "pool_heading": "Featured sample list",
-        "pool_note": "One older Limitless list kept on this page",
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
     },
     {
         "id": "OP14-020",
@@ -125,8 +125,8 @@ LEADERS = [
         "color": "color-green",
         "crumb": ("/decklists/op17.html", "OP17 decklists"),
         "nav_op17": False,
-        "pool_heading": "Featured sample list",
-        "pool_note": "One older Limitless list kept on this page",
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
     },
     {
         "id": "OP16-001",
@@ -137,8 +137,8 @@ LEADERS = [
         "color": "color-red",
         "crumb": ("/decklists/op17.html", "OP17 decklists"),
         "nav_op17": False,
-        "pool_heading": "Featured sample list",
-        "pool_note": "Current-format OP16 lists from Limitless Play",
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
     },
     {
         "id": "OP15-058",
@@ -149,8 +149,8 @@ LEADERS = [
         "color": "color-purple",
         "crumb": ("/decklists/op17.html", "OP17 decklists"),
         "nav_op17": False,
-        "pool_heading": "Featured sample list",
-        "pool_note": "Current-format purple Enel lists from Limitless Play",
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
     },
     {
         "id": "OP11-062",
@@ -161,8 +161,8 @@ LEADERS = [
         "color": "color-purple",
         "crumb": ("/decklists/op17.html", "OP17 decklists"),
         "nav_op17": False,
-        "pool_heading": "Featured sample list",
-        "pool_note": "Current-format purple Katakuri lists from Limitless Play",
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
     },
     {
         "id": "OP13-079",
@@ -173,8 +173,8 @@ LEADERS = [
         "color": "color-black",
         "crumb": ("/decklists/op17.html", "OP17 decklists"),
         "nav_op17": False,
-        "pool_heading": "Featured sample list",
-        "pool_note": "Current-format black Imu lists from Limitless Play",
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
     },
     {
         "id": "OP13-002",
@@ -185,8 +185,8 @@ LEADERS = [
         "color": "color-red-blue",
         "crumb": ("/decklists/op17.html", "OP17 decklists"),
         "nav_op17": False,
-        "pool_heading": "Featured sample list",
-        "pool_note": "Current-format red/blue OP13 Ace lists from Limitless Play",
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
     },
 ]
 

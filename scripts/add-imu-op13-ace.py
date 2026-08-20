@@ -44,9 +44,10 @@ def write_hub(leader: dict, card: dict) -> None:
     if types and str(types).strip() not in {"", "?"}:
         pills.append(types)
     pill_html = "\n              ".join(f'<span class="pill">{html.escape(p)}</span>' for p in pills)
-    note = "Current-format leader. Tournament 50-card lists from Limitless Play are below."
-    if leader["id"] == "OP13-002":
-        note = "This is OP13-002 red/blue Ace. The red OP16 Ace page is separate. Tournament lists from Limitless Play are below."
+    note = {
+        "OP13-079": "Black OP13 Imu. Not OP17 Elbaph Luffy.",
+        "OP13-002": "Red/blue OP13-002. The red OP16 Ace page is separate.",
+    }.get(leader["id"], "Current-format leader.")
     body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="{html.escape(crumb_href)}">{html.escape(crumb_label)}</a> / {html.escape(name)}</div>
         <div class="leader-hero">
           <img src="{html.escape(img)}" alt="{html.escape(full)} leader" />

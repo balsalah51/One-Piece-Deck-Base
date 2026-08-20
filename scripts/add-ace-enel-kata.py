@@ -44,6 +44,11 @@ def write_hub(leader: dict, card: dict) -> None:
     if types:
         pills.append(types)
     pill_html = "\n              ".join(f'<span class="pill">{html.escape(p)}</span>' for p in pills)
+    note = {
+        "OP16-001": "Red OP16 Ace. The red/blue OP13 Ace page is separate.",
+        "OP15-058": "Purple OP15 Enel. Not yellow OP05 Enel.",
+        "OP11-062": "Purple OP11 Katakuri. Not yellow OP17 Linlin.",
+    }.get(leader["id"], "Current-format leader.")
     body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="{html.escape(crumb_href)}">{html.escape(crumb_label)}</a> / {html.escape(name)}</div>
         <div class="leader-hero">
           <img src="{html.escape(img)}" alt="{html.escape(name)} leader" />
@@ -54,7 +59,7 @@ def write_hub(leader: dict, card: dict) -> None:
               {pill_html}
             </div>
             <div class="effect">{html.escape(effect)}</div>
-            <p class="muted" style="margin-top:12px">Current-format leader. Tournament 50-card lists from Limitless Play are below.</p>
+            <p class="muted" style="margin-top:12px">{html.escape(note)}</p>
           </div>
         </div>
 
