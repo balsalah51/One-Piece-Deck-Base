@@ -191,7 +191,7 @@ LEADERS = [
 ]
 
 
-def http_json(url: str, retries: int = 3):
+def http_json(url: str, retries: int = 6):
     last = None
     for attempt in range(retries):
         try:
@@ -202,7 +202,7 @@ def http_json(url: str, retries: int = 3):
             last = exc
             wait = 0.5 * (attempt + 1)
             if "429" in str(exc):
-                wait = 4 * (attempt + 1)
+                wait = 8 * (attempt + 1)
             time.sleep(wait)
     raise last
 
