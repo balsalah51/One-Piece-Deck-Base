@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Strip Shop links from public HTML so the shop stays off the live nav."""
+"""Strip Shop links and shop-era copy from public HTML."""
 
 from __future__ import annotations
 
@@ -7,6 +7,8 @@ from pathlib import Path
 
 ROOT = Path("/workspace")
 SKIP = {".git", "scripts", "node_modules", "shop"}
+COMMUNITY = '        <a href="/#community">Community</a>'
+DISCORD = '        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>'
 
 
 def patch(text: str) -> str:
@@ -17,6 +19,16 @@ def patch(text: str) -> str:
     text = text.replace('<a href="/shop/">Shop</a> · ', "")
     text = text.replace(' · <a href="/shop/">Shop</a>', "")
     text = text.replace('<a href="/shop/">Shop</a>', "")
+    text = text.replace(
+        "Decklists, community, and custom gear",
+        "OPTCG decklists",
+    )
+    if COMMUNITY in text:
+        if DISCORD in text:
+            text = text.replace("\n" + COMMUNITY, "")
+            text = text.replace(COMMUNITY + "\n", "")
+        else:
+            text = text.replace(COMMUNITY, DISCORD)
     return text if text != original else original
 
 
