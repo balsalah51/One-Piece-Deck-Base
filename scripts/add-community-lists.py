@@ -259,7 +259,7 @@ COMMUNITY = {
             "slug": "yt-nami-op15-eb04-profile",
             "player": "YouTube",
             "title": "Nami deck profile — OP15/EB04",
-            "subtitle": "YouTube standard-format UY Nami list",
+            "subtitle": "YouTube standard-format Nami list",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=wvbMkjghVtU",
             "raw": "1xOP11-041 4xP-096 2xOP15-047 1xPRB02-008 3xOP13-042 4xOP14-102 2xOP06-106 4xOP11-106 3xOP06-104 3xOP14-110 3xOP14-111 1xOP15-113 4xEB03-053 4xEB04-058 4xEB03-055 4xOP14-104 4xEB03-060",
@@ -268,7 +268,7 @@ COMMUNITY = {
             "slug": "yt-ultimate-uy-nami-guide",
             "player": "YouTube",
             "title": "Ultimate Blue/Yellow Nami guide",
-            "subtitle": "YouTube OP15 UY Nami guide list",
+            "subtitle": "YouTube OP15 Nami guide list",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=WnXYFHwz08E",
             "raw": "1xOP11-041 4xP-096 1xOP15-047 3xOP13-042 4xOP14-102 3xOP11-106 4xOP06-104 3xOP12-112 4xOP14-110 4xOP14-111 4xEB03-053 4xEB04-058 4xEB03-055 4xOP14-104 4xEB03-060",
@@ -276,11 +276,53 @@ COMMUNITY = {
         {
             "slug": "yt-kebbieg-op16-nami-gameplay",
             "player": "KebbieG",
-            "title": "UY Nami OP16 gameplay — KebbieG",
-            "subtitle": "YouTube OP16 UY Nami list",
+            "title": "Nami OP16 gameplay — KebbieG",
+            "subtitle": "YouTube OP16 Nami list",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=fZAOabjuE64",
             "raw": "1xOP11-041 4xP-096 1xPRB02-008 3xOP13-042 4xOP14-102 4xOP11-106 2xOP06-104 2xOP12-112 4xOP14-110 4xOP14-111 1xOP15-113 4xEB03-053 4xEB04-058 2xOP14-108 4xEB03-055 4xOP14-104 2xOP16-119 1xOP06-058",
+        },
+    ],
+    "OP16-001": [
+        {
+            "slug": "web-mabi-op16-ace-infinite-counters",
+            "player": "Mabi",
+            "title": "Infinite Counters — Mabi",
+            "subtitle": "Public MabTCG OP16 red Ace list",
+            "kind": "web",
+            "source_url": "https://mabitcg.com/one-piece-tcg-portgas-d-ace-op16-infinite-counters-op16-mabi/",
+            "raw": "1xOP16-001 4xOP16-002 4xOP13-016 4xOP16-015 4xOP16-017 4xOP16-118 4xOP16-014 4xOP16-011 4xOP16-004 2xOP08-118 4xOP16-005 4xOP16-003 1xOP09-118 3xOP16-020 4xOP16-021",
+        },
+    ],
+    "OP13-079": [
+        {
+            "slug": "web-mabi-imu-five-elders",
+            "player": "Mabi",
+            "title": "The Five Elders — Mabi",
+            "subtitle": "Public MabTCG black Imu list",
+            "kind": "web",
+            "source_url": "https://mabitcg.com/one-piece-tcg-imu-op13-the-five-elders-op13-mabi/",
+            "raw": "1xOP13-079 4xOP13-086 4xOP13-087 4xOP13-092 4xOP13-083 4xOP13-089 4xOP13-080 4xOP13-091 4xPRB02-014 4xOP13-084 4xOP13-082 4xOP13-096 2xOP13-097 3xOP13-098 1xOP13-099",
+        },
+    ],
+    "OP13-002": [
+        {
+            "slug": "yt-tcg353-op13-ace-vs-enel",
+            "player": "TCG353",
+            "title": "OP15 Ace vs Enel — TCG353",
+            "subtitle": "YouTube red/blue OP13 Ace tournament list",
+            "kind": "youtube",
+            "source_url": "https://www.youtube.com/watch?v=hbYhFPZRY5E",
+            "raw": "1xOP13-002 4xOP13-016 4xST23-001 4xEB04-007 2xOP09-118 4xOP13-043 4xST22-002 2xOP08-040 1xOP10-045 4xPRB02-008 4xOP13-054 2xST22-010 1xOP07-051 3xOP08-047 4xOP13-042 3xEB04-008 4xST22-015",
+        },
+        {
+            "slug": "web-deltia-op13-ace-guide",
+            "player": "Deltia's Gaming",
+            "title": "Red/Blue Ace guide list — Deltia",
+            "subtitle": "Public OP13-002 Portgas D. Ace guide list",
+            "kind": "web",
+            "source_url": "https://deltiasgaming.com/one-piece-tcg-red-blue-portgas-d-ace-deck-guide/",
+            "raw": "1xOP13-002 4xST22-002 4xOP13-016 4xOP13-043 2xOP13-007 4xPRB02-008 2xOP02-008 2xOP06-047 2xOP10-045 1xOP08-040 4xOP13-054 4xOP08-047 2xST23-001 1xOP02-004 4xOP13-042 1xOP09-118 2xOP01-027 3xOP04-056 4xST22-015",
         },
     ],
 }
@@ -323,7 +365,7 @@ def community_section(leader: dict, lists: list[dict], tournament_html: str) -> 
         href = entry["href"]
         title = entry.get("title_override") or entry.get("title")
         subtitle = entry.get("subtitle") or ""
-        badge = "YouTube" if entry.get("kind") == "youtube" else "Web"
+        badge = {"youtube": "YouTube", "x": "X"}.get(entry.get("kind"), "Web")
         rows.append(
             f"""            <li>
               <a class="item" href="{html.escape(href)}">
@@ -341,7 +383,7 @@ def community_section(leader: dict, lists: list[dict], tournament_html: str) -> 
             <h3>YouTube and community decklists</h3>
             <div class="muted">{len(lists)} lists</div>
           </div>
-          <p class="muted">Lists copied from recent YouTube deck profiles and public deck builders. Creator X/Twitter accounts are linked on each list page when they posted one.</p>
+          <p class="muted">Public YouTube and web lists with a full 50-card ID list. Tournament tables below are from Limitless.</p>
           <ul class="list" aria-label="YouTube and community decklists">
 {chr(10).join(rows)}
           </ul>
@@ -441,7 +483,7 @@ def main() -> None:
             <h3>Tournament decklists</h3>
             <div class="muted">0 lists</div>
           </div>
-          <p class="muted">Still no Limitless tournament results for OP17-001. Use the YouTube lists above until events start posting this leader.</p>
+          <p class="muted">No Limitless standings for this leader yet. Community lists are above.</p>
         </section>
         <!-- /TOURNAMENT_DECKLISTS -->"""
         combined = community_section(leader, public, tournament_block)

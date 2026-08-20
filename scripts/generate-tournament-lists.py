@@ -101,20 +101,20 @@ LEADERS = [
         "color": "color-red-green",
         "crumb": ("/decklists/op17.html", "OP17 decklists"),
         "nav_op17": False,
-        "pool_heading": "Featured sample list",
-        "pool_note": "One older Limitless list kept on this page",
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
     },
     {
         "id": "OP11-041",
-        "key": "uy-nami",
-        "page": "decklists/uy-nami.html",
-        "dir": "decklists/uy-nami",
-        "name": "UY Nami",
+        "key": "nami",
+        "page": "decklists/nami.html",
+        "dir": "decklists/nami",
+        "name": "Nami",
         "color": "color-blue-yellow",
         "crumb": ("/decklists/op17.html", "OP17 decklists"),
         "nav_op17": False,
-        "pool_heading": "Featured sample list",
-        "pool_note": "One older Limitless list kept on this page",
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
     },
     {
         "id": "OP14-020",
@@ -125,13 +125,73 @@ LEADERS = [
         "color": "color-green",
         "crumb": ("/decklists/op17.html", "OP17 decklists"),
         "nav_op17": False,
-        "pool_heading": "Featured sample list",
-        "pool_note": "One older Limitless list kept on this page",
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP16-001",
+        "key": "portgas-d-ace",
+        "page": "decklists/portgas-d-ace.html",
+        "dir": "decklists/portgas-d-ace",
+        "name": "Portgas D. Ace",
+        "color": "color-red",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP15-058",
+        "key": "enel",
+        "page": "decklists/enel.html",
+        "dir": "decklists/enel",
+        "name": "Enel",
+        "color": "color-purple",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP11-062",
+        "key": "charlotte-katakuri",
+        "page": "decklists/charlotte-katakuri.html",
+        "dir": "decklists/charlotte-katakuri",
+        "name": "Charlotte Katakuri",
+        "color": "color-purple",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP13-079",
+        "key": "imu",
+        "page": "decklists/imu.html",
+        "dir": "decklists/imu",
+        "name": "Imu",
+        "color": "color-black",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP13-002",
+        "key": "op13-ace",
+        "page": "decklists/op13-ace.html",
+        "dir": "decklists/op13-ace",
+        "name": "OP13 Ace",
+        "color": "color-red-blue",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
     },
 ]
 
 
-def http_json(url: str, retries: int = 3):
+def http_json(url: str, retries: int = 6):
     last = None
     for attempt in range(retries):
         try:
@@ -140,7 +200,10 @@ def http_json(url: str, retries: int = 3):
                 return json.loads(resp.read())
         except Exception as exc:  # noqa: BLE001
             last = exc
-            time.sleep(0.4 * (attempt + 1))
+            wait = 0.5 * (attempt + 1)
+            if "429" in str(exc):
+                wait = 8 * (attempt + 1)
+            time.sleep(wait)
     raise last
 
 
@@ -282,16 +345,18 @@ def select_lists(entries: list[dict], limit: int = MAX_LISTS) -> list[dict]:
 def fetch_standings(tournaments: list[dict], target_ids: set[str]) -> dict[str, list]:
     by_leader = defaultdict(list)
     skip_re = re.compile(r"\b(draft|sealed)\b", re.I)
-    for i, tourney in enumerate(tournaments, 1):
+    eligible = [t for t in tournaments if t.get("id") and not skip_re.search(t.get("name") or "")]
+    lock = defaultdict(list)
+
+    def one(tourney: dict) -> list[tuple[str, dict]]:
         tid = tourney["id"]
-        name = tourney.get("name") or ""
-        if skip_re.search(name):
-            continue
+        time.sleep(0.03)
         try:
             standings = http_json(f"https://play.limitlesstcg.com/api/tournaments/{tid}/standings")
         except Exception as exc:  # noqa: BLE001
             print("standings fail", tid, exc)
-            continue
+            return []
+        found = []
         for row in standings:
             dl = row.get("decklist") or {}
             leader = dl.get("leader") or {}
@@ -300,23 +365,36 @@ def fetch_standings(tournaments: list[dict], target_ids: set[str]) -> dict[str, 
             lid = card_id(leader["set"], leader.get("number"))
             if lid not in target_ids:
                 continue
-            by_leader[lid].append(
-                {
-                    "tournament_id": tid,
-                    "tournament_name": tourney.get("name") or "Limitless event",
-                    "date": (tourney.get("date") or "")[:10],
-                    "players": tourney.get("players") or 0,
-                    "player": row.get("name") or "Unknown",
-                    "placing": row.get("placing"),
-                    "record": row.get("record") or {},
-                    "decklist": dl,
-                    "source_url": f"https://play.limitlesstcg.com/tournament/{tid}/standings",
-                    "kind": "tournament",
-                }
+            found.append(
+                (
+                    lid,
+                    {
+                        "tournament_id": tid,
+                        "tournament_name": tourney.get("name") or "Limitless event",
+                        "date": (tourney.get("date") or "")[:10],
+                        "players": tourney.get("players") or 0,
+                        "player": row.get("name") or "Unknown",
+                        "placing": row.get("placing"),
+                        "record": row.get("record") or {},
+                        "decklist": dl,
+                        "source_url": f"https://play.limitlesstcg.com/tournament/{tid}/standings",
+                        "kind": "tournament",
+                    },
+                )
             )
-        if i % 20 == 0:
-            print(f"  processed {i}/{len(tournaments)} events")
-        time.sleep(0.08)
+        return found
+
+    done = 0
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        futures = [pool.submit(one, t) for t in eligible]
+        for fut in as_completed(futures):
+            for lid, entry in fut.result():
+                lock[lid].append(entry)
+            done += 1
+            if done % 40 == 0:
+                print(f"  processed {done}/{len(eligible)} events")
+    for lid, rows in lock.items():
+        by_leader[lid].extend(rows)
     return by_leader
 
 
@@ -634,6 +712,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
       <nav aria-label="Primary">
         <a href="/#decklists"{deck_cur}>Decklists</a>
         <a href="/decklists/op17.html"{op17_cur}>OP17</a>
+        <a href="/shop/">Shop</a>
         <a href="/#community">Community</a>
       </nav>
     </header>
@@ -644,7 +723,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
       </div>
     </main>
     <footer>
-      © <span id="year"></span> One Piece Deck Base — Built with community in mind.
+      © <span id="year"></span> One Piece Deck Base — Built with community in mind. <a href="/shop/">Shop</a>
     </footer>
   </div>
   <script>
@@ -843,6 +922,7 @@ def render_deck_page(leader: dict, entry: dict, cache: dict) -> str:
         "tournament": "Tournament list scraped from Limitless Play. English card text from Limitless One Piece.",
         "youtube": "List from a YouTube deck profile. English card text from Limitless One Piece.",
         "web": "Community list from a public deck builder. English card text from Limitless One Piece.",
+        "x": "List copied from a public X/Twitter post. English card text from Limitless One Piece.",
     }.get(entry.get("kind"), "List sourced from the One Piece TCG community. Not affiliated with Bandai.")
     body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="{html.escape(crumb_href)}">{html.escape(crumb_label)}</a> / <a href="{html.escape(parent_href)}">{html.escape(leader['name'])}</a> / Decklist</div>
         <h2>{html.escape(title)}</h2>
