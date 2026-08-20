@@ -73,7 +73,7 @@ def main() -> None:
         if 'href="/css/site.css"' in updated:
             updated = updated.replace(
                 'href="/css/site.css"',
-                'href="/css/site.css?v=stack"',
+                'href="/css/site.css?v=stack-left"',
             )
         if updated != original:
             path.write_text(updated)
