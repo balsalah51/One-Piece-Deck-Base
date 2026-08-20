@@ -755,21 +755,22 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
+  <link rel="icon" href="/img/opdb-mark-sm.webp" type="image/webp" />
   <link rel="stylesheet" href="/css/site.css" />
 </head>
 <body class="{html.escape(color)}">
   <div class="wrap">
     <header>
       <a class="brand" href="/">
-        <div class="logo">OP</div>
+        <img class="logo" src="/img/opdb-mark-sm.webp" width="48" height="48" alt="OPDB" />
         <div>
           <h1>One Piece Deck Base</h1>
-          <div class="subtitle">Decklists and community</div>
+          <div class="subtitle">OPTCG decklists</div>
         </div>
       </a>
       <nav aria-label="Primary">
         <a href="/#decklists"{deck_cur}>Decklists</a>
-        <a href="/decklists/op17.html"{op17_cur}>OP17</a>
+        <a href="/decklists/op17.html"{op17_cur}>Leaders</a>
         <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
       </nav>
     </header>
@@ -1018,23 +1019,24 @@ def render_index_section(leader: dict, lists: list[dict]) -> str:
         if sample_only
         else "Each row opens a separate 50-card list. Sorted by Limitless event date, newest first."
     )
-    rows = []
-    for entry in sorted(lists, key=date_sort_key, reverse=True):
-        href = entry["href"]
-        title, subtitle = list_heading(entry, leader["name"])
-        date_label = format_date(entry.get("date") or "")
-        place = (
-            date_label
-            or ordinal(entry.get("placing"))
-            or record_text(entry.get("record"))
-            or "View"
-        )
-        if entry.get("kind") == "sample":
-            place = "Sample"
-        elif entry.get("kind") == "featured":
-            place = date_label or ordinal(entry.get("placing")) or "List"
-        rows.append(
-            f"""            <li>
+    def list_rows(entries: list[dict]) -> list[str]:
+        rows = []
+        for entry in entries:
+            href = entry["href"]
+            title, subtitle = list_heading(entry, leader["name"])
+            date_label = format_date(entry.get("date") or "")
+            place = (
+                date_label
+                or ordinal(entry.get("placing"))
+                or record_text(entry.get("record"))
+                or "View"
+            )
+            if entry.get("kind") == "sample":
+                place = "Sample"
+            elif entry.get("kind") == "featured":
+                place = date_label or ordinal(entry.get("placing")) or "List"
+            rows.append(
+                f"""            <li>
               <a class="item" href="{html.escape(href)}">
                 <div>
                   <div style="font-weight:700">{html.escape(title)}</div>
@@ -1043,7 +1045,22 @@ def render_index_section(leader: dict, lists: list[dict]) -> str:
                 <div class="link">{html.escape(place)} →</div>
               </a>
             </li>"""
-        )
+            )
+        return rows
+
+    ordered = sorted(lists, key=date_sort_key, reverse=True)
+    visible_n = 12
+    shown = list_rows(ordered[:visible_n])
+    rest = ordered[visible_n:]
+    extra = ""
+    if rest:
+        extra = f"""
+          <details class="more-lists">
+            <summary>{len(rest)} older lists</summary>
+            <ul class="list">
+{chr(10).join(list_rows(rest))}
+            </ul>
+          </details>"""
     return f"""        <!-- TOURNAMENT_DECKLISTS -->
         <section class="deck-index" style="margin-top:22px">
           <div class="section-title">
@@ -1052,8 +1069,8 @@ def render_index_section(leader: dict, lists: list[dict]) -> str:
           </div>
           <p class="muted">{html.escape(intro)}</p>
           <ul class="list" aria-label="{html.escape(heading)}">
-{chr(10).join(rows)}
-          </ul>
+{chr(10).join(shown)}
+          </ul>{extra}
         </section>
         <!-- /TOURNAMENT_DECKLISTS -->"""
 
