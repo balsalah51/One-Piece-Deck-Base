@@ -52,6 +52,31 @@ a.item:hover{border-color:rgba(183,28,28,0.25)}
 }
 .crew-fan img:first-child{margin-left:0}
 .crew-fan img:hover{transform:rotate(0deg) translateY(-10px) scale(1.08);z-index:6}
+.home-banner{
+  position:relative;overflow:hidden;height:250px;margin-top:22px;border-radius:14px;
+  box-shadow:var(--shadow);background:#5a0c0c
+}
+.home-banner-art{position:absolute;inset:0;display:flex}
+.home-banner-art img{
+  flex:1 1 0;width:0;height:100%;object-fit:cover;object-position:center 14%;
+  filter:saturate(1.08) contrast(1.04)
+}
+.home-banner-copy{
+  position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;text-align:center;padding:28px 22px;
+  background:linear-gradient(180deg,rgba(55,8,8,.12) 0%,rgba(55,8,8,.42) 42%,rgba(40,6,6,.82) 100%);
+  color:#fff;box-shadow:inset 0 0 0 2px rgba(201,162,39,.45)
+}
+.home-banner-copy .kicker{
+  font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:#ffd7a8
+}
+.home-banner-copy h2{
+  margin:8px 0 0;color:#fff;font-size:36px;letter-spacing:-.02em;line-height:1.1;
+  text-shadow:0 2px 18px rgba(0,0,0,.45)
+}
+.home-banner-copy p{
+  margin:10px 0 0;color:rgba(255,255,255,.9);max-width:540px;line-height:1.45
+}
 .events-banner{
   display:flex;align-items:center;justify-content:space-between;gap:14px;
   margin-top:18px;padding:14px 16px;border-radius:12px;
@@ -175,4 +200,7 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;text-align:center}
   .leader-hero img{width:140px}
   .crew-fan img{width:52px;margin-left:-18px}
   .events-banner{flex-direction:column;align-items:flex-start}
+  .home-banner{height:200px}
+  .home-banner-copy h2{font-size:26px}
+  .home-banner-copy p{font-size:14px}
 }
