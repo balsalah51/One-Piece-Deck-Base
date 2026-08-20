@@ -116,6 +116,20 @@ TAKES = {
         "We're Going to Claim the One Piece, Mamaragan, and Divine Departure show up in most lists. "
         "The consensus below is averaged from those public tournament lists."
     ),
+    "OP13-079": (
+        "Black OP13 Imu is the Mary Geoise / Five Elders leader, not OP17 Elbaph Luffy. "
+        "The rule is the whole identity: no 2-cost or higher events, and you start by playing the Empty Throne stage from deck. "
+        "Limitless lists are still posting this leader, and the pile is the Five Elders engine: Saturn, Warcury, Nusjuro, Mars, Ju Peter, the 10-cost Five Elders, Saint Shalria, and The Five Elders Are at Your Service. "
+        "Saint Charlos, Sabo, Never Existed, and Ground Death are the usual flex. "
+        "The consensus below is averaged from those public tournament lists plus the MabTCG list, not a made-up sample."
+    ),
+    "OP13-002": (
+        "OP13 Ace is red/blue Portgas D. Ace — 3 life, 6000 power — not the red OP16 Ace rush deck. "
+        "YouTube and Limitless still update this leader: trash a brick to dunk power, then draw when you take damage or a 6000-power body dies. "
+        "The public core is Monkey D. Garp, Otama, Izo, Marco, Yamato, OP13 Edward Newgate, and I Am Whitebeard. "
+        "Uta, Jozu, Atmos, and Roger are the usual finishers. "
+        "If you want the red Whitebeard rush Ace with 4 Luffy and Moby Dick, that is the OP16 Ace page. This page is the older red/blue list that kept getting tournament updates."
+    ),
 }
 
 POPUP_JS = r"""

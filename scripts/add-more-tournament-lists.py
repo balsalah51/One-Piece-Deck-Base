@@ -21,8 +21,8 @@ comm = importlib.util.module_from_spec(cspec)
 cspec.loader.exec_module(comm)
 
 ROOT = gen.ROOT
-EXTRA_LIMIT = 32
-PAGES = 12
+EXTRA_LIMIT = 48
+PAGES = 30
 PER_PAGE = 40
 HUB_BLOCK_RE = re.compile(
     r"        <!-- (?:COMMUNITY_DECKLISTS|TOURNAMENT_DECKLISTS) -->.*?        <!-- /TOURNAMENT_DECKLISTS -->",
@@ -208,10 +208,8 @@ def fetch_more(index: dict, pages: int = PAGES) -> dict:
     target_ids = {L["id"] for L in gen.LEADERS}
     print("fetching tournament pages", pages)
     tournaments = fetch_tournament_pages(pages=pages)
-    seen = known_tournament_ids(index)
-    fresh_events = [t for t in tournaments if t.get("id") not in seen]
-    print("tournaments", len(tournaments), "new events", len(fresh_events), "already indexed", len(seen))
-    by_leader = gen.fetch_standings(fresh_events, target_ids)
+    print("tournaments", len(tournaments), "rescanning all events for every leader")
+    by_leader = gen.fetch_standings(tournaments, target_ids)
     cache = gen.load_card_cache()
     needed = set()
     planned: dict[str, list] = {}

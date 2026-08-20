@@ -164,6 +164,30 @@ LEADERS = [
         "pool_heading": "Featured sample list",
         "pool_note": "Current-format purple Katakuri lists from Limitless Play",
     },
+    {
+        "id": "OP13-079",
+        "key": "imu",
+        "page": "decklists/imu.html",
+        "dir": "decklists/imu",
+        "name": "Imu",
+        "color": "color-black",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Featured sample list",
+        "pool_note": "Current-format black Imu lists from Limitless Play",
+    },
+    {
+        "id": "OP13-002",
+        "key": "op13-ace",
+        "page": "decklists/op13-ace.html",
+        "dir": "decklists/op13-ace",
+        "name": "OP13 Ace",
+        "color": "color-red-blue",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Featured sample list",
+        "pool_note": "Current-format red/blue OP13 Ace lists from Limitless Play",
+    },
 ]
 
 
@@ -176,7 +200,10 @@ def http_json(url: str, retries: int = 3):
                 return json.loads(resp.read())
         except Exception as exc:  # noqa: BLE001
             last = exc
-            time.sleep(0.4 * (attempt + 1))
+            wait = 0.5 * (attempt + 1)
+            if "429" in str(exc):
+                wait = 4 * (attempt + 1)
+            time.sleep(wait)
     raise last
 
 
@@ -318,16 +345,18 @@ def select_lists(entries: list[dict], limit: int = MAX_LISTS) -> list[dict]:
 def fetch_standings(tournaments: list[dict], target_ids: set[str]) -> dict[str, list]:
     by_leader = defaultdict(list)
     skip_re = re.compile(r"\b(draft|sealed)\b", re.I)
-    for i, tourney in enumerate(tournaments, 1):
+    eligible = [t for t in tournaments if t.get("id") and not skip_re.search(t.get("name") or "")]
+    lock = defaultdict(list)
+
+    def one(tourney: dict) -> list[tuple[str, dict]]:
         tid = tourney["id"]
-        name = tourney.get("name") or ""
-        if skip_re.search(name):
-            continue
+        time.sleep(0.03)
         try:
             standings = http_json(f"https://play.limitlesstcg.com/api/tournaments/{tid}/standings")
         except Exception as exc:  # noqa: BLE001
             print("standings fail", tid, exc)
-            continue
+            return []
+        found = []
         for row in standings:
             dl = row.get("decklist") or {}
             leader = dl.get("leader") or {}
@@ -336,23 +365,36 @@ def fetch_standings(tournaments: list[dict], target_ids: set[str]) -> dict[str, 
             lid = card_id(leader["set"], leader.get("number"))
             if lid not in target_ids:
                 continue
-            by_leader[lid].append(
-                {
-                    "tournament_id": tid,
-                    "tournament_name": tourney.get("name") or "Limitless event",
-                    "date": (tourney.get("date") or "")[:10],
-                    "players": tourney.get("players") or 0,
-                    "player": row.get("name") or "Unknown",
-                    "placing": row.get("placing"),
-                    "record": row.get("record") or {},
-                    "decklist": dl,
-                    "source_url": f"https://play.limitlesstcg.com/tournament/{tid}/standings",
-                    "kind": "tournament",
-                }
+            found.append(
+                (
+                    lid,
+                    {
+                        "tournament_id": tid,
+                        "tournament_name": tourney.get("name") or "Limitless event",
+                        "date": (tourney.get("date") or "")[:10],
+                        "players": tourney.get("players") or 0,
+                        "player": row.get("name") or "Unknown",
+                        "placing": row.get("placing"),
+                        "record": row.get("record") or {},
+                        "decklist": dl,
+                        "source_url": f"https://play.limitlesstcg.com/tournament/{tid}/standings",
+                        "kind": "tournament",
+                    },
+                )
             )
-        if i % 20 == 0:
-            print(f"  processed {i}/{len(tournaments)} events")
-        time.sleep(0.08)
+        return found
+
+    done = 0
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        futures = [pool.submit(one, t) for t in eligible]
+        for fut in as_completed(futures):
+            for lid, entry in fut.result():
+                lock[lid].append(entry)
+            done += 1
+            if done % 40 == 0:
+                print(f"  processed {done}/{len(eligible)} events")
+    for lid, rows in lock.items():
+        by_leader[lid].extend(rows)
     return by_leader
 
 

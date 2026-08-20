@@ -138,8 +138,10 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
 .color-yellow{--tile:#c9a227}
 .color-red-green{--tile:#b71c1c}
 .color-blue-yellow{--tile:#1565c0}
+.color-red-blue{--tile:#b71c1c}
 .swatch.dual-red-green{background:linear-gradient(90deg,#b71c1c 50%,#2e7d32 50%)}
 .swatch.dual-blue-yellow{background:linear-gradient(90deg,#1565c0 50%,#c9a227 50%)}
+.swatch.dual-red-blue{background:linear-gradient(90deg,#b71c1c 50%,#1565c0 50%)}
 @media (max-width:880px){
   main{grid-template-columns:1fr}
   nav{display:none}
