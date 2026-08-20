@@ -418,7 +418,15 @@ def main() -> None:
 
         page_path = ROOT / leader["page"]
         page_html = page_path.read_text()
-        # extract existing tournament block
+        if "<!-- COMMUNITY_DECKLISTS -->" in page_html:
+            page_html = re.sub(
+                r"        <!-- COMMUNITY_DECKLISTS -->.*?        <!-- /COMMUNITY_DECKLISTS -->\n?",
+                "",
+                page_html,
+                count=1,
+                flags=re.S,
+            )
+        # Match tournament markers only after community is stripped so indices stay valid.
         m = re.search(
             r"        <!-- TOURNAMENT_DECKLISTS -->.*?        <!-- /TOURNAMENT_DECKLISTS -->",
             page_html,
@@ -437,14 +445,6 @@ def main() -> None:
         </section>
         <!-- /TOURNAMENT_DECKLISTS -->"""
         combined = community_section(leader, public, tournament_block)
-        if "<!-- COMMUNITY_DECKLISTS -->" in page_html:
-            page_html = re.sub(
-                r"        <!-- COMMUNITY_DECKLISTS -->.*?        <!-- /COMMUNITY_DECKLISTS -->\n?",
-                "",
-                page_html,
-                count=1,
-                flags=re.S,
-            )
         if m:
             page_html = page_html[: m.start()] + combined + page_html[m.end() :]
         else:
