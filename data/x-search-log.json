@@ -1,0 +1,427 @@
+{
+  "profiles": [
+    {
+      "handle": "MarinefordTCG",
+      "url": "https://r.jina.ai/https://x.com/MarinefordTCG",
+      "status": 200,
+      "chars": 3224,
+      "tweet_ids": [
+        "Silvers_D_Foxy/2090197490913902734",
+        "MarinefordTCG/2089448508684189741",
+        "MarinefordTCG/2088771006592663815"
+      ],
+      "card_lines": 0,
+      "complete_lists": 0,
+      "note": ""
+    },
+    {
+      "handle": "StrawHatPecan",
+      "url": "https://r.jina.ai/https://x.com/StrawHatPecan",
+      "status": 200,
+      "chars": 4502,
+      "tweet_ids": [
+        "StrawHatPecan/1971363188022378540",
+        "StrawHatPecan/2089927395570544651",
+        "StrawHatPecan/2089878018772574414",
+        "StrawHatPecan/2089486990089519374",
+        "StrawHatPecan/2088274028452524343"
+      ],
+      "card_lines": 0,
+      "complete_lists": 0,
+      "note": ""
+    },
+    {
+      "handle": "BenSchumi7",
+      "url": "https://r.jina.ai/https://x.com/BenSchumi7",
+      "status": 200,
+      "chars": 2284,
+      "tweet_ids": [],
+      "card_lines": 0,
+      "complete_lists": 0,
+      "note": ""
+    },
+    {
+      "handle": "CardKaizoku",
+      "url": "https://r.jina.ai/https://x.com/CardKaizoku",
+      "status": 200,
+      "chars": 5782,
+      "tweet_ids": [
+        "cardkaizoku/2089597170316144997",
+        "cardkaizoku/2089491621176029306",
+        "cardkaizoku/2088505853402108192",
+        "cardkaizoku/2088365415928127503",
+        "cardkaizoku/2086926321696076196"
+      ],
+      "card_lines": 0,
+      "complete_lists": 0,
+      "note": ""
+    },
+    {
+      "handle": "BlaisePlays",
+      "url": "https://r.jina.ai/https://x.com/BlaisePlays",
+      "status": 200,
+      "chars": 2408,
+      "tweet_ids": [
+        "BlaisePlays/1623769368092868608"
+      ],
+      "card_lines": 0,
+      "complete_lists": 0,
+      "note": ""
+    },
+    {
+      "handle": "BlaisePlaysTCG",
+      "url": "https://r.jina.ai/https://x.com/BlaisePlaysTCG",
+      "status": 200,
+      "chars": 1901,
+      "tweet_ids": [
+        "BlaisePlaysTCG/2032863385402957948"
+      ],
+      "card_lines": 0,
+      "complete_lists": 0,
+      "note": ""
+    },
+    {
+      "handle": "NightingaleTCG",
+      "url": "https://r.jina.ai/https://x.com/NightingaleTCG",
+      "status": 200,
+      "chars": 1215,
+      "tweet_ids": [],
+      "card_lines": 0,
+      "complete_lists": 0,
+      "note": ""
+    },
+    {
+      "handle": "michaelartress",
+      "url": "https://r.jina.ai/https://x.com/michaelartress",
+      "status": 200,
+      "chars": 3047,
+      "tweet_ids": [
+        "MichaelArtress/2070236440638935270",
+        "MichaelArtress/2045670158832898529",
+        "MichaelArtress/2040660566830903757",
+        "MichaelArtress/2040122488617853341",
+        "MichaelArtress/2018768346096054355"
+      ],
+      "card_lines": 0,
+      "complete_lists": 0,
+      "note": ""
+    },
+    {
+      "handle": "ONEPIECE_tcg_EN",
+      "url": "https://r.jina.ai/https://x.com/ONEPIECE_tcg_EN",
+      "status": 200,
+      "chars": 2916,
+      "tweet_ids": [],
+      "card_lines": 0,
+      "complete_lists": 0,
+      "note": ""
+    },
+    {
+      "handle": "Silvers_D_Foxy",
+      "url": "https://r.jina.ai/https://x.com/Silvers_D_Foxy",
+      "status": 200,
+      "chars": 3513,
+      "tweet_ids": [
+        "Silvers_D_Foxy/2090203732373913737"
+      ],
+      "card_lines": 0,
+      "complete_lists": 0,
+      "note": ""
+    },
+    {
+      "handle": "LimitlessTCG",
+      "url": "https://r.jina.ai/https://x.com/LimitlessTCG",
+      "status": 200,
+      "chars": 2385,
+      "tweet_ids": [],
+      "card_lines": 0,
+      "complete_lists": 0,
+      "note": ""
+    }
+  ],
+  "searches": [
+    {
+      "query": "site:x.com \"4xOP17\"",
+      "status": 202,
+      "chars": 14232,
+      "tweet_ids": [],
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "query": "site:twitter.com \"4xOP17-040\"",
+      "status": 202,
+      "chars": 14264,
+      "tweet_ids": [],
+      "card_lines": 2,
+      "complete_lists": 0
+    },
+    {
+      "query": "site:x.com \"1xOP17-001\" decklist",
+      "status": 202,
+      "chars": 14264,
+      "tweet_ids": [],
+      "card_lines": 2,
+      "complete_lists": 0
+    },
+    {
+      "query": "site:x.com \"1xOP16-001\"",
+      "status": 202,
+      "chars": 14257,
+      "tweet_ids": [],
+      "card_lines": 2,
+      "complete_lists": 0
+    },
+    {
+      "query": "site:x.com MarinefordTCG OP17 decklist",
+      "status": 202,
+      "chars": 14268,
+      "tweet_ids": [],
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "query": "site:x.com StrawHatPecan OP17 list",
+      "status": 202,
+      "chars": 14254,
+      "tweet_ids": [],
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "query": "site:x.com CardKaizoku Ace OP16-001",
+      "status": 202,
+      "chars": 14250,
+      "tweet_ids": [],
+      "card_lines": 0,
+      "complete_lists": 0
+    }
+  ],
+  "tweets": [
+    {
+      "handle": "Silvers_D_Foxy",
+      "id": "2090197490913902734",
+      "url": "https://x.com/Silvers_D_Foxy/status/2090197490913902734",
+      "http": 200,
+      "text": "The “Elite Four” of the OP17 Meta",
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "handle": "MarinefordTCG",
+      "id": "2089448508684189741",
+      "url": "https://x.com/MarinefordTCG/status/2089448508684189741",
+      "http": 200,
+      "text": "",
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "handle": "MarinefordTCG",
+      "id": "2088771006592663815",
+      "url": "https://x.com/MarinefordTCG/status/2088771006592663815",
+      "http": 200,
+      "text": "Removing 6c Newgate with this shit is like crack",
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "handle": "cardkaizoku",
+      "id": "2089597170316144997",
+      "url": "https://x.com/cardkaizoku/status/2089597170316144997",
+      "http": 200,
+      "text": "Top 8 TCG channels for constipated players",
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "handle": "cardkaizoku",
+      "id": "2089491621176029306",
+      "url": "https://x.com/cardkaizoku/status/2089491621176029306",
+      "http": 200,
+      "text": "Sabo and Rocks continue to climb! The meta is getting more hostile towards Mihawk if all the power down in Sabo, Ace, and Kaido remains. Speaking of Kaido, being pretty decent into the Rocks and Mihawk has given him some meta relevance! And people remembered PEnel existed again",
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "handle": "cardkaizoku",
+      "id": "2088505853402108192",
+      "url": "https://x.com/cardkaizoku/status/2088505853402108192",
+      "http": 200,
+      "text": "You can now make Match History reports by clicking the Match Report button in your match history!\n\nYou can also save them to where you normally save your Tournament Reports!",
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "handle": "cardkaizoku",
+      "id": "2088365415928127503",
+      "url": "https://x.com/cardkaizoku/status/2088365415928127503",
+      "http": 200,
+      "text": "Got my first manga rare and it only took 22 sets",
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "handle": "cardkaizoku",
+      "id": "2086926321696076196",
+      "url": "https://x.com/cardkaizoku/status/2086926321696076196",
+      "http": 200,
+      "text": "Super early Red Ace data. Looks like that new 10 drop and getting a 2nd Whitebeard 2k with 8k power was enough to push him over the edge\n\nLoses to moms and dads though",
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "handle": "StrawHatPecan",
+      "id": "1971363188022378540",
+      "url": "https://x.com/StrawHatPecan/status/1971363188022378540",
+      "http": 200,
+      "text": "There's always a silly deck you could try\n\nhttps://www.youtube.com/@StrawHatPecan",
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "handle": "StrawHatPecan",
+      "id": "2089927395570544651",
+      "url": "https://x.com/StrawHatPecan/status/2089927395570544651",
+      "http": 200,
+      "text": "Is riftbound fun",
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "handle": "StrawHatPecan",
+      "id": "2089878018772574414",
+      "url": "https://x.com/StrawHatPecan/status/2089878018772574414",
+      "http": 200,
+      "text": "Wait people scalping donuts now?",
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "handle": "StrawHatPecan",
+      "id": "2089486990089519374",
+      "url": "https://x.com/StrawHatPecan/status/2089486990089519374",
+      "http": 200,
+      "text": "I just wanna know how many kidneys I’ll have to sell to get this (I’m bad at the game and also bad at signing up for events)",
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "handle": "StrawHatPecan",
+      "id": "2088274028452524343",
+      "url": "https://x.com/StrawHatPecan/status/2088274028452524343",
+      "http": 200,
+      "text": "If everyone is playing linlin, I’m bringing back Robin. I’ll cope forever.",
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "handle": "BlaisePlays",
+      "id": "1623769368092868608",
+      "url": "https://x.com/BlaisePlays/status/1623769368092868608",
+      "http": 200,
+      "text": "Mmmmm",
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "handle": "BlaisePlaysTCG",
+      "id": "2032863385402957948",
+      "url": "https://x.com/BlaisePlaysTCG/status/2032863385402957948",
+      "http": 200,
+      "text": "These “ban lists” getting more and more outta hand every day lmao",
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "handle": "MichaelArtress",
+      "id": "2070236440638935270",
+      "url": "https://x.com/MichaelArtress/status/2070236440638935270",
+      "http": 200,
+      "text": "The new Buggy goes W I D E. 19 DON!! on turn 4 seems balanced.",
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "handle": "MichaelArtress",
+      "id": "2045670158832898529",
+      "url": "https://x.com/MichaelArtress/status/2045670158832898529",
+      "http": 200,
+      "text": "Got my Nats invite today with Lucy 🔥 Matchups lined up, I’ll take it.",
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "handle": "MichaelArtress",
+      "id": "2040660566830903757",
+      "url": "https://x.com/MichaelArtress/status/2040660566830903757",
+      "http": 200,
+      "text": "Your local warrior reporting in. Another Lucy W. Same list, just slightly optimized.",
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "handle": "MichaelArtress",
+      "id": "2040122488617853341",
+      "url": "https://x.com/MichaelArtress/status/2040122488617853341",
+      "http": 200,
+      "text": "Won a 52-man local with Lucy - first OP15 event 🏆\n\nRebecca’s gone…\nDressrosa control isn’t. We’re so back!",
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "handle": "MichaelArtress",
+      "id": "2018768346096054355",
+      "url": "https://x.com/MichaelArtress/status/2018768346096054355",
+      "http": 200,
+      "text": "My TCG channel just hit a big milestone!!\nReally thankful for everyone who’s taken the time to support the channel ❤️",
+      "card_lines": 0,
+      "complete_lists": 0
+    }
+  ],
+  "complete_lists": [],
+  "partial_id_hits": [
+    {
+      "source": "site:twitter.com \"4xOP17-040\"",
+      "hits": [
+        [
+          4,
+          "OP17-040"
+        ],
+        [
+          4,
+          "OP17-040"
+        ]
+      ]
+    },
+    {
+      "source": "site:x.com \"1xOP17-001\" decklist",
+      "hits": [
+        [
+          1,
+          "OP17-001"
+        ],
+        [
+          1,
+          "OP17-001"
+        ]
+      ]
+    },
+    {
+      "source": "site:x.com \"1xOP16-001\"",
+      "hits": [
+        [
+          1,
+          "OP16-001"
+        ],
+        [
+          1,
+          "OP16-001"
+        ]
+      ]
+    }
+  ],
+  "notes": [
+    "Public X proxies (Jina reader, FxTwitter, DuckDuckGo site:x.com) returned no complete 50-card NxSET-NNN lists for tracked leaders. Recent creator tweets were memes, meta charts, product ads, and single-card photos. CardKaizoku's Ace/meta posts are win-rate graphics (staple names + matchups), not pasteable lists. Artress Lucy tweets attach playmat photos of OP04-002 Lucy, which is not a hub leader and has no readable NxSET-NNN lines. Creator 50-card lists on this site still come from YouTube descriptions, with X profile links."
+  ]
+}

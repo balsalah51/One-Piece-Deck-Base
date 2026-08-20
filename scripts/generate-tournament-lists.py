@@ -880,6 +880,7 @@ def render_deck_page(leader: dict, entry: dict, cache: dict) -> str:
         "tournament": "Tournament list scraped from Limitless Play. English card text from Limitless One Piece.",
         "youtube": "List from a YouTube deck profile. English card text from Limitless One Piece.",
         "web": "Community list from a public deck builder. English card text from Limitless One Piece.",
+        "x": "List copied from a public X/Twitter post. English card text from Limitless One Piece.",
     }.get(entry.get("kind"), "List sourced from the One Piece TCG community. Not affiliated with Bandai.")
     body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="{html.escape(crumb_href)}">{html.escape(crumb_label)}</a> / <a href="{html.escape(parent_href)}">{html.escape(leader['name'])}</a> / Decklist</div>
         <h2>{html.escape(title)}</h2>
