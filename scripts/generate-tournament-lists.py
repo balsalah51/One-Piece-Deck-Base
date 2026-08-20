@@ -300,6 +300,14 @@ def flatten_cards(dl: dict) -> list[dict]:
     return out
 
 
+def date_sort_key(entry: dict) -> tuple:
+    """Newest Limitless event date first; better placing breaks a same-day tie."""
+    date = entry.get("date") or "0000-00-00"
+    placing = entry.get("placing")
+    placing_n = int(placing) if placing is not None else 10_000
+    return (date, -placing_n)
+
+
 def quality_key(entry: dict) -> tuple:
     placing = entry.get("placing")
     placing_n = int(placing) if placing is not None else 10_000
@@ -965,17 +973,17 @@ def render_index_section(leader: dict, lists: list[dict]) -> str:
     intro = (
         "No Limitless tournament results for this leader yet, so these are sample 50-card lists from the OP17 Red pool. Each row opens a full list."
         if sample_only
-        else "Each row opens a separate 50-card list. Taken from recent Limitless Play events."
+        else "Newest Limitless events first. Each row opens a separate 50-card list."
     )
     rows = []
-    for entry in lists:
+    for entry in sorted(lists, key=date_sort_key, reverse=True):
         href = entry["href"]
         title, subtitle = list_heading(entry, leader["name"])
-        place = ordinal(entry.get("placing")) or record_text(entry.get("record")) or "View"
+        right = entry.get("date") or ordinal(entry.get("placing")) or record_text(entry.get("record")) or "View"
         if entry.get("kind") == "sample":
-            place = "Sample"
-        elif entry.get("kind") == "featured":
-            place = ordinal(entry.get("placing")) or "List"
+            right = "Sample"
+        elif entry.get("kind") in ("youtube", "web", "x") and not entry.get("date"):
+            right = "List"
         rows.append(
             f"""            <li>
               <a class="item" href="{html.escape(href)}">
@@ -983,7 +991,7 @@ def render_index_section(leader: dict, lists: list[dict]) -> str:
                   <div style="font-weight:700">{html.escape(title)}</div>
                   <div class="muted" style="font-size:13px">{html.escape(subtitle)}</div>
                 </div>
-                <div class="link">{html.escape(place)} →</div>
+                <div class="link">{html.escape(str(right))} →</div>
               </a>
             </li>"""
         )

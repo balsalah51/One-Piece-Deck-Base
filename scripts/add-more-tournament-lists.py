@@ -141,6 +141,7 @@ def rebuild_hubs(index: dict) -> None:
         page = page_path.read_text()
         comm_lists = community_entries(leader)
         tour_lists = tournament_entries(leader, index.get(lid) or [])
+        tour_lists.sort(key=gen.date_sort_key, reverse=True)
         if lid == "OP17-001":
             tournament_html = NEWGATE_TOURNAMENT
         else:
