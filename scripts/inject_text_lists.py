@@ -36,8 +36,8 @@ PREVIEW_JS = """    document.getElementById('year').textContent = new Date().get
         if (!pop || !title) return;
         resetPop(pop);
         var tr = title.getBoundingClientRect();
-        var width = pop.offsetWidth || 220;
-        var height = pop.offsetHeight || 308;
+        var width = pop.offsetWidth || 110;
+        var height = pop.offsetHeight || 154;
         var left = tr.left;
         var top = tr.top - height - 10;
         if (left + width > window.innerWidth - 12) left = window.innerWidth - width - 12;
