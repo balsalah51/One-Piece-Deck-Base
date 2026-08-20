@@ -714,13 +714,12 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
         <div class="logo">OP</div>
         <div>
           <h1>One Piece Deck Base</h1>
-          <div class="subtitle">Decklists, community, and custom gear</div>
+          <div class="subtitle">OPTCG decklists</div>
         </div>
       </a>
       <nav aria-label="Primary">
         <a href="/#decklists"{deck_cur}>Decklists</a>
         <a href="/decklists/op17.html"{op17_cur}>OP17</a>
-        <a href="/shop/">Shop</a>
         <a href="/#community">Community</a>
       </nav>
     </header>
@@ -731,7 +730,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
       </div>
     </main>
     <footer>
-      © <span id="year"></span> One Piece Deck Base — Built with community in mind. <a href="/shop/">Shop</a>
+      © <span id="year"></span> One Piece Deck Base — Built with community in mind.
     </footer>
   </div>
   <script>

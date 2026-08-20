@@ -51,13 +51,12 @@ def chrome(title: str, description: str, body: str) -> str:
         <div class="logo">OP</div>
         <div>
           <h1>One Piece Deck Base</h1>
-          <div class="subtitle">Decklists, community, and custom gear</div>
+          <div class="subtitle">OPTCG decklists</div>
         </div>
       </a>
       <nav aria-label="Primary">
         <a href="/#decklists">Decklists</a>
         <a href="/decklists/op17.html">OP17</a>
-        <a href="/shop/">Shop</a>
         <a href="/#community">Community</a>
       </nav>
     </header>
@@ -67,7 +66,7 @@ def chrome(title: str, description: str, body: str) -> str:
       </div>
     </main>
     <footer>
-      © <span id="year"></span> One Piece Deck Base — Fan site for the Bandai ONE PIECE CARD GAME (OPTCG). Not affiliated with Bandai. <a href="/shop/">Shop</a>
+      © <span id="year"></span> One Piece Deck Base — Fan site for the Bandai ONE PIECE CARD GAME (OPTCG). Not affiliated with Bandai.
     </footer>
   </div>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
@@ -747,7 +746,7 @@ def write_page(rel: str, title: str, desc: str, body: str) -> str:
 def existing_html_urls() -> list[str]:
     urls = []
     for p in sorted(ROOT.rglob("*.html")):
-        if any(part in p.parts for part in (".git", "scripts", "node_modules")):
+        if any(part in p.parts for part in (".git", "scripts", "node_modules", "shop")):
             continue
         rel = p.relative_to(ROOT).as_posix()
         if rel.endswith("index.html"):
@@ -796,7 +795,7 @@ def main() -> None:
     )
 
     (ROOT / "robots.txt").write_text(
-        "User-agent: *\nAllow: /\nSitemap: https://onepiecedeckbase.com/sitemap.xml\n"
+        "User-agent: *\nAllow: /\nDisallow: /shop/\nSitemap: https://onepiecedeckbase.com/sitemap.xml\n"
     )
 
     all_urls = existing_html_urls()
