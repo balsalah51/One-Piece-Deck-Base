@@ -188,6 +188,54 @@ LEADERS = [
         "pool_heading": "Card pictures",
         "pool_note": "English names and art from Limitless",
     },
+    {
+        "id": "OP12-061",
+        "key": "donquixote-rosinante",
+        "page": "decklists/donquixote-rosinante.html",
+        "dir": "decklists/donquixote-rosinante",
+        "name": "Donquixote Rosinante",
+        "color": "color-purple-yellow",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP13-004",
+        "key": "sabo",
+        "page": "decklists/sabo.html",
+        "dir": "decklists/sabo",
+        "name": "Sabo",
+        "color": "color-red-black",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP14-080",
+        "key": "gecko-moria",
+        "page": "decklists/gecko-moria.html",
+        "dir": "decklists/gecko-moria",
+        "name": "Gecko Moria",
+        "color": "color-black-yellow",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP09-062",
+        "key": "nico-robin",
+        "page": "decklists/nico-robin.html",
+        "dir": "decklists/nico-robin",
+        "name": "Nico Robin",
+        "color": "color-purple-yellow",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
 ]
 
 
@@ -300,21 +348,31 @@ def flatten_cards(dl: dict) -> list[dict]:
     return out
 
 
-def quality_key(entry: dict) -> tuple:
+def format_date(date: str) -> str:
+    if not date:
+        return ""
+    return str(date)[:10]
+
+
+def date_sort_key(entry: dict) -> tuple:
+    """Newest event date first; better finish as a tiebreaker."""
     placing = entry.get("placing")
     placing_n = int(placing) if placing is not None else 10_000
     rec = entry.get("record") or {}
     wins = rec.get("wins") or 0
     players = entry.get("players") or 0
-    date = entry.get("date") or ""
     cards = count_cards(entry.get("decklist") or {})
-    return (placing_n, -wins, -players, -cards, date)
+    return (format_date(entry.get("date") or ""), -placing_n, wins, players, cards)
+
+
+def quality_key(entry: dict) -> tuple:
+    return date_sort_key(entry)
 
 
 def select_lists(entries: list[dict], limit: int = MAX_LISTS) -> list[dict]:
     unique = []
     seen = set()
-    for entry in sorted(entries, key=quality_key):
+    for entry in sorted(entries, key=date_sort_key, reverse=True):
         dl = entry.get("decklist") or {}
         if count_cards(dl) < MIN_CARDS:
             continue
@@ -706,14 +764,13 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
         <div class="logo">OP</div>
         <div>
           <h1>One Piece Deck Base</h1>
-          <div class="subtitle">Decklists, community, and custom gear</div>
+          <div class="subtitle">Decklists and community</div>
         </div>
       </a>
       <nav aria-label="Primary">
         <a href="/#decklists"{deck_cur}>Decklists</a>
         <a href="/decklists/op17.html"{op17_cur}>OP17</a>
-        <a href="/shop/">Shop</a>
-        <a href="/#community">Community</a>
+        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
       </nav>
     </header>
 
@@ -723,7 +780,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
       </div>
     </main>
     <footer>
-      © <span id="year"></span> One Piece Deck Base — Built with community in mind. <a href="/shop/">Shop</a>
+      © <span id="year"></span> One Piece Deck Base — Built with community in mind. <a href="/guides/">Guides</a>
     </footer>
   </div>
   <script>
@@ -792,7 +849,7 @@ def list_heading(entry: dict, leader_name: str) -> tuple[str, str]:
     place = ordinal(entry.get("placing"))
     rec = record_text(entry.get("record"))
     date = entry.get("date") or ""
-    bits = [b for b in (place, rec, date) if b]
+    bits = [b for b in (place, rec, format_date(date)) if b]
     title = f"{player} — {leader_name}"
     sub = event
     if bits:
@@ -959,17 +1016,23 @@ def render_index_section(leader: dict, lists: list[dict]) -> str:
     intro = (
         "No Limitless tournament results for this leader yet, so these are sample 50-card lists from the OP17 Red pool. Each row opens a full list."
         if sample_only
-        else "Each row opens a separate 50-card list. Taken from recent Limitless Play events."
+        else "Each row opens a separate 50-card list. Sorted by Limitless event date, newest first."
     )
     rows = []
-    for entry in lists:
+    for entry in sorted(lists, key=date_sort_key, reverse=True):
         href = entry["href"]
         title, subtitle = list_heading(entry, leader["name"])
-        place = ordinal(entry.get("placing")) or record_text(entry.get("record")) or "View"
+        date_label = format_date(entry.get("date") or "")
+        place = (
+            date_label
+            or ordinal(entry.get("placing"))
+            or record_text(entry.get("record"))
+            or "View"
+        )
         if entry.get("kind") == "sample":
             place = "Sample"
         elif entry.get("kind") == "featured":
-            place = ordinal(entry.get("placing")) or "List"
+            place = date_label or ordinal(entry.get("placing")) or "List"
         rows.append(
             f"""            <li>
               <a class="item" href="{html.escape(href)}">
