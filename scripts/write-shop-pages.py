@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write the starter shop pages, including a custom leader designer."""
+"""Write unpublished shop pages (kept on disk, not linked from the public site)."""
 
 from pathlib import Path
 
@@ -19,6 +19,7 @@ def chrome(title: str, desc: str, current: str, body: str) -> str:
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{title}</title>
   <meta name="description" content="{desc}" />
+  <meta name="robots" content="noindex, nofollow" />
   <link rel="stylesheet" href="/css/site.css" />
 </head>
 <body>
