@@ -34,7 +34,7 @@ NEWGATE_TOURNAMENT = """        <!-- TOURNAMENT_DECKLISTS -->
             <h3>Tournament decklists</h3>
             <div class="muted">0 lists</div>
           </div>
-          <p class="muted">Still no Limitless tournament results for OP17-001. Use the YouTube lists above until events start posting this leader.</p>
+          <p class="muted">No Limitless standings for this leader yet. Community lists are above.</p>
         </section>
         <!-- /TOURNAMENT_DECKLISTS -->"""
 

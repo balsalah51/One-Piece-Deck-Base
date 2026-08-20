@@ -631,7 +631,7 @@ CHARACTERS = [
 def topic_body(topic: dict) -> str:
     return f"""        <div class="crumb"><a href="/">Home</a> / <a href="/guides/">Guides</a> / {html.escape(topic["h2"])}</div>
         <h2>{html.escape(topic["h2"])}</h2>
-        <p>{html.escape(topic["copy"])} Official Bandai events: <a href="https://en.onepiece-cardgame.com/events/">ONE PIECE CARD GAME events</a>. More names: <a href="/guides/one-piece-tcg.html">One Piece TCG</a>, <a href="/guides/optcg.html">OPTCG</a>, <a href="/guides/bandai.html">Bandai</a>, <a href="/guides/characters/">character guides</a>.</p>
+        <p>{html.escape(topic["copy"])}</p>
         <section style="margin-top:18px">
           <div class="section-title">
             <h3>OPTCG leader pages</h3>
@@ -673,7 +673,7 @@ def character_body(name: str, blurb: str, related: list[int]) -> str:
         )
     return f"""        <div class="crumb"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <a href="/guides/characters/">Characters</a> / {html.escape(name)}</div>
         <h2>{html.escape(name)}</h2>
-        <p>{html.escape(blurb)} This page exists so searches for {html.escape(name)} in the One Piece TCG, OPTCG, and Bandai ONE PIECE CARD GAME can reach a real decklist on this site.</p>
+        <p>{html.escape(blurb)}</p>
         <section style="margin-top:18px">
           <div class="section-title">
             <h3>Related OPTCG decklists</h3>
@@ -697,7 +697,7 @@ def guides_index(topic_links: list[tuple[str, str]], char_links: list[tuple[str,
     )
     return f"""        <div class="crumb"><a href="/">Home</a> / Guides</div>
         <h2>One Piece TCG guides</h2>
-        <p>Extra OPTCG pages for search: One Piece, One Piece TCG, OPTCG, Bandai, and character names. Each page points at real 50-card decklists. These are not in the main nav on purpose.</p>
+        <p>Topic and character pages that link to the 50-card lists on this site.</p>
         <section style="margin-top:18px">
           <div class="section-title"><h3>Topics</h3><div class="muted">Bandai / OPTCG</div></div>
           <ul class="list">

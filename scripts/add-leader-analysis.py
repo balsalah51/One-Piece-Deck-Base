@@ -28,107 +28,74 @@ TARGET = 50
 
 TAKES = {
     "OP17-001": (
-        "YouTube is carrying OP17 Edward Newgate while Limitless still has no posted standings for OP17-001. "
-        "MarinefordTCG (also on X @MarinefordTCG) is selling the leader as an 8k-forever beatstick and asking whether the new Whitebeard is already better than Ace; "
-        "NightingaleTCG (@BenSchumi7) is on the same page, treating Newgate as a big body that wins long games. "
-        "The three public lists agree on the core: 4 Sanji, 4 Portgas D. Ace, 4 Izo, 4 ten-cost Edward Newgate, 4 Kouzuki Oden, Marco, Uta, and Moby Dick. "
-        "Flex slots are where the videos diverge — Namule/Curiel search, Rakuyo/Ace beatdown, or an Ivankov/Zoro package — so the consensus below is the Whitebeard package everyone actually shares, not a made-up tournament winner."
+        "Red OP17 Edward Newgate is a Whitebeard beatstick that keeps 8000-power bodies on the board. "
+        "Core lists play 4 Sanji, 4 Portgas D. Ace, 4 Izo, 4 ten-cost Edward Newgate, 4 Kouzuki Oden, plus Marco, Uta, and Moby Dick. "
+        "Flex is Namule/Curiel search, Rakuyo beatdown, or an Ivankov/Zoro package."
     ),
     "OP17-020": (
-        "Green Shanks is the loudest argument on YouTube and X, and the quietest deck on Limitless. "
-        "StrawHatPecan (@StrawHatPecan) is teaching a freeze-the-board Red Hair list; MarinefordTCG (@MarinefordTCG) is asking if that rest package is already better than Mihawk; "
-        "a first-impressions video is still titled as if the leader might be overhyped. "
-        "Only a handful of ChinoizeCup lists have shown up, mostly mid-table, so the public take is: the leader effect is real, the deck is not yet proven as the green deck of the format. "
-        "Every list still locks Benn Beckman, Yasopp, and the ten-cost Shanks. Most also play Limejuice, Lucky Roux, Crone Oli, and the rest events. "
-        "The split is whether you stay in Red Hair or splash Perona, Smoker, and Law like a Mihawk list — the average stays Red Hair."
+        "Green OP17 Shanks rests the board and plays Red Hair Pirates. "
+        "Every list locks Benn Beckman, Yasopp, and the ten-cost Shanks; most also play Limejuice, Lucky Roux, Crone Oli, and rest events. "
+        "The split is staying in-theme versus splashing Perona, Smoker, and Law like Mihawk."
     ),
     "OP17-039": (
-        "Rocks D. Xebec is the OP17 deck people actually registered. JohnnyTCG called it the most fun leader; a first-impressions video asked if blue Rocks was overhyped or legit; "
-        "CAPIAMO and CardKaizoku posted testing lists and a builder link almost immediately. "
-        "The X/YouTube hype matches the table: this is the densest Limitless pile on the site, and the list is close to solved. "
-        "Every sampled deck plays 4 Edward Newgate, 4 Shiki, 4 Charlotte Linlin, 4 Gloriosa, 4 Miss Buckingham Stussy, 4 Rocks D. Xebec, the 4-cost Rocks Pirates stage, and There's No Authority. "
-        "Kaido, Streusen, Don Marlon, and Captain John are the only real ratios people argue about. "
-        "If you want one list that looks like what the room is playing, use the consensus below."
+        "Blue OP17 Rocks D. Xebec is the densest Limitless pile on this site. "
+        "Lists play 4 Edward Newgate, 4 Shiki, 4 Charlotte Linlin, 4 Gloriosa, 4 Miss Buckingham Stussy, 4 Rocks D. Xebec, the Rocks Pirates stage, and There's No Authority. "
+        "Kaido, Streusen, Don Marlon, and Captain John are the usual ratio fights."
     ),
     "OP17-058": (
-        "Purple Kaido's YouTube arc was 'people slept on this.' JohnnyTCG said the leader is hard to beat; another profile is literally titled that they were wrong about purple Kaido; "
-        "a third calls it the new best purple deck; MarinefordTCG (@MarinefordTCG) told people not to sleep on the King of the Beasts. "
-        "Limitless agrees more than it does for Shanks or Newgate: Kaido is a high-volume OP17 registration with a tight core. "
-        "King, Queen, Basil Hawkins, Yamato, the on-leader Kaido, Mamaragan, and We're Going to Claim the One Piece are in every list we averaged. "
-        "Charlotte Linlin from the starter, Slow-Slow Beam Sword, and the cheaper Kaido are close behind. "
-        "Flex is Black Maria, Jack, Divine Departure, or the new OP17 events — not whether the All-Star package belongs."
+        "Purple OP17 Kaido is All-Star midrange with a tight tournament core. "
+        "King, Queen, Basil Hawkins, Yamato, the on-leader Kaido, Mamaragan, and We're Going to Claim the One Piece show up in every averaged list. "
+        "Flex is Black Maria, Jack, Divine Departure, or the new OP17 events."
     ),
     "OP17-079": (
-        "Black OP17 Monkey D. Luffy is the Elbaph blocker deck on YouTube. StrawHatPecan (@StrawHatPecan) is selling infinite blockers; "
-        "BlaisePlaysTCG says the leader is already strong; the early Elbaph profile lists are the same Straw Hat plus giants package you see on Limitless. "
-        "Usopp, Gerd, and Loki are 4-ofs in every list. Most also play Jaguar D. Saul, a Luffy beater, Zoro, Nico Robin, Rodo, Sanji, and Chopper. "
-        "The argument on X and in the comments is how much Straw Hat glue you keep versus extra giants and events like Gum-Gum Kong Gun, Tempest Kick, or Thousand Sunny. "
-        "It is not a solved 4-of pile like Rocks, but the consensus is clearly Elbaph Luffy, not a leftover black midrange pile from an older set."
+        "Black OP17 Monkey D. Luffy is the Elbaph blocker deck, not Imu. "
+        "Usopp, Gerd, and Loki are 4-ofs; most lists also play Jaguar D. Saul, a Luffy beater, Zoro, Nico Robin, Rodo, Sanji, and Chopper. "
+        "Flex is extra giants versus events like Gum-Gum Kong Gun, Tempest Kick, or Thousand Sunny."
     ),
     "OP17-099": (
-        "Yellow Charlotte Linlin came out of YouTube sounding like a problem. StrawHatPecan (@StrawHatPecan) called it the slop yellow deck and meant that as a compliment; "
-        "another profile is titled that Linlin is a big problem. "
-        "Limitless lists back that up: this is a real OP17 registration, not a flavor leader. "
-        "Pudding, the on-color Linlin, and Cracker are in every averaged list. Katakuri, Oven, Sweet 3 Generals, Daifuku, and Zeus are in almost all of them. "
-        "Perospero, Smoothie, and Streusen are the next tier. Teach and Brulee are the main splits. "
-        "The community take is that yellow finally has an OP17 boss that just plays Big Mom cards and wins by generating too many bodies, not by a cute trigger gimmick."
+        "Yellow OP17 Charlotte Linlin is a Big Mom swarm leader. "
+        "Pudding, the on-color Linlin, and Cracker are in every averaged list; Katakuri, Oven, Sweet 3 Generals, Daifuku, and Zeus are close behind. "
+        "Perospero, Smoothie, Streusen, Teach, and Brulee fill the rest."
     ),
     "OP13-001": (
-        "RG Luffy is the current-format deck YouTube keeps returning to. JohnnyTCG asked if it just became meta again; "
-        "ArtressTCG (@michaelartress) said they made it even harder to beat and posted the list on the EgmanEvents builder. "
-        "Unlike the brand-new OP17 leaders, this one has a long Limitless sample, and the average is a Straw Hat value pile: Sanji, Usopp, Nami, EB04 Zoro, Brook, Charlestone, starter Luffy, and Thousand Sunny. "
-        "Laboon, Electrical Luna, and Bonney are common; the 10-cost Luffy and extra Zoro events are the usual cuts. "
-        "The X take matches the lists: RG Luffy did not leave when OP17 arrived, it just absorbed new green and red tools and kept winning local tables."
+        "RG Luffy is a Straw Hat value pile that still posts in current format. "
+        "Lists average Sanji, Usopp, Nami, EB04 Zoro, Brook, Charlestone, starter Luffy, and Thousand Sunny. "
+        "Laboon, Electrical Luna, and Bonney are common; the 10-cost Luffy and extra Zoro events are the usual cuts."
     ),
     "OP11-041": (
-        "Nami's public conversation is older than OP17, and the lists show it. YouTube profiles from OP15/EB04, an 'ultimate' blue/yellow guide, and KebbieG's OP16 gameplay all point at the same engine: "
-        "draw when Life cards leave, then a Thriller Bark yellow package. "
-        "Every averaged list plays Kumacy, Gecko Moria, Nico Robin, Nami, Borsalino, and Perona. Hogback, Zeus, and a Newgate splash are close to required. "
-        "Mr. 3, Marco, Kikunojo, and Gravity Blade are the next tier; Girl and Teach are the older vs newer split. "
-        "On X and in those videos the knock is that Nami is linear; the praise is that the linear plan still puts up Limitless results next to the new emperors."
+        "Blue/Yellow Nami draws when Life cards leave, then plays a Thriller Bark yellow package. "
+        "Every averaged list has Kumacy, Gecko Moria, Nico Robin, Nami, Borsalino, and Perona; Hogback, Zeus, and a Newgate splash are close to required. "
+        "Mr. 3, Marco, Kikunojo, and Gravity Blade are the next tier."
     ),
     "OP14-020": (
-        "Green Mihawk's YouTube story is the starter-deck lottery. ArtressTCG (@michaelartress) said Mihawk won that lottery and posted a Law/Bepo plus ST32 list on EgmanEvents. "
-        "Limitless is full of that same green pile: Perona (both printings), Law & Bepo, Kin'emon, Kouzuki Oden, the Mihawk character, and Dead Man's Game. "
-        "Otama, Kikunojo, You Can Be My Samurai, Coffin Boat, and the rush event show up in most lists; Smoker, Zoro, and the ten-cost Mihawk are the flex. "
-        "The community comparison on X is Mihawk versus the new OP17 Shanks rest deck — Mihawk has the tournament sample, Shanks has the new-set hype. "
-        "The consensus below is the Mihawk list the room is actually submitting."
+        "Green Mihawk is a rest/control pile. "
+        "Limitless lists play Perona (both printings), Law & Bepo, Kin'emon, Kouzuki Oden, the Mihawk character, and Dead Man's Game. "
+        "Otama, Kikunojo, You Can Be My Samurai, Coffin Boat, and the rush event show up in most lists; Smoker, Zoro, and the ten-cost Mihawk are flex."
     ),
     "OP16-001": (
-        "OP16 Portgas D. Ace is the red current-format deck that kept posting after the emperors arrived. "
-        "Limitless Play is full of the same Whitebeard rush package: 4 Monkey D. Luffy, 4 Edward Newgate, 4 Vista, and Moby Dick in every list we averaged. "
-        "Garp, Little Oars Jr., Curiel, Marco, and Thatch are close to required. The 10-cost Ace is a 3-of in almost every pile. "
-        "Namule, Time for the Counterattack, Uta, and Izo are the usual flex. "
-        "CardKaizoku's public X chart of private-lobby Ace data names the same staples (OP16 Luffy, Moby Dick, Newgate, Oars Jr.) and says Ace is worse into Rocks, Linlin, and Newgate — that post is a win-rate graphic, not a 50-card ID list. "
-        "The consensus below is averaged from those public tournament lists, not a made-up sample."
+        "Red OP16 Portgas D. Ace is Whitebeard rush — not the red/blue OP13 Ace. "
+        "Lists lock 4 Monkey D. Luffy, 4 Edward Newgate, 4 Vista, and Moby Dick; Garp, Little Oars Jr., Curiel, Marco, and Thatch are close to required. "
+        "The 10-cost Ace is usually a 3-of; Namule, Time for the Counterattack, Uta, and Izo are flex."
     ),
     "OP15-058": (
-        "Purple OP15 Enel is still the Sky Island ramp deck in current-format events. "
-        "The leader rule is the whole identity: a 6-card DON!! deck, then from turn two you flood DON!! and rest the board. "
-        "Every averaged Limitless list plays Ohm, Shura, Enel, El Thor, Lightning Beast Kiten, Lightning Dragon, Mamaragan, Charlotte Pudding, and Vinsmoke Reiju. "
-        "Gamma Knife, Varie, Senor Pink, and Divine Departure fill the rest. "
-        "That is OP15 Enel, not the old yellow OP05 Enel list."
+        "Purple OP15 Enel is Sky Island ramp: a 6-card DON!! deck that floods DON!! from turn two and rests the board. "
+        "Averaged lists play Ohm, Shura, Enel, El Thor, Lightning Beast Kiten, Lightning Dragon, Mamaragan, Charlotte Pudding, and Vinsmoke Reiju. "
+        "Gamma Knife, Varie, Senor Pink, and Divine Departure fill the rest. This is not yellow OP05 Enel."
     ),
     "OP11-062": (
-        "Purple OP11 Charlotte Katakuri is the other Big Mom leader people still register, separate from yellow OP17 Linlin. "
-        "The effect is small and repeatable: DON!! −1 on attack or on the opponent's attack to peek their deck and gain power. "
-        "The Limitless core is Katakuri and Pudding in both printings, plus the ST34 Big Mom package: Katakuri, Brulee, Linlin, and Cracker. "
-        "We're Going to Claim the One Piece, Mamaragan, and Divine Departure show up in most lists. "
-        "The consensus below is averaged from those public tournament lists."
+        "Purple OP11 Charlotte Katakuri is the other Big Mom leader, separate from yellow OP17 Linlin. "
+        "DON!! −1 on attack or on the opponent's attack to peek their deck and gain power. "
+        "Core is Katakuri and Pudding in both printings plus ST34 Big Mom: Katakuri, Brulee, Linlin, and Cracker, with We're Going to Claim the One Piece, Mamaragan, and Divine Departure."
     ),
     "OP13-079": (
-        "Black OP13 Imu is the Mary Geoise / Five Elders leader, not OP17 Elbaph Luffy. "
-        "The rule is the whole identity: no 2-cost or higher events, and you start by playing the Empty Throne stage from deck. "
-        "Limitless lists are still posting this leader, and the pile is the Five Elders engine: Saturn, Warcury, Nusjuro, Mars, Ju Peter, the 10-cost Five Elders, Saint Shalria, and The Five Elders Are at Your Service. "
-        "Saint Charlos, Sabo, Never Existed, and Ground Death are the usual flex. "
-        "The consensus below is averaged from those public tournament lists plus the MabTCG list, not a made-up sample."
+        "Black OP13 Imu is Mary Geoise / Five Elders, not OP17 Elbaph Luffy. "
+        "No 2-cost or higher events, and the Empty Throne stage starts in play from deck. "
+        "Lists play Saturn, Warcury, Nusjuro, Mars, Ju Peter, the 10-cost Five Elders, Saint Shalria, and The Five Elders Are at Your Service. Saint Charlos, Sabo, Never Existed, and Ground Death are flex."
     ),
     "OP13-002": (
         "OP13 Ace is red/blue Portgas D. Ace — 3 life, 6000 power — not the red OP16 Ace rush deck. "
-        "YouTube and Limitless still update this leader: trash a brick to dunk power, then draw when you take damage or a 6000-power body dies. "
-        "The public core is Monkey D. Garp, Otama, Izo, Marco, Yamato, OP13 Edward Newgate, and I Am Whitebeard. "
-        "Uta, Jozu, Atmos, and Roger are the usual finishers. "
-        "If you want the red Whitebeard rush Ace with 4 Luffy and Moby Dick, that is the OP16 Ace page. This page is the older red/blue list that kept getting tournament updates."
+        "Trash a card to give −2000, then draw when you take damage or a 6000-power body dies. "
+        "Core is Monkey D. Garp, Otama, Izo, Marco, Yamato, OP13 Edward Newgate, and I Am Whitebeard; Uta, Jozu, Atmos, and Roger finish."
     ),
 }
 
@@ -288,8 +255,7 @@ def analysis_block(leader: dict, n: int, take: str, text_deck: str) -> str:
     text_deck = text_deck.replace(
         '<p class="muted">Hover or tap a card name to see the picture.</p>',
         (
-            f'<p class="muted">Averaged from {n} YouTube, web, and Limitless lists on this page. '
-            "Copies are the typical count among lists that play the card, then filled to 50. "
+            f'<p class="muted">Averaged from {n} lists on this page, then filled to 50 cards. '
             "Hover or tap a name for the picture.</p>"
         ),
         1,
@@ -297,8 +263,8 @@ def analysis_block(leader: dict, n: int, take: str, text_deck: str) -> str:
     return f"""        <!-- LEADER_ANALYSIS -->
         <section class="leader-analysis" style="margin-top:22px">
           <div class="section-title">
-            <h3>Community take</h3>
-            <div class="muted">YouTube and X</div>
+            <h3>How it plays</h3>
+            <div class="muted">Staples from lists on this page</div>
           </div>
           <p class="leader-take">{html.escape(take)}</p>
         </section>
