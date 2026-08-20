@@ -115,10 +115,10 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
 .text-line .card-title{font-weight:800;color:var(--tile, var(--accent));text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px}
 .text-line .card-id{font-size:12px;margin-left:auto;flex-shrink:0}
 .text-line .card-pop{
-  position:absolute;left:48px;bottom:calc(100% + 8px);z-index:80;
-  width:110px;max-width:110px;height:auto;max-height:154px;border-radius:8px;background:#fff;
+  position:absolute;left:28px;bottom:calc(100% + 8px);z-index:80;
+  width:72px;max-width:72px;height:auto;max-height:100px;border-radius:6px;background:#fff;
   display:block;
-  box-shadow:0 10px 24px rgba(16,22,26,0.22);border:1px solid rgba(0,0,0,0.08);
+  box-shadow:0 8px 18px rgba(16,22,26,0.2);border:1px solid rgba(0,0,0,0.08);
   visibility:hidden;opacity:0;pointer-events:none;transform:translateY(4px);
   transition:opacity .12s ease, transform .12s ease, visibility .12s
 }
