@@ -972,7 +972,7 @@ def render_index_section(leader: dict, lists: list[dict]) -> str:
     intro = (
         "No Limitless tournament results for this leader yet, so these are sample 50-card lists from the OP17 Red pool. Each row opens a full list."
         if sample_only
-        else "Newest Limitless events first. Each row opens a separate 50-card list."
+        else "Newest events first. Each row opens a separate 50-card list."
     )
     rows = []
     for entry in sorted(lists, key=date_sort_key, reverse=True):
