@@ -26,6 +26,8 @@ LEADERS = [
     ("Nami", "/decklists/nami.html", "Blue/Yellow Nami"),
     ("Mihawk", "/decklists/mihawk.html", "Green Dracule Mihawk"),
     ("Portgas D. Ace", "/decklists/portgas-d-ace.html", "OP16 Red Whitebeard Pirates"),
+    ("OP13 Ace", "/decklists/op13-ace.html", "OP13 Red/Blue Portgas D. Ace"),
+    ("Imu", "/decklists/imu.html", "OP13 Black Mary Geoise"),
     ("Enel", "/decklists/enel.html", "OP15 Purple Sky Island"),
     ("Charlotte Katakuri", "/decklists/charlotte-katakuri.html", "OP11 Purple Big Mom Pirates"),
 ]
@@ -223,7 +225,7 @@ TOPICS = [
         "title": "OPTCG leaders | One Piece TCG",
         "h2": "OPTCG leaders",
         "desc": "OPTCG leader pages for OP17 and current-format One Piece TCG decks.",
-        "copy": "OPTCG leaders on this site: Edward Newgate, Shanks, Rocks D. Xebec, Kaido, Monkey D. Luffy, Charlotte Linlin, plus RG Luffy, Nami, Mihawk, Portgas D. Ace, Enel, and Charlotte Katakuri.",
+        "copy": "OPTCG leaders on this site: Edward Newgate, Shanks, Rocks D. Xebec, Kaido, Monkey D. Luffy, Charlotte Linlin, plus RG Luffy, Nami, Mihawk, OP16 Portgas D. Ace, OP13 Ace, Imu, Enel, and Charlotte Katakuri.",
     },
     {
         "slug": "one-piece-tcg-leaders",
@@ -258,7 +260,7 @@ TOPICS = [
         "title": "Red One Piece TCG decks | OPTCG",
         "h2": "Red OPTCG",
         "desc": "Red One Piece TCG decks on this site start with OP17 Edward Newgate and OP16 Ace.",
-        "copy": "Red OPTCG on this site is OP17 Edward Newgate / Whitebeard, OP16 Portgas D. Ace, plus red cards inside RG Luffy. Open those leader lists for 50-card decks.",
+        "copy": "Red OPTCG on this site is OP17 Edward Newgate / Whitebeard, OP16 Portgas D. Ace, OP13 Ace, plus red cards inside RG Luffy. Open those leader lists for 50-card decks.",
     },
     {
         "slug": "green-optcg",
@@ -272,7 +274,7 @@ TOPICS = [
         "title": "Blue One Piece TCG decks | OPTCG",
         "h2": "Blue OPTCG",
         "desc": "Blue One Piece TCG decks: OP17 Rocks D. Xebec and Nami.",
-        "copy": "Blue OPTCG on this site is Rocks D. Xebec and the blue half of Nami. Rocks is the main OP17 blue leader with recent Limitless lists.",
+        "copy": "Blue OPTCG on this site is Rocks D. Xebec, the blue half of Nami, and red/blue OP13 Ace. Rocks is the main OP17 blue leader with recent Limitless lists.",
     },
     {
         "slug": "purple-optcg",
@@ -285,8 +287,8 @@ TOPICS = [
         "slug": "black-optcg",
         "title": "Black One Piece TCG decks | OPTCG",
         "h2": "Black OPTCG",
-        "desc": "Black One Piece TCG decks start with OP17 Monkey D. Luffy.",
-        "copy": "Black OPTCG on this site is OP17 Monkey D. Luffy / Elbaph. Open that leader page for blockers, trash, and recent Limitless lists.",
+        "desc": "Black One Piece TCG decks: OP17 Monkey D. Luffy and OP13 Imu.",
+        "copy": "Black OPTCG on this site is OP17 Monkey D. Luffy / Elbaph and OP13 Imu / Five Elders. Open those leader pages for blockers, trash, and recent Limitless lists.",
     },
     {
         "slug": "yellow-optcg",
@@ -314,7 +316,7 @@ TOPICS = [
         "title": "Whitebeard Pirates One Piece TCG | OPTCG",
         "h2": "Whitebeard Pirates",
         "desc": "Whitebeard Pirates OPTCG lists live on OP17 Edward Newgate and OP16 Ace.",
-        "copy": "Whitebeard Pirates OPTCG on this site is red OP17 Edward Newgate and red OP16 Portgas D. Ace. Ace, Marco, Jozu, Izo, Vista, and Whitebeard searches belong there.",
+        "copy": "Whitebeard Pirates OPTCG on this site is red OP17 Edward Newgate, red OP16 Portgas D. Ace, and red/blue OP13 Ace. Ace, Marco, Jozu, Izo, Vista, and Whitebeard searches belong there.",
     },
     {
         "slug": "rocks-pirates",
@@ -387,8 +389,8 @@ CHARACTERS = [
     ("Rockstar", "rockstar", "Red Hair Pirate who shows up as a card in green Shanks OPTCG lists.", [1]),
     ("Edward Newgate", "edward-newgate", "Whitebeard, OP17 red leader. YouTube OPTCG lists live on his page while Limitless standings catch up.", [0]),
     ("Whitebeard", "whitebeard", "The same person as Edward Newgate. Search Whitebeard OPTCG and you want the red OP17 leader page.", [0]),
-    ("Portgas D. Ace", "portgas-d-ace", "Fire Fist Ace. OP16 red Ace is a constructed leader here; Ace cards also show up in Edward Newgate lists.", [9, 0]),
-    ("Marco", "marco", "Phoenix of the Whitebeard Pirates. Marco is a common name in red Newgate OPTCG lists.", [0]),
+    ("Portgas D. Ace", "portgas-d-ace", "Fire Fist Ace. OP16 red Ace and OP13 red/blue Ace are both constructed leaders here; Ace cards also show up in Edward Newgate lists.", [9, 10, 0]),
+    ("Marco", "marco", "Phoenix of the Whitebeard Pirates. Marco is a common name in red Newgate and Ace OPTCG lists.", [0, 9, 10]),
     ("Jozu", "jozu", "Diamond Jozu of Whitebeard’s crew. See the Newgate OPTCG decklists.", [0]),
     ("Izo", "izo", "Whitebeard Pirate and gunner. Izo cards appear in OP17 Newgate lists.", [0]),
     ("Thatch", "thatch", "Whitebeard Pirate. Newgate OPTCG pages are the right constructed lists.", [0]),
@@ -406,7 +408,7 @@ CHARACTERS = [
     ("Page One", "page-one", "Tobi Roppo. Paired with Ulti in some Kaido OPTCG decklists.", [3]),
     ("Charlotte Linlin", "charlotte-linlin", "Big Mom and OP17 yellow leader. Yellow Linlin OPTCG lists are on her leader page.", [5]),
     ("Big Mom", "big-mom", "The same person as Charlotte Linlin. Yellow OPTCG lists live on the Linlin page.", [5]),
-    ("Charlotte Katakuri", "charlotte-katakuri", "Sweet Commander. Purple OP11 Katakuri is a constructed leader here; yellow Linlin lists also play Katakuri cards.", [11, 5]),
+    ("Charlotte Katakuri", "charlotte-katakuri", "Sweet Commander. Purple OP11 Katakuri is a constructed leader here; yellow Linlin lists also play Katakuri cards.", [13, 5]),
     ("Charlotte Smoothie", "charlotte-smoothie", "Sweet Commander. Open the Linlin OPTCG page for yellow lists.", [5]),
     ("Charlotte Cracker", "charlotte-cracker", "Thousand Arms Cracker. Yellow Linlin OPTCG is the matching leader.", [5]),
     ("Charlotte Perospero", "charlotte-perospero", "First son of Big Mom. See Linlin OPTCG decklists.", [5]),
@@ -449,13 +451,13 @@ CHARACTERS = [
     ("Linlin", "linlin", "Same person as Charlotte Linlin / Big Mom. Yellow OP17 is the constructed page.", [5]),
     ("Law", "law", "Same search as Trafalgar Law. RG Luffy and Mihawk lists are the closest OPTCG pages.", [6, 8]),
     ("Kid", "kid", "Same search as Eustass Kid. Start from RG Luffy and the OP17 hub.", [6, 4]),
-    ("Ace", "ace", "Same search as Portgas D. Ace. OP16 Ace is the constructed red leader; Fire Fist cards also show up in Newgate lists.", [9, 0]),
+    ("Ace", "ace", "Same search as Portgas D. Ace. OP16 Ace is the constructed red leader; OP13 Ace is the red/blue leader.", [9, 10]),
     ("Roger", "roger", "Same search as Gol D. Roger. Roger cards show up in Newgate and Rocks OPTCG lists.", [0, 2]),
     ("Oden", "oden", "Same search as Kouzuki Oden. Red Newgate OPTCG lists are the usual home.", [0]),
-    ("Katakuri", "katakuri", "Same search as Charlotte Katakuri. Purple OP11 Katakuri is the constructed leader.", [11]),
+    ("Katakuri", "katakuri", "Same search as Charlotte Katakuri. Purple OP11 Katakuri is the constructed leader.", [13]),
     ("Beckman", "beckman", "Same search as Benn Beckman. Open OP17 Shanks OPTCG lists.", [1]),
     ("Rayleigh", "rayleigh", "Same search as Silvers Rayleigh. Newgate and Rocks pages are the closest lists.", [0, 2]),
-    ("Enel", "enel", "God of Skypeia. Purple OP15 Enel is the constructed OPTCG leader on this site.", [10]),
+    ("Enel", "enel", "God of Skypeia. Purple OP15 Enel is the constructed OPTCG leader on this site.", [12]),
     ("Lucci", "lucci", "Same search as Rob Lucci. Start from the hub, Mihawk, or Black Luffy pages.", [8, 4]),
     ("Doflamingo", "doflamingo", "Same search as Donquixote Doflamingo. Use the OPTCG hub and green lists.", [8, 2]),
     ("Hancock", "hancock", "Same search as Boa Hancock. Start from the OP17 hub and yellow/black lists.", [5, 4]),
@@ -547,12 +549,12 @@ CHARACTERS = [
     ("York", "york", "Vegapunk satellite. Egghead searches can start at the hub.", [4]),
     ("Atlas", "atlas", "Vegapunk satellite. Egghead searches can start at the hub.", [4]),
     ("Stussy", "stussy", "CP0. Lucci-adjacent searches can start at the hub.", [8, 2]),
-    ("Jaygarcia Saturn", "jaygarcia-saturn", "Five Elders. Use the OPTCG hub.", [4]),
-    ("Marcus Mars", "marcus-mars", "Five Elders. Use the OPTCG hub.", [4]),
-    ("Topman Warcury", "topman-warcury", "Five Elders. Use the OPTCG hub.", [4]),
-    ("Ethanbaron V. Nusjuro", "ethanbaron-v-nusjuro", "Five Elders. Use the OPTCG hub.", [4]),
-    ("Shepherd Ju Peter", "shepherd-ju-peter", "Five Elders. Use the OPTCG hub.", [4]),
-    ("Imu", "imu", "Empty Throne. Use the OPTCG hub.", [4]),
+    ("Jaygarcia Saturn", "jaygarcia-saturn", "Five Elders. Black Imu OPTCG lists are the matching constructed pages.", [11]),
+    ("Marcus Mars", "marcus-mars", "Five Elders. Black Imu OPTCG lists are the matching constructed pages.", [11]),
+    ("Topman Warcury", "topman-warcury", "Five Elders. Black Imu OPTCG lists are the matching constructed pages.", [11]),
+    ("Ethanbaron V. Nusjuro", "ethanbaron-v-nusjuro", "Five Elders. Black Imu OPTCG lists are the matching constructed pages.", [11]),
+    ("Shepherd Ju Peter", "shepherd-ju-peter", "Five Elders. Black Imu OPTCG lists are the matching constructed pages.", [11]),
+    ("Imu", "imu", "Sovereign of Mary Geoise and black OP13 OPTCG leader. Five Elders lists live on the Imu page.", [11]),
     ("Figarland Garling", "figarland-garling", "Holy Knights / God Valley. Rocks and Shanks pages are related OPTCG lists.", [2, 1]),
     ("Figarland Shamrock", "figarland-shamrock", "Holy Knights. Shanks and Elbaph Luffy pages are related OPTCG lists.", [1, 4]),
     ("Gunko", "gunko", "Holy Knight. Elbaph Luffy is the matching OP17 constructed page.", [4]),
@@ -577,7 +579,7 @@ CHARACTERS = [
     ("World's Strongest Man", "worlds-strongest-man", "Whitebeard’s title. Red OP17 Edward Newgate is the constructed page.", [0]),
     ("World's Strongest Swordsman", "worlds-strongest-swordsman", "Mihawk’s title. Green Mihawk OPTCG lists are on his leader page.", [8]),
     ("Pirate King", "pirate-king", "Gol D. Roger’s title, and Luffy’s goal. Roger and Luffy OPTCG pages are related.", [0, 4]),
-    ("Fire Fist", "fire-fist", "Portgas D. Ace’s epithet. OP16 Ace is the constructed leader; Ace cards also show up in Edward Newgate lists.", [9, 0]),
+    ("Fire Fist", "fire-fist", "Portgas D. Ace’s epithet. OP16 Ace and OP13 Ace are both constructed leaders; Ace cards also show up in Edward Newgate lists.", [9, 10, 0]),
     ("Surgeon of Death", "surgeon-of-death", "Trafalgar Law’s epithet. RG Luffy lists are a common home for Law cards.", [6]),
     ("Heavenly Demon", "heavenly-demon", "Doflamingo’s epithet. Use the OPTCG hub and green lists.", [8]),
     ("Tyrant", "tyrant", "Bartholomew Kuma’s epithet. Start from the One Piece TCG hub.", [4]),
@@ -629,7 +631,7 @@ CHARACTERS = [
 def topic_body(topic: dict) -> str:
     return f"""        <div class="crumb"><a href="/">Home</a> / <a href="/guides/">Guides</a> / {html.escape(topic["h2"])}</div>
         <h2>{html.escape(topic["h2"])}</h2>
-        <p>{html.escape(topic["copy"])} Official Bandai events: <a href="https://en.onepiece-cardgame.com/events/">ONE PIECE CARD GAME events</a>. More names: <a href="/guides/one-piece-tcg.html">One Piece TCG</a>, <a href="/guides/optcg.html">OPTCG</a>, <a href="/guides/bandai.html">Bandai</a>, <a href="/guides/characters/">character guides</a>.</p>
+        <p>{html.escape(topic["copy"])}</p>
         <section style="margin-top:18px">
           <div class="section-title">
             <h3>OPTCG leader pages</h3>
@@ -671,7 +673,7 @@ def character_body(name: str, blurb: str, related: list[int]) -> str:
         )
     return f"""        <div class="crumb"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <a href="/guides/characters/">Characters</a> / {html.escape(name)}</div>
         <h2>{html.escape(name)}</h2>
-        <p>{html.escape(blurb)} This page exists so searches for {html.escape(name)} in the One Piece TCG, OPTCG, and Bandai ONE PIECE CARD GAME can reach a real decklist on this site.</p>
+        <p>{html.escape(blurb)}</p>
         <section style="margin-top:18px">
           <div class="section-title">
             <h3>Related OPTCG decklists</h3>
@@ -695,7 +697,7 @@ def guides_index(topic_links: list[tuple[str, str]], char_links: list[tuple[str,
     )
     return f"""        <div class="crumb"><a href="/">Home</a> / Guides</div>
         <h2>One Piece TCG guides</h2>
-        <p>Extra OPTCG pages for search: One Piece, One Piece TCG, OPTCG, Bandai, and character names. Each page points at real 50-card decklists. These are not in the main nav on purpose.</p>
+        <p>Topic and character pages that link to the 50-card lists on this site.</p>
         <section style="margin-top:18px">
           <div class="section-title"><h3>Topics</h3><div class="muted">Bandai / OPTCG</div></div>
           <ul class="list">

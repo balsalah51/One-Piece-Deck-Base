@@ -198,5 +198,39 @@
       "source_url": "https://www.youtube.com/watch?v=xyTp2cBJpMM",
       "kind": "web"
     }
+  ],
+  "OP16-001": [
+    {
+      "slug": "web-mabi-op16-ace-infinite-counters",
+      "href": "/decklists/portgas-d-ace/web-mabi-op16-ace-infinite-counters.html",
+      "title": "Infinite Counters — Mabi",
+      "source_url": "https://mabitcg.com/one-piece-tcg-portgas-d-ace-op16-infinite-counters-op16-mabi/",
+      "kind": "web"
+    }
+  ],
+  "OP13-079": [
+    {
+      "slug": "web-mabi-imu-five-elders",
+      "href": "/decklists/imu/web-mabi-imu-five-elders.html",
+      "title": "The Five Elders — Mabi",
+      "source_url": "https://mabitcg.com/one-piece-tcg-imu-op13-the-five-elders-op13-mabi/",
+      "kind": "web"
+    }
+  ],
+  "OP13-002": [
+    {
+      "slug": "yt-tcg353-op13-ace-vs-enel",
+      "href": "/decklists/op13-ace/yt-tcg353-op13-ace-vs-enel.html",
+      "title": "OP15 Ace vs Enel — TCG353",
+      "source_url": "https://www.youtube.com/watch?v=hbYhFPZRY5E",
+      "kind": "youtube"
+    },
+    {
+      "slug": "web-deltia-op13-ace-guide",
+      "href": "/decklists/op13-ace/web-deltia-op13-ace-guide.html",
+      "title": "Red/Blue Ace guide list — Deltia",
+      "source_url": "https://deltiasgaming.com/one-piece-tcg-red-blue-portgas-d-ace-deck-guide/",
+      "kind": "web"
+    }
   ]
 }
