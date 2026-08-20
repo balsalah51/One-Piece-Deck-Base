@@ -16,13 +16,45 @@ html,body{height:100%;margin:0;background:var(--bg);color:var(--text);-webkit-fo
 header{display:flex;align-items:center;justify-content:space-between;gap:18px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
 .logo{
-  width:56px;height:56px;border-radius:10px;background:linear-gradient(180deg,var(--accent),#7a1212);
-  display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px;box-shadow:var(--shadow)
+  width:48px;height:48px;border-radius:50%;object-fit:cover;
+  background:#111;box-shadow:var(--shadow);display:block;flex-shrink:0
 }
 h1{margin:0;font-size:20px;letter-spacing:-0.01em}
 .subtitle{color:var(--muted);font-size:13px;margin-top:4px}
+nav{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center}
 nav a{color:var(--muted);text-decoration:none;margin-left:14px;font-weight:600}
 nav a:hover,nav a[aria-current="page"]{color:var(--accent)}
+.home-masthead{
+  display:grid;grid-template-columns:minmax(180px,260px) 1fr;gap:28px;align-items:center;
+  padding:22px 26px;margin-bottom:22px;border-radius:16px;overflow:hidden;
+  background:
+    radial-gradient(circle at 18% 40%, rgba(183,28,28,0.42), transparent 58%),
+    linear-gradient(180deg,#1c0b0b 0%,#0b0707 100%);
+  color:#fff;box-shadow:0 16px 40px rgba(16,22,26,0.18)
+}
+.home-masthead .home-mark{
+  width:100%;max-width:260px;aspect-ratio:1;object-fit:cover;border-radius:50%;
+  background:#000;box-shadow:0 12px 36px rgba(0,0,0,0.45)
+}
+.home-masthead .kicker{
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;
+  color:rgba(255,255,255,0.7);margin:0 0 8px
+}
+.home-masthead h2{color:#fff;margin:0;font-size:32px;line-height:1.1}
+.home-masthead p{color:rgba(255,255,255,0.78);margin:10px 0 0;line-height:1.5}
+.home-masthead .home-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,0.28)}
+.home-masthead .home-ghost:hover{border-color:#fff}
+.leader-jump{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+.leader-jump a{
+  font-size:13px;font-weight:700;text-decoration:none;padding:6px 10px;border-radius:999px;
+  background:var(--accent-bleed);color:var(--accent)
+}
+.leader-jump a:hover{background:rgba(183,28,28,0.16)}
+.more-lists{margin-top:12px}
+.more-lists summary{
+  cursor:pointer;font-weight:800;color:var(--accent);font-size:14px;padding:8px 0
+}
+.more-lists .list{margin-top:8px}
 main{margin-top:22px;display:grid;grid-template-columns:1fr 340px;gap:22px;align-items:start}
 main.single{grid-template-columns:1fr}
 .card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
@@ -167,9 +199,14 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
 .swatch.dual-black-yellow{background:linear-gradient(90deg,#212121 50%,#c9a227 50%)}
 @media (max-width:880px){
   main{grid-template-columns:1fr}
-  nav{display:none}
+  header{flex-wrap:wrap}
+  nav{width:100%;justify-content:flex-start;margin-top:8px}
+  nav a{margin-left:0;margin-right:14px}
   .wrap{padding:16px;margin:18px auto}
-  .leader-grid,.leader-hero,.home-leaders{grid-template-columns:1fr}
+  .leader-grid,.leader-hero,.home-leaders,.home-masthead{grid-template-columns:1fr}
+  .home-masthead{text-align:center;padding:18px}
+  .home-masthead .home-mark{margin:0 auto}
+  .home-masthead .home-actions{justify-content:center}
   .leader-cards,.home-cards{grid-template-columns:repeat(2,1fr)}
   .leader-hero img{width:140px}
   .events-banner{flex-direction:column;align-items:flex-start}

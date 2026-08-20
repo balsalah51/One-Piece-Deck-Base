@@ -46,21 +46,22 @@ def chrome(title: str, description: str, body: str) -> str:
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
   <link rel="canonical" href="{html.escape(SITE)}" />
+  <link rel="icon" href="/img/opdb-mark-sm.webp" type="image/webp" />
   <link rel="stylesheet" href="/css/site.css" />
 </head>
 <body>
   <div class="wrap">
     <header>
       <a class="brand" href="/">
-        <div class="logo">OP</div>
+        <img class="logo" src="/img/opdb-mark-sm.webp" width="48" height="48" alt="OPDB" />
         <div>
           <h1>One Piece Deck Base</h1>
-          <div class="subtitle">Decklists and community</div>
+          <div class="subtitle">OPTCG decklists</div>
         </div>
       </a>
       <nav aria-label="Primary">
         <a href="/#decklists">Decklists</a>
-        <a href="/decklists/op17.html">OP17</a>
+        <a href="/decklists/op17.html">Leaders</a>
         <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
       </nav>
     </header>
@@ -779,12 +780,8 @@ def character_body(name: str, blurb: str, related: list[int]) -> str:
 
 
 def guides_index(topic_links: list[tuple[str, str]], char_links: list[tuple[str, str]]) -> str:
-    topics = "\n".join(
-        f'            <li><a class="item" href="{html.escape(href)}"><div style="font-weight:700">{html.escape(label)}</div><div class="link">Open →</div></a></li>'
-        for label, href in topic_links
-    )
     chars = "\n".join(
-        f'            <li><a class="item" href="{html.escape(href)}"><div style="font-weight:700">{html.escape(label)}</div><div class="link">Open →</div></a></li>'
+        f'            <a href="{html.escape(href)}">{html.escape(label)}</a>'
         for label, href in char_links
     )
     return f"""        <div class="crumb"><a href="/">Home</a> / Guides</div>
@@ -792,29 +789,29 @@ def guides_index(topic_links: list[tuple[str, str]], char_links: list[tuple[str,
         <p>Topic and character pages that link to the 50-card lists on this site.</p>
         <section style="margin-top:18px">
           <div class="section-title"><h3>Topics</h3><div class="muted">Bandai / OPTCG</div></div>
-          <ul class="list">
-{topics}
-          </ul>
+          <div class="leader-jump">
+{chr(10).join(f'            <a href="{html.escape(href)}">{html.escape(label)}</a>' for label, href in topic_links)}
+          </div>
         </section>
-        <section style="margin-top:18px">
+        <section style="margin-top:22px">
           <div class="section-title"><h3>Characters</h3><div class="muted">{len(char_links)} names</div></div>
-          <ul class="list">
+          <div class="leader-jump">
 {chars}
-          </ul>
+          </div>
         </section>"""
 
 
 def characters_index(char_links: list[tuple[str, str]]) -> str:
     chars = "\n".join(
-        f'            <li><a class="item" href="{html.escape(href)}"><div style="font-weight:700">{html.escape(label)}</div><div class="link">Open →</div></a></li>'
+        f'            <a href="{html.escape(href)}">{html.escape(label)}</a>'
         for label, href in char_links
     )
     return f"""        <div class="crumb"><a href="/">Home</a> / <a href="/guides/">Guides</a> / Characters</div>
         <h2>One Piece TCG characters</h2>
-        <p>Character names from One Piece, mapped to OPTCG leader decklists on this Bandai One Piece Card Game fan site.</p>
-        <ul class="list" style="margin-top:18px">
+        <p>Character names mapped to OPTCG leader decklists.</p>
+        <div class="leader-jump" style="margin-top:18px">
 {chars}
-        </ul>"""
+        </div>"""
 
 
 def patch_canonical(page: str, url: str) -> str:
