@@ -21,8 +21,8 @@ comm = importlib.util.module_from_spec(cspec)
 cspec.loader.exec_module(comm)
 
 ROOT = gen.ROOT
-EXTRA_LIMIT = 48
-PAGES = 30
+EXTRA_LIMIT = 64
+PAGES = 40
 PER_PAGE = 40
 HUB_BLOCK_RE = re.compile(
     r"        <!-- (?:COMMUNITY_DECKLISTS|TOURNAMENT_DECKLISTS) -->.*?        <!-- /TOURNAMENT_DECKLISTS -->",
