@@ -377,16 +377,16 @@ def redraft_lists():
 
 
 NAV = [
-    ("/", "Home"),
-    ("/the-keep.html", "The Keep"),
-    ("/redraft-ppr.html", "Redraft PPR"),
-    ("/redraft-standard.html", "Redraft STD"),
-    ("/rookies-2026.html", "2026 Rookies"),
-    ("/hot-n-cold.html", "Hot 'n' Cold"),
-    ("/board.html", "The Board"),
-    ("/nfl-schedule.html", "NFL"),
-    ("/mlb-schedule.html", "MLB"),
-    ("/discord.html", "Discord"),
+    ("index.html", "Home"),
+    ("the-keep.html", "The Keep"),
+    ("redraft-ppr.html", "Redraft PPR"),
+    ("redraft-standard.html", "Redraft STD"),
+    ("rookies-2026.html", "2026 Rookies"),
+    ("hot-n-cold.html", "Hot 'n' Cold"),
+    ("board.html", "The Board"),
+    ("nfl-schedule.html", "NFL"),
+    ("mlb-schedule.html", "MLB"),
+    ("discord.html", "Discord"),
 ]
 
 
@@ -402,14 +402,14 @@ def page(title, path, body, extra_js=""):
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{esc(title)} — Ball Keep</title>
   <meta name="description" content="Ball Keep dynasty and redraft rankings, schedules, and market notes." />
-  <link rel="stylesheet" href="/css/site.css" />
-  <link rel="icon" href="/img/logo.jpg" />
+  <link rel="stylesheet" href="css/site.css" />
+  <link rel="icon" href="img/logo.jpg" />
 </head>
 <body>
   <div class="wrap">
     <header class="site">
-      <a class="brand" href="/">
-        <img src="/img/logo.jpg" alt="Ball Keep circular logo" />
+      <a class="brand" href="index.html">
+        <img src="img/logo.jpg" alt="Ball Keep circular logo" />
         <div>
           <h1>BALL KEEP</h1>
           <p>Dynasty · redraft · ball</p>
@@ -465,18 +465,18 @@ def main():
 
     # HOME
     tiles = [
-        ("/the-keep.html", "The Keep", "Daily Superflex dynasty top 100. Our keystone board."),
-        ("/redraft-ppr.html", "Redraft PPR", "2026 startup board for full-PPR redraft."),
-        ("/redraft-standard.html", "Redraft Standard", "Same season, no reception point. Different order."),
-        ("/rookies-2026.html", "2026 Rookies", "Drafted class consensus ranks and Superflex values."),
-        ("/hot-n-cold.html", "BK Hot 'n' Cold", "Buys and sells scraped from dynasty desks and film shows."),
-        ("/board.html", "The Board", "The long proprietary aggregate — every ranked name we pulled."),
-        ("/nfl-schedule.html", "NFL schedules", "2026 week-by-week slate and all 32 team pages."),
-        ("/mlb-schedule.html", "MLB schedules", "September stretch run, filterable by club."),
-        ("/discord.html", "Discord", "The circular mark. Community room coming online."),
+        ("the-keep.html", "The Keep", "Daily Superflex dynasty top 100. Our keystone board."),
+        ("redraft-ppr.html", "Redraft PPR", "2026 startup board for full-PPR redraft."),
+        ("redraft-standard.html", "Redraft Standard", "Same season, no reception point. Different order."),
+        ("rookies-2026.html", "2026 Rookies", "Drafted class consensus ranks and Superflex values."),
+        ("hot-n-cold.html", "BK Hot 'n' Cold", "Buys and sells scraped from dynasty desks and film shows."),
+        ("board.html", "The Board", "The long proprietary aggregate — every ranked name we pulled."),
+        ("nfl-schedule.html", "NFL schedules", "2026 week-by-week slate and all 32 team pages."),
+        ("mlb-schedule.html", "MLB schedules", "September stretch run, filterable by club."),
+        ("discord.html", "Discord", "The circular mark. Community room coming online."),
     ]
     home_body = f"""
-    <section class="hero" style="background-image:url('/img/hero.jpg')">
+    <section class="hero" style="background-image:url('img/hero.jpg')">
       <div class="hero-card">
         <p class="kicker" style="color:#ffd4db">Updated {UPDATED}</p>
         <h2>BALL KEEP</h2>
@@ -686,7 +686,7 @@ def main():
     # Discord
     disc = """
     <div class="panel discord-hero">
-      <img src="/img/discord.jpg" alt="Ball Keep circular Discord logo" />
+      <img src="img/discord.jpg" alt="Ball Keep circular Discord logo" />
       <p class="kicker">Community</p>
       <h2>Ball Keep on Discord</h2>
       <p class="note">Red primary. White BK. Black ring. This is the mark for the server — ranks chat, trade block, and The Keep daily drop.</p>
