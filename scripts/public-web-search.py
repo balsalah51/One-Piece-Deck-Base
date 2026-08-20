@@ -36,7 +36,7 @@ QUERIES = [
     "OP17 Monkey D Luffy decklist OP17-079",
     "OP17 Charlotte Linlin decklist OP17-099",
     "RG Luffy OP13-001 decklist",
-    "UY Nami OP11-041 decklist",
+    "Nami OP11-041 decklist",
     "Mihawk OP14-020 decklist",
     "One Piece TCG OP17 deck profile youtube comments",
     "site:reddit.com/r/OnePieceTCG OP17 decklist",
