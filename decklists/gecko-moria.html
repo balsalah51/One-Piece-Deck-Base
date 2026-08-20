@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gecko Moria decklist</title>
+  <meta name="description" content="Gecko Moria — Black/Yellow leader page and scraped tournament lists." />
+  <link rel="stylesheet" href="/css/site.css" />
+</head>
+<body class="color-black-yellow">
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/">
+        <div class="logo">OP</div>
+        <div>
+          <h1>One Piece Deck Base</h1>
+          <div class="subtitle">Decklists and community</div>
+        </div>
+      </a>
+      <nav aria-label="Primary">
+        <a href="/#decklists" aria-current="page">Decklists</a>
+        <a href="/decklists/op17.html">OP17</a>
+        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
+      </nav>
+    </header>
+
+    <main class="single">
+      <div class="card hero">
+        <div class="crumb"><a href="/">Home</a> / <a href="/decklists/op17.html">OP17 decklists</a> / Gecko Moria</div>
+        <div class="leader-hero">
+          <img src="https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP14/OP14-080_EN.webp" alt="Gecko Moria leader" />
+          <div>
+            <h2>Gecko Moria</h2>
+            <p>Black/Yellow OP14 Gecko Moria. K.O. your own Thriller Bark character to give the board +1000, then trash 3 to gain a life.</p>
+            <div class="stat-row">
+              <span class="pill">Black/Yellow Leader</span>
+              <span class="pill">OP14-080</span>
+              <span class="pill">4 Life</span>
+              <span class="pill">5000 Power</span>
+              <span class="pill">Special</span>
+              <span class="pill">The Seven Warlords of the Sea/Thriller Bark Pirates</span>
+            </div>
+            <div class="effect">[Activate: Main] [Once Per Turn] You may K.O. 1 of your {Thriller Bark Pirates} type Characters: Your Leader and all of your Characters gain +1000 power during this turn.
+[When Attacking] You may trash 3 cards from your hand: Add up to 1 card from the top of your deck to the top of your Life cards.</div>
+            <p class="muted" style="margin-top:12px">Black/yellow Thriller Bark. Recent lists include OP17 cards.</p>
+          </div>
+        </div>
+
+        <!-- TOURNAMENT_DECKLISTS -->
+        <section class="deck-index" style="margin-top:22px">
+          <div class="section-title">
+            <h3>Decklists</h3>
+            <div class="muted">0 lists</div>
+          </div>
+          <p class="muted">No tournament lists found for this leader yet.</p>
+        </section>
+        <!-- /TOURNAMENT_DECKLISTS -->
+
+      </div>
+    </main>
+    <footer>
+      © <span id="year"></span> One Piece Deck Base — Built with community in mind. <a href="/guides/">Guides</a>
+    </footer>
+  </div>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (function(){
+      var lines = document.querySelectorAll('.text-line');
+      if (!lines.length) return;
+      function resetPop(pop){
+        pop.style.position = '';
+        pop.style.left = '';
+        pop.style.top = '';
+        pop.style.right = '';
+        pop.style.bottom = '';
+        pop.classList.remove('flip-left', 'flip-down');
+      }
+      function place(line){
+        var pop = line.querySelector('.card-pop');
+        var title = line.querySelector('.card-title');
+        if (!pop || !title) return;
+        resetPop(pop);
+        var tr = title.getBoundingClientRect();
+        var width = pop.offsetWidth || 110;
+        var height = pop.offsetHeight || 154;
+        var left = tr.left;
+        var top = tr.top - height - 10;
+        if (left + width > window.innerWidth - 12) left = window.innerWidth - width - 12;
+        if (left < 12) left = 12;
+        if (top < 12) top = tr.bottom + 10;
+        if (top + height > window.innerHeight - 12) top = Math.max(12, window.innerHeight - height - 12);
+        pop.style.position = 'fixed';
+        pop.style.left = left + 'px';
+        pop.style.top = top + 'px';
+        pop.style.bottom = 'auto';
+        pop.style.right = 'auto';
+      }
+      lines.forEach(function(line){
+        line.addEventListener('mouseenter', function(){ place(line); });
+        line.addEventListener('focus', function(){ place(line); });
+        line.addEventListener('click', function(e){
+          if (window.matchMedia('(hover: hover)').matches) return;
+          e.stopPropagation();
+          lines.forEach(function(other){ if (other !== line) other.classList.remove('is-open'); });
+          line.classList.toggle('is-open');
+          place(line);
+        });
+      });
+      document.addEventListener('click', function(e){
+        if (!e.target.closest('.text-line')) {
+          lines.forEach(function(line){ line.classList.remove('is-open'); });
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

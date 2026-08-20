@@ -131,6 +131,7 @@ def tournament_entries(leader: dict, items: list[dict]) -> list[dict]:
         entry = dict(item)
         entry["tournament_name"] = entry.get("tournament_name") or entry.get("tournament") or "Limitless event"
         out.append(entry)
+    out.sort(key=gen.date_sort_key, reverse=True)
     return out
 
 

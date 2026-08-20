@@ -30,6 +30,10 @@ LEADERS = [
     ("Imu", "/decklists/imu.html", "OP13 Black Mary Geoise"),
     ("Enel", "/decklists/enel.html", "OP15 Purple Sky Island"),
     ("Charlotte Katakuri", "/decklists/charlotte-katakuri.html", "OP11 Purple Big Mom Pirates"),
+    ("Donquixote Rosinante", "/decklists/donquixote-rosinante.html", "OP12 Purple/Yellow Corazon"),
+    ("Sabo", "/decklists/sabo.html", "OP13 Red/Black Revolutionary Army"),
+    ("Gecko Moria", "/decklists/gecko-moria.html", "OP14 Black/Yellow Thriller Bark"),
+    ("Nico Robin", "/decklists/nico-robin.html", "OP09 Purple/Yellow Straw Hat"),
 ]
 
 
@@ -51,14 +55,13 @@ def chrome(title: str, description: str, body: str) -> str:
         <div class="logo">OP</div>
         <div>
           <h1>One Piece Deck Base</h1>
-          <div class="subtitle">Decklists, community, and custom gear</div>
+          <div class="subtitle">Decklists and community</div>
         </div>
       </a>
       <nav aria-label="Primary">
         <a href="/#decklists">Decklists</a>
         <a href="/decklists/op17.html">OP17</a>
-        <a href="/shop/">Shop</a>
-        <a href="/#community">Community</a>
+        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
       </nav>
     </header>
     <main class="single">
@@ -67,7 +70,7 @@ def chrome(title: str, description: str, body: str) -> str:
       </div>
     </main>
     <footer>
-      © <span id="year"></span> One Piece Deck Base — Fan site for the Bandai ONE PIECE CARD GAME (OPTCG). Not affiliated with Bandai. <a href="/shop/">Shop</a>
+      © <span id="year"></span> One Piece Deck Base — Fan site for the Bandai ONE PIECE CARD GAME (OPTCG). Not affiliated with Bandai. <a href="/guides/">Guides</a>
     </footer>
   </div>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
@@ -134,7 +137,7 @@ TOPICS = [
         "title": "Bandai ONE PIECE CARD GAME | OPTCG",
         "h2": "Bandai ONE PIECE CARD GAME",
         "desc": "Decklists for the Bandai ONE PIECE CARD GAME, including OP17 leaders.",
-        "copy": "Search traffic often uses the full phrase Bandai ONE PIECE CARD GAME. That is the same OPTCG format these leader pages cover: Red Newgate, Green Shanks, Blue Rocks, Purple Kaido, Black Luffy, Yellow Linlin, plus RG Luffy, Nami, Mihawk, OP16 Ace, Enel, and Katakuri.",
+        "copy": "Search traffic often uses the full phrase Bandai ONE PIECE CARD GAME. That is the same OPTCG format these leader pages cover: the six OP17 leaders plus Mihawk, Sabo, RG Luffy, Ace, Enel, Katakuri, Rosinante, Nico Robin, Gecko Moria, Imu, and Nami.",
     },
     {
         "slug": "op17",
@@ -155,7 +158,7 @@ TOPICS = [
         "title": "One Piece TCG meta | OP17 OPTCG",
         "h2": "One Piece TCG meta",
         "desc": "OP17 OPTCG meta leaders with tournament and community decklists.",
-        "copy": "The early OP17 meta is still moving. Rocks, Kaido, Black Luffy, Linlin, Shanks, RG Luffy, Nami, Mihawk, OP16 Ace, Enel, and Katakuri all have recent Limitless lists here. Newgate is mostly YouTube lists until more events post standings.",
+        "copy": "The early OP17 meta is still moving. Rocks, Kaido, Black Luffy, Linlin, and Shanks lead the OP17 pages. Current-format lists here include Mihawk, Sabo, RG Luffy, Ace, Enel, Katakuri, Rosinante, Nico Robin, Gecko Moria, Imu, and Nami — several of those 50-card lists now splash OP17 cards.",
     },
     {
         "slug": "treasure-cup",
@@ -225,7 +228,7 @@ TOPICS = [
         "title": "OPTCG leaders | One Piece TCG",
         "h2": "OPTCG leaders",
         "desc": "OPTCG leader pages for OP17 and current-format One Piece TCG decks.",
-        "copy": "OPTCG leaders on this site: Edward Newgate, Shanks, Rocks D. Xebec, Kaido, Monkey D. Luffy, Charlotte Linlin, plus RG Luffy, Nami, Mihawk, OP16 Portgas D. Ace, OP13 Ace, Imu, Enel, and Charlotte Katakuri.",
+        "copy": "OPTCG leaders on this site: the six OP17 leaders, then Mihawk, Sabo, RG Luffy, OP16 Ace, Enel, Katakuri, Donquixote Rosinante, Nico Robin, Gecko Moria, Imu, Nami, and OP13 Ace.",
     },
     {
         "slug": "one-piece-tcg-leaders",
@@ -260,7 +263,7 @@ TOPICS = [
         "title": "Red One Piece TCG decks | OPTCG",
         "h2": "Red OPTCG",
         "desc": "Red One Piece TCG decks on this site start with OP17 Edward Newgate and OP16 Ace.",
-        "copy": "Red OPTCG on this site is OP17 Edward Newgate / Whitebeard, OP16 Portgas D. Ace, OP13 Ace, plus red cards inside RG Luffy. Open those leader lists for 50-card decks.",
+        "copy": "Red OPTCG on this site is OP17 Edward Newgate / Whitebeard, OP16 Portgas D. Ace, OP13 Ace, red/black Sabo, plus red cards inside RG Luffy. Open those leader lists for 50-card decks.",
     },
     {
         "slug": "green-optcg",
@@ -281,28 +284,28 @@ TOPICS = [
         "title": "Purple One Piece TCG decks | OPTCG",
         "h2": "Purple OPTCG",
         "desc": "Purple One Piece TCG decks: OP17 Kaido, Enel, and Katakuri.",
-        "copy": "Purple OPTCG here is OP17 Kaido, OP15 Enel, and OP11 Charlotte Katakuri. Open those leader pages for tournament 50-card lists.",
+        "copy": "Purple OPTCG here is OP17 Kaido, OP15 Enel, OP11 Charlotte Katakuri, plus purple/yellow Donquixote Rosinante and Nico Robin. Open those leader pages for tournament 50-card lists.",
     },
     {
         "slug": "black-optcg",
         "title": "Black One Piece TCG decks | OPTCG",
         "h2": "Black OPTCG",
         "desc": "Black One Piece TCG decks: OP17 Monkey D. Luffy and OP13 Imu.",
-        "copy": "Black OPTCG on this site is OP17 Monkey D. Luffy / Elbaph and OP13 Imu / Five Elders. Open those leader pages for blockers, trash, and recent Limitless lists.",
+        "copy": "Black OPTCG on this site is OP17 Monkey D. Luffy / Elbaph, OP13 Imu / Five Elders, red/black Sabo, and black/yellow Gecko Moria. Open those leader pages for blockers, trash, and recent Limitless lists.",
     },
     {
         "slug": "yellow-optcg",
         "title": "Yellow One Piece TCG decks | OPTCG",
         "h2": "Yellow OPTCG",
         "desc": "Yellow One Piece TCG decks start with OP17 Charlotte Linlin.",
-        "copy": "Yellow OPTCG here is OP17 Charlotte Linlin / Big Mom, plus the yellow half of Nami. Linlin has a stack of recent tournament lists.",
+        "copy": "Yellow OPTCG here is OP17 Charlotte Linlin / Big Mom, plus the yellow half of Nami, Rosinante, Nico Robin, and Gecko Moria. Linlin has a stack of recent tournament lists.",
     },
     {
         "slug": "straw-hat-crew",
         "title": "Straw Hat Crew One Piece TCG | OPTCG",
         "h2": "Straw Hat Crew",
         "desc": "Straw Hat Crew OPTCG pages: Monkey D. Luffy, Nami, and related lists.",
-        "copy": "Straw Hat Crew searches should reach Black OP17 Luffy, RG Luffy, and Nami. Those are the constructed OPTCG leaders tied to the crew on this site.",
+        "copy": "Straw Hat Crew searches should reach Black OP17 Luffy, RG Luffy, Nami, and Nico Robin. Those are the constructed OPTCG leaders tied to the crew on this site.",
     },
     {
         "slug": "red-hair-pirates",
@@ -367,6 +370,90 @@ TOPICS = [
         "desc": "Marineford-era OPTCG names often land on Whitebeard and Luffy lists.",
         "copy": "Marineford searches should try Edward Newgate, OP16 Portgas D. Ace, and Monkey D. Luffy. Ace, Whitebeard, Garp, and the Admirals are linked from the character guide too.",
     },
+    {
+        "slug": "donquixote-rosinante",
+        "title": "Donquixote Rosinante OPTCG | Corazon decklists",
+        "h2": "Donquixote Rosinante",
+        "desc": "OP12 purple/yellow Donquixote Rosinante (Corazon) OPTCG decklists.",
+        "copy": "Donquixote Rosinante is the purple/yellow OP12-061 leader, also searched as Corazon. The page is a Law engine: spend a life to save Trafalgar Law, then DON!! −1 to cheapen a 4-cost or higher Law. This is not green/blue OP05-022 Rosinante.",
+    },
+    {
+        "slug": "corazon",
+        "title": "Corazon OPTCG | Donquixote Rosinante",
+        "h2": "Corazon",
+        "desc": "Corazon is Donquixote Rosinante in the One Piece TCG. Open OP12-061 lists.",
+        "copy": "Corazon is the epithet search for Donquixote Rosinante. Open the purple/yellow OP12 leader page for 50-card OPTCG lists built around Trafalgar Law.",
+    },
+    {
+        "slug": "sabo-optcg",
+        "title": "Sabo OPTCG decklists | OP13 red/black",
+        "h2": "Sabo",
+        "desc": "OP13 red/black Sabo OPTCG decklists for the Bandai One Piece Card Game.",
+        "copy": "Sabo on this site is red/black OP13-004, Dressrosa / Revolutionary Army. It is not ST13 Sabo. Recent 50-card lists include OP17 cards on top of the 8-cost Revolutionary package.",
+    },
+    {
+        "slug": "gecko-moria-optcg",
+        "title": "Gecko Moria OPTCG | Thriller Bark lists",
+        "h2": "Gecko Moria",
+        "desc": "OP14 black/yellow Gecko Moria OPTCG decklists, including OP17 updates.",
+        "copy": "Gecko Moria is the black/yellow OP14-080 Thriller Bark leader. K.O. your own Thriller Bark character to pump the board, then trash 3 to gain a life. Recent lists splash OP17 cards.",
+    },
+    {
+        "slug": "nico-robin-optcg",
+        "title": "Nico Robin OPTCG | OP09 purple/yellow",
+        "h2": "Nico Robin",
+        "desc": "OP09 purple/yellow Nico Robin OPTCG decklists with OP17 card updates.",
+        "copy": "Nico Robin is the purple/yellow OP09-062 Straw Hat leader. Banish damage, then trash a Trigger to rest a DON!!. Recent copies include OP17 cards. This is the archaeologist leader page, not a cameo in Black Luffy.",
+    },
+    {
+        "slug": "dressrosa",
+        "title": "Dressrosa One Piece TCG | OPTCG",
+        "h2": "Dressrosa",
+        "desc": "Dressrosa OPTCG lists: Sabo, Rosinante, and related Bandai One Piece TCG decks.",
+        "copy": "Dressrosa names on this site land on red/black Sabo and purple/yellow Donquixote Rosinante. Law, Doflamingo, and Revolutionary Army searches can start on those leader pages.",
+    },
+    {
+        "slug": "thriller-bark",
+        "title": "Thriller Bark One Piece TCG | OPTCG",
+        "h2": "Thriller Bark",
+        "desc": "Thriller Bark OPTCG lists live on the OP14 Gecko Moria leader page.",
+        "copy": "Thriller Bark Pirates OPTCG is black/yellow Gecko Moria. Perona, Hogback, Absalom, and Ryuma searches should open that constructed page.",
+    },
+    {
+        "slug": "revolutionary-army",
+        "title": "Revolutionary Army One Piece TCG | OPTCG",
+        "h2": "Revolutionary Army",
+        "desc": "Revolutionary Army OPTCG lists live on red/black OP13 Sabo.",
+        "copy": "Revolutionary Army OPTCG on this site is red/black OP13 Sabo, with Dragon, Koala, and Ivankov names nearby. Open the Sabo leader page for 50-card lists.",
+    },
+    {
+        "slug": "op17-updated-leaders",
+        "title": "OP17 updated OPTCG leaders | One Piece TCG",
+        "h2": "OP17 updated leaders",
+        "desc": "Current-format OPTCG leaders whose 50-card lists now include OP17 cards.",
+        "copy": "Besides the six OP17 leaders, recent Limitless lists for Sabo, Nico Robin, and Gecko Moria already include OP17 cards. Rosinante is the OP12 Law engine on this site. Open those leader pages for the newest 50-card lists.",
+    },
+    {
+        "slug": "purple-yellow-optcg",
+        "title": "Purple Yellow One Piece TCG | OPTCG",
+        "h2": "Purple/Yellow OPTCG",
+        "desc": "Purple/yellow OPTCG leaders: Donquixote Rosinante and Nico Robin.",
+        "copy": "Purple/yellow dual-color OPTCG on this site is OP12 Donquixote Rosinante and OP09 Nico Robin. Both have constructed 50-card lists.",
+    },
+    {
+        "slug": "red-black-optcg",
+        "title": "Red Black One Piece TCG | OPTCG",
+        "h2": "Red/Black OPTCG",
+        "desc": "Red/black OPTCG lists live on the OP13 Sabo leader page.",
+        "copy": "Red/black OPTCG here is OP13-004 Sabo. Open that leader page for Dressrosa / Revolutionary Army 50-card lists.",
+    },
+    {
+        "slug": "black-yellow-optcg",
+        "title": "Black Yellow One Piece TCG | OPTCG",
+        "h2": "Black/Yellow OPTCG",
+        "desc": "Black/yellow OPTCG lists live on OP14 Gecko Moria.",
+        "copy": "Black/yellow OPTCG on this site is OP14 Gecko Moria / Thriller Bark. Open that leader page for tournament lists.",
+    },
 ]
 
 
@@ -378,7 +465,7 @@ CHARACTERS = [
     ("Usopp", "usopp", "Sniper of the Straw Hats. Usopp cards appear in RG Luffy and Black Luffy OPTCG decklists.", [6, 4]),
     ("Sanji", "sanji", "Cook of the Thousand Sunny. Red Sanji is a staple in Edward Newgate Whitebeard lists.", [0, 6]),
     ("Tony Tony Chopper", "tony-tony-chopper", "Doctor of the crew. Chopper cards show up in Black Elbaph Luffy OPTCG lists.", [4]),
-    ("Nico Robin", "nico-robin", "Archaeologist of the Straw Hats. Robin cards appear in Black Luffy and other OPTCG midrange lists.", [4, 6]),
+    ("Nico Robin", "nico-robin", "Archaeologist of the Straw Hats and the purple/yellow OP09 OPTCG leader. Recent lists include OP17 cards. Black Luffy lists may still play Robin as a character.", [17, 4, 6]),
     ("Franky", "franky", "Shipwright. Franky is a Straw Hat name searchers type; start from the Luffy leader pages.", [4, 6]),
     ("Brook", "brook", "Soul King of the Straw Hats. Brook cards appear in some RG Luffy OPTCG lists.", [6, 4]),
     ("Jinbe", "jinbe", "Helmsman and Fish-Man. Jinbe cards show up in Black Luffy and other OPTCG lists.", [4]),
@@ -413,7 +500,7 @@ CHARACTERS = [
     ("Charlotte Cracker", "charlotte-cracker", "Thousand Arms Cracker. Yellow Linlin OPTCG is the matching leader.", [5]),
     ("Charlotte Perospero", "charlotte-perospero", "First son of Big Mom. See Linlin OPTCG decklists.", [5]),
     ("Dracule Mihawk", "dracule-mihawk", "World’s Strongest Swordsman and green OPTCG leader. Mihawk has tournament lists on this site.", [8]),
-    ("Trafalgar Law", "trafalgar-law", "Surgeon of Death. Law cards appear in RG Luffy and other green OPTCG lists.", [6, 8]),
+    ("Trafalgar Law", "trafalgar-law", "Surgeon of Death. Law is the engine on purple/yellow Donquixote Rosinante; Law cards also show up in RG Luffy and Mihawk lists.", [14, 6, 8]),
     ("Eustass Kid", "eustass-kid", "Captain of the Kid Pirates. Kid is a common OPTCG search; start from the OP17 hub and RG Luffy.", [6, 4]),
     ("Killer", "killer", "Kid Pirates combatant. Related OPTCG lists sit with supernova packages on RG Luffy.", [6]),
     ("Jewelry Bonney", "jewelry-bonney", "Supernova captain. Bonney names often land next to other supernova OPTCG lists.", [6]),
@@ -421,13 +508,13 @@ CHARACTERS = [
     ("Blackbeard", "blackbeard", "Same person as Marshall D. Teach. Use the OP17 hub until a Teach leader page exists.", [4, 3]),
     ("Buggy", "buggy", "Warlord and Emperor. Buggy searches should still land on this OPTCG hub and the OP17 leaders.", [1, 4]),
     ("Crocodile", "crocodile", "Former Warlord. No Crocodile leader page yet; the OP17 decklist hub is the start.", [2, 5]),
-    ("Donquixote Doflamingo", "donquixote-doflamingo", "Heavenly Demon. Doflamingo is a frequent OPTCG search; open the hub then a color that matches your list.", [8, 2]),
+    ("Donquixote Doflamingo", "donquixote-doflamingo", "Heavenly Demon. Dressrosa searches should try Sabo and Donquixote Rosinante, then green lists.", [15, 14, 8]),
     ("Boa Hancock", "boa-hancock", "Empress of Amazon Lily. Hancock searches can start at the OP17 hub.", [5, 4]),
-    ("Gecko Moria", "gecko-moria", "Former Warlord. Use the OPTCG hub while looking for a matching leader.", [8]),
+    ("Gecko Moria", "gecko-moria", "Former Warlord and the black/yellow OP14 Thriller Bark OPTCG leader. Recent lists include OP17 cards.", [16]),
     ("Bartholomew Kuma", "bartholomew-kuma", "Tyrant and former Warlord. Start from the One Piece TCG hub on this site.", [4]),
     ("Monkey D. Garp", "monkey-d-garp", "Hero of the Marines and Luffy’s grandfather. Luffy OPTCG pages are the closest constructed lists.", [4, 6]),
     ("Monkey D. Dragon", "monkey-d-dragon", "Revolutionary Army leader. Luffy OPTCG pages are the related constructed lists.", [4]),
-    ("Sabo", "sabo", "Chief of Staff of the Revolutionaries. Ace, Sabo, and Luffy cards show up in some red lists.", [0, 6]),
+    ("Sabo", "sabo", "Chief of Staff of the Revolutionaries and the red/black OP13 OPTCG leader. Not ST13 Sabo. Ace and Luffy cards still show up in some red lists.", [15, 0, 6]),
     ("Akainu", "akainu", "Fleet Admiral Sakazuki. Marine searches can start at the OPTCG hub.", [4]),
     ("Aokiji", "aokiji", "Kuzan. Cross-guild and marine searches still belong on this OPTCG site hub.", [2]),
     ("Kizaru", "kizaru", "Borsalino. Admiral searches should land here, then move to a leader list.", [8]),
@@ -435,7 +522,7 @@ CHARACTERS = [
     ("Coby", "coby", "Marine prodigy. Coby searches can start at Luffy-related OPTCG pages.", [4]),
     ("Smoker", "smoker", "White Hunter of the Marines. Use the OPTCG hub.", [7]),
     ("Rob Lucci", "rob-lucci", "CP0. Lucci is a popular OPTCG name; start from the hub if you do not see a dedicated leader.", [8, 4]),
-    ("Perona", "perona", "Ghost Princess. Perona cards can show up in Mihawk-adjacent OPTCG packages.", [8]),
+    ("Perona", "perona", "Ghost Princess. Perona cards show up in Gecko Moria Thriller Bark lists and some Mihawk packages.", [16, 8]),
     ("Mr 2 Bon Kurei", "mr-2-bon-kurei", "Bentham. A fun OPTCG character name that should still reach this site.", [3, 5]),
     ("Emporio Ivankov", "emporio-ivankov", "Queen of the Kamabakka Kingdom. Related constructed lists start at Luffy pages.", [4]),
     ("Uta", "uta", "New Genesis. Uta cards appear in some red Newgate OPTCG lists.", [0]),
@@ -449,7 +536,7 @@ CHARACTERS = [
     ("Xebec", "xebec", "Same search as Rocks D. Xebec. Blue OP17 is the constructed OPTCG leader.", [2]),
     ("Rocks", "rocks", "Short name for Rocks D. Xebec and the Rocks Pirates OPTCG package.", [2]),
     ("Linlin", "linlin", "Same person as Charlotte Linlin / Big Mom. Yellow OP17 is the constructed page.", [5]),
-    ("Law", "law", "Same search as Trafalgar Law. RG Luffy and Mihawk lists are the closest OPTCG pages.", [6, 8]),
+    ("Law", "law", "Same search as Trafalgar Law. Donquixote Rosinante is the Law-engine leader; RG Luffy and Mihawk lists also play Law cards.", [14, 6, 8]),
     ("Kid", "kid", "Same search as Eustass Kid. Start from RG Luffy and the OP17 hub.", [6, 4]),
     ("Ace", "ace", "Same search as Portgas D. Ace. OP16 Ace is the constructed red leader; OP13 Ace is the red/blue leader.", [9, 10]),
     ("Roger", "roger", "Same search as Gol D. Roger. Roger cards show up in Newgate and Rocks OPTCG lists.", [0, 2]),
@@ -459,7 +546,7 @@ CHARACTERS = [
     ("Rayleigh", "rayleigh", "Same search as Silvers Rayleigh. Newgate and Rocks pages are the closest lists.", [0, 2]),
     ("Enel", "enel", "God of Skypeia. Purple OP15 Enel is the constructed OPTCG leader on this site.", [12]),
     ("Lucci", "lucci", "Same search as Rob Lucci. Start from the hub, Mihawk, or Black Luffy pages.", [8, 4]),
-    ("Doflamingo", "doflamingo", "Same search as Donquixote Doflamingo. Use the OPTCG hub and green lists.", [8, 2]),
+    ("Doflamingo", "doflamingo", "Same search as Donquixote Doflamingo. Sabo and Rosinante are the Dressrosa constructed pages.", [15, 14, 8]),
     ("Hancock", "hancock", "Same search as Boa Hancock. Start from the OP17 hub and yellow/black lists.", [5, 4]),
     ("Teach", "teach", "Same search as Marshall D. Teach / Blackbeard. Use the OP17 hub until a Teach leader exists.", [3, 4]),
     ("Garp", "garp", "Same search as Monkey D. Garp. Luffy OPTCG pages are the closest constructed lists.", [4, 6]),
@@ -486,7 +573,7 @@ CHARACTERS = [
     ("Shirahoshi", "shirahoshi", "Princess of the Ryugu Kingdom. Jinbe and Luffy OPTCG pages are related.", [4]),
     ("Neptune", "neptune", "King of the Ryugu Kingdom. Fish-Man searches can start at Jinbe/Luffy pages.", [4]),
     ("Fisher Tiger", "fisher-tiger", "Sun Pirates founder. Jinbe-related OPTCG searches start at Black Luffy.", [4]),
-    ("Koala", "koala", "Revolutionary Army. Sabo and Dragon searches sit next to Luffy OPTCG pages.", [4, 0]),
+    ("Koala", "koala", "Revolutionary Army. Sabo is the constructed OPTCG leader; Dragon searches sit next to Luffy pages.", [15, 4]),
     ("Iceburg", "iceburg", "Mayor of Water 7. Franky-related searches can start at Luffy OPTCG pages.", [4]),
     ("Paulie", "paulie", "Galley-La shipwright. Water 7 names can start at the OPTCG hub.", [4]),
     ("Kalifa", "kalifa", "CP9. Lucci-adjacent searches can start at the hub or Mihawk.", [8, 4]),
@@ -494,10 +581,10 @@ CHARACTERS = [
     ("Blueno", "blueno", "CP9. Enies Lobby names can start at the OPTCG hub.", [8]),
     ("Jabra", "jabra", "CP9. Use the OPTCG hub.", [8]),
     ("Spandam", "spandam", "CP9 director. Use the OPTCG hub.", [4, 8]),
-    ("Nico Olvia", "nico-olvia", "Robin’s mother. Robin and Luffy OPTCG pages are the related lists.", [4]),
+    ("Nico Olvia", "nico-olvia", "Robin’s mother. Nico Robin is the constructed OPTCG leader; Luffy pages are related.", [17, 4]),
     ("Jaguar D. Saul", "jaguar-d-saul", "Giant marine who saved Robin. Elbaph Luffy is the matching OP17 OPTCG leader.", [4]),
-    ("Hogback", "hogback", "Thriller Bark doctor. Moria and Perona searches sit with Mihawk-adjacent lists.", [8]),
-    ("Absalom", "absalom", "Thriller Bark commander. Use the OPTCG hub or Mihawk.", [8]),
+    ("Hogback", "hogback", "Thriller Bark doctor. Gecko Moria is the constructed OPTCG leader.", [16]),
+    ("Absalom", "absalom", "Thriller Bark commander. Open the Gecko Moria OPTCG page.", [16]),
     ("Ryuma", "ryuma", "Legendary samurai zombie. Zoro and Mihawk OPTCG pages are the closest lists.", [8, 6]),
     ("Caesar Clown", "caesar-clown", "Scientist of Punk Hazard. Law-related searches can start at RG Luffy.", [6]),
     ("Monet", "monet", "Snow woman of Punk Hazard. Use the OPTCG hub.", [6, 7]),
@@ -622,6 +709,11 @@ CHARACTERS = [
     ("Haki", "haki", "OPTCG cards reference Haki in effects. Open any leader list to see constructed cards.", [4, 1]),
     ("DON", "don", "DON!! cards power OPTCG attacks. Every 50-card list on this site plays with DON!!.", [4, 1]),
     ("Leader card", "leader-card", "Every OPTCG deck starts with a leader. Open the leader pages below for 50-card lists.", [4, 1]),
+    ("Donquixote Rosinante", "donquixote-rosinante", "Corazon, purple/yellow OP12 leader. Spend a life to save Trafalgar Law, then DON!! −1 to cheapen a 4-cost or higher Law. Not green/blue OP05-022 Rosinante.", [14]),
+    ("Corazon", "corazon", "Epithet for Donquixote Rosinante. Open the purple/yellow OP12 OPTCG leader page.", [14]),
+    ("Rosinante", "rosinante", "Same search as Donquixote Rosinante / Corazon. OP12-061 is the constructed leader on this site.", [14]),
+    ("Robin", "robin", "Same search as Nico Robin. Purple/yellow OP09 is the constructed Straw Hat leader.", [17]),
+    ("Moria", "moria", "Same search as Gecko Moria. Black/yellow OP14 is the Thriller Bark OPTCG leader.", [16]),
     ("Character card", "character-card", "OPTCG Character cards make up most of a 50-card list. Open a leader page to see them.", [1, 3]),
     ("Event card", "event-card", "OPTCG Event cards sit in the 50-card list next to Characters. Open any leader page.", [1, 5]),
     ("Stage card", "stage-card", "OPTCG Stage cards are uncommon but show up in some constructed lists on this site.", [7, 2]),
@@ -747,7 +839,7 @@ def write_page(rel: str, title: str, desc: str, body: str) -> str:
 def existing_html_urls() -> list[str]:
     urls = []
     for p in sorted(ROOT.rglob("*.html")):
-        if any(part in p.parts for part in (".git", "scripts", "node_modules")):
+        if any(part in p.parts for part in (".git", "scripts", "node_modules", "shop")):
             continue
         rel = p.relative_to(ROOT).as_posix()
         if rel.endswith("index.html"):
@@ -796,7 +888,7 @@ def main() -> None:
     )
 
     (ROOT / "robots.txt").write_text(
-        "User-agent: *\nAllow: /\nSitemap: https://onepiecedeckbase.com/sitemap.xml\n"
+        "User-agent: *\nAllow: /\nDisallow: /shop/\nSitemap: https://onepiecedeckbase.com/sitemap.xml\n"
     )
 
     all_urls = existing_html_urls()

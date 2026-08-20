@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sabo decklist</title>
+  <meta name="description" content="Sabo — Red/Black leader page and scraped tournament lists." />
+  <link rel="stylesheet" href="/css/site.css" />
+</head>
+<body class="color-red-black">
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/">
+        <div class="logo">OP</div>
+        <div>
+          <h1>One Piece Deck Base</h1>
+          <div class="subtitle">Decklists and community</div>
+        </div>
+      </a>
+      <nav aria-label="Primary">
+        <a href="/#decklists" aria-current="page">Decklists</a>
+        <a href="/decklists/op17.html">OP17</a>
+        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
+      </nav>
+    </header>
+
+    <main class="single">
+      <div class="card hero">
+        <div class="crumb"><a href="/">Home</a> / <a href="/decklists/op17.html">OP17 decklists</a> / Sabo</div>
+        <div class="leader-hero">
+          <img src="https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP13/OP13-004_EN.webp" alt="Sabo leader" />
+          <div>
+            <h2>Sabo</h2>
+            <p>Red/Black OP13 Sabo. At 4+ life the leader is −1000. DON!! x1 plus an 8-cost character pumps the board. Dressrosa / Revolutionary Army — not ST13 Sabo.</p>
+            <div class="stat-row">
+              <span class="pill">Red/Black Leader</span>
+              <span class="pill">OP13-004</span>
+              <span class="pill">5 Life</span>
+              <span class="pill">5000 Power</span>
+              <span class="pill">Special</span>
+              <span class="pill">Dressrosa/Revolutionary Army</span>
+            </div>
+            <div class="effect">If you have 4 or more Life cards, give this Leader −1000 power.
+[DON!! x1] If you have a Character with a cost of 8 or more, your Leader and all of your Characters gain +1000 power.</div>
+            <p class="muted" style="margin-top:12px">Red/black OP13-004. The ST13 Sabo leader is separate and is not on this site.</p>
+          </div>
+        </div>
+
+        <!-- TOURNAMENT_DECKLISTS -->
+        <section class="deck-index" style="margin-top:22px">
+          <div class="section-title">
+            <h3>Decklists</h3>
+            <div class="muted">0 lists</div>
+          </div>
+          <p class="muted">No tournament lists found for this leader yet.</p>
+        </section>
+        <!-- /TOURNAMENT_DECKLISTS -->
+
+      </div>
+    </main>
+    <footer>
+      © <span id="year"></span> One Piece Deck Base — Built with community in mind. <a href="/guides/">Guides</a>
+    </footer>
+  </div>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (function(){
+      var lines = document.querySelectorAll('.text-line');
+      if (!lines.length) return;
+      function resetPop(pop){
+        pop.style.position = '';
+        pop.style.left = '';
+        pop.style.top = '';
+        pop.style.right = '';
+        pop.style.bottom = '';
+        pop.classList.remove('flip-left', 'flip-down');
+      }
+      function place(line){
+        var pop = line.querySelector('.card-pop');
+        var title = line.querySelector('.card-title');
+        if (!pop || !title) return;
+        resetPop(pop);
+        var tr = title.getBoundingClientRect();
+        var width = pop.offsetWidth || 110;
+        var height = pop.offsetHeight || 154;
+        var left = tr.left;
+        var top = tr.top - height - 10;
+        if (left + width > window.innerWidth - 12) left = window.innerWidth - width - 12;
+        if (left < 12) left = 12;
+        if (top < 12) top = tr.bottom + 10;
+        if (top + height > window.innerHeight - 12) top = Math.max(12, window.innerHeight - height - 12);
+        pop.style.position = 'fixed';
+        pop.style.left = left + 'px';
+        pop.style.top = top + 'px';
+        pop.style.bottom = 'auto';
+        pop.style.right = 'auto';
+      }
+      lines.forEach(function(line){
+        line.addEventListener('mouseenter', function(){ place(line); });
+        line.addEventListener('focus', function(){ place(line); });
+        line.addEventListener('click', function(e){
+          if (window.matchMedia('(hover: hover)').matches) return;
+          e.stopPropagation();
+          lines.forEach(function(other){ if (other !== line) other.classList.remove('is-open'); });
+          line.classList.toggle('is-open');
+          place(line);
+        });
+      });
+      document.addEventListener('click', function(e){
+        if (!e.target.closest('.text-line')) {
+          lines.forEach(function(line){ line.classList.remove('is-open'); });
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

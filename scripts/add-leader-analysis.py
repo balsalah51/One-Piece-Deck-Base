@@ -97,6 +97,24 @@ TAKES = {
         "Trash a card to give −2000, then draw when you take damage or a 6000-power body dies. "
         "Core is Monkey D. Garp, Otama, Izo, Marco, Yamato, OP13 Edward Newgate, and I Am Whitebeard; Uta, Jozu, Atmos, and Roger finish."
     ),
+    "OP12-061": (
+        "Purple/yellow OP12 Donquixote Rosinante is Corazon’s Law engine, not green/blue OP05-022 Rosinante. "
+        "Spend a life to save Trafalgar Law from K.O., then DON!! −1 to play a 4-cost or higher Law for 2 less. "
+        "Lists are Law, Dressrosa, and DON!! tricks; some recent copies splash OP17 cards."
+    ),
+    "OP13-004": (
+        "Red/black OP13-004 Sabo is Dressrosa / Revolutionary Army, not ST13 Sabo. "
+        "At 4+ life the leader is −1000; DON!! x1 plus an 8-cost character pumps the whole board. "
+        "Recent lists have started packing OP17 cards on top of the 8-cost Revolutionary package."
+    ),
+    "OP14-080": (
+        "Black/yellow OP14 Gecko Moria is Thriller Bark: K.O. your own Thriller Bark character to give the board +1000, then trash 3 to gain a life. "
+        "Recent copies include OP17 cards in the 50-card list. This is not a Mihawk sideboard — Moria is the leader."
+    ),
+    "OP09-062": (
+        "Purple/yellow OP09 Nico Robin is a banish leader that trashes a Trigger to rest a DON!!. "
+        "Recent lists have picked up OP17 cards. This is the Straw Hat archaeologist leader, not a cameo in Black Luffy."
+    ),
 }
 
 POPUP_JS = r"""

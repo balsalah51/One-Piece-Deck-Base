@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Donquixote Rosinante decklist</title>
+  <meta name="description" content="Donquixote Rosinante — Purple/Yellow leader page and scraped tournament lists." />
+  <link rel="stylesheet" href="/css/site.css" />
+</head>
+<body class="color-purple-yellow">
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/">
+        <div class="logo">OP</div>
+        <div>
+          <h1>One Piece Deck Base</h1>
+          <div class="subtitle">Decklists and community</div>
+        </div>
+      </a>
+      <nav aria-label="Primary">
+        <a href="/#decklists" aria-current="page">Decklists</a>
+        <a href="/decklists/op17.html">OP17</a>
+        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
+      </nav>
+    </header>
+
+    <main class="single">
+      <div class="card hero">
+        <div class="crumb"><a href="/">Home</a> / <a href="/decklists/op17.html">OP17 decklists</a> / Donquixote Rosinante</div>
+        <div class="leader-hero">
+          <img src="https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP12/OP12-061_EN.webp" alt="Donquixote Rosinante leader" />
+          <div>
+            <h2>Donquixote Rosinante</h2>
+            <p>Purple/Yellow OP12 Donquixote Rosinante. Once per turn, spend a life to save Trafalgar Law from K.O., then DON!! −1 to play a 4-cost or higher Law for 2 less. Not green/blue OP05-022 Rosinante.</p>
+            <div class="stat-row">
+              <span class="pill">Purple/Yellow Leader</span>
+              <span class="pill">OP12-061</span>
+              <span class="pill">4 Life</span>
+              <span class="pill">5000 Power</span>
+              <span class="pill">Special</span>
+              <span class="pill">Navy/Donquixote Pirates</span>
+            </div>
+            <div class="effect">[Once Per Turn] If your [Trafalgar Law] would be K.O.&#x27;d, you may add 1 card from the top of your Life cards to your hand instead.
+[Activate: Main] [Once Per Turn] DON!! −1: The next time you play [Trafalgar Law] with a cost of 4 or more from your hand during this turn, the cost will be reduced by 2.</div>
+            <p class="muted" style="margin-top:12px">Purple/yellow OP12-061 Corazon. Not green/blue OP05-022 Rosinante.</p>
+          </div>
+        </div>
+
+        <!-- TOURNAMENT_DECKLISTS -->
+        <section class="deck-index" style="margin-top:22px">
+          <div class="section-title">
+            <h3>Decklists</h3>
+            <div class="muted">0 lists</div>
+          </div>
+          <p class="muted">No tournament lists found for this leader yet.</p>
+        </section>
+        <!-- /TOURNAMENT_DECKLISTS -->
+
+      </div>
+    </main>
+    <footer>
+      © <span id="year"></span> One Piece Deck Base — Built with community in mind. <a href="/guides/">Guides</a>
+    </footer>
+  </div>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (function(){
+      var lines = document.querySelectorAll('.text-line');
+      if (!lines.length) return;
+      function resetPop(pop){
+        pop.style.position = '';
+        pop.style.left = '';
+        pop.style.top = '';
+        pop.style.right = '';
+        pop.style.bottom = '';
+        pop.classList.remove('flip-left', 'flip-down');
+      }
+      function place(line){
+        var pop = line.querySelector('.card-pop');
+        var title = line.querySelector('.card-title');
+        if (!pop || !title) return;
+        resetPop(pop);
+        var tr = title.getBoundingClientRect();
+        var width = pop.offsetWidth || 110;
+        var height = pop.offsetHeight || 154;
+        var left = tr.left;
+        var top = tr.top - height - 10;
+        if (left + width > window.innerWidth - 12) left = window.innerWidth - width - 12;
+        if (left < 12) left = 12;
+        if (top < 12) top = tr.bottom + 10;
+        if (top + height > window.innerHeight - 12) top = Math.max(12, window.innerHeight - height - 12);
+        pop.style.position = 'fixed';
+        pop.style.left = left + 'px';
+        pop.style.top = top + 'px';
+        pop.style.bottom = 'auto';
+        pop.style.right = 'auto';
+      }
+      lines.forEach(function(line){
+        line.addEventListener('mouseenter', function(){ place(line); });
+        line.addEventListener('focus', function(){ place(line); });
+        line.addEventListener('click', function(e){
+          if (window.matchMedia('(hover: hover)').matches) return;
+          e.stopPropagation();
+          lines.forEach(function(other){ if (other !== line) other.classList.remove('is-open'); });
+          line.classList.toggle('is-open');
+          place(line);
+        });
+      });
+      document.addEventListener('click', function(e){
+        if (!e.target.closest('.text-line')) {
+          lines.forEach(function(line){ line.classList.remove('is-open'); });
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
