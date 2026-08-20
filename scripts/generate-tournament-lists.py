@@ -756,7 +756,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
   <link rel="icon" href="/img/opdb-mark-sm.webp" type="image/webp" />
-  <link rel="stylesheet" href="/css/site.css?v=stack1" />
+  <link rel="stylesheet" href="/css/site.css?v=stack2" />
 </head>
 <body class="{html.escape(color)}">
   <div class="wrap">
@@ -904,7 +904,7 @@ def render_text_deck(grouped: dict, cache: dict, order: list[str], totals: dict)
             </li>"""
             )
         cols.append(
-            f"""          <div>
+            f"""          <div{' class="text-deck-leader"' if group == "Leader" else ""}>
             <h4>{html.escape(group)}</h4>
             <ul class="text-lines">
 {chr(10).join(lines)}
@@ -949,6 +949,7 @@ def render_deck_page(leader: dict, entry: dict, cache: dict) -> str:
                 display_name(cache.get(it["id"], {}).get("name") or it["name"]),
             )
         )
+    leader_block = ""
     sections = []
     for group in order:
         items = grouped.get(group) or []
@@ -956,7 +957,7 @@ def render_deck_page(leader: dict, entry: dict, cache: dict) -> str:
             continue
         count_label = "1 card" if group == "Leader" else f"{totals[group]} cards"
         entries = "\n".join(render_card_entry(it, cache.get(it["id"], {"name": it["name"], "category": group.rstrip("s"), "id": it["id"]})) for it in items)
-        sections.append(f"""        <section style="margin-top:22px">
+        block = f"""        <section class="{'leader-block' if group == 'Leader' else 'picture-group'}" style="margin-top:22px">
           <div class="section-title">
             <h3>{html.escape(group)}</h3>
             <div class="muted">{html.escape(count_label)}</div>
@@ -964,7 +965,11 @@ def render_deck_page(leader: dict, entry: dict, cache: dict) -> str:
           <div class="card-grid">
 {entries}
           </div>
-        </section>""")
+        </section>"""
+        if group == "Leader":
+            leader_block = block
+        else:
+            sections.append(block)
     text_list = render_text_deck(grouped, cache, order, totals)
     picture = f"""        <section class="picture-summary">
           <div class="section-title">
@@ -985,6 +990,7 @@ def render_deck_page(leader: dict, entry: dict, cache: dict) -> str:
     body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="{html.escape(crumb_href)}">{html.escape(crumb_label)}</a> / <a href="{html.escape(parent_href)}">{html.escape(leader['name'])}</a> / Decklist</div>
         <h2>{html.escape(title)}</h2>
         <p>{html.escape(subtitle)}</p>
+{leader_block}
 {text_list}
 {picture}
         <p class="muted" style="margin-top:22px">{html.escape(kind_note)} Source: <a href="{html.escape(source)}">{html.escape(source)}</a>. Images hosted by Limitless. Not affiliated with Bandai.</p>"""

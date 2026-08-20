@@ -90,7 +90,7 @@ def chrome(title: str, description: str, body: str, url: str, crumbs: list[tuple
   <meta property="og:image" content="{SITE}/img/opdb-mark.webp" />
   <meta name="twitter:card" content="summary" />
   <link rel="icon" href="/img/opdb-mark-sm.webp" type="image/webp" />
-  <link rel="stylesheet" href="/css/site.css?v=stack1" />
+  <link rel="stylesheet" href="/css/site.css?v=stack2" />
   <script type="application/ld+json">{json_ld(ld)}</script>
 </head>
 <body>
