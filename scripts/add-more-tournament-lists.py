@@ -8,7 +8,6 @@ from __future__ import annotations
 
 import json
 import re
-import subprocess
 from pathlib import Path
 
 import importlib.util
@@ -22,9 +21,9 @@ comm = importlib.util.module_from_spec(cspec)
 cspec.loader.exec_module(comm)
 
 ROOT = gen.ROOT
-CLEAN_HUB_REV = "61aff06"
-EXTRA_LIMIT = 16
-TOURNAMENT_LIMIT = 80
+EXTRA_LIMIT = 32
+PAGES = 12
+PER_PAGE = 40
 HUB_BLOCK_RE = re.compile(
     r"        <!-- (?:COMMUNITY_DECKLISTS|TOURNAMENT_DECKLISTS) -->.*?        <!-- /TOURNAMENT_DECKLISTS -->",
     re.S,
@@ -58,12 +57,15 @@ def existing_stems(leader: dict) -> set[str]:
     return {p.stem for p in d.glob("*.html")}
 
 
-def restore_clean_hubs() -> None:
-    for leader in gen.LEADERS:
-        rel = leader["page"]
-        text = subprocess.check_output(["git", "show", f"{CLEAN_HUB_REV}:{rel}"], text=True)
-        (ROOT / rel).write_text(text)
-        print("restored hub", rel)
+def known_tournament_ids(index: dict) -> set[str]:
+    ids: set[str] = set()
+    for items in index.values():
+        for item in items or []:
+            url = item.get("source_url") or ""
+            m = re.search(r"/tournament/([^/]+)/", url)
+            if m:
+                ids.add(m.group(1))
+    return ids
 
 
 def prune_duplicate_lists(index: dict) -> dict:
@@ -180,19 +182,40 @@ def index_row(entry: dict) -> dict:
     }
 
 
-def fetch_more(index: dict) -> dict:
+def fetch_tournament_pages(pages: int = PAGES, per_page: int = PER_PAGE) -> list:
+    seen = []
+    ids = set()
+    for page in range(1, pages + 1):
+        batch = gen.http_json(
+            f"https://play.limitlesstcg.com/api/tournaments?game=OP&limit={per_page}&page={page}"
+        )
+        added = 0
+        for tourney in batch or []:
+            tid = tourney.get("id")
+            if not tid or tid in ids:
+                continue
+            ids.add(tid)
+            seen.append(tourney)
+            added += 1
+        print("page", page, "new", added, "unique", len(seen))
+    return seen
+
+
+def fetch_more(index: dict, pages: int = PAGES) -> dict:
     target_ids = {L["id"] for L in gen.LEADERS}
-    print("fetching tournaments", TOURNAMENT_LIMIT)
-    tournaments = gen.http_json(f"https://play.limitlesstcg.com/api/tournaments?game=OP&limit={TOURNAMENT_LIMIT}")
-    print("tournaments", len(tournaments))
-    by_leader = gen.fetch_standings(tournaments, target_ids)
+    print("fetching tournament pages", pages)
+    tournaments = fetch_tournament_pages(pages=pages)
+    seen = known_tournament_ids(index)
+    fresh_events = [t for t in tournaments if t.get("id") not in seen]
+    print("tournaments", len(tournaments), "new events", len(fresh_events), "already indexed", len(seen))
+    by_leader = gen.fetch_standings(fresh_events, target_ids)
     cache = gen.load_card_cache()
     needed = set()
     planned: dict[str, list] = {}
     for leader in gen.LEADERS:
         lid = leader["id"]
         have = existing_stems(leader)
-        picked = gen.select_lists(by_leader.get(lid) or [], limit=EXTRA_LIMIT + 12)
+        picked = gen.select_lists(by_leader.get(lid) or [], limit=EXTRA_LIMIT + 24)
         fresh = []
         for entry in picked:
             slug = gen.planned_slug(entry)
@@ -226,11 +249,8 @@ def fetch_more(index: dict) -> dict:
 
 
 def main() -> None:
-    restore_clean_hubs()
-    index = prune_duplicate_lists(load_index())
-    save_index(index)
-    rebuild_hubs(index)
-    index = fetch_more(index)
+    index = load_index()
+    index = fetch_more(index, pages=PAGES)
     save_index(index)
     rebuild_hubs(index)
     print("done")

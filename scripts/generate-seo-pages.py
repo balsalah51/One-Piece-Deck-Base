@@ -52,7 +52,7 @@ def chrome(title: str, description: str, body: str) -> str:
       <nav aria-label="Primary">
         <a href="/#decklists">Decklists</a>
         <a href="/decklists/op17.html">OP17</a>
-        <a href="https://en.onepiece-cardgame.com/events/" target="_blank" rel="noopener">Events</a>
+        <a href="/shop/">Shop</a>
         <a href="/#community">Community</a>
       </nav>
     </header>
@@ -62,7 +62,7 @@ def chrome(title: str, description: str, body: str) -> str:
       </div>
     </main>
     <footer>
-      © <span id="year"></span> One Piece Deck Base — Fan site for the Bandai ONE PIECE CARD GAME (OPTCG). Not affiliated with Bandai.
+      © <span id="year"></span> One Piece Deck Base — Fan site for the Bandai ONE PIECE CARD GAME (OPTCG). Not affiliated with Bandai. <a href="/shop/">Shop</a>
     </footer>
   </div>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
