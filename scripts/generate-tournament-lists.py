@@ -756,7 +756,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
   <link rel="icon" href="/img/opdb-mark-sm.webp" type="image/webp" />
-  <link rel="stylesheet" href="/css/site.css" />
+  <link rel="stylesheet" href="/css/site.css?v=stack1" />
 </head>
 <body class="{html.escape(color)}">
   <div class="wrap">
