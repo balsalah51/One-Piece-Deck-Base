@@ -649,6 +649,54 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
   </div>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+    (function(){
+      var lines = document.querySelectorAll('.text-line');
+      if (!lines.length) return;
+      function resetPop(pop){
+        pop.style.position = '';
+        pop.style.left = '';
+        pop.style.top = '';
+        pop.style.right = '';
+        pop.style.bottom = '';
+        pop.classList.remove('flip-left', 'flip-down');
+      }
+      function place(line){
+        var pop = line.querySelector('.card-pop');
+        var title = line.querySelector('.card-title');
+        if (!pop || !title) return;
+        resetPop(pop);
+        var tr = title.getBoundingClientRect();
+        var width = pop.offsetWidth || 220;
+        var height = pop.offsetHeight || 308;
+        var left = tr.left;
+        var top = tr.top - height - 10;
+        if (left + width > window.innerWidth - 12) left = window.innerWidth - width - 12;
+        if (left < 12) left = 12;
+        if (top < 12) top = tr.bottom + 10;
+        if (top + height > window.innerHeight - 12) top = Math.max(12, window.innerHeight - height - 12);
+        pop.style.position = 'fixed';
+        pop.style.left = left + 'px';
+        pop.style.top = top + 'px';
+        pop.style.bottom = 'auto';
+        pop.style.right = 'auto';
+      }
+      lines.forEach(function(line){
+        line.addEventListener('mouseenter', function(){ place(line); });
+        line.addEventListener('focus', function(){ place(line); });
+        line.addEventListener('click', function(e){
+          if (window.matchMedia('(hover: hover)').matches) return;
+          e.stopPropagation();
+          lines.forEach(function(other){ if (other !== line) other.classList.remove('is-open'); });
+          line.classList.toggle('is-open');
+          place(line);
+        });
+      });
+      document.addEventListener('click', function(e){
+        if (!e.target.closest('.text-line')) {
+          lines.forEach(function(line){ line.classList.remove('is-open'); });
+        }
+      });
+    })();
   </script>
 </body>
 </html>
@@ -688,6 +736,51 @@ def unique_slug(entry: dict, used: set[str]) -> str:
         n += 1
     used.add(slug)
     return slug
+
+
+def card_image_url(cid: str) -> str:
+    set_code = cid.split("-")[0]
+    return f"https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/{set_code}/{cid}_EN.webp"
+
+
+def render_text_deck(grouped: dict, cache: dict, order: list[str], totals: dict) -> str:
+    total = 1 + sum(totals.values())
+    cols = []
+    for group in order:
+        items = grouped.get(group) or []
+        if not items:
+            continue
+        lines = []
+        for item in items:
+            meta = cache.get(item["id"], {})
+            name = display_name(html.unescape(meta.get("name") or item.get("name") or item["id"]))
+            img = card_image_url(item["id"])
+            lines.append(
+                f"""            <li class="text-line" tabindex="0">
+              <span class="qty">{html.escape(str(item['count']))}x</span>
+              <span class="card-title">{html.escape(name)}</span>
+              <span class="muted card-id">{html.escape(item['id'])}</span>
+              <img class="card-pop" src="{html.escape(img)}" alt="{html.escape(name)}" />
+            </li>"""
+            )
+        cols.append(
+            f"""          <div>
+            <h4>{html.escape(group)}</h4>
+            <ul class="text-lines">
+{chr(10).join(lines)}
+            </ul>
+          </div>"""
+        )
+    return f"""        <section class="text-deck">
+          <div class="section-title">
+            <h3>Text list</h3>
+            <div class="muted">{total} cards</div>
+          </div>
+          <p class="muted">Hover or tap a card name to see the picture.</p>
+          <div class="text-deck-cols">
+{chr(10).join(cols)}
+          </div>
+        </section>"""
 
 
 def render_deck_page(leader: dict, entry: dict, cache: dict) -> str:
@@ -732,6 +825,14 @@ def render_deck_page(leader: dict, entry: dict, cache: dict) -> str:
 {entries}
           </div>
         </section>""")
+    text_list = render_text_deck(grouped, cache, order, totals)
+    picture = f"""        <section class="picture-summary">
+          <div class="section-title">
+            <h3>Card pictures</h3>
+            <div class="muted">Full card text</div>
+          </div>
+{chr(10).join(sections)}
+        </section>"""
     source = entry.get("source_url") or "https://play.limitlesstcg.com/"
     kind_note = {
         "sample": "Sample 50-card list built from the OP17 Red card pool. Not taken from a tournament.",
@@ -743,7 +844,8 @@ def render_deck_page(leader: dict, entry: dict, cache: dict) -> str:
     body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="{html.escape(crumb_href)}">{html.escape(crumb_label)}</a> / <a href="{html.escape(parent_href)}">{html.escape(leader['name'])}</a> / Decklist</div>
         <h2>{html.escape(title)}</h2>
         <p>{html.escape(subtitle)}</p>
-{chr(10).join(sections)}
+{text_list}
+{picture}
         <p class="muted" style="margin-top:22px">{html.escape(kind_note)} Source: <a href="{html.escape(source)}">{html.escape(source)}</a>. Images hosted by Limitless. Not affiliated with Bandai.</p>"""
     desc = f"{leader['name']} decklist — {subtitle}"[:160]
     return page_chrome(f"{title}", desc, leader["color"], leader["nav_op17"], body)
