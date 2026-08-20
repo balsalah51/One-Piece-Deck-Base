@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import html
 import json
+import sys
 from pathlib import Path
 
 ROOT = Path("/workspace")
@@ -37,7 +38,42 @@ LEADERS = [
 ]
 
 
-def chrome(title: str, description: str, body: str) -> str:
+def json_ld(obj: dict) -> str:
+    return json.dumps(obj, ensure_ascii=False).replace("<", "\\u003c")
+
+
+def chrome(title: str, description: str, body: str, url: str, crumbs: list[tuple[str, str]] | None = None) -> str:
+    crumbs = crumbs or [("/", "Home"), ("/guides/", "Guides")]
+    ld = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "name": "One Piece Deck Base",
+                "url": SITE,
+                "description": "Fan hub for Bandai ONE PIECE CARD GAME (OPTCG) 50-card decklists.",
+            },
+            {
+                "@type": "WebPage",
+                "name": title,
+                "description": description,
+                "url": url,
+                "isPartOf": {"@type": "WebSite", "url": SITE, "name": "One Piece Deck Base"},
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": i + 1,
+                        "name": name,
+                        "item": SITE + (href if href.startswith("/") else "/" + href),
+                    }
+                    for i, (href, name) in enumerate(crumbs)
+                ],
+            },
+        ],
+    }
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -45,9 +81,17 @@ def chrome(title: str, description: str, body: str) -> str:
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
-  <link rel="canonical" href="{html.escape(SITE)}" />
+  <link rel="canonical" href="{html.escape(url)}" />
+  <meta property="og:title" content="{html.escape(title)}" />
+  <meta property="og:description" content="{html.escape(description)}" />
+  <meta property="og:url" content="{html.escape(url)}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="One Piece Deck Base" />
+  <meta property="og:image" content="{SITE}/img/opdb-mark.webp" />
+  <meta name="twitter:card" content="summary" />
   <link rel="icon" href="/img/opdb-mark-sm.webp" type="image/webp" />
   <link rel="stylesheet" href="/css/site.css" />
+  <script type="application/ld+json">{json_ld(ld)}</script>
 </head>
 <body>
   <div class="wrap">
@@ -80,9 +124,15 @@ def chrome(title: str, description: str, body: str) -> str:
 """
 
 
-def leader_list() -> str:
+def leader_items(indices: list[int] | None = None) -> list[tuple[str, str, str]]:
+    if not indices:
+        return list(LEADERS)
+    return [LEADERS[i] for i in indices if 0 <= i < len(LEADERS)]
+
+
+def leader_list(items: list[tuple[str, str, str]] | None = None) -> str:
     rows = []
-    for name, href, meta in LEADERS:
+    for name, href, meta in items or LEADERS:
         rows.append(
             f"""            <li>
               <a class="item" href="{html.escape(href)}">
@@ -95,6 +145,23 @@ def leader_list() -> str:
             </li>"""
         )
     return "\n".join(rows)
+
+
+def chip_row(links: list[tuple[str, str]], heading: str) -> str:
+    if not links:
+        return ""
+    chips = "\n".join(
+        f'            <a href="{html.escape(href)}">{html.escape(label)}</a>' for label, href in links
+    )
+    return f"""        <section style="margin-top:22px">
+          <div class="section-title">
+            <h3>{html.escape(heading)}</h3>
+            <div class="muted">More OPTCG searches</div>
+          </div>
+          <div class="leader-jump">
+{chips}
+          </div>
+        </section>"""
 
 
 TOPICS = [
@@ -720,20 +787,73 @@ CHARACTERS = [
     ("Stage card", "stage-card", "OPTCG Stage cards are uncommon but show up in some constructed lists on this site.", [7, 2]),
 ]
 
+sys.path.insert(0, str(ROOT / "scripts"))
+import seo_extra as extra
 
-def topic_body(topic: dict) -> str:
+_have_topics = {t["slug"] for t in TOPICS}
+TOPICS.extend(t for t in extra.EXTRA_TOPICS if t["slug"] not in _have_topics)
+_have_chars = {c[1] for c in CHARACTERS}
+CHARACTERS.extend(c for c in extra.EXTRA_CHARACTERS if c[1] not in _have_chars)
+SETS = extra.SETS
+COMPARES = extra.COMPARES
+HOWTOS = extra.HOWTOS
+SEARCHES = extra.SEARCHES
+
+
+def topic_leaders(topic: dict) -> list[tuple[str, str, str]]:
+    if topic.get("leaders") is not None:
+        return leader_items(topic["leaders"])
+    slug = (topic.get("slug") or "") + " " + (topic.get("h2") or "").lower()
+    mapping = [
+        (("newgate", "whitebeard"), [0, 9, 10]),
+        (("shanks", "red hair", "red-hair"), [1]),
+        (("rocks", "xebec", "god valley"), [2]),
+        (("kaido", "beast", "wano"), [3, 4]),
+        (("elbaph", "black luffy", "straw hat"), [4, 6, 17, 7]),
+        (("linlin", "big mom", "yellow"), [5, 13]),
+        (("nami",), [7]),
+        (("mihawk",), [8]),
+        (("ace",), [9, 10, 0]),
+        (("imu", "mary geoise", "five elders"), [11]),
+        (("enel", "sky island", "skypeia"), [12]),
+        (("katakuri",), [13, 5]),
+        (("rosinante", "corazon"), [14, 15]),
+        (("sabo", "revolutionary", "dressrosa"), [15, 14, 9]),
+        (("moria", "thriller"), [16, 8]),
+        (("robin",), [17, 4]),
+        (("red/black", "red-black"), [15]),
+        (("purple/yellow", "purple-yellow"), [14, 17]),
+        (("black/yellow", "black-yellow"), [16]),
+        (("red optcg",), [0, 9, 10, 15, 6]),
+        (("green optcg",), [1, 8]),
+        (("blue optcg",), [2, 7, 10]),
+        (("purple optcg",), [3, 12, 13, 14, 17]),
+        (("black optcg",), [4, 11, 15, 16]),
+    ]
+    for keys, idx in mapping:
+        if any(k in slug for k in keys):
+            return leader_items(idx)
+    return list(LEADERS)
+
+
+def topic_body(topic: dict, related: list[tuple[str, str]]) -> str:
+    items = topic_leaders(topic)
+    extra = topic.get("extra") or ""
+    extra_html = f"<p>{html.escape(extra)}</p>" if extra else ""
     return f"""        <div class="crumb"><a href="/">Home</a> / <a href="/guides/">Guides</a> / {html.escape(topic["h2"])}</div>
         <h2>{html.escape(topic["h2"])}</h2>
         <p>{html.escape(topic["copy"])}</p>
+        {extra_html}
         <section style="margin-top:18px">
           <div class="section-title">
-            <h3>OPTCG leader pages</h3>
-            <div class="muted">One Piece TCG</div>
+            <h3>Related OPTCG leader pages</h3>
+            <div class="muted">Open a 50-card list</div>
           </div>
           <ul class="list">
-{leader_list()}
+{leader_list(items)}
           </ul>
         </section>
+{chip_row(related, "Related OPTCG searches")}
         <p class="muted" style="margin-top:18px">Fan site. Not affiliated with Bandai or Shueisha. <a href="/guides/">More One Piece TCG guides</a>.</p>"""
 
 
@@ -776,7 +896,103 @@ def character_body(name: str, blurb: str, related: list[int]) -> str:
 {chr(10).join(rows)}
           </ul>
         </section>
-        <p class="muted" style="margin-top:18px"><a href="/guides/characters/">All character guides</a> · <a href="/guides/">One Piece TCG guides</a></p>"""
+        <p class="muted" style="margin-top:18px"><a href="/guides/characters/">All character guides</a> · <a href="/guides/">One Piece TCG guides</a> · <a href="/guides/sets/">Set guides</a></p>"""
+
+
+def nearby(links: list[tuple[str, str]], i: int, n: int = 6) -> list[tuple[str, str]]:
+    if not links:
+        return []
+    out = []
+    for k in range(1, n + 1):
+        out.append(links[(i + k) % len(links)])
+    return out
+
+
+def set_body(item: dict, related: list[tuple[str, str]]) -> str:
+    return f"""        <div class="crumb"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <a href="/guides/sets/">Sets</a> / {html.escape(item["code"])}</div>
+        <h2>{html.escape(item["code"])} {html.escape(item["name"])}</h2>
+        <p>{html.escape(item["copy"])}</p>
+        <section style="margin-top:18px">
+          <div class="section-title">
+            <h3>Leaders on this site</h3>
+            <div class="muted">{html.escape(item["code"])}</div>
+          </div>
+          <ul class="list">
+{leader_list(leader_items(item.get("leaders")))}
+          </ul>
+        </section>
+{chip_row(related, "Other set guides")}
+        <p class="muted" style="margin-top:18px"><a href="/guides/sets/">All set guides</a> · <a href="/guides/">OPTCG guides</a></p>"""
+
+
+def compare_body(item: dict, related: list[tuple[str, str]]) -> str:
+    return f"""        <div class="crumb"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <a href="/guides/compare/">Compare</a> / {html.escape(item["h2"])}</div>
+        <h2>{html.escape(item["h2"])}</h2>
+        <p>{html.escape(item["copy"])}</p>
+        <section style="margin-top:18px">
+          <div class="section-title">
+            <h3>Open the matching leader</h3>
+            <div class="muted">Do not mix lookalike IDs</div>
+          </div>
+          <ul class="list">
+{leader_list(leader_items(item.get("leaders")))}
+          </ul>
+        </section>
+{chip_row(related, "Other compares")}
+        <p class="muted" style="margin-top:18px"><a href="/guides/compare/">All compares</a> · <a href="/guides/">OPTCG guides</a></p>"""
+
+
+def howto_body(item: dict, related: list[tuple[str, str]]) -> str:
+    faqs = []
+    for q, a in item.get("qas") or []:
+        faqs.append(
+            f"""          <div style="margin-top:12px">
+            <h3 style="font-size:16px;margin:0 0 6px">{html.escape(q)}</h3>
+            <p class="muted" style="margin:0">{html.escape(a)}</p>
+          </div>"""
+        )
+    faq_html = "\n".join(faqs)
+    return f"""        <div class="crumb"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <a href="/guides/how-to/">How to</a> / {html.escape(item["h2"])}</div>
+        <h2>{html.escape(item["h2"])}</h2>
+        <p>{html.escape(item["copy"])}</p>
+        <section style="margin-top:18px">
+          <div class="section-title"><h3>FAQ</h3><div class="muted">OPTCG</div></div>
+{faq_html}
+        </section>
+        <section style="margin-top:18px">
+          <div class="section-title"><h3>Leader pages</h3><div class="muted">50-card lists</div></div>
+          <ul class="list">
+{leader_list(leader_items(item.get("leaders")))}
+          </ul>
+        </section>
+{chip_row(related, "More how-tos")}
+        <p class="muted" style="margin-top:18px"><a href="/guides/how-to/">All how-tos</a> · <a href="/guides/">OPTCG guides</a></p>"""
+
+
+def search_body(name: str, blurb: str, indices: list[int], related: list[tuple[str, str]]) -> str:
+    return f"""        <div class="crumb"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <a href="/guides/search/">Search</a> / {html.escape(name)}</div>
+        <h2>{html.escape(name)}</h2>
+        <p>{html.escape(blurb)}</p>
+        <section style="margin-top:18px">
+          <div class="section-title"><h3>Go to a real list</h3><div class="muted">OPTCG</div></div>
+          <ul class="list">
+{leader_list(leader_items(indices))}
+          </ul>
+        </section>
+{chip_row(related, "Similar searches")}
+        <p class="muted" style="margin-top:18px"><a href="/guides/search/">All search pages</a> · <a href="/guides/">OPTCG guides</a></p>"""
+
+
+def catalog_index(title: str, blurb: str, crumb: str, links: list[tuple[str, str]]) -> str:
+    chips = "\n".join(
+        f'            <a href="{html.escape(href)}">{html.escape(label)}</a>' for label, href in links
+    )
+    return f"""        <div class="crumb"><a href="/">Home</a> / <a href="/guides/">Guides</a> / {html.escape(crumb)}</div>
+        <h2>{html.escape(title)}</h2>
+        <p>{html.escape(blurb)}</p>
+        <div class="leader-jump" style="margin-top:18px">
+{chips}
+        </div>"""
 
 
 def guides_index(topic_links: list[tuple[str, str]], char_links: list[tuple[str, str]]) -> str:
@@ -798,7 +1014,8 @@ def guides_index(topic_links: list[tuple[str, str]], char_links: list[tuple[str,
           <div class="leader-jump">
 {chars}
           </div>
-        </section>"""
+        </section>
+        <p class="muted" style="margin-top:18px"><a href="/guides/sets/">Set guides</a> · <a href="/guides/compare/">Leader compares</a> · <a href="/guides/how-to/">How to play</a> · <a href="/guides/search/">Search pages</a></p>"""
 
 
 def characters_index(char_links: list[tuple[str, str]]) -> str:
@@ -814,21 +1031,17 @@ def characters_index(char_links: list[tuple[str, str]]) -> str:
         </div>"""
 
 
-def patch_canonical(page: str, url: str) -> str:
-    return page.replace(
-        f'<link rel="canonical" href="{html.escape(SITE)}" />',
-        f'<link rel="canonical" href="{html.escape(url)}" />',
-        1,
-    )
-
-
-def write_page(rel: str, title: str, desc: str, body: str) -> str:
+def write_page(rel: str, title: str, desc: str, body: str, crumbs: list[tuple[str, str]] | None = None) -> str:
     path = ROOT / rel.lstrip("/")
     path.parent.mkdir(parents=True, exist_ok=True)
-    url = SITE + ("/" if rel == "guides/index.html" else "/" + rel)
-    if rel.endswith("/index.html"):
+    if rel == "guides/index.html":
+        url = SITE + "/guides/"
+        crumbs = crumbs or [("/", "Home"), ("/guides/", "Guides")]
+    elif rel.endswith("/index.html"):
         url = SITE + "/" + rel[: -len("index.html")]
-    page = patch_canonical(chrome(title, desc, body), url)
+    else:
+        url = SITE + "/" + rel
+    page = chrome(title, desc, body, url, crumbs)
     path.write_text(page)
     return url
 
@@ -854,47 +1067,151 @@ def main() -> None:
     topic_slugs = [t["slug"] for t in TOPICS]
     if len(topic_slugs) != len(set(topic_slugs)):
         raise SystemExit("duplicate topic slugs")
-    topic_links = []
-    urls = []
-    for topic in TOPICS:
+
+    topic_links = [(t["h2"], f"/guides/{t['slug']}.html") for t in TOPICS]
+    set_links = [(s["code"] + " " + s["name"], f"/guides/sets/{s['slug']}.html") for s in SETS]
+    compare_links = [(c["h2"], f"/guides/compare/{c['slug']}.html") for c in COMPARES]
+    howto_links = [(h["h2"], f"/guides/how-to/{h['slug']}.html") for h in HOWTOS]
+    search_links = [(n[:1].upper() + n[1:], f"/guides/search/{slug}.html") for n, slug, _b, _i in SEARCHES]
+
+    for i, topic in enumerate(TOPICS):
         rel = f"guides/{topic['slug']}.html"
-        url = write_page(rel, topic["title"], topic["desc"], topic_body(topic))
-        topic_links.append((topic["h2"], "/" + rel))
-        urls.append(url)
+        write_page(
+            rel,
+            topic["title"],
+            topic["desc"],
+            topic_body(topic, nearby(topic_links, i)),
+            [("/", "Home"), ("/guides/", "Guides"), ("/" + rel, topic["h2"])],
+        )
 
     char_links = []
-    for name, slug, blurb, related in CHARACTERS:
+    char_chip_src = [(n, f"/guides/characters/{s}.html") for n, s, _b, _r in CHARACTERS]
+    for i, (name, slug, blurb, related) in enumerate(CHARACTERS):
         rel = f"guides/characters/{slug}.html"
         title = f"{name} One Piece TCG | OPTCG decklists"
         desc = f"{name} in the One Piece TCG (OPTCG, Bandai ONE PIECE CARD GAME). Open related 50-card decklists."
-        url = write_page(rel, title, desc, character_body(name, blurb, related))
+        body = character_body(name, blurb, related) + chip_row(nearby(char_chip_src, i, 8), "Other character searches")
+        write_page(
+            rel,
+            title,
+            desc,
+            body,
+            [("/", "Home"), ("/guides/", "Guides"), ("/guides/characters/", "Characters"), ("/" + rel, name)],
+        )
         char_links.append((name, "/" + rel))
-        urls.append(url)
+
+    for i, item in enumerate(SETS):
+        rel = f"guides/sets/{item['slug']}.html"
+        write_page(
+            rel,
+            f"{item['code']} {item['name']} | OPTCG",
+            item["desc"],
+            set_body(item, nearby(set_links, i)),
+            [("/", "Home"), ("/guides/", "Guides"), ("/guides/sets/", "Sets"), ("/" + rel, item["code"])],
+        )
+
+    for i, item in enumerate(COMPARES):
+        rel = f"guides/compare/{item['slug']}.html"
+        write_page(
+            rel,
+            item["title"],
+            item["desc"],
+            compare_body(item, nearby(compare_links, i)),
+            [("/", "Home"), ("/guides/", "Guides"), ("/guides/compare/", "Compare"), ("/" + rel, item["h2"])],
+        )
+
+    for i, item in enumerate(HOWTOS):
+        rel = f"guides/how-to/{item['slug']}.html"
+        write_page(
+            rel,
+            item["title"],
+            item["desc"],
+            howto_body(item, nearby(howto_links, i)),
+            [("/", "Home"), ("/guides/", "Guides"), ("/guides/how-to/", "How to"), ("/" + rel, item["h2"])],
+        )
+
+    for i, (name, slug, blurb, indices) in enumerate(SEARCHES):
+        rel = f"guides/search/{slug}.html"
+        display = name[:1].upper() + name[1:]
+        write_page(
+            rel,
+            f"{display} | OPTCG",
+            f"{display} for the Bandai One Piece TCG. Open a real 50-card list.",
+            search_body(display, blurb, indices, nearby(
+                [(n[:1].upper() + n[1:], href) for n, href in search_links], i
+            )),
+            [("/", "Home"), ("/guides/", "Guides"), ("/guides/search/", "Search"), ("/" + rel, display)],
+        )
 
     write_page(
         "guides/index.html",
         "One Piece TCG guides | OPTCG | Bandai",
-        "Guides for One Piece TCG, OPTCG, Bandai, and character names, linking to real decklists.",
+        "Guides for One Piece TCG, OPTCG, Bandai, sets, and character names, linking to real decklists.",
         guides_index(topic_links, char_links),
+        [("/", "Home"), ("/guides/", "Guides")],
     )
     write_page(
         "guides/characters/index.html",
         "One Piece TCG characters | OPTCG",
         "One Piece character names mapped to OPTCG decklists on One Piece Deck Base.",
         characters_index(char_links),
+        [("/", "Home"), ("/guides/", "Guides"), ("/guides/characters/", "Characters")],
+    )
+    write_page(
+        "guides/sets/index.html",
+        "OPTCG set guides | OP09–OP17",
+        "Bandai OPTCG set pages linking to the leader decklists on this site.",
+        catalog_index("OPTCG sets", "Booster and starter codes that show up in the 50-card lists.", "Sets", set_links),
+        [("/", "Home"), ("/guides/", "Guides"), ("/guides/sets/", "Sets")],
+    )
+    write_page(
+        "guides/compare/index.html",
+        "OPTCG leader compares | lookalike IDs",
+        "Do not mix OP17 Luffy with RG Luffy, OP16 Ace with OP13 Ace, or Imu with OP17 Luffy.",
+        catalog_index("Leader compares", "Lookalike OPTCG leaders split onto separate pages.", "Compare", compare_links),
+        [("/", "Home"), ("/guides/", "Guides"), ("/guides/compare/", "Compare")],
+    )
+    write_page(
+        "guides/how-to/index.html",
+        "How to play OPTCG | One Piece TCG",
+        "Short OPTCG how-tos that link to real 50-card leader lists.",
+        catalog_index("How to play", "Rules basics and how to read a 50-card list.", "How to", howto_links),
+        [("/", "Home"), ("/guides/", "Guides"), ("/guides/how-to/", "How to")],
+    )
+    write_page(
+        "guides/search/index.html",
+        "OPTCG search pages | decklist queries",
+        "Search-style OPTCG pages that point at real leader decklists.",
+        catalog_index("OPTCG searches", "Common decklist searches mapped to leader pages.", "Search", search_links),
+        [("/", "Home"), ("/guides/", "Guides"), ("/guides/search/", "Search")],
     )
 
+    today = "2026-08-20"
     (ROOT / "robots.txt").write_text(
         "User-agent: *\nAllow: /\nDisallow: /shop/\nSitemap: https://onepiecedeckbase.com/sitemap.xml\n"
     )
-
     all_urls = existing_html_urls()
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for url in all_urls:
-        sitemap.append(f"  <url><loc>{html.escape(url)}</loc></url>")
+        sitemap.append(f"  <url><loc>{html.escape(url)}</loc><lastmod>{today}</lastmod></url>")
     sitemap.append("</urlset>\n")
     (ROOT / "sitemap.xml").write_text("\n".join(sitemap))
-    print("topics", len(TOPICS), "characters", len(CHARACTERS), "sitemap", len(all_urls))
+    print(
+        "topics",
+        len(TOPICS),
+        "characters",
+        len(CHARACTERS),
+        "sets",
+        len(SETS),
+        "compares",
+        len(COMPARES),
+        "howtos",
+        len(HOWTOS),
+        "searches",
+        len(SEARCHES),
+        "sitemap",
+        len(all_urls),
+    )
 
 
 if __name__ == "__main__":
