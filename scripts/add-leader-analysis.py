@@ -99,6 +99,7 @@ TAKES = {
         "Limitless Play is full of the same Whitebeard rush package: 4 Monkey D. Luffy, 4 Edward Newgate, 4 Vista, and Moby Dick in every list we averaged. "
         "Garp, Little Oars Jr., Curiel, Marco, and Thatch are close to required. The 10-cost Ace is a 3-of in almost every pile. "
         "Namule, Time for the Counterattack, Uta, and Izo are the usual flex. "
+        "CardKaizoku's public X chart of private-lobby Ace data names the same staples (OP16 Luffy, Moby Dick, Newgate, Oars Jr.) and says Ace is worse into Rocks, Linlin, and Newgate — that post is a win-rate graphic, not a 50-card ID list. "
         "The consensus below is averaged from those public tournament lists, not a made-up sample."
     ),
     "OP15-058": (

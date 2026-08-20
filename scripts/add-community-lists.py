@@ -323,7 +323,7 @@ def community_section(leader: dict, lists: list[dict], tournament_html: str) -> 
         href = entry["href"]
         title = entry.get("title_override") or entry.get("title")
         subtitle = entry.get("subtitle") or ""
-        badge = "YouTube" if entry.get("kind") == "youtube" else "Web"
+        badge = {"youtube": "YouTube", "x": "X"}.get(entry.get("kind"), "Web")
         rows.append(
             f"""            <li>
               <a class="item" href="{html.escape(href)}">
@@ -341,7 +341,7 @@ def community_section(leader: dict, lists: list[dict], tournament_html: str) -> 
             <h3>YouTube and community decklists</h3>
             <div class="muted">{len(lists)} lists</div>
           </div>
-          <p class="muted">Lists copied from recent YouTube deck profiles and public deck builders. Creator X/Twitter accounts are linked on each list page when they posted one.</p>
+          <p class="muted">Lists copied from recent YouTube deck profiles and public deck builders. Public X posts from those creators were also scraped for pasteable NxSET-NNN lines; recent tweets were charts, memes, and clips rather than 50-card ID lists, so X is linked as a profile when the same creator posted a YouTube list.</p>
           <ul class="list" aria-label="YouTube and community decklists">
 {chr(10).join(rows)}
           </ul>
