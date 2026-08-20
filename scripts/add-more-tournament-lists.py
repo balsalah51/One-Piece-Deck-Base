@@ -145,7 +145,10 @@ def rebuild_hubs(index: dict) -> None:
             tournament_html = NEWGATE_TOURNAMENT
         else:
             tournament_html = gen.render_index_section(leader, tour_lists)
-        combined = comm.community_section(leader, comm_lists, tournament_html)
+        if comm_lists:
+            combined = comm.community_section(leader, comm_lists, tournament_html)
+        else:
+            combined = tournament_html
         page = re.sub(
             r"        <!-- COMMUNITY_DECKLISTS -->.*?        <!-- /COMMUNITY_DECKLISTS -->\n?",
             "",

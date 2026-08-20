@@ -81,7 +81,7 @@ TAKES = {
         "The X take matches the lists: RG Luffy did not leave when OP17 arrived, it just absorbed new green and red tools and kept winning local tables."
     ),
     "OP11-041": (
-        "UY Nami's public conversation is older than OP17, and the lists show it. YouTube profiles from OP15/EB04, an 'ultimate' blue/yellow guide, and KebbieG's OP16 gameplay all point at the same engine: "
+        "Nami's public conversation is older than OP17, and the lists show it. YouTube profiles from OP15/EB04, an 'ultimate' blue/yellow guide, and KebbieG's OP16 gameplay all point at the same engine: "
         "draw when Life cards leave, then a Thriller Bark yellow package. "
         "Every averaged list plays Kumacy, Gecko Moria, Nico Robin, Nami, Borsalino, and Perona. Hogback, Zeus, and a Newgate splash are close to required. "
         "Mr. 3, Marco, Kikunojo, and Gravity Blade are the next tier; Girl and Teach are the older vs newer split. "
@@ -93,6 +93,27 @@ TAKES = {
         "Otama, Kikunojo, You Can Be My Samurai, Coffin Boat, and the rush event show up in most lists; Smoker, Zoro, and the ten-cost Mihawk are the flex. "
         "The community comparison on X is Mihawk versus the new OP17 Shanks rest deck — Mihawk has the tournament sample, Shanks has the new-set hype. "
         "The consensus below is the Mihawk list the room is actually submitting."
+    ),
+    "OP16-001": (
+        "OP16 Portgas D. Ace is the red current-format deck that kept posting after the emperors arrived. "
+        "Limitless Play is full of the same Whitebeard rush package: 4 Monkey D. Luffy, 4 Edward Newgate, 4 Vista, and Moby Dick in every list we averaged. "
+        "Garp, Little Oars Jr., Curiel, Marco, and Thatch are close to required. The 10-cost Ace is a 3-of in almost every pile. "
+        "Namule, Time for the Counterattack, Uta, and Izo are the usual flex. "
+        "The consensus below is averaged from those public tournament lists, not a made-up sample."
+    ),
+    "OP15-058": (
+        "Purple OP15 Enel is still the Sky Island ramp deck in current-format events. "
+        "The leader rule is the whole identity: a 6-card DON!! deck, then from turn two you flood DON!! and rest the board. "
+        "Every averaged Limitless list plays Ohm, Shura, Enel, El Thor, Lightning Beast Kiten, Lightning Dragon, Mamaragan, Charlotte Pudding, and Vinsmoke Reiju. "
+        "Gamma Knife, Varie, Senor Pink, and Divine Departure fill the rest. "
+        "That is OP15 Enel, not the old yellow OP05 Enel list."
+    ),
+    "OP11-062": (
+        "Purple OP11 Charlotte Katakuri is the other Big Mom leader people still register, separate from yellow OP17 Linlin. "
+        "The effect is small and repeatable: DON!! −1 on attack or on the opponent's attack to peek their deck and gain power. "
+        "The Limitless core is Katakuri and Pudding in both printings, plus the ST34 Big Mom package: Katakuri, Brulee, Linlin, and Cracker. "
+        "We're Going to Claim the One Piece, Mamaragan, and Divine Departure show up in most lists. "
+        "The consensus below is averaged from those public tournament lists."
     ),
 }
 
