@@ -845,8 +845,9 @@ def render_text_deck(grouped: dict, cache: dict, order: list[str], totals: dict)
               <img class="card-pop" src="{html.escape(img)}" alt="{html.escape(name)}" />
             </li>"""
             )
+        box = ' class="text-deck-leader"' if group == "Leader" else ""
         cols.append(
-            f"""          <div>
+            f"""          <div{box}>
             <h4>{html.escape(group)}</h4>
             <ul class="text-lines">
 {chr(10).join(lines)}
@@ -898,7 +899,8 @@ def render_deck_page(leader: dict, entry: dict, cache: dict) -> str:
             continue
         count_label = "1 card" if group == "Leader" else f"{totals[group]} cards"
         entries = "\n".join(render_card_entry(it, cache.get(it["id"], {"name": it["name"], "category": group.rstrip("s"), "id": it["id"]})) for it in items)
-        sections.append(f"""        <section style="margin-top:22px">
+        sec = ' class="leader-block"' if group == "Leader" else ""
+        sections.append(f"""        <section{sec} style="margin-top:22px">
           <div class="section-title">
             <h3>{html.escape(group)}</h3>
             <div class="muted">{html.escape(count_label)}</div>
