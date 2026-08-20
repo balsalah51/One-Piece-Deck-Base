@@ -108,8 +108,9 @@ def render_text_deck(groups: list[tuple[str, list[dict]]]) -> str:
               <img class="card-pop" src="{html.escape(item['src'])}" alt="{name}" />
             </li>"""
             )
+        box = ' class="text-deck-leader"' if group == "Leader" else ""
         cols.append(
-            f"""          <div>
+            f"""          <div{box}>
             <h4>{html.escape(group)}</h4>
             <ul class="text-lines">
 {chr(10).join(lines)}
