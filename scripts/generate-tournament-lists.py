@@ -649,18 +649,18 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
   </div>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    (function(){
+    (function(){{
       var lines = document.querySelectorAll('.text-line');
       if (!lines.length) return;
-      function resetPop(pop){
+      function resetPop(pop){{
         pop.style.position = '';
         pop.style.left = '';
         pop.style.top = '';
         pop.style.right = '';
         pop.style.bottom = '';
         pop.classList.remove('flip-left', 'flip-down');
-      }
-      function place(line){
+      }}
+      function place(line){{
         var pop = line.querySelector('.card-pop');
         var title = line.querySelector('.card-title');
         if (!pop || !title) return;
@@ -679,24 +679,24 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
         pop.style.top = top + 'px';
         pop.style.bottom = 'auto';
         pop.style.right = 'auto';
-      }
-      lines.forEach(function(line){
-        line.addEventListener('mouseenter', function(){ place(line); });
-        line.addEventListener('focus', function(){ place(line); });
-        line.addEventListener('click', function(e){
+      }}
+      lines.forEach(function(line){{
+        line.addEventListener('mouseenter', function(){{ place(line); }});
+        line.addEventListener('focus', function(){{ place(line); }});
+        line.addEventListener('click', function(e){{
           if (window.matchMedia('(hover: hover)').matches) return;
           e.stopPropagation();
-          lines.forEach(function(other){ if (other !== line) other.classList.remove('is-open'); });
+          lines.forEach(function(other){{ if (other !== line) other.classList.remove('is-open'); }});
           line.classList.toggle('is-open');
           place(line);
-        });
-      });
-      document.addEventListener('click', function(e){
-        if (!e.target.closest('.text-line')) {
-          lines.forEach(function(line){ line.classList.remove('is-open'); });
-        }
-      });
-    })();
+        }});
+      }});
+      document.addEventListener('click', function(e){{
+        if (!e.target.closest('.text-line')) {{
+          lines.forEach(function(line){{ line.classList.remove('is-open'); }});
+        }}
+      }});
+    }})();
   </script>
 </body>
 </html>
@@ -721,14 +721,17 @@ def list_heading(entry: dict, leader_name: str) -> tuple[str, str]:
     return title, sub
 
 
-def unique_slug(entry: dict, used: set[str]) -> str:
+def planned_slug(entry: dict) -> str:
     if entry.get("forced_slug"):
-        slug = entry["forced_slug"]
-    else:
-        player = slugify(entry.get("player") or "player")
-        event = slugify(entry.get("tournament_name") or "event")
-        place = ordinal(entry.get("placing")) or record_text(entry.get("record")) or "list"
-        slug = slugify(f"{place}-{player}-{event}")
+        return entry["forced_slug"]
+    player = slugify(entry.get("player") or "player")
+    event = slugify(entry.get("tournament_name") or "event")
+    place = ordinal(entry.get("placing")) or record_text(entry.get("record")) or "list"
+    return slugify(f"{place}-{player}-{event}")
+
+
+def unique_slug(entry: dict, used: set[str]) -> str:
+    slug = planned_slug(entry)
     base = slug
     n = 2
     while slug in used:
