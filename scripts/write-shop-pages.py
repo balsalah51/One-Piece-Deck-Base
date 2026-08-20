@@ -19,7 +19,7 @@ def chrome(title: str, desc: str, current: str, body: str) -> str:
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{title}</title>
   <meta name="description" content="{desc}" />
-  <link rel="stylesheet" href="/css/site.css" />
+  <link rel="stylesheet" href="/css/site.css?v=stack1" />
 </head>
 <body>
   <div class="wrap">
