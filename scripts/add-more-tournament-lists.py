@@ -94,6 +94,10 @@ def prune_duplicate_lists(index: dict) -> dict:
                 continue
             if not path.exists():
                 continue
+            if gen.page_has_banned(path.read_text()):
+                path.unlink()
+                print("removed banned", path)
+                continue
             seen.add(slug)
             kept.append(item)
         cleaned[lid] = kept
@@ -220,6 +224,8 @@ def fetch_more(index: dict, pages: int = PAGES) -> dict:
         picked = gen.select_lists(by_leader.get(lid) or [], limit=EXTRA_LIMIT + 24)
         fresh = []
         for entry in picked:
+            if gen.deck_has_banned(entry.get("decklist") or {}):
+                continue
             slug = gen.planned_slug(entry)
             if slug in have:
                 continue
