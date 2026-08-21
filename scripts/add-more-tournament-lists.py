@@ -21,9 +21,11 @@ comm = importlib.util.module_from_spec(cspec)
 cspec.loader.exec_module(comm)
 
 ROOT = gen.ROOT
-EXTRA_LIMIT = 64
-PAGES = 40
+SITE = "https://onepiecedeckbase.com"
+EXTRA_LIMIT = 80
+PAGES = 70
 PER_PAGE = 40
+PER_EVENT = 4
 HUB_BLOCK_RE = re.compile(
     r"        <!-- (?:COMMUNITY_DECKLISTS|TOURNAMENT_DECKLISTS) -->.*?        <!-- /TOURNAMENT_DECKLISTS -->",
     re.S,
@@ -57,15 +59,15 @@ def existing_stems(leader: dict) -> set[str]:
     return {p.stem for p in d.glob("*.html")}
 
 
-def known_tournament_ids(index: dict) -> set[str]:
-    ids: set[str] = set()
-    for items in index.values():
-        for item in items or []:
-            url = item.get("source_url") or ""
-            m = re.search(r"/tournament/([^/]+)/", url)
-            if m:
-                ids.add(m.group(1))
-    return ids
+def known_results(leader: dict, index: dict) -> set[tuple[str, str]]:
+    keys: set[tuple[str, str]] = set()
+    for item in index.get(leader["id"]) or []:
+        player = (item.get("player") or "").strip().lower()
+        url = item.get("source_url") or ""
+        m = re.search(r"/tournament/([^/]+)/", url)
+        if m and player:
+            keys.add((m.group(1), player))
+    return keys
 
 
 def prune_duplicate_lists(index: dict) -> dict:
@@ -142,7 +144,7 @@ def rebuild_hubs(index: dict) -> None:
         comm_lists = community_entries(leader)
         tour_lists = tournament_entries(leader, index.get(lid) or [])
         tour_lists.sort(key=gen.date_sort_key, reverse=True)
-        if lid == "OP17-001":
+        if lid == "OP17-001" and not tour_lists:
             tournament_html = NEWGATE_TOURNAMENT
         else:
             tournament_html = gen.render_index_section(leader, tour_lists)
@@ -169,7 +171,7 @@ def rebuild_hubs(index: dict) -> None:
             "community",
             len(comm_lists),
             "tournament",
-            0 if lid == "OP17-001" else len(tour_lists),
+            len(tour_lists),
         )
 
 
@@ -205,6 +207,37 @@ def fetch_tournament_pages(pages: int = PAGES, per_page: int = PER_PAGE) -> list
     return seen
 
 
+def pick_fresh(leader: dict, entries: list[dict], index: dict) -> list[dict]:
+    have = existing_stems(leader)
+    known = known_results(leader, index)
+    per_event: dict[str, int] = {}
+    fresh = []
+    for entry in sorted(entries, key=gen.quality_key):
+        if entry.get("kind") == "sample":
+            continue
+        dl = entry.get("decklist") or {}
+        if gen.count_cards(dl) < gen.MIN_CARDS:
+            continue
+        player = (entry.get("player") or "").strip().lower()
+        tid = entry.get("tournament_id") or ""
+        if tid and player and (tid, player) in known:
+            continue
+        if per_event.get(tid, 0) >= PER_EVENT:
+            continue
+        slug = gen.unique_slug(entry, have)
+        href = f"/{leader['dir']}/{slug}.html"
+        row = dict(entry)
+        row["slug"] = slug
+        row["href"] = href
+        fresh.append(row)
+        if tid and player:
+            known.add((tid, player))
+        per_event[tid] = per_event.get(tid, 0) + 1
+        if len(fresh) >= EXTRA_LIMIT:
+            break
+    return fresh
+
+
 def fetch_more(index: dict, pages: int = PAGES) -> dict:
     target_ids = {L["id"] for L in gen.LEADERS}
     print("fetching tournament pages", pages)
@@ -216,25 +249,12 @@ def fetch_more(index: dict, pages: int = PAGES) -> dict:
     planned: dict[str, list] = {}
     for leader in gen.LEADERS:
         lid = leader["id"]
-        have = existing_stems(leader)
-        picked = gen.select_lists(by_leader.get(lid) or [], limit=EXTRA_LIMIT + 24)
-        fresh = []
-        for entry in picked:
-            slug = gen.planned_slug(entry)
-            if slug in have:
-                continue
-            href = f"/{leader['dir']}/{slug}.html"
-            entry = dict(entry)
-            entry["slug"] = slug
-            entry["href"] = href
-            fresh.append(entry)
-            have.add(slug)
+        fresh = pick_fresh(leader, by_leader.get(lid) or [], index)
+        planned[lid] = fresh
+        for entry in fresh:
             for item in gen.flatten_cards(entry["decklist"]):
                 needed.add(item["id"])
-            if len(fresh) >= EXTRA_LIMIT:
-                break
-        planned[lid] = fresh
-        print(lid, "new unique", len(fresh))
+        print(lid, "new lists", len(fresh), "raw", len(by_leader.get(lid) or []))
     cache = gen.ensure_cards(needed, cache)
     for leader in gen.LEADERS:
         lid = leader["id"]
@@ -250,11 +270,35 @@ def fetch_more(index: dict, pages: int = PAGES) -> dict:
     return index
 
 
+def rewrite_sitemap() -> None:
+    skip = {".git", "scripts", "node_modules", "shop", "discord-bot"}
+    urls = []
+    for p in sorted(ROOT.rglob("*.html")):
+        if any(part in p.parts for part in skip):
+            continue
+        rel = p.relative_to(ROOT).as_posix()
+        if rel.endswith("index.html"):
+            url = SITE + "/" if rel == "index.html" else SITE + "/" + rel[: -len("index.html")]
+        else:
+            url = SITE + "/" + rel
+        urls.append(url)
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ]
+    for url in urls:
+        lines.append(f"  <url><loc>{url}</loc></url>")
+    lines.append("</urlset>")
+    (ROOT / "sitemap.xml").write_text("\n".join(lines) + "\n")
+    print("sitemap", len(urls))
+
+
 def main() -> None:
     index = load_index()
     index = fetch_more(index, pages=PAGES)
     save_index(index)
     rebuild_hubs(index)
+    rewrite_sitemap()
     print("done")
 
 
