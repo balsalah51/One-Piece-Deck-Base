@@ -380,10 +380,10 @@ def community_section(leader: dict, lists: list[dict], tournament_html: str) -> 
     comm = f"""        <!-- COMMUNITY_DECKLISTS -->
         <section class="deck-index" style="margin-top:22px">
           <div class="section-title">
-            <h3>YouTube and community decklists</h3>
+            <h3>YouTube, X, and community decklists</h3>
             <div class="muted">{len(lists)} lists</div>
           </div>
-          <p class="muted">Public YouTube and web lists with a full 50-card ID list. Tournament tables below are from Limitless.</p>
+          <p class="muted">Public YouTube, X, and web lists with a full 50-card ID list. Tournament tables below are from Limitless and One Piece Top Decks.</p>
           <ul class="list" aria-label="YouTube and community decklists">
 {chr(10).join(rows)}
           </ul>

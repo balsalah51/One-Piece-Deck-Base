@@ -103,16 +103,30 @@ def prune_duplicate_lists(index: dict) -> dict:
     return cleaned
 
 
+def extra_community() -> dict:
+    path = ROOT / "data/scraped-community.json"
+    if not path.exists():
+        return {}
+    return json.loads(path.read_text())
+
+
 def community_entries(leader: dict) -> list[dict]:
+    items = list(comm.COMMUNITY.get(leader["id"], []))
+    items.extend(extra_community().get(leader["id"], []))
     out = []
-    for item in comm.COMMUNITY.get(leader["id"], []):
-        href = f"/{leader['dir']}/{item['slug']}.html"
-        if not (ROOT / leader["dir"] / f"{item['slug']}.html").exists():
+    seen: set[str] = set()
+    for item in items:
+        slug = item.get("slug") or ""
+        if not slug or slug in seen:
             continue
+        href = item.get("href") or f"/{leader['dir']}/{slug}.html"
+        if not (ROOT / href.lstrip("/")).exists():
+            continue
+        seen.add(slug)
         out.append(
             {
                 "href": href,
-                "title": item["title"],
+                "title": item.get("title") or slug,
                 "subtitle": item.get("subtitle") or "",
                 "kind": item.get("kind"),
             }
