@@ -752,8 +752,8 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
         if (!pop || !title) return;
         resetPop(pop);
         var tr = title.getBoundingClientRect();
-        var width = pop.offsetWidth || 110;
-        var height = pop.offsetHeight || 154;
+        var width = pop.offsetWidth || 72;
+        var height = pop.offsetHeight || 100;
         var left = tr.left;
         var top = tr.top - height - 10;
         if (left + width > window.innerWidth - 12) left = window.innerWidth - width - 12;
