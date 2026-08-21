@@ -18,6 +18,10 @@ UA = "OnePieceDeckBase/1.0 (+https://onepiecedeckbase.com)"
 MAX_LISTS = 8
 MIN_CARDS = 45
 TOURNAMENT_LIMIT = 80
+# Official constructed ban (Blue Charlotte Pudding, including parallels).
+# Other Pudding prints stay legal: OP17-109, ST20-004, EB03-035, OP12-071,
+# OP08-067, OP11-070, PRB02-010.
+BANNED_CARDS = {"OP06-047"}
 
 LEADERS = [
     {
@@ -274,6 +278,14 @@ def count_cards(dl: dict) -> int:
     return total
 
 
+def deck_has_banned(dl: dict) -> bool:
+    return any(item["id"] in BANNED_CARDS for item in flatten_cards(dl))
+
+
+def page_has_banned(text: str) -> bool:
+    return any(cid in text for cid in BANNED_CARDS)
+
+
 def flatten_cards(dl: dict) -> list[dict]:
     out = []
     leader = dl.get("leader") or {}
@@ -325,6 +337,8 @@ def select_lists(entries: list[dict], limit: int = MAX_LISTS) -> list[dict]:
     for entry in sorted(entries, key=quality_key):
         dl = entry.get("decklist") or {}
         if count_cards(dl) < MIN_CARDS:
+            continue
+        if deck_has_banned(dl):
             continue
         sig = deck_signature(dl)
         if sig in seen:
@@ -1069,7 +1083,11 @@ def main() -> None:
     for leader in LEADERS:
         lid = leader["id"]
         entries = by_leader.get(lid) or []
-        featured_entries = [e for e in entries if e.get("kind") == "featured"]
+        featured_entries = [
+            e
+            for e in entries
+            if e.get("kind") == "featured" and not deck_has_banned(e.get("decklist") or {})
+        ]
         rest = [e for e in entries if e.get("kind") != "featured"]
         picked = select_lists(rest, limit=MAX_LISTS)
         if featured_entries:
@@ -1102,7 +1120,11 @@ def main() -> None:
                 old.unlink()
         out_dir.mkdir(parents=True, exist_ok=True)
         used_slugs: set[str] = set()
-        lists = selected[leader["id"]]
+        lists = [
+            e
+            for e in selected[leader["id"]]
+            if not deck_has_banned(e.get("decklist") or {})
+        ]
         public = []
         for entry in lists:
             slug = unique_slug(entry, used_slugs)

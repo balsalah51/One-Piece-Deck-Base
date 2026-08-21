@@ -96,6 +96,10 @@ def prune_duplicate_lists(index: dict) -> dict:
                 continue
             if not path.exists():
                 continue
+            if gen.page_has_banned(path.read_text()):
+                path.unlink()
+                print("removed banned", path)
+                continue
             seen.add(slug)
             kept.append(item)
         cleaned[lid] = kept
@@ -217,6 +221,8 @@ def pick_fresh(leader: dict, entries: list[dict], index: dict) -> list[dict]:
             continue
         dl = entry.get("decklist") or {}
         if gen.count_cards(dl) < gen.MIN_CARDS:
+            continue
+        if gen.deck_has_banned(dl):
             continue
         player = (entry.get("player") or "").strip().lower()
         tid = entry.get("tournament_id") or ""

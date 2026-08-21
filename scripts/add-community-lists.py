@@ -315,15 +315,6 @@ COMMUNITY = {
             "source_url": "https://www.youtube.com/watch?v=hbYhFPZRY5E",
             "raw": "1xOP13-002 4xOP13-016 4xST23-001 4xEB04-007 2xOP09-118 4xOP13-043 4xST22-002 2xOP08-040 1xOP10-045 4xPRB02-008 4xOP13-054 2xST22-010 1xOP07-051 3xOP08-047 4xOP13-042 3xEB04-008 4xST22-015",
         },
-        {
-            "slug": "web-deltia-op13-ace-guide",
-            "player": "Deltia's Gaming",
-            "title": "Red/Blue Ace guide list — Deltia",
-            "subtitle": "Public OP13-002 Portgas D. Ace guide list",
-            "kind": "web",
-            "source_url": "https://deltiasgaming.com/one-piece-tcg-red-blue-portgas-d-ace-deck-guide/",
-            "raw": "1xOP13-002 4xST22-002 4xOP13-016 4xOP13-043 2xOP13-007 4xPRB02-008 2xOP02-008 2xOP06-047 2xOP10-045 1xOP08-040 4xOP13-054 4xOP08-047 2xST23-001 1xOP02-004 4xOP13-042 1xOP09-118 2xOP01-027 3xOP04-056 4xST22-015",
-        },
     ],
 }
 
@@ -401,6 +392,10 @@ def main() -> None:
         for item in items:
             counts = parse_raw(item["raw"])
             total = sum(counts.values())
+            banned = sorted(cid for cid in counts if cid in gen.BANNED_CARDS)
+            if banned:
+                print("skip banned", lid, item["slug"], banned)
+                continue
             print(lid, item["slug"], "cards", total, "unique", len(counts))
             if total < 46 or total > 52:
                 raise SystemExit(f"bad count {item['slug']} {total}")
