@@ -254,7 +254,7 @@ def main() -> None:
     patch_op17()
     # leftover html (guides, format)
     for path in ROOT.rglob("*.html"):
-        if any(p in path.parts for p in (".git", "scripts", "node_modules", "shop", "discord-bot")):
+        if any(p in path.parts for p in (".git", "scripts", "node_modules", "shop", "discord-bot", "ballkeep")):
             continue
         text = path.read_text()
         new = patch_nav_and_assets(text)

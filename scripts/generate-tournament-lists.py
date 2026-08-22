@@ -264,6 +264,18 @@ LEADERS = [
         "pool_heading": "Card pictures",
         "pool_note": "English names and art from Limitless",
     },
+    {
+        "id": "OP14-060",
+        "key": "doffy",
+        "page": "decklists/doffy.html",
+        "dir": "decklists/doffy",
+        "name": "Doffy",
+        "color": "color-purple",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
 ]
 
 
@@ -1144,6 +1156,11 @@ HUB_INTRO = {
     "OP11-001": (
         "Red/Black Koby. Navy / SWORD. "
         "SWORD characters can attack the turn they are played. A 7000-power-or-less Navy body can be saved from removal."
+    ),
+    "OP14-060": (
+        "Purple OP14 Donquixote Doflamingo. Warlords / Donquixote Pirates. "
+        "Once per opponent attack, DON!! −1 to retarget that attack onto Doffy or a Donquixote Pirates body. "
+        "Not blue OP01-060 Doffy, not purple Katakuri, and not the 10-cost OP14-069 character."
     ),
 }
 

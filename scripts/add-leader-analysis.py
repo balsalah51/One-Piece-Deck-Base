@@ -127,6 +127,11 @@ TAKES = {
         "SWORD characters can attack the turn they come down, and a 7000-or-less Navy body can be saved from removal. "
         "Averaged lists lock Kujyaku, Aramaki, Helmeppo, Ripper, and I'm Gonna Be a Navy Officer; Doll, both Koby bodies, Prince Grus, and Hibari are the next cuts."
     ),
+    "OP14-060": (
+        "Purple OP14 Donquixote Doflamingo is the Dressrosa retarget leader — not blue OP01-060 Doffy and not purple Katakuri. "
+        "Once per opponent attack, DON!! −1 to send that attack at Doffy or a Donquixote Pirates body. "
+        "Averaged lists are the Donquixote Pirates / On K.O. package from tournaments on this page."
+    ),
 }
 
 POPUP_JS = r"""
