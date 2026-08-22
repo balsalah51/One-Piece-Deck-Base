@@ -44,10 +44,20 @@ NAV_OLD_PATTERNS = [
 ]
 
 
+def patch_lists_nav(text: str) -> str:
+    text = text.replace('href="/#decklists">Decklists<', 'href="/lists.html">Lists<')
+    text = text.replace(
+        'href="/#decklists" aria-current="page">Decklists<',
+        'href="/lists.html" aria-current="page">Lists<',
+    )
+    return text
+
+
 def patch_nav_and_assets(text: str) -> str:
     text = re.sub(r'href="/css/site\.css(?:\?[^"]*)?"', f'href="{CSS_NEW}"', text)
     for old, new in NAV_OLD_PATTERNS:
         text = text.replace(old, new)
+    text = patch_lists_nav(text)
     text = re.sub(r'src="/js/site\.js(?:\?[^"]*)?"', f'src="{JS_NEW}"', text)
     text = text.replace(">Copy for sim<", ">Copy to OP TCG SIM<")
     text = text.replace("for OPTCGSim.", "for OP TCG SIM.")
@@ -256,29 +266,76 @@ def recent_rows_html(rows: list[dict]) -> str:
 
 def render_home_body() -> str:
     cards = leader_cards_html()
-    recent = pick_recent_lists(collect_home_lists())
-    n = len(gen.LEADERS)
     return f"""        <!-- HOME_BODY -->
+        <div class="home-jump">
+          <a class="home-jump-leaders" href="/decklists/op17.html">Leaders</a>
+          <a class="home-jump-recent" href="/lists.html">Lists</a>
+        </div>
         <h2>One Piece Deck Base</h2>
-        <p>Every leader on this site. Open a picture, or jump to leaders and recent lists.</p>
+        <p>Every leader on this site. Open a picture, or use Leaders and Lists above.</p>
         <div class="leader-cards home-cards" aria-label="All leader card pictures">
 {cards}
         </div>
-        <div class="home-jump">
-          <a class="home-jump-leaders" href="/decklists/op17.html">Leaders</a>
-          <a class="home-jump-recent" href="/#recent">Recent lists</a>
-        </div>
+        <!-- /HOME_BODY -->"""
+
+
+def render_lists_page() -> str:
+    recent = pick_recent_lists(collect_home_lists())
+    body = f"""        <div class="crumb"><a href="/">Home</a> / Lists</div>
+        <h2>Lists</h2>
+        <p>Newest 50-card lists first. At least one list from each leader, then the latest results.</p>
         <section id="recent">
           <div class="section-title">
             <h3>Recent lists</h3>
             <div class="muted">{len(recent)} lists</div>
           </div>
-          <p class="muted">Newest first. At least one list from each leader, then the latest results.</p>
           <ul class="recent-list" aria-label="Recent decklists">
 {recent_rows_html(recent)}
           </ul>
-        </section>
-        <!-- /HOME_BODY -->"""
+        </section>"""
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Recent OPTCG lists | One Piece Deck Base</title>
+  <meta name="description" content="The newest One Piece TCG decklists, with a small color-coded leader picture on every row." />
+  <link rel="stylesheet" href="{CSS_NEW}" />
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/">
+        <div class="logo">OP</div>
+        <div>
+          <h1>One Piece Deck Base</h1>
+          <div class="subtitle">OPTCG decklists</div>
+        </div>
+      </a>
+      <nav aria-label="Primary">
+        <a href="/lists.html" aria-current="page">Lists</a>
+        <a href="/decklists/op17.html">Leaders</a>
+        <a href="/format.html">Format</a>
+        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
+      </nav>
+    </header>
+    <main class="single">
+      <div class="card hero">
+{body}
+      </div>
+    </main>
+    <footer>
+      © <span id="year"></span> One Piece Deck Base — Fan site, not affiliated with Bandai or Shueisha.
+      <a href="/decklists/op17.html">Leaders</a> · <a href="/lists.html">Lists</a> · <a href="/format.html">Format</a> · <a href="/guides/">Guides</a>
+    </footer>
+  </div>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script src="{JS_NEW}"></script>
+</body>
+</html>
+"""
 
 
 def leader_cards_html() -> str:
@@ -314,10 +371,26 @@ def patch_home() -> None:
             count=1,
             flags=re.S,
         )
-    text = text.replace('href="/#decklists"', 'href="/#recent"')
+    text = text.replace(
+        "Leader pictures and recent 50-card lists.",
+        "Leader pictures plus a Lists page with recent 50-card decks.",
+    )
+    text = text.replace('href="/#decklists"', 'href="/lists.html"')
+    text = text.replace('href="/#recent"', 'href="/lists.html"')
     text = patch_nav_and_assets(text)
     path.write_text(text)
-    print("home leaders", len(gen.LEADERS), "recent", RECENT_LIMIT)
+    lists_path = ROOT / "lists.html"
+    lists_path.write_text(render_lists_page())
+    sitemap = ROOT / "sitemap.xml"
+    if sitemap.exists() and "https://onepiecedeckbase.com/lists.html" not in sitemap.read_text():
+        sitemap.write_text(
+            sitemap.read_text().replace(
+                "</urlset>",
+                "  <url><loc>https://onepiecedeckbase.com/lists.html</loc></url>\n</urlset>\n",
+                1,
+            )
+        )
+    print("home leaders", len(gen.LEADERS), "lists page", RECENT_LIMIT)
 
 
 def patch_op17() -> None:
@@ -335,10 +408,14 @@ def patch_op17() -> None:
         count=1,
         flags=re.S,
     )
-    grid = '          <div class="leader-cards" aria-label="All leader card pictures">\n' + leader_cards_html() + "\n          </div>"
+    grid = (
+        '          <div class="leader-cards" aria-label="All leader card pictures">\n'
+        + leader_cards_html()
+        + "\n          </div>"
+    )
     text = re.sub(
-        r'          <div class="leader-cards" aria-label="All leader card pictures">.*?</div>',
-        grid,
+        r'          <div class="leader-cards" aria-label="All leader card pictures">.*?\n        </section>',
+        grid + "\n        </section>",
         text,
         count=1,
         flags=re.S,
@@ -360,15 +437,16 @@ def main() -> None:
             upgrade_list_page(path, leader, cache)
     patch_home()
     patch_op17()
-    # leftover html (guides, format)
+    n = 0
     for path in ROOT.rglob("*.html"):
         if any(p in path.parts for p in (".git", "scripts", "node_modules", "shop", "discord-bot", "ballkeep")):
             continue
         text = path.read_text()
-        new = patch_nav_and_assets(text)
+        new = patch_lists_nav(text)
         if new != text:
             path.write_text(new)
-    print("upgraded html")
+            n += 1
+    print("upgraded html", "lists-nav", n)
 
 
 if __name__ == "__main__":

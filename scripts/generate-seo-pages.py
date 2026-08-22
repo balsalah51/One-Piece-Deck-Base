@@ -64,7 +64,7 @@ def chrome(title: str, description: str, body: str) -> str:
         </div>
       </a>
       <nav aria-label="Primary">
-        <a href="/#decklists">Decklists</a>
+        <a href="/lists.html">Lists</a>
         <a href="/decklists/op17.html">Leaders</a>
         <a href="/format.html">Format</a>
         <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>

@@ -840,7 +840,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
         </div>
       </a>
       <nav aria-label="Primary">
-        <a href="/#decklists"{deck_cur}>Decklists</a>
+        <a href="/lists.html"{deck_cur}>Lists</a>
         <a href="/decklists/op17.html"{op17_cur}>Leaders</a>
         <a href="/format.html">Format</a>
         <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
