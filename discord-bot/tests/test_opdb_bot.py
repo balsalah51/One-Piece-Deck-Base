@@ -10,11 +10,13 @@ BOT_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(BOT_DIR))
 
 from opdb_bot.config import (  # noqa: E402
+    COLOR_HEX,
     LEADERS,
     METAS,
     channel_name,
     emoji_name,
     leaders_for_meta,
+    load_site_generator_leaders,
     planned_channel_names,
     role_name,
 )
@@ -31,21 +33,31 @@ EMOJI_NAME_RE = re.compile(r"^[a-z0-9_]{2,32}$")
 
 
 class LayoutTests(unittest.TestCase):
-    def test_fourteen_site_leaders(self):
-        self.assertEqual(len(LEADERS), 14)
-        self.assertEqual(len({L["id"] for L in LEADERS}), 14)
-        self.assertEqual(len({L["key"] for L in LEADERS}), 14)
+    def test_follows_every_site_leader(self):
+        site = load_site_generator_leaders()
+        self.assertGreaterEqual(len(site), 23)
+        self.assertEqual({L["id"] for L in LEADERS}, {L["id"] for L in site})
+        self.assertEqual({L["key"] for L in LEADERS}, {L["key"] for L in site})
+        self.assertEqual(len({L["id"] for L in LEADERS}), len(LEADERS))
+        self.assertEqual(len({L["key"] for L in LEADERS}), len(LEADERS))
+        for leader in LEADERS:
+            self.assertIn(leader["color"], COLOR_HEX, leader["id"])
 
-    def test_matches_site_generator(self):
-        import importlib.util
-
-        spec = importlib.util.spec_from_file_location(
-            "genlists", BOT_DIR.parent / "scripts" / "generate-tournament-lists.py"
-        )
-        gen = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(gen)
-        self.assertEqual({L["id"] for L in LEADERS}, {L["id"] for L in gen.LEADERS})
-        self.assertEqual({L["key"] for L in LEADERS}, {L["key"] for L in gen.LEADERS})
+    def test_new_format_leaders_are_present(self):
+        keys = {L["key"] for L in LEADERS}
+        for key in (
+            "gb-luffy",
+            "blackbeard",
+            "rosinante",
+            "lucy",
+            "yamato",
+            "koby",
+            "doffy",
+            "buggy",
+            "sengoku",
+            "charlotte-katakuri",
+        ):
+            self.assertIn(key, keys)
 
     def test_op17_meta_has_six_set_leaders(self):
         op17 = leaders_for_meta("op17")
@@ -57,7 +69,7 @@ class LayoutTests(unittest.TestCase):
             "OP17-079",
             "OP17-099",
         ])
-        self.assertEqual(len(leaders_for_meta("format")), 8)
+        self.assertGreaterEqual(len(leaders_for_meta("format")), 17)
 
     def test_channel_names_are_discord_safe_and_unique(self):
         names = planned_channel_names()
@@ -78,9 +90,19 @@ class LayoutTests(unittest.TestCase):
 
     def test_generic_pages_exist(self):
         names = set(planned_channel_names())
-        for page in ("welcome", "rules", "announcements", "flair"):
+        for page in ("welcome", "rules", "announcements", "flair", "general"):
             self.assertIn(page, names)
         self.assertEqual({m["key"] for m in METAS}, {"op17", "format"})
+        from opdb_bot.config import GENERIC_CATEGORIES
+
+        keys = [c["key"] for c in GENERIC_CATEGORIES]
+        self.assertEqual(keys[0], "information")
+        self.assertEqual(keys[1], "general")
+        general = next(c for c in GENERIC_CATEGORIES if c["key"] == "general")
+        self.assertEqual(general["name"], "GENERAL")
+        self.assertEqual([ch["name"] for ch in general["channels"]], ["general"])
+        community = next(c for c in GENERIC_CATEGORIES if c["key"] == "community")
+        self.assertNotIn("general", [ch["name"] for ch in community["channels"]])
 
 
 class ConsensusTests(unittest.TestCase):
@@ -156,6 +178,45 @@ class EmojiTests(unittest.TestCase):
         luffy = next(L for L in LEADERS if L["key"] == "monkey-d-luffy")
         self.assertEqual(match_catalog_emoji(shanks, catalog)["image"], "https://cdn.example/shanks.png")
         self.assertIsNone(match_catalog_emoji(luffy, catalog))
+
+
+class EnvLoadTests(unittest.TestCase):
+    def test_reads_token_txt_and_ignores_placeholder(self):
+        import os
+        import tempfile
+
+        from opdb_bot.envload import clean_token, load_token, parse_env_text
+
+        self.assertEqual(clean_token("  DISCORD_TOKEN=abc.def.ghi  "), "abc.def.ghi")
+        self.assertEqual(clean_token("paste-bot-token-here"), "")
+        self.assertEqual(parse_env_text("DISCORD_TOKEN=abc\nDISCORD_GUILD_ID=\n")["DISCORD_TOKEN"], "abc")
+
+        old = os.environ.pop("DISCORD_TOKEN", None)
+        self.addCleanup(lambda: os.environ.update({"DISCORD_TOKEN": old}) if old else None)
+        with tempfile.TemporaryDirectory() as tmp:
+            bot_dir = Path(tmp)
+            (bot_dir / "token.txt").write_text("  MTAxxx.yyy.zzz \n", encoding="utf-8")
+            token, source = load_token(bot_dir)
+            self.assertEqual(token, "MTAxxx.yyy.zzz")
+            self.assertEqual(source, "token.txt")
+
+    def test_reads_utf16_env_and_guild_swap(self):
+        import os
+        import tempfile
+
+        from opdb_bot.envload import load_guild_id, load_token
+
+        old = os.environ.pop("DISCORD_TOKEN", None)
+        self.addCleanup(lambda: os.environ.update({"DISCORD_TOKEN": old}) if old else None)
+        with tempfile.TemporaryDirectory() as tmp:
+            bot_dir = Path(tmp)
+            (bot_dir / ".env.txt").write_bytes(
+                "DISCORD_TOKEN=real.token.here\r\nDISCORD_GUILD_ID=\r\n".encode("utf-16")
+            )
+            token, source = load_token(bot_dir)
+            self.assertEqual(token, "real.token.here")
+            self.assertEqual(source, ".env.txt")
+            self.assertEqual(load_guild_id(bot_dir), "")
 
 
 if __name__ == "__main__":

@@ -18,7 +18,7 @@ def display_name(name: str) -> str:
 
 
 def load_json(path) -> dict:
-    return json.loads(path.read_text())
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def load_card_cache() -> dict:

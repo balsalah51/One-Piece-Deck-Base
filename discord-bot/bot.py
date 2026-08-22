@@ -5,15 +5,13 @@ from __future__ import annotations
 
 import argparse
 import asyncio
-import os
 import sys
 from pathlib import Path
 
-from dotenv import load_dotenv
-
 BOT_DIR = Path(__file__).resolve().parent
-load_dotenv(BOT_DIR / ".env")
 sys.path.insert(0, str(BOT_DIR))
+
+from opdb_bot.envload import describe_token_search, load_guild_id, load_token  # noqa: E402
 
 from opdb_bot.config import (  # noqa: E402
     GENERIC_CATEGORIES,
@@ -22,6 +20,7 @@ from opdb_bot.config import (  # noqa: E402
     SITE_URL,
     leaders_for_meta,
     planned_channel_names,
+    refresh_leaders,
 )
 from opdb_bot.data import all_planned_messages, load_card_cache, load_consensus  # noqa: E402
 from opdb_bot.emojis import ensure_all_faces  # noqa: E402
@@ -70,14 +69,24 @@ async def run_bot() -> None:
     from opdb_bot.guildsetup import post_consensus, post_info_pages, setup_guild
     from opdb_bot.config import channel_name
 
-    token = os.environ.get("DISCORD_TOKEN", "").strip()
+    token, token_source = load_token(BOT_DIR)
     if not token:
         raise SystemExit(
-            "DISCORD_TOKEN is missing. Copy discord-bot/.env.example to .env and paste the bot token."
+            "No bot token found.\n"
+            f"{describe_token_search(BOT_DIR)}\n"
+            "In this same Command Prompt run:\n"
+            "  set /p DISCORD_TOKEN=Paste token and press Enter: \n"
+            "  set PYTHONUTF8=1\n"
+            "  python bot.py"
         )
 
-    guild_id_raw = os.environ.get("DISCORD_GUILD_ID", "").strip()
-    guild_id = int(guild_id_raw) if guild_id_raw else None
+    guild_id_raw = load_guild_id(BOT_DIR)
+    try:
+        guild_id = int(guild_id_raw) if guild_id_raw else None
+    except ValueError:
+        raise SystemExit(
+            "DISCORD_GUILD_ID must be empty or the server number. Do not put the token there."
+        )
 
     intents = discord.Intents.default()
     intents.guilds = True
@@ -99,7 +108,8 @@ async def run_bot() -> None:
 
     @bot.event
     async def on_ready() -> None:
-        ensure_all_faces()
+        refresh_leaders()
+        ensure_all_faces(download=False)
         bot.add_view(FlairView())
         try:
             if guild_id:
@@ -134,10 +144,20 @@ async def run_bot() -> None:
             return
         await interaction.response.defer(ephemeral=True, thinking=True)
         assert interaction.guild is not None
-        log = await setup_guild(interaction.guild, post_lists=True)
+        refresh_leaders()
+        try:
+            log = await setup_guild(interaction.guild, post_lists=True)
+        except Exception as exc:  # noqa: BLE001
+            await interaction.followup.send(
+                f"Setup stopped: {exc}. Check Command Prompt. Run /opdb-setup again to continue.",
+                ephemeral=True,
+            )
+            raise
         bot.add_view(FlairView())
+        leaders_made = sum(1 for L in LEADERS if L["key"] in log)
         await interaction.followup.send(
-            f"Setup complete. {len(log)} records. Re-run anytime — it updates in place.",
+            f"Setup complete. {leaders_made}/{len(LEADERS)} leader rooms. "
+            "Check OP17 and Format staples on the left. Re-run anytime.",
             ephemeral=True,
         )
 
@@ -148,6 +168,7 @@ async def run_bot() -> None:
             return
         await interaction.response.defer(ephemeral=True, thinking=True)
         assert interaction.guild is not None
+        refresh_leaders()
         updated = 0
         missing = []
         for leader in LEADERS:
@@ -167,6 +188,7 @@ async def run_bot() -> None:
             return
         await interaction.response.defer(ephemeral=True, thinking=True)
         assert interaction.guild is not None
+        refresh_leaders()
         flair = discord.utils.get(interaction.guild.text_channels, name="flair")
         if flair is None:
             await interaction.followup.send("No #flair channel. Run `/opdb-setup` first.", ephemeral=True)
@@ -196,7 +218,14 @@ async def run_bot() -> None:
         await post_consensus(channel, match)
         await interaction.followup.send(f"Posted {match['name']} consensus.")
 
-    await bot.start(token)
+    try:
+        print(f"Starting bot (token from {token_source}, {len(token)} chars)")
+        await bot.start(token)
+    except discord.LoginFailure:
+        raise SystemExit(
+            "Discord rejected the token (401). Use Bot → Reset Token → Copy, "
+            "not the Application ID or Client Secret. Then run the set /p line again."
+        )
 
 
 def main() -> None:
