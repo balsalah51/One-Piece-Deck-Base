@@ -38,6 +38,15 @@ LEADERS = {
     "OP11-062",
     "OP13-079",
     "OP13-002",
+    "OP16-022",
+    "OP16-080",
+    "OP12-061",
+    "OP15-002",
+    "OP16-079",
+    "OP11-001",
+    "OP14-060",
+    "OP16-041",
+    "OP16-060",
 }
 
 # Public creator accounts that actually post OPTCG content.
@@ -76,6 +85,12 @@ SEARCHES = [
     "site:x.com MarinefordTCG OP17 decklist",
     "site:x.com StrawHatPecan OP17 list",
     "site:x.com CardKaizoku Ace OP16-001",
+    'site:x.com "1xOP14-060" decklist',
+    'site:x.com "1xOP16-041" Buggy',
+    'site:x.com "1xOP16-060" Sengoku',
+    'site:x.com "1xOP15-002" Lucy',
+    'site:x.com "1xOP16-080" Blackbeard',
+    "site:x.com Doffy OP14-060 decklist",
 ]
 
 

@@ -109,16 +109,27 @@ def prune_duplicate_lists(index: dict) -> dict:
 
 def community_entries(leader: dict) -> list[dict]:
     out = []
-    for item in comm.COMMUNITY.get(leader["id"], []):
-        href = f"/{leader['dir']}/{item['slug']}.html"
-        if not (ROOT / leader["dir"] / f"{item['slug']}.html").exists():
+    seen = set()
+    static = list(comm.COMMUNITY.get(leader["id"], []))
+    extra_path = ROOT / "data/community-decks.json"
+    if extra_path.exists():
+        extra = json.loads(extra_path.read_text()).get(leader["id"]) or []
+        static.extend(extra)
+    for item in static:
+        slug = item.get("slug") or ""
+        href = item.get("href") or f"/{leader['dir']}/{slug}.html"
+        if slug in seen:
             continue
+        if not (ROOT / href.lstrip("/")).exists():
+            continue
+        seen.add(slug)
         out.append(
             {
                 "href": href,
-                "title": item["title"],
+                "title": item.get("title") or slug,
                 "subtitle": item.get("subtitle") or "",
                 "kind": item.get("kind"),
+                "slug": slug,
             }
         )
     return out
@@ -128,7 +139,7 @@ def tournament_entries(leader: dict, items: list[dict]) -> list[dict]:
     out = []
     for item in items:
         kind = item.get("kind")
-        if kind == "sample":
+        if kind in ("sample", "youtube", "web", "x"):
             continue
         slug = item.get("slug") or ""
         path = ROOT / leader["dir"] / f"{slug}.html"
@@ -140,8 +151,10 @@ def tournament_entries(leader: dict, items: list[dict]) -> list[dict]:
     return out
 
 
-def rebuild_hubs(index: dict) -> None:
+def rebuild_hubs(index: dict, only_ids: set[str] | None = None) -> None:
     for leader in gen.LEADERS:
+        if only_ids is not None and leader["id"] not in only_ids:
+            continue
         lid = leader["id"]
         page_path = ROOT / leader["page"]
         if not page_path.exists():
@@ -214,10 +227,16 @@ def fetch_tournament_pages(pages: int = PAGES, per_page: int = PER_PAGE) -> list
     return seen
 
 
-def pick_fresh(leader: dict, entries: list[dict], index: dict) -> list[dict]:
+def pick_fresh(
+    leader: dict,
+    entries: list[dict],
+    index: dict,
+    extra_limit: int = EXTRA_LIMIT,
+    per_event: int = PER_EVENT,
+) -> list[dict]:
     have = existing_stems(leader)
     known = known_results(leader, index)
-    per_event: dict[str, int] = {}
+    per_event_counts: dict[str, int] = {}
     fresh = []
     for entry in sorted(entries, key=gen.quality_key):
         if entry.get("kind") == "sample":
@@ -231,7 +250,7 @@ def pick_fresh(leader: dict, entries: list[dict], index: dict) -> list[dict]:
         tid = entry.get("tournament_id") or ""
         if tid and player and (tid, player) in known:
             continue
-        if per_event.get(tid, 0) >= PER_EVENT:
+        if per_event_counts.get(tid, 0) >= per_event:
             continue
         slug = gen.unique_slug(entry, have)
         href = f"/{leader['dir']}/{slug}.html"
@@ -241,16 +260,24 @@ def pick_fresh(leader: dict, entries: list[dict], index: dict) -> list[dict]:
         fresh.append(row)
         if tid and player:
             known.add((tid, player))
-        per_event[tid] = per_event.get(tid, 0) + 1
-        if len(fresh) >= EXTRA_LIMIT:
+        per_event_counts[tid] = per_event_counts.get(tid, 0) + 1
+        if len(fresh) >= extra_limit:
             break
     return fresh
 
 
-def fetch_more(index: dict, pages: int = PAGES, only_ids: set[str] | None = None) -> dict:
+def fetch_more(
+    index: dict,
+    pages: int = PAGES,
+    only_ids: set[str] | None = None,
+    extra_limit: int | None = None,
+    per_event: int | None = None,
+) -> dict:
     target_ids = only_ids or {L["id"] for L in gen.LEADERS}
     leaders = [L for L in gen.LEADERS if L["id"] in target_ids]
-    print("fetching tournament pages", pages)
+    limit = EXTRA_LIMIT if extra_limit is None else extra_limit
+    event_cap = PER_EVENT if per_event is None else per_event
+    print("fetching tournament pages", pages, "extra_limit", limit, "per_event", event_cap)
     tournaments = fetch_tournament_pages(pages=pages)
     print("tournaments", len(tournaments), "scanning", sorted(target_ids))
     by_leader = gen.fetch_standings(tournaments, target_ids)
@@ -259,7 +286,13 @@ def fetch_more(index: dict, pages: int = PAGES, only_ids: set[str] | None = None
     planned: dict[str, list] = {}
     for leader in leaders:
         lid = leader["id"]
-        fresh = pick_fresh(leader, by_leader.get(lid) or [], index)
+        fresh = pick_fresh(
+            leader,
+            by_leader.get(lid) or [],
+            index,
+            extra_limit=limit,
+            per_event=event_cap,
+        )
         planned[lid] = fresh
         for entry in fresh:
             for item in gen.flatten_cards(entry["decklist"]):

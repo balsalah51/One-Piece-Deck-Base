@@ -357,8 +357,9 @@ def community_section(leader: dict, lists: list[dict], tournament_html: str) -> 
         title = entry.get("title_override") or entry.get("title")
         subtitle = entry.get("subtitle") or ""
         badge = {"youtube": "YouTube", "x": "X"}.get(entry.get("kind"), "Web")
+        copy_btn = gen.copy_sim_button(gen.sim_text_for_entry(leader, entry))
         rows.append(
-            f"""            <li>
+            f"""            <li class="list-row">
               <a class="item" href="{html.escape(href)}">
                 <div>
                   <div style="font-weight:700">{html.escape(title)}</div>
@@ -366,6 +367,7 @@ def community_section(leader: dict, lists: list[dict], tournament_html: str) -> 
                 </div>
                 <div class="link">{html.escape(badge)} →</div>
               </a>
+              {copy_btn}
             </li>"""
         )
     comm = f"""        <!-- COMMUNITY_DECKLISTS -->

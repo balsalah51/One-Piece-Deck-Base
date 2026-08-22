@@ -264,6 +264,42 @@ LEADERS = [
         "pool_heading": "Card pictures",
         "pool_note": "English names and art from Limitless",
     },
+    {
+        "id": "OP14-060",
+        "key": "doffy",
+        "page": "decklists/doffy.html",
+        "dir": "decklists/doffy",
+        "name": "Doffy",
+        "color": "color-purple",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP16-041",
+        "key": "buggy",
+        "page": "decklists/buggy.html",
+        "dir": "decklists/buggy",
+        "name": "Buggy",
+        "color": "color-blue",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP16-060",
+        "key": "sengoku",
+        "page": "decklists/sengoku.html",
+        "dir": "decklists/sengoku",
+        "name": "Sengoku",
+        "color": "color-purple",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
 ]
 
 
@@ -791,7 +827,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
-  <link rel="stylesheet" href="/css/site.css?v=meta-tools" />
+  <link rel="stylesheet" href="/css/site.css?v=sim-copy" />
 </head>
 <body class="{html.escape(color)}">
   <div class="wrap">
@@ -871,7 +907,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
       }});
     }})();
   </script>
-  <script src="/js/site.js?v=meta-tools"></script>
+  <script src="/js/site.js?v=sim-copy"></script>
 </body>
 </html>
 """
@@ -918,6 +954,72 @@ def unique_slug(entry: dict, used: set[str]) -> str:
 def card_image_url(cid: str) -> str:
     set_code = cid.split("-")[0]
     return f"https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/{set_code}/{cid}_EN.webp"
+
+
+TEXT_QTY_RE = re.compile(
+    r'<span class="qty">(\d+)x</span>.*?<span class="muted card-id">([^<]+)</span>',
+    re.S,
+)
+
+
+def sim_text_from_cards(cards: list[dict]) -> str:
+    lines = []
+    for item in cards:
+        try:
+            n = int(item.get("count") or 0)
+        except (TypeError, ValueError):
+            continue
+        cid = (item.get("id") or "").strip()
+        if n and cid:
+            lines.append(f"{n}x{cid}")
+    return "\n".join(lines)
+
+
+def sim_text_from_decklist(dl: dict) -> str:
+    return sim_text_from_cards(flatten_cards(dl or {}))
+
+
+def sim_text_from_html(page: str) -> str:
+    block = page
+    m = re.search(r'<section class="text-deck">.*?</section>', page, re.S)
+    if m:
+        block = m.group(0)
+    lines = [f"{n}x{cid.strip()}" for n, cid in TEXT_QTY_RE.findall(block)]
+    return "\n".join(lines)
+
+
+def sim_text_for_entry(leader: dict, entry: dict) -> str:
+    raw = entry.get("sim_text")
+    if raw:
+        return raw
+    dl = entry.get("decklist")
+    if dl:
+        return sim_text_from_decklist(dl)
+    slug = entry.get("slug")
+    if slug:
+        path = ROOT / leader["dir"] / f"{slug}.html"
+        if path.exists():
+            return sim_text_from_html(path.read_text())
+    href = entry.get("href") or ""
+    if href.startswith("/"):
+        path = ROOT / href.lstrip("/")
+        if path.exists():
+            return sim_text_from_html(path.read_text())
+    return ""
+
+
+def sim_compact(text: str) -> str:
+    return " ".join(text.split())
+
+
+def copy_sim_button(sim_text: str) -> str:
+    compact = sim_compact(sim_text)
+    if not compact:
+        return ""
+    return (
+        f'<button type="button" class="copy-sim" data-copy-sim data-sim="{html.escape(compact, quote=True)}">'
+        "Copy to OP TCG SIM</button>"
+    )
 
 
 def event_bucket(name: str) -> str:
@@ -1024,9 +1126,9 @@ def render_text_deck(grouped: dict, cache: dict, order: list[str], totals: dict)
     return f"""        <section class="text-deck">
           <div class="section-title">
             <h3>Text list</h3>
-            <button type="button" class="copy-sim" data-copy-sim>Copy for sim</button>
+            <button type="button" class="copy-sim" data-copy-sim>Copy to OP TCG SIM</button>
           </div>
-          <p class="muted">Hover or tap a card name to see the picture. Copy pastes <code>NxSET-NNN</code> for OPTCGSim.</p>
+          <p class="muted">Hover or tap a card name to see the picture. Copy pastes <code>NxSET-NNN</code> lines for OP TCG SIM import.</p>
           <div class="text-deck-cols">
 {chr(10).join(cols)}
           </div>
@@ -1145,6 +1247,18 @@ HUB_INTRO = {
         "Red/Black Koby. Navy / SWORD. "
         "SWORD characters can attack the turn they are played. A 7000-power-or-less Navy body can be saved from removal."
     ),
+    "OP14-060": (
+        "Purple OP14 Donquixote Doflamingo is the Dressrosa retarget leader — not blue OP01-060 Doffy. "
+        "Once per opponent attack, DON!! −1 to send that attack at Doffy or a Donquixote Pirates character."
+    ),
+    "OP16-041": (
+        "Blue OP16 Buggy. Impel Down / Buggy Pirates. "
+        "When an Impel Down character leaves the field, DON!! ×1 lets you play a Prisoner of Impel Down from hand. Not a character in GB Luffy."
+    ),
+    "OP16-060": (
+        "Purple OP16 Sengoku. Navy. "
+        "Return 8 active DON!! to play up to 3 differently named Admirals from hand. Not Enel and not Katakuri."
+    ),
 }
 
 
@@ -1231,8 +1345,9 @@ def render_index_section(leader: dict, lists: list[dict]) -> str:
         placing_s = "" if placing is None else str(placing)
         date_s = entry.get("date") or ""
         bucket = event_bucket(entry.get("tournament_name") or entry.get("tournament") or "")
+        copy_btn = copy_sim_button(sim_text_for_entry(leader, entry))
         rows.append(
-            f"""            <li data-date="{html.escape(date_s)}" data-placing="{html.escape(placing_s)}" data-event="{html.escape(bucket)}">
+            f"""            <li class="list-row" data-date="{html.escape(date_s)}" data-placing="{html.escape(placing_s)}" data-event="{html.escape(bucket)}">
               <a class="item" href="{html.escape(href)}">
                 <div>
                   <div style="font-weight:700">{html.escape(title)}</div>
@@ -1240,6 +1355,7 @@ def render_index_section(leader: dict, lists: list[dict]) -> str:
                 </div>
                 <div class="link">{html.escape(str(right))} →</div>
               </a>
+              {copy_btn}
             </li>"""
         )
     filters = ""

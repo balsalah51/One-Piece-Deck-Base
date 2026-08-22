@@ -1,4 +1,6 @@
 (function () {
+  var COPY_LABEL = "Copy to OP TCG SIM";
+
   function textList(root) {
     return Array.prototype.map.call(root.querySelectorAll(".text-line"), function (line) {
       var qty = (line.querySelector(".qty") || {}).textContent || "";
@@ -11,13 +13,24 @@
     }).filter(Boolean).join("\n");
   }
 
+  function simText(btn) {
+    var raw = btn.getAttribute("data-sim");
+    if (raw && raw.trim()) return raw.trim().split(/\s+/).join("\n");
+    var root = btn.closest(".text-deck") || document;
+    return textList(root);
+  }
+
   function initCopy() {
     document.querySelectorAll("[data-copy-sim]").forEach(function (btn) {
       if (btn.dataset.bound) return;
       btn.dataset.bound = "1";
-      btn.addEventListener("click", function () {
-        var root = btn.closest(".text-deck") || document;
-        var text = textList(root);
+      if (btn.textContent.replace(/\s+/g, " ").trim() === "Copy for sim") {
+        btn.textContent = COPY_LABEL;
+      }
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var text = simText(btn);
         if (!text) return;
         var done = function () {
           var prev = btn.textContent;
@@ -26,10 +39,10 @@
         };
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(text).then(done).catch(function () {
-            window.prompt("Copy this list", text);
+            window.prompt("Copy this list for OP TCG SIM", text);
           });
         } else {
-          window.prompt("Copy this list", text);
+          window.prompt("Copy this list for OP TCG SIM", text);
         }
       });
     });
@@ -37,12 +50,18 @@
 
   function ensureCopyButtons() {
     document.querySelectorAll(".text-deck .section-title").forEach(function (title) {
-      if (title.querySelector("[data-copy-sim]")) return;
+      var existing = title.querySelector("[data-copy-sim]");
+      if (existing) {
+        if (existing.textContent.replace(/\s+/g, " ").trim() === "Copy for sim") {
+          existing.textContent = COPY_LABEL;
+        }
+        return;
+      }
       var btn = document.createElement("button");
       btn.type = "button";
       btn.className = "copy-sim";
       btn.setAttribute("data-copy-sim", "");
-      btn.textContent = "Copy for sim";
+      btn.textContent = COPY_LABEL;
       title.appendChild(btn);
     });
   }

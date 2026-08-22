@@ -127,6 +127,21 @@ TAKES = {
         "SWORD characters can attack the turn they come down, and a 7000-or-less Navy body can be saved from removal. "
         "Averaged lists lock Kujyaku, Aramaki, Helmeppo, Ripper, and I'm Gonna Be a Navy Officer; Doll, both Koby bodies, Prince Grus, and Hibari are the next cuts."
     ),
+    "OP14-060": (
+        "Purple OP14 Donquixote Doflamingo is the Dressrosa retarget leader — not blue OP01-060 Doffy and not purple Katakuri. "
+        "Once per opponent attack, DON!! −1 to send that attack at Doffy or a Donquixote Pirates body. "
+        "Averaged lists lock Sugar, Dellinger, 8-cost Doffy, Monet, Vergo, Baby 5, and 10-cost Doffy; Uso-Hachi, Slow-Slow Beam Sword, Divine Departure, and Trebol finish the 50."
+    ),
+    "OP16-041": (
+        "Blue OP16 Buggy is the Impel Down / Buggy Pirates leader — not a character in GB Luffy. "
+        "When an Impel Down body leaves the field, DON!! ×1 plays a Prisoner of Impel Down from hand. "
+        "Averaged lists lock Prisoner of Impel Down, Mr. 1, Mr. 2, Mr. 3, Buggy, and Crocodile; Slave Arrow and Miss Olive are the next cuts."
+    ),
+    "OP16-060": (
+        "Purple OP16 Sengoku is the Navy Admiral drop leader — not Enel and not Katakuri. "
+        "Return 8 active DON!! to play up to 3 differently named Admirals from hand. "
+        "Averaged lists lock Koby, Sakazuki, Sengoku, Buddha Sengoku, Mamaragan, Borsalino, and Kuzan; Tsuru is a near 4-of."
+    ),
 }
 
 POPUP_JS = r"""
@@ -284,7 +299,12 @@ def analysis_block(leader: dict, n: int, take: str, text_deck: str) -> str:
     text_deck = text_deck.replace("<h3>Text list</h3>", "<h3>Consensus list</h3>", 1)
     averaged = (
         f'<p class="muted">Averaged from {n} lists on this page, then filled to 50 cards. '
-        "Hover or tap a name for the picture. Copy pastes the IDs for OPTCGSim.</p>"
+        "Hover or tap a name for the picture. Copy pastes the IDs for OP TCG SIM.</p>"
+    )
+    text_deck = text_deck.replace(
+        '<p class="muted">Hover or tap a card name to see the picture. Copy pastes <code>NxSET-NNN</code> lines for OP TCG SIM import.</p>',
+        averaged,
+        1,
     )
     text_deck = text_deck.replace(
         '<p class="muted">Hover or tap a card name to see the picture. Copy pastes <code>NxSET-NNN</code> for OPTCGSim.</p>',
