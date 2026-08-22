@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Mihawk decklist</title>
   <meta name="description" content="Mihawk — Green Dracule Mihawk leader page and scraped tournament list." />
-  <link rel="stylesheet" href="/css/site.css?v=stack-left" />
+  <link rel="stylesheet" href="/css/site.css?v=meta-tools" />
 </head>
 <body class="color-green">
   <div class="wrap">
@@ -19,8 +19,9 @@
       </a>
       <nav aria-label="Primary">
         <a href="/#decklists" aria-current="page">Decklists</a>
-        <a href="/decklists/op17.html">OP17</a>
-        <a href="/#community">Community</a>
+        <a href="/decklists/op17.html">Leaders</a>
+        <a href="/format.html">Format</a>
+        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
       </nav>
     </header>
 
@@ -222,8 +223,28 @@
             <div class="muted">180 lists</div>
           </div>
           <p class="muted">Newest Limitless events first. Each row opens a separate 50-card list.</p>
+          <div class="list-filters" data-hub-filters>
+            <input type="search" data-filter="q" placeholder="Filter player or event" aria-label="Filter lists" />
+            <select data-filter="when" aria-label="Date">
+              <option value="">Any date</option>
+              <option value="jul">Since July 2026</option>
+              <option value="aug">Since August 2026</option>
+            </select>
+            <select data-filter="place" aria-label="Placing">
+              <option value="">Any placing</option>
+              <option value="top8">Top 8</option>
+              <option value="win">1st only</option>
+            </select>
+            <select data-filter="event" aria-label="Event type">
+              <option value="">Any event</option>
+              <option value="regional">Regional</option>
+              <option value="treasure">Treasure Cup</option>
+              <option value="championship">Championship / Flagship</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
           <ul class="list" aria-label="Tournament decklists">
-            <li>
+            <li data-date="2026-08-20" data-placing="5" data-event="other">
               <a class="item" href="/decklists/mihawk/5th-kampsi-ger-dressrosa-tournament-op17.html">
                 <div>
                   <div style="font-weight:700">Kampsi — Mihawk</div>
@@ -232,7 +253,7 @@
                 <div class="link">2026-08-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-19" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-fenohs-op17-chinoizecup-99-wednesday.html">
                 <div>
                   <div style="font-weight:700">FenoHS — Mihawk</div>
@@ -241,7 +262,7 @@
                 <div class="link">2026-08-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-19" data-placing="9" data-event="other">
               <a class="item" href="/decklists/mihawk/9th-brian-op17-chinoizecup-99-wednesday.html">
                 <div>
                   <div style="font-weight:700">Brian — Mihawk</div>
@@ -250,7 +271,7 @@
                 <div class="link">2026-08-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-18" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-jose-laaz-liga-phoenix-2026-one-piece-mana-32.html">
                 <div>
                   <div style="font-weight:700">Jose Laaz — Mihawk</div>
@@ -259,7 +280,7 @@
                 <div class="link">2026-08-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-18" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-imanol-calvo-liga-phoenix-2026-one-piece-mana-32.html">
                 <div>
                   <div style="font-weight:700">Imanol Calvo — Mihawk</div>
@@ -268,7 +289,7 @@
                 <div class="link">2026-08-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-17" data-placing="2" data-event="other">
               <a class="item" href="/decklists/mihawk/2nd-ups-employee-op17-chinoizecup-97-monday.html">
                 <div>
                   <div style="font-weight:700">UPS_Employee — Mihawk</div>
@@ -277,7 +298,7 @@
                 <div class="link">2026-08-17 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-17" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-marshmellor-op17-chinoizecup-97-monday.html">
                 <div>
                   <div style="font-weight:700">marshmellor — Mihawk</div>
@@ -286,7 +307,7 @@
                 <div class="link">2026-08-17 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-17" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-jose-laaz-liga-phoenix-2026-one-piece-mana-31.html">
                 <div>
                   <div style="font-weight:700">Jose Laaz — Mihawk</div>
@@ -295,7 +316,7 @@
                 <div class="link">2026-08-17 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-13" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-jose-laaz-phoenix-la-plata-one-piece-17.html">
                 <div>
                   <div style="font-weight:700">Jose Laaz — Mihawk</div>
@@ -304,7 +325,7 @@
                 <div class="link">2026-08-13 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-13" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-duh-dude-op-tcg-ua-weekly-webcam-tournament.html">
                 <div>
                   <div style="font-weight:700">Duh__Dude — Mihawk</div>
@@ -313,7 +334,7 @@
                 <div class="link">2026-08-13 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-12" data-placing="2" data-event="other">
               <a class="item" href="/decklists/mihawk/2nd-dragoatx-chinoizecup-96-wednesday.html">
                 <div>
                   <div style="font-weight:700">DragoATX — Mihawk</div>
@@ -322,7 +343,7 @@
                 <div class="link">2026-08-12 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-12" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-dzayas-chinoizecup-96-wednesday.html">
                 <div>
                   <div style="font-weight:700">DZayas — Mihawk</div>
@@ -331,7 +352,7 @@
                 <div class="link">2026-08-12 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-11" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-ups-employee-chinoizecup-95-tuesday.html">
                 <div>
                   <div style="font-weight:700">UPS_Employee — Mihawk</div>
@@ -340,7 +361,7 @@
                 <div class="link">2026-08-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-11" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-azirite-chinoizecup-95-tuesday.html">
                 <div>
                   <div style="font-weight:700">azirite — Mihawk</div>
@@ -349,7 +370,7 @@
                 <div class="link">2026-08-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-10" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-freajski-chinoizecup-94-monday.html">
                 <div>
                   <div style="font-weight:700">freajski — Mihawk</div>
@@ -358,7 +379,7 @@
                 <div class="link">2026-08-10 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-10" data-placing="5" data-event="other">
               <a class="item" href="/decklists/mihawk/5th-itsscheroxtv-ger-dressrosa-tournament-op16-5.html">
                 <div>
                   <div style="font-weight:700">ItsScheroxTV — Mihawk</div>
@@ -367,7 +388,7 @@
                 <div class="link">2026-08-10 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-06" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-vimax19-rumble-league-3-op16-5-free.html">
                 <div>
                   <div style="font-weight:700">ViMax19 — Mihawk</div>
@@ -376,7 +397,7 @@
                 <div class="link">2026-08-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-06" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-maciota-maca-ba-tcg-simulador-3-edi-o.html">
                 <div>
                   <div style="font-weight:700">Maciota — Mihawk</div>
@@ -385,7 +406,7 @@
                 <div class="link">2026-08-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-06" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-dearcan-versus-cup.html">
                 <div>
                   <div style="font-weight:700">Dearcan — Mihawk</div>
@@ -394,7 +415,7 @@
                 <div class="link">2026-08-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-06" data-placing="2" data-event="other">
               <a class="item" href="/decklists/mihawk/2nd-davehunterhs-rumble-league-3-op16-5-free.html">
                 <div>
                   <div style="font-weight:700">DavehunterHS — Mihawk</div>
@@ -403,7 +424,7 @@
                 <div class="link">2026-08-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-06" data-placing="2" data-event="other">
               <a class="item" href="/decklists/mihawk/2nd-destru-versus-cup.html">
                 <div>
                   <div style="font-weight:700">Destru — Mihawk</div>
@@ -412,7 +433,7 @@
                 <div class="link">2026-08-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-06" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-angelo94-rumble-league-3-op16-5-free.html">
                 <div>
                   <div style="font-weight:700">Angelo94 — Mihawk</div>
@@ -421,7 +442,7 @@
                 <div class="link">2026-08-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-06" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-imanol-calvo-phoenix-la-plata-one-piece-16.html">
                 <div>
                   <div style="font-weight:700">Imanol Calvo — Mihawk</div>
@@ -430,7 +451,7 @@
                 <div class="link">2026-08-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-06" data-placing="6" data-event="other">
               <a class="item" href="/decklists/mihawk/6th-ryurex-versus-cup.html">
                 <div>
                   <div style="font-weight:700">RyuRex — Mihawk</div>
@@ -439,7 +460,7 @@
                 <div class="link">2026-08-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-06" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-jose-laaz-phoenix-la-plata-one-piece-16.html">
                 <div>
                   <div style="font-weight:700">Jose Laaz — Mihawk</div>
@@ -448,7 +469,7 @@
                 <div class="link">2026-08-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-06" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-lykoi763-ger-dressrosa-tournament-op16-5.html">
                 <div>
                   <div style="font-weight:700">Lykoi763 — Mihawk</div>
@@ -457,7 +478,7 @@
                 <div class="link">2026-08-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-05" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-wpkaptain-chinoizecup-93-wednesday.html">
                 <div>
                   <div style="font-weight:700">WPKaptain — Mihawk</div>
@@ -466,7 +487,7 @@
                 <div class="link">2026-08-05 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-05" data-placing="2" data-event="other">
               <a class="item" href="/decklists/mihawk/2nd-nikolaybaydanov-chinoizecup-93-wednesday.html">
                 <div>
                   <div style="font-weight:700">NikolayBaydanov — Mihawk</div>
@@ -475,7 +496,7 @@
                 <div class="link">2026-08-05 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-04" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-imanol-calvo-liga-phoenix-2026-one-piece-mana-30.html">
                 <div>
                   <div style="font-weight:700">Imanol Calvo — Mihawk</div>
@@ -484,7 +505,7 @@
                 <div class="link">2026-08-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-03" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-lykoi763-ger-dressrosa-tournament-op16-5.html">
                 <div>
                   <div style="font-weight:700">Lykoi763 — Mihawk</div>
@@ -493,7 +514,7 @@
                 <div class="link">2026-08-03 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-03" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-wil248-chinoizecup-91-monday.html">
                 <div>
                   <div style="font-weight:700">Wil248 — Mihawk</div>
@@ -502,7 +523,7 @@
                 <div class="link">2026-08-03 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-03" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-freajski-chinoizecup-91-monday.html">
                 <div>
                   <div style="font-weight:700">freajski — Mihawk</div>
@@ -511,7 +532,7 @@
                 <div class="link">2026-08-03 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-30" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-ryurex-versus-cup.html">
                 <div>
                   <div style="font-weight:700">RyuRex — Mihawk</div>
@@ -520,7 +541,7 @@
                 <div class="link">2026-07-30 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-30" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-dearcan-versus-cup.html">
                 <div>
                   <div style="font-weight:700">Dearcan — Mihawk</div>
@@ -529,7 +550,7 @@
                 <div class="link">2026-07-30 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-30" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-angelo94-rumble-league-vol-2-op16-5.html">
                 <div>
                   <div style="font-weight:700">Angelo94 — Mihawk</div>
@@ -538,7 +559,7 @@
                 <div class="link">2026-07-30 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-30" data-placing="6" data-event="other">
               <a class="item" href="/decklists/mihawk/6th-stergioulis-op16-5-win-a-box-tuesday-aegean-pirate-cup-3.html">
                 <div>
                   <div style="font-weight:700">Stergioulis — Mihawk</div>
@@ -547,7 +568,7 @@
                 <div class="link">2026-07-30 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-30" data-placing="8" data-event="other">
               <a class="item" href="/decklists/mihawk/8th-highdef10-op16-5-win-a-box-tuesday-aegean-pirate-cup-3.html">
                 <div>
                   <div style="font-weight:700">highdef10 — Mihawk</div>
@@ -556,7 +577,7 @@
                 <div class="link">2026-07-30 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-29" data-placing="2" data-event="other">
               <a class="item" href="/decklists/mihawk/2nd-ups-employee-chinoizecup-90-wednesday.html">
                 <div>
                   <div style="font-weight:700">UPS_Employee — Mihawk</div>
@@ -565,7 +586,7 @@
                 <div class="link">2026-07-29 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-29" data-placing="9" data-event="other">
               <a class="item" href="/decklists/mihawk/9th-freajski-chinoizecup-90-wednesday.html">
                 <div>
                   <div style="font-weight:700">freajski — Mihawk</div>
@@ -574,7 +595,7 @@
                 <div class="link">2026-07-29 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-28" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-captivat3-chinoizecup-89-tuesday.html">
                 <div>
                   <div style="font-weight:700">Captivat3 — Mihawk</div>
@@ -583,7 +604,7 @@
                 <div class="link">2026-07-28 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-28" data-placing="6" data-event="other">
               <a class="item" href="/decklists/mihawk/6th-otakuprowder-chinoizecup-89-tuesday.html">
                 <div>
                   <div style="font-weight:700">OtakuProwder — Mihawk</div>
@@ -592,7 +613,7 @@
                 <div class="link">2026-07-28 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-27" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-gut0n-club-tv-24-simulador-op16-5.html">
                 <div>
                   <div style="font-weight:700">gut0n — Mihawk</div>
@@ -601,7 +622,7 @@
                 <div class="link">2026-07-27 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-27" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-legendarysword34-chinoizecup-88-monday.html">
                 <div>
                   <div style="font-weight:700">legendarysword34 — Mihawk</div>
@@ -610,7 +631,7 @@
                 <div class="link">2026-07-27 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-27" data-placing="5" data-event="other">
               <a class="item" href="/decklists/mihawk/5th-kereminator-chinoizecup-88-monday.html">
                 <div>
                   <div style="font-weight:700">Kereminator — Mihawk</div>
@@ -619,7 +640,7 @@
                 <div class="link">2026-07-27 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-27" data-placing="8" data-event="other">
               <a class="item" href="/decklists/mihawk/8th-lykoi763-ger-dressrosa-tournament-op16-st-31-36.html">
                 <div>
                   <div style="font-weight:700">Lykoi763 — Mihawk</div>
@@ -628,7 +649,7 @@
                 <div class="link">2026-07-27 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-23" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-angelo94-rumble-league-vol-1-op16-st31-36.html">
                 <div>
                   <div style="font-weight:700">Angelo94 — Mihawk</div>
@@ -637,7 +658,7 @@
                 <div class="link">2026-07-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-23" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-duh-dude-op-tcg-ua-weekly-chill-tournament.html">
                 <div>
                   <div style="font-weight:700">Duh__Dude — Mihawk</div>
@@ -646,7 +667,7 @@
                 <div class="link">2026-07-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-23" data-placing="2" data-event="other">
               <a class="item" href="/decklists/mihawk/2nd-vins14-rumble-league-vol-1-op16-st31-36.html">
                 <div>
                   <div style="font-weight:700">Vins14 — Mihawk</div>
@@ -655,7 +676,7 @@
                 <div class="link">2026-07-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-23" data-placing="2" data-event="other">
               <a class="item" href="/decklists/mihawk/2nd-altanx-ger-dressrosa-tournament-op16-st-31-36.html">
                 <div>
                   <div style="font-weight:700">AltanX — Mihawk</div>
@@ -664,7 +685,7 @@
                 <div class="link">2026-07-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-23" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-mexxfall-ger-dressrosa-tournament-op16-st-31-36.html">
                 <div>
                   <div style="font-weight:700">Mexxfall — Mihawk</div>
@@ -673,7 +694,7 @@
                 <div class="link">2026-07-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-23" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-ryurex-versus-cup.html">
                 <div>
                   <div style="font-weight:700">RyuRex — Mihawk</div>
@@ -682,7 +703,7 @@
                 <div class="link">2026-07-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-23" data-placing="5" data-event="other">
               <a class="item" href="/decklists/mihawk/5th-lykoi763-ger-dressrosa-tournament-op16-st-31-36.html">
                 <div>
                   <div style="font-weight:700">Lykoi763 — Mihawk</div>
@@ -691,7 +712,7 @@
                 <div class="link">2026-07-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-23" data-placing="5" data-event="other">
               <a class="item" href="/decklists/mihawk/5th-davehunterhs-rumble-league-vol-1-op16-st31-36.html">
                 <div>
                   <div style="font-weight:700">DavehunterHS — Mihawk</div>
@@ -700,7 +721,7 @@
                 <div class="link">2026-07-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-23" data-placing="6" data-event="other">
               <a class="item" href="/decklists/mihawk/6th-nick-zaitsev-op-tcg-ua-weekly-chill-tournament.html">
                 <div>
                   <div style="font-weight:700">Nick Zaitsev — Mihawk</div>
@@ -709,7 +730,7 @@
                 <div class="link">2026-07-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-23" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-itachipain911-ger-dressrosa-tournament-op16-st-31-36.html">
                 <div>
                   <div style="font-weight:700">ItachiPain911 — Mihawk</div>
@@ -718,7 +739,7 @@
                 <div class="link">2026-07-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-22" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-kereminator-chinoizecup-87-wednesday.html">
                 <div>
                   <div style="font-weight:700">Kereminator — Mihawk</div>
@@ -727,7 +748,7 @@
                 <div class="link">2026-07-22 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-22" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-ups-employee-chinoizecup-87-wednesday.html">
                 <div>
                   <div style="font-weight:700">UPS_Employee — Mihawk</div>
@@ -736,7 +757,7 @@
                 <div class="link">2026-07-22 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-22" data-placing="5" data-event="other">
               <a class="item" href="/decklists/mihawk/5th-divalol-chinoizecup-87-wednesday.html">
                 <div>
                   <div style="font-weight:700">divalol — Mihawk</div>
@@ -745,7 +766,7 @@
                 <div class="link">2026-07-22 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-21" data-placing="2" data-event="other">
               <a class="item" href="/decklists/mihawk/2nd-ups-employee-chinoizecup-86-tuesday.html">
                 <div>
                   <div style="font-weight:700">UPS_Employee — Mihawk</div>
@@ -754,7 +775,7 @@
                 <div class="link">2026-07-21 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-21" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-wpkaptain-chinoizecup-86-tuesday.html">
                 <div>
                   <div style="font-weight:700">WPKaptain — Mihawk</div>
@@ -763,7 +784,7 @@
                 <div class="link">2026-07-21 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-21" data-placing="8" data-event="other">
               <a class="item" href="/decklists/mihawk/8th-legendarysword34-chinoizecup-86-tuesday.html">
                 <div>
                   <div style="font-weight:700">legendarysword34 — Mihawk</div>
@@ -772,7 +793,7 @@
                 <div class="link">2026-07-21 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-20" data-placing="2" data-event="other">
               <a class="item" href="/decklists/mihawk/2nd-wpkaptain-chinoizecup-85-monday.html">
                 <div>
                   <div style="font-weight:700">WPKaptain — Mihawk</div>
@@ -781,7 +802,7 @@
                 <div class="link">2026-07-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-20" data-placing="2" data-event="other">
               <a class="item" href="/decklists/mihawk/2nd-mexxfall-ger-dressrosa-tournament-op16-st-31-36.html">
                 <div>
                   <div style="font-weight:700">Mexxfall — Mihawk</div>
@@ -790,7 +811,7 @@
                 <div class="link">2026-07-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-20" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-kereminator-chinoizecup-85-monday.html">
                 <div>
                   <div style="font-weight:700">Kereminator — Mihawk</div>
@@ -799,7 +820,7 @@
                 <div class="link">2026-07-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-20" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-alisonpl-club-tv-23-simulador-op16-5.html">
                 <div>
                   <div style="font-weight:700">Alisonpl — Mihawk</div>
@@ -808,7 +829,7 @@
                 <div class="link">2026-07-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-20" data-placing="5" data-event="other">
               <a class="item" href="/decklists/mihawk/5th-yanb-club-tv-23-simulador-op16-5.html">
                 <div>
                   <div style="font-weight:700">YanB — Mihawk</div>
@@ -817,7 +838,7 @@
                 <div class="link">2026-07-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-20" data-placing="6" data-event="other">
               <a class="item" href="/decklists/mihawk/6th-woodmann95-ger-dressrosa-tournament-op16-st-31-36.html">
                 <div>
                   <div style="font-weight:700">woodmann95 — Mihawk</div>
@@ -826,7 +847,7 @@
                 <div class="link">2026-07-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-16" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-just10-skl-supreme-king-league-vol-2-free-entry.html">
                 <div>
                   <div style="font-weight:700">Just10 — Mihawk</div>
@@ -835,7 +856,7 @@
                 <div class="link">2026-07-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-16" data-placing="6" data-event="other">
               <a class="item" href="/decklists/mihawk/6th-highdef10-op16-win-a-box-tuesday-aegean-pirate-cup-2.html">
                 <div>
                   <div style="font-weight:700">highdef10 — Mihawk</div>
@@ -844,7 +865,7 @@
                 <div class="link">2026-07-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-15" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-mirkosp95-chinoizecup-200.html">
                 <div>
                   <div style="font-weight:700">mirkosp95 — Mihawk</div>
@@ -853,7 +874,7 @@
                 <div class="link">2026-07-15 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-15" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-dearcan-chinoizecup-200.html">
                 <div>
                   <div style="font-weight:700">Dearcan — Mihawk</div>
@@ -862,7 +883,7 @@
                 <div class="link">2026-07-15 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-15" data-placing="8" data-event="other">
               <a class="item" href="/decklists/mihawk/8th-wpkaptain-chinoizecup-200.html">
                 <div>
                   <div style="font-weight:700">WPKaptain — Mihawk</div>
@@ -871,7 +892,7 @@
                 <div class="link">2026-07-15 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-13" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-otakuprowder-chinoizecup-82-monday.html">
                 <div>
                   <div style="font-weight:700">OtakuProwder — Mihawk</div>
@@ -880,7 +901,7 @@
                 <div class="link">2026-07-13 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-11" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-santiago-patala-phoenix-la-plata-one-piece-mini-open.html">
                 <div>
                   <div style="font-weight:700">Santiago Patala — Mihawk</div>
@@ -889,7 +910,7 @@
                 <div class="link">2026-07-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-04" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-venki0457-optcg-india-online-sim-tournament-4th-july.html">
                 <div>
                   <div style="font-weight:700">Venki0457 — Mihawk</div>
@@ -898,7 +919,7 @@
                 <div class="link">2026-07-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-04" data-placing="5" data-event="other">
               <a class="item" href="/decklists/mihawk/5th-slughy-mon-mon-box-turnering.html">
                 <div>
                   <div style="font-weight:700">Slughy — Mihawk</div>
@@ -907,7 +928,7 @@
                 <div class="link">2026-07-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-04" data-placing="6" data-event="other">
               <a class="item" href="/decklists/mihawk/6th-dipsydoodles-optcg-india-online-sim-tournament-4th-july.html">
                 <div>
                   <div style="font-weight:700">Dipsydoodles — Mihawk</div>
@@ -916,7 +937,7 @@
                 <div class="link">2026-07-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-30" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-otakuprowder-chinoizecup-77-tuesday.html">
                 <div>
                   <div style="font-weight:700">OtakuProwder — Mihawk</div>
@@ -925,7 +946,7 @@
                 <div class="link">2026-06-30 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-21" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-venki0457-optcg-india-op16-tournament-21st-june.html">
                 <div>
                   <div style="font-weight:700">Venki0457 — Mihawk</div>
@@ -934,7 +955,7 @@
                 <div class="link">2026-06-21 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-11" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-jose-laaz-phoenix-la-plata-one-piece-8.html">
                 <div>
                   <div style="font-weight:700">Jose Laaz — Mihawk</div>
@@ -943,7 +964,7 @@
                 <div class="link">2026-06-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-11" data-placing="5" data-event="other">
               <a class="item" href="/decklists/mihawk/5th-insearchfor1-op-tcg-ua-random-tournament.html">
                 <div>
                   <div style="font-weight:700">insearchfor1 — Mihawk</div>
@@ -952,7 +973,7 @@
                 <div class="link">2026-06-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-11" data-placing="6" data-event="other">
               <a class="item" href="/decklists/mihawk/6th-imanol-calvo-phoenix-la-plata-one-piece-8.html">
                 <div>
                   <div style="font-weight:700">Imanol Calvo — Mihawk</div>
@@ -961,7 +982,7 @@
                 <div class="link">2026-06-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-09" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-imanol-calvo-liga-phoenix-2026-one-piece-mana-22.html">
                 <div>
                   <div style="font-weight:700">Imanol Calvo — Mihawk</div>
@@ -970,7 +991,7 @@
                 <div class="link">2026-06-09 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-04" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-jose-laaz-phoenix-la-plata-one-piece-7.html">
                 <div>
                   <div style="font-weight:700">Jose Laaz — Mihawk</div>
@@ -979,7 +1000,7 @@
                 <div class="link">2026-06-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-04" data-placing="5" data-event="other">
               <a class="item" href="/decklists/mihawk/5th-imanol-calvo-phoenix-la-plata-one-piece-7.html">
                 <div>
                   <div style="font-weight:700">Imanol Calvo — Mihawk</div>
@@ -988,7 +1009,7 @@
                 <div class="link">2026-06-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-02" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-imanol-calvo-liga-phoenix-2026-one-piece-mana-21.html">
                 <div>
                   <div style="font-weight:700">Imanol Calvo — Mihawk</div>
@@ -997,7 +1018,7 @@
                 <div class="link">2026-06-02 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-01" data-placing="8" data-event="other">
               <a class="item" href="/decklists/mihawk/8th-otakuprowder-chinoizecup-64-monday.html">
                 <div>
                   <div style="font-weight:700">OtakuProwder — Mihawk</div>
@@ -1006,7 +1027,7 @@
                 <div class="link">2026-06-01 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-30" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-maxmor-portutorneo-one-piece-2026.html">
                 <div>
                   <div style="font-weight:700">Maxmor — Mihawk</div>
@@ -1015,7 +1036,7 @@
                 <div class="link">2026-05-30 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-28" data-placing="2" data-event="other">
               <a class="item" href="/decklists/mihawk/2nd-jose-laaz-phoenix-la-plata-one-piece-6.html">
                 <div>
                   <div style="font-weight:700">Jose Laaz — Mihawk</div>
@@ -1024,7 +1045,7 @@
                 <div class="link">2026-05-28 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-28" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-lykoi763-ger-dressrosa-tournament-extra-battle.html">
                 <div>
                   <div style="font-weight:700">Lykoi763 — Mihawk</div>
@@ -1033,7 +1054,7 @@
                 <div class="link">2026-05-28 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-28" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-imanol-calvo-phoenix-la-plata-one-piece-6.html">
                 <div>
                   <div style="font-weight:700">Imanol Calvo — Mihawk</div>
@@ -1042,7 +1063,7 @@
                 <div class="link">2026-05-28 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-27" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-ahab-693-chinoizecup-63-wednesday.html">
                 <div>
                   <div style="font-weight:700">Ahab_693 — Mihawk</div>
@@ -1051,7 +1072,7 @@
                 <div class="link">2026-05-27 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-26" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-otakuprowder-chinoizecup-62-tuesday.html">
                 <div>
                   <div style="font-weight:700">OtakuProwder — Mihawk</div>
@@ -1060,7 +1081,7 @@
                 <div class="link">2026-05-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-26" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-jose-laaz-liga-phoenix-2026-one-piece-mana-20.html">
                 <div>
                   <div style="font-weight:700">Jose Laaz — Mihawk</div>
@@ -1069,7 +1090,7 @@
                 <div class="link">2026-05-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-25" data-placing="5" data-event="other">
               <a class="item" href="/decklists/mihawk/5th-lykoi763-ger-dressrosa-tournament-extra-battle.html">
                 <div>
                   <div style="font-weight:700">Lykoi763 — Mihawk</div>
@@ -1078,7 +1099,7 @@
                 <div class="link">2026-05-25 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-23" data-placing="8" data-event="championship">
               <a class="item" href="/decklists/mihawk/8th-dom1n1co-one-piece-tcg-swedish-championship-2026.html">
                 <div>
                   <div style="font-weight:700">Dom1n1co — Mihawk</div>
@@ -1087,7 +1108,7 @@
                 <div class="link">2026-05-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-21" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-jose-laaz-phoenix-la-plata-one-piece-5.html">
                 <div>
                   <div style="font-weight:700">Jose Laaz — Mihawk</div>
@@ -1096,7 +1117,7 @@
                 <div class="link">2026-05-21 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-19" data-placing="8" data-event="other">
               <a class="item" href="/decklists/mihawk/8th-imanol-calvo-liga-phoenix-2026-one-piece-mana-19.html">
                 <div>
                   <div style="font-weight:700">Imanol Calvo — Mihawk</div>
@@ -1105,7 +1126,7 @@
                 <div class="link">2026-05-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-18" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-alisonpl-clubtv-19-simulador-extended.html">
                 <div>
                   <div style="font-weight:700">Alisonpl — Mihawk</div>
@@ -1114,7 +1135,7 @@
                 <div class="link">2026-05-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-14" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-laaz-j-phoenix-la-plata-one-piece-4.html">
                 <div>
                   <div style="font-weight:700">Laaz_j — Mihawk</div>
@@ -1123,7 +1144,7 @@
                 <div class="link">2026-05-14 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-14" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-ryurex-versus-cup-picking.html">
                 <div>
                   <div style="font-weight:700">RyuRex — Mihawk</div>
@@ -1132,7 +1153,7 @@
                 <div class="link">2026-05-14 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-14" data-placing="8" data-event="other">
               <a class="item" href="/decklists/mihawk/8th-lykoi763-ger-dressrosa-tournament-extra-battle.html">
                 <div>
                   <div style="font-weight:700">Lykoi763 — Mihawk</div>
@@ -1141,7 +1162,7 @@
                 <div class="link">2026-05-14 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-13" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-raphterra-supernova-rumble-1-raphterra-cs.html">
                 <div>
                   <div style="font-weight:700">Raphterra — Mihawk</div>
@@ -1150,7 +1171,7 @@
                 <div class="link">2026-05-13 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-11" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-outrotaz-clubtv-18-simulador.html">
                 <div>
                   <div style="font-weight:700">OutroTaz — Mihawk</div>
@@ -1159,7 +1180,7 @@
                 <div class="link">2026-05-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-11" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-lykoi763-ger-dressrosa-tournament-extra-battle-3.html">
                 <div>
                   <div style="font-weight:700">Lykoi763 — Mihawk</div>
@@ -1168,7 +1189,7 @@
                 <div class="link">2026-05-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-07" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-lykoi763-ger-dressrosa-tournament-extra-battle-2.html">
                 <div>
                   <div style="font-weight:700">Lykoi763 — Mihawk</div>
@@ -1177,7 +1198,7 @@
                 <div class="link">2026-05-07 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-06" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-sumi-chinoizecup-54-wednesday.html">
                 <div>
                   <div style="font-weight:700">sumi — Mihawk</div>
@@ -1186,7 +1207,7 @@
                 <div class="link">2026-05-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-04" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-lykoi763-ger-dressrosa-tournament-op15-remote.html">
                 <div>
                   <div style="font-weight:700">Lykoi763 — Mihawk</div>
@@ -1195,7 +1216,7 @@
                 <div class="link">2026-05-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-30" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-trex94-ger-dressrosa-tournament-op15-remote.html">
                 <div>
                   <div style="font-weight:700">TRex94 — Mihawk</div>
@@ -1204,7 +1225,7 @@
                 <div class="link">2026-04-30 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-30" data-placing="2" data-event="other">
               <a class="item" href="/decklists/mihawk/2nd-jose-laaz-phoenix-la-plata-one-piece-2.html">
                 <div>
                   <div style="font-weight:700">Jose Laaz — Mihawk</div>
@@ -1213,7 +1234,7 @@
                 <div class="link">2026-04-30 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-27" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-trex94-ger-dressrosa-tournament-op15-remote.html">
                 <div>
                   <div style="font-weight:700">TRex94 — Mihawk</div>
@@ -1222,7 +1243,7 @@
                 <div class="link">2026-04-27 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-23" data-placing="6" data-event="other">
               <a class="item" href="/decklists/mihawk/6th-jose-laaz-phoenix-la-plata-one-piece-1.html">
                 <div>
                   <div style="font-weight:700">Jose Laaz — Mihawk</div>
@@ -1231,7 +1252,7 @@
                 <div class="link">2026-04-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-23" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-trustonmates-ger-dressrosa-tournament-op15-remote.html">
                 <div>
                   <div style="font-weight:700">Trustonmates — Mihawk</div>
@@ -1240,7 +1261,7 @@
                 <div class="link">2026-04-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-16" data-placing="6" data-event="other">
               <a class="item" href="/decklists/mihawk/6th-lykoi763-ger-dressrosa-tournament-op15-remote.html">
                 <div>
                   <div style="font-weight:700">Lykoi763 — Mihawk</div>
@@ -1249,7 +1270,7 @@
                 <div class="link">2026-04-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-14" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-captivat3-chinoizecup-44-tuesday.html">
                 <div>
                   <div style="font-weight:700">Captivat3 — Mihawk</div>
@@ -1258,7 +1279,7 @@
                 <div class="link">2026-04-14 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-13" data-placing="8" data-event="other">
               <a class="item" href="/decklists/mihawk/8th-alisonpl-clubtv-14-simulador-feat-maca-ba-tcg.html">
                 <div>
                   <div style="font-weight:700">Alisonpl — Mihawk</div>
@@ -1267,7 +1288,7 @@
                 <div class="link">2026-04-13 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-06" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-alisonpl-clubtv-13-simulador-feat-maca-ba-tcg.html">
                 <div>
                   <div style="font-weight:700">Alisonpl — Mihawk</div>
@@ -1276,7 +1297,7 @@
                 <div class="link">2026-04-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-05" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-ray-van-der-nat-one-piece-rand-show-tournament.html">
                 <div>
                   <div style="font-weight:700">Ray van der Nat — Mihawk</div>
@@ -1285,7 +1306,7 @@
                 <div class="link">2026-04-05 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-05" data-placing="6" data-event="other">
               <a class="item" href="/decklists/mihawk/6th-dante-l-one-piece-rand-show-tournament.html">
                 <div>
                   <div style="font-weight:700">Dante L — Mihawk</div>
@@ -1294,7 +1315,7 @@
                 <div class="link">2026-04-05 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-01" data-placing="8" data-event="other">
               <a class="item" href="/decklists/mihawk/8th-pixsci-chinoizecup-39-wednesday.html">
                 <div>
                   <div style="font-weight:700">Pixsci — Mihawk</div>
@@ -1303,7 +1324,7 @@
                 <div class="link">2026-04-01 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-30" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-otakuprowder-chinoizecup-37-monday.html">
                 <div>
                   <div style="font-weight:700">OtakuProwder — Mihawk</div>
@@ -1312,7 +1333,7 @@
                 <div class="link">2026-03-30 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-26" data-placing="5" data-event="other">
               <a class="item" href="/decklists/mihawk/5th-ryurex-versus-cup-picking.html">
                 <div>
                   <div style="font-weight:700">RyuRex — Mihawk</div>
@@ -1321,7 +1342,7 @@
                 <div class="link">2026-03-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-26" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-gravesen-versus-cup-picking.html">
                 <div>
                   <div style="font-weight:700">Gravesen — Mihawk</div>
@@ -1330,7 +1351,7 @@
                 <div class="link">2026-03-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-24" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-otakuprowder-chinoizecup-35-tuesday.html">
                 <div>
                   <div style="font-weight:700">OtakuProwder — Mihawk</div>
@@ -1339,7 +1360,7 @@
                 <div class="link">2026-03-24 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-19" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-ryurex-versus-cup-picking-2.html">
                 <div>
                   <div style="font-weight:700">RyuRex — Mihawk</div>
@@ -1348,7 +1369,7 @@
                 <div class="link">2026-03-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-18" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-lonotus-chinoizecup-33-wednesday.html">
                 <div>
                   <div style="font-weight:700">lonotus — Mihawk</div>
@@ -1357,7 +1378,7 @@
                 <div class="link">2026-03-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-16" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-lonotus-chinoizecup-31-monday.html">
                 <div>
                   <div style="font-weight:700">lonotus — Mihawk</div>
@@ -1366,7 +1387,7 @@
                 <div class="link">2026-03-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-12" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-lykoi763-ger-dressrosa-tournament-op14-eb03.html">
                 <div>
                   <div style="font-weight:700">Lykoi763 — Mihawk</div>
@@ -1375,7 +1396,7 @@
                 <div class="link">2026-03-12 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-12" data-placing="6" data-event="other">
               <a class="item" href="/decklists/mihawk/6th-ryurex-versus-cup-picking.html">
                 <div>
                   <div style="font-weight:700">RyuRex — Mihawk</div>
@@ -1384,7 +1405,7 @@
                 <div class="link">2026-03-12 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-11" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-bachixp-chinoizecup-30-wednesday.html">
                 <div>
                   <div style="font-weight:700">BachiXP — Mihawk</div>
@@ -1393,7 +1414,7 @@
                 <div class="link">2026-03-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-10" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-otakuprowder-chinoizecup-29-tuesday.html">
                 <div>
                   <div style="font-weight:700">OtakuProwder — Mihawk</div>
@@ -1402,7 +1423,7 @@
                 <div class="link">2026-03-10 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-09" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-dropchronic-clubtv-9-simulador.html">
                 <div>
                   <div style="font-weight:700">Dropchronic — Mihawk</div>
@@ -1411,7 +1432,7 @@
                 <div class="link">2026-03-09 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-09" data-placing="5" data-event="other">
               <a class="item" href="/decklists/mihawk/5th-lykoi763-ger-dressrosa-tournament-op14-eb03.html">
                 <div>
                   <div style="font-weight:700">Lykoi763 — Mihawk</div>
@@ -1420,7 +1441,7 @@
                 <div class="link">2026-03-09 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-09" data-placing="6" data-event="other">
               <a class="item" href="/decklists/mihawk/6th-alisonpl-clubtv-9-simulador.html">
                 <div>
                   <div style="font-weight:700">Alisonpl — Mihawk</div>
@@ -1429,7 +1450,7 @@
                 <div class="link">2026-03-09 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-08" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-eric-rossier-ryou-x-umai-cup-3.html">
                 <div>
                   <div style="font-weight:700">Eric Rossier — Mihawk</div>
@@ -1438,7 +1459,7 @@
                 <div class="link">2026-03-08 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-08" data-placing="5" data-event="other">
               <a class="item" href="/decklists/mihawk/5th-lz-kuzenbo-ryou-x-umai-cup-3.html">
                 <div>
                   <div style="font-weight:700">LZ_KUZENBO — Mihawk</div>
@@ -1447,7 +1468,7 @@
                 <div class="link">2026-03-08 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-08" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-zuelouf-ryou-x-umai-cup-3.html">
                 <div>
                   <div style="font-weight:700">Zuelouf — Mihawk</div>
@@ -1456,7 +1477,7 @@
                 <div class="link">2026-03-08 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-08" data-placing="8" data-event="other">
               <a class="item" href="/decklists/mihawk/8th-nadir-sehli-ryou-x-umai-cup-3.html">
                 <div>
                   <div style="font-weight:700">Nadir Sehli — Mihawk</div>
@@ -1465,7 +1486,7 @@
                 <div class="link">2026-03-08 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-05" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-ryurex-versus-cup-picking.html">
                 <div>
                   <div style="font-weight:700">RyuRex — Mihawk</div>
@@ -1474,7 +1495,7 @@
                 <div class="link">2026-03-05 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-02" data-placing="8" data-event="other">
               <a class="item" href="/decklists/mihawk/8th-alisonpl-clubtv-8-simulador.html">
                 <div>
                   <div style="font-weight:700">Alisonpl — Mihawk</div>
@@ -1483,7 +1504,7 @@
                 <div class="link">2026-03-02 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-25" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-lonotus-chinoizecup-24-wednesday.html">
                 <div>
                   <div style="font-weight:700">lonotus — Mihawk</div>
@@ -1492,7 +1513,7 @@
                 <div class="link">2026-02-25 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-25" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-jose-laaz-liga-phoenix-2026-one-piece-mana-8.html">
                 <div>
                   <div style="font-weight:700">Jose Laaz — Mihawk</div>
@@ -1501,7 +1522,7 @@
                 <div class="link">2026-02-25 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-19" data-placing="6" data-event="other">
               <a class="item" href="/decklists/mihawk/6th-dmake96-ger-dressrosa-tournament-op14-eb03.html">
                 <div>
                   <div style="font-weight:700">Dmake96 — Mihawk</div>
@@ -1510,7 +1531,7 @@
                 <div class="link">2026-02-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-17" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-otakuprowder-chinoizecup-20-tuesday.html">
                 <div>
                   <div style="font-weight:700">OtakuProwder — Mihawk</div>
@@ -1519,7 +1540,7 @@
                 <div class="link">2026-02-17 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-14" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-billyt-optcg-chemnitz-classic-tournament.html">
                 <div>
                   <div style="font-weight:700">BillyT — Mihawk</div>
@@ -1528,7 +1549,7 @@
                 <div class="link">2026-02-14 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-14" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-lykoi763-optcg-chemnitz-classic-tournament.html">
                 <div>
                   <div style="font-weight:700">Lykoi763 — Mihawk</div>
@@ -1537,7 +1558,7 @@
                 <div class="link">2026-02-14 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-09" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-alisonpl-clubtv-6-simulador.html">
                 <div>
                   <div style="font-weight:700">Alisonpl — Mihawk</div>
@@ -1546,7 +1567,7 @@
                 <div class="link">2026-02-09 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-04" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-jose-laaz-liga-phoenix-2026-one-piece-mana-5.html">
                 <div>
                   <div style="font-weight:700">Jose Laaz — Mihawk</div>
@@ -1555,7 +1576,7 @@
                 <div class="link">2026-02-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-04" data-placing="2" data-event="other">
               <a class="item" href="/decklists/mihawk/2nd-barrocatcg-chinoizecup-15-wednesday.html">
                 <div>
                   <div style="font-weight:700">BarrocaTCG — Mihawk</div>
@@ -1564,7 +1585,7 @@
                 <div class="link">2026-02-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-03" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-thedn5-chinoizecup-14-tuesday.html">
                 <div>
                   <div style="font-weight:700">TheDN5 — Mihawk</div>
@@ -1573,7 +1594,7 @@
                 <div class="link">2026-02-03 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-03" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-tonybojji-chinoizecup-14-tuesday.html">
                 <div>
                   <div style="font-weight:700">TonyBojji — Mihawk</div>
@@ -1582,7 +1603,7 @@
                 <div class="link">2026-02-03 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-02" data-placing="9" data-event="other">
               <a class="item" href="/decklists/mihawk/9th-otakuprowder-chinoizecup-13-monday.html">
                 <div>
                   <div style="font-weight:700">OtakuProwder — Mihawk</div>
@@ -1591,7 +1612,7 @@
                 <div class="link">2026-02-02 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-29" data-placing="2" data-event="other">
               <a class="item" href="/decklists/mihawk/2nd-lykoi763-ger-dressrosa-tournament-the-azure-sea-s-seven.html">
                 <div>
                   <div style="font-weight:700">Lykoi763 — Mihawk</div>
@@ -1600,7 +1621,7 @@
                 <div class="link">2026-01-29 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-28" data-placing="2" data-event="other">
               <a class="item" href="/decklists/mihawk/2nd-jose-laaz-liga-phoenix-2026-one-piece-mana-4.html">
                 <div>
                   <div style="font-weight:700">Jose Laaz — Mihawk</div>
@@ -1609,7 +1630,7 @@
                 <div class="link">2026-01-28 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-28" data-placing="8" data-event="other">
               <a class="item" href="/decklists/mihawk/8th-patpat-chinoizecup-12-wednesday.html">
                 <div>
                   <div style="font-weight:700">Patpat — Mihawk</div>
@@ -1618,7 +1639,7 @@
                 <div class="link">2026-01-28 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-27" data-placing="9" data-event="other">
               <a class="item" href="/decklists/mihawk/9th-tonybojji-chinoizecup-11-tuesday.html">
                 <div>
                   <div style="font-weight:700">TonyBojji — Mihawk</div>
@@ -1627,7 +1648,7 @@
                 <div class="link">2026-01-27 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-26" data-placing="5" data-event="other">
               <a class="item" href="/decklists/mihawk/5th-lykoi763-ger-dressrosa-tournament-the-azure-sea-s-seven.html">
                 <div>
                   <div style="font-weight:700">Lykoi763 — Mihawk</div>
@@ -1636,7 +1657,7 @@
                 <div class="link">2026-01-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-26" data-placing="8" data-event="other">
               <a class="item" href="/decklists/mihawk/8th-imazire-chinoizecup-10-monday.html">
                 <div>
                   <div style="font-weight:700">ImAzire — Mihawk</div>
@@ -1645,7 +1666,7 @@
                 <div class="link">2026-01-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-20" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-otakuprowder-chinoizecup-8-tuesday.html">
                 <div>
                   <div style="font-weight:700">OtakuProwder — Mihawk</div>
@@ -1654,7 +1675,7 @@
                 <div class="link">2026-01-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-19" data-placing="2" data-event="other">
               <a class="item" href="/decklists/mihawk/2nd-mblawluffy-chinoizecup-7-monday.html">
                 <div>
                   <div style="font-weight:700">mblawluffy — Mihawk</div>
@@ -1663,7 +1684,7 @@
                 <div class="link">2026-01-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-19" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-dennisicebear-ger-dressrosa-tournament-the-azure-sea-s-seven.html">
                 <div>
                   <div style="font-weight:700">dennisicebear — Mihawk</div>
@@ -1672,7 +1693,7 @@
                 <div class="link">2026-01-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-19" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-patpat-chinoizecup-7-monday.html">
                 <div>
                   <div style="font-weight:700">Patpat — Mihawk</div>
@@ -1681,7 +1702,7 @@
                 <div class="link">2026-01-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-19" data-placing="6" data-event="other">
               <a class="item" href="/decklists/mihawk/6th-dropchronic-clubtv-3-simulador.html">
                 <div>
                   <div style="font-weight:700">Dropchronic — Mihawk</div>
@@ -1690,7 +1711,7 @@
                 <div class="link">2026-01-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-19" data-placing="8" data-event="other">
               <a class="item" href="/decklists/mihawk/8th-tonybojji-chinoizecup-7-monday.html">
                 <div>
                   <div style="font-weight:700">TonyBojji — Mihawk</div>
@@ -1699,7 +1720,7 @@
                 <div class="link">2026-01-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-19" data-placing="8" data-event="other">
               <a class="item" href="/decklists/mihawk/8th-lykoi763-ger-dressrosa-tournament-the-azure-sea-s-seven.html">
                 <div>
                   <div style="font-weight:700">Lykoi763 — Mihawk</div>
@@ -1708,7 +1729,7 @@
                 <div class="link">2026-01-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-15" data-placing="8" data-event="other">
               <a class="item" href="/decklists/mihawk/8th-lykoi763-ger-the-azure-sea-s-seven.html">
                 <div>
                   <div style="font-weight:700">Lykoi763 — Mihawk</div>
@@ -1717,7 +1738,7 @@
                 <div class="link">2026-01-15 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-14" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-cinnas-chinoizecup-6-wednesday.html">
                 <div>
                   <div style="font-weight:700">Cinnas — Mihawk</div>
@@ -1726,7 +1747,7 @@
                 <div class="link">2026-01-14 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-12" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-patpat-chinoizecup-4-monday.html">
                 <div>
                   <div style="font-weight:700">Patpat — Mihawk</div>
@@ -1735,7 +1756,7 @@
                 <div class="link">2026-01-12 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-12" data-placing="5" data-event="other">
               <a class="item" href="/decklists/mihawk/5th-lykoi763-ger-the-azure-sea-s-seven.html">
                 <div>
                   <div style="font-weight:700">Lykoi763 — Mihawk</div>
@@ -1744,7 +1765,7 @@
                 <div class="link">2026-01-12 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-12" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-cinnas-chinoizecup-4-monday.html">
                 <div>
                   <div style="font-weight:700">Cinnas — Mihawk</div>
@@ -1753,7 +1774,7 @@
                 <div class="link">2026-01-12 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-07" data-placing="3" data-event="other">
               <a class="item" href="/decklists/mihawk/3rd-felipe-r-chinoizecup-3-wednesday.html">
                 <div>
                   <div style="font-weight:700">Felipe R — Mihawk</div>
@@ -1762,7 +1783,7 @@
                 <div class="link">2026-01-07 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-06" data-placing="7" data-event="other">
               <a class="item" href="/decklists/mihawk/7th-otakuprowder-chinoizecup-2-tuesday.html">
                 <div>
                   <div style="font-weight:700">OtakuProwder — Mihawk</div>
@@ -1771,7 +1792,7 @@
                 <div class="link">2026-01-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-05" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-otakuprowder-chinoizecup-1-monday.html">
                 <div>
                   <div style="font-weight:700">OtakuProwder — Mihawk</div>
@@ -1780,7 +1801,7 @@
                 <div class="link">2026-01-05 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-05" data-placing="4" data-event="other">
               <a class="item" href="/decklists/mihawk/4th-lykoi763-ger-the-azure-sea-s-seven-pre-realase-event.html">
                 <div>
                   <div style="font-weight:700">Lykoi763 — Mihawk</div>
@@ -1789,7 +1810,7 @@
                 <div class="link">2026-01-05 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-05" data-placing="9" data-event="other">
               <a class="item" href="/decklists/mihawk/9th-nickson777-chinoizecup-1-monday.html">
                 <div>
                   <div style="font-weight:700">Nickson777 — Mihawk</div>
@@ -1798,7 +1819,7 @@
                 <div class="link">2026-01-05 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-29" data-placing="1" data-event="other">
               <a class="item" href="/decklists/mihawk/1st-akatlas-op14-new-year-chinoizecup.html">
                 <div>
                   <div style="font-weight:700">AkAtlas — Mihawk</div>
@@ -1807,7 +1828,7 @@
                 <div class="link">2025-12-29 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-29" data-placing="8" data-event="other">
               <a class="item" href="/decklists/mihawk/8th-simpiii-op14-new-year-chinoizecup.html">
                 <div>
                   <div style="font-weight:700">Simpiii — Mihawk</div>
@@ -1816,7 +1837,7 @@
                 <div class="link">2025-12-29 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-22" data-placing="8" data-event="other">
               <a class="item" href="/decklists/mihawk/8th-simpiii-op14-christmas-chinoizecup.html">
                 <div>
                   <div style="font-weight:700">Simpiii — Mihawk</div>
@@ -1825,7 +1846,7 @@
                 <div class="link">2025-12-22 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-15" data-placing="2" data-event="other">
               <a class="item" href="/decklists/mihawk/2nd-akatlas-op14-chinoizecup-114-monday.html">
                 <div>
                   <div style="font-weight:700">AkAtlas — Mihawk</div>
@@ -1834,7 +1855,7 @@
                 <div class="link">2025-12-15 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="" data-placing="23" data-event="treasure">
               <a class="item" href="/decklists/mihawk/featured-mike.html">
                 <div>
                   <div style="font-weight:700">Mike — Mihawk</div>
@@ -2133,5 +2154,6 @@
     })();
 
   </script>
+  <script src="/js/site.js?v=meta-tools"></script>
 </body>
 </html>
