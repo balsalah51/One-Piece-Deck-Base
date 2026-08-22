@@ -6,6 +6,7 @@ Does not wipe list pages. Does not run generate-tournament-lists.main().
 
 from __future__ import annotations
 
+import html
 import importlib.util
 import json
 import re
@@ -21,8 +22,8 @@ aspec.loader.exec_module(ana)
 
 ROOT = gen.ROOT
 LINE_RE = ana.LINE_RE
-CSS_NEW = "/css/site.css?v=sim-copy"
-JS_NEW = "/js/site.js?v=sim-copy"
+CSS_NEW = "/css/site.css?v=home-recent"
+JS_NEW = "/js/site.js?v=home-recent"
 NAV_OLD_PATTERNS = [
     (
         '        <a href="/decklists/op17.html">OP17</a>\n        <a href="/#community">Community</a>',
@@ -155,6 +156,131 @@ def leader_list_html(rows: list[tuple[dict, int]]) -> str:
     return "\n".join(items)
 
 
+RECENT_LIMIT = 100
+
+
+def collect_home_lists() -> list[dict]:
+    index_path = ROOT / "data/tournament-decks.json"
+    comm_path = ROOT / "data/community-decks.json"
+    index = json.loads(index_path.read_text()) if index_path.exists() else {}
+    community = json.loads(comm_path.read_text()) if comm_path.exists() else {}
+    rows = []
+    seen = set()
+    for leader in gen.LEADERS:
+        for item in index.get(leader["id"]) or []:
+            href = item.get("href") or ""
+            if item.get("kind") == "sample" or not href:
+                continue
+            if not (ROOT / href.lstrip("/")).exists():
+                continue
+            if href in seen:
+                continue
+            seen.add(href)
+            row = dict(item)
+            row["leader"] = leader
+            row["tournament_name"] = row.get("tournament_name") or row.get("tournament") or ""
+            rows.append(row)
+        for item in community.get(leader["id"]) or []:
+            href = item.get("href") or ""
+            if not href or href in seen:
+                continue
+            if not (ROOT / href.lstrip("/")).exists():
+                continue
+            seen.add(href)
+            rows.append(
+                {
+                    "slug": item.get("slug"),
+                    "href": href,
+                    "player": item.get("player") or "Community",
+                    "tournament_name": item.get("subtitle") or item.get("title") or "",
+                    "placing": None,
+                    "date": item.get("date") or "",
+                    "kind": item.get("kind") or "web",
+                    "title_override": item.get("title"),
+                    "subtitle": item.get("subtitle")
+                    or {"youtube": "YouTube list", "x": "X list", "web": "Community list"}.get(
+                        item.get("kind"), "Community list"
+                    ),
+                    "leader": leader,
+                }
+            )
+    return rows
+
+
+def pick_recent_lists(rows: list[dict], limit: int = RECENT_LIMIT) -> list[dict]:
+    by_leader: dict[str, list[dict]] = {}
+    for row in rows:
+        by_leader.setdefault(row["leader"]["id"], []).append(row)
+    for lid, items in by_leader.items():
+        items.sort(key=gen.date_sort_key, reverse=True)
+    picked = []
+    seen = set()
+    for leader in gen.LEADERS:
+        items = by_leader.get(leader["id"]) or []
+        if not items:
+            continue
+        first = items[0]
+        picked.append(first)
+        seen.add(first["href"])
+    rest = [row for row in rows if row["href"] not in seen]
+    rest.sort(key=gen.date_sort_key, reverse=True)
+    for row in rest:
+        picked.append(row)
+        if len(picked) >= limit:
+            break
+    picked.sort(key=gen.date_sort_key, reverse=True)
+    return picked[:limit]
+
+
+def recent_rows_html(rows: list[dict]) -> str:
+    items = []
+    for entry in rows:
+        leader = entry["leader"]
+        title, subtitle = gen.list_heading(entry, leader["name"])
+        when = entry.get("date") or gen.ordinal(entry.get("placing")) or "List"
+        img = gen.card_image_url(leader["id"])
+        items.append(
+            f"""            <li>
+              <a class="recent-item {html.escape(leader['color'])}" href="{html.escape(entry['href'])}">
+                <img class="recent-leader" src="{html.escape(img)}" alt="{html.escape(leader['name'])}" />
+                <div class="recent-copy">
+                  <div class="who">{html.escape(title)}</div>
+                  <div class="muted meta">{html.escape(subtitle)}</div>
+                </div>
+                <div class="when">{html.escape(str(when))}</div>
+              </a>
+            </li>"""
+        )
+    return "\n".join(items)
+
+
+def render_home_body() -> str:
+    cards = leader_cards_html()
+    recent = pick_recent_lists(collect_home_lists())
+    n = len(gen.LEADERS)
+    return f"""        <!-- HOME_BODY -->
+        <h2>One Piece Deck Base</h2>
+        <p>Every leader on this site. Open a picture, or jump to leaders and recent lists.</p>
+        <div class="leader-cards home-cards" aria-label="All leader card pictures">
+{cards}
+        </div>
+        <div class="home-jump">
+          <a class="home-jump-leaders" href="/decklists/op17.html">Leaders</a>
+          <a class="home-jump-recent" href="/#recent">Recent lists</a>
+        </div>
+        <section id="recent">
+          <div class="section-title">
+            <h3>Recent lists</h3>
+            <div class="muted">{len(recent)} lists</div>
+          </div>
+          <p class="muted">Newest first. At least one list from each leader, then the latest results.</p>
+          <ul class="recent-list" aria-label="Recent decklists">
+{recent_rows_html(recent)}
+          </ul>
+        </section>
+        <!-- /HOME_BODY -->"""
+
+
 def leader_cards_html() -> str:
     cards = []
     for leader in gen.LEADERS:
@@ -171,54 +297,27 @@ def leader_cards_html() -> str:
 def patch_home() -> None:
     path = ROOT / "index.html"
     text = path.read_text()
-    rows = meta_rows()
-    n_leaders = len(gen.LEADERS)
-    text = re.sub(
-        r"All \d+ leader pages on this site\.",
-        f"All {n_leaders} leader pages on this site.",
-        text,
-        count=1,
-    )
-    if "Format &amp; banlist" not in text:
-        text = text.replace(
-            '<a class="home-ghost" href="/decklists/op17.html">All leader pages</a>',
-            '<a class="home-ghost" href="/decklists/op17.html">All leader pages</a>\n          <a class="home-ghost" href="/format.html">Format &amp; banlist</a>',
-            1,
+    body = render_home_body()
+    if "<!-- HOME_BODY -->" in text:
+        text = re.sub(
+            r"        <!-- HOME_BODY -->.*?        <!-- /HOME_BODY -->",
+            body,
+            text,
+            count=1,
+            flags=re.S,
         )
-    text = patch_nav_and_assets(text)
-    strip = render_meta_strip(rows)
-    if 'id="meta"' in text:
-        text = re.sub(r'        <section class="meta-strip" id="meta">.*?</section>\n', strip, text, count=1, flags=re.S)
     else:
-        text = text.replace(
-            '        <section id="decklists">',
-            strip + "\n        <section id=\"decklists\">",
-            1,
+        text = re.sub(
+            r"        <h2>One Piece Deck Base</h2>.*?(?=\n      </div>\n    </main>)",
+            body,
+            text,
+            count=1,
+            flags=re.S,
         )
-    ol = '          <ol class="text-leader-list" aria-label="All leader pages">\n' + leader_list_html(rows) + "\n          </ol>"
-    text = re.sub(
-        r'          <ol class="text-leader-list" aria-label="All leader pages">.*?</ol>',
-        ol,
-        text,
-        count=1,
-        flags=re.S,
-    )
-    grid = '          <div class="leader-cards home-cards" aria-label="All leader card pictures" style="margin-top:18px">\n' + leader_cards_html() + "\n          </div>"
-    text = re.sub(
-        r'          <div class="leader-cards home-cards" aria-label="All leader card pictures"[^>]*>.*?</div>\n        </section>',
-        grid + "\n        </section>",
-        text,
-        count=1,
-        flags=re.S,
-    )
-    if 'href="/format.html"' not in text.split("footer")[-1]:
-        text = text.replace(
-            '<a href="/guides/">Guides</a>',
-            '<a href="/format.html">Format</a> · <a href="/guides/">Guides</a>',
-            1,
-        )
+    text = text.replace('href="/#decklists"', 'href="/#recent"')
+    text = patch_nav_and_assets(text)
     path.write_text(text)
-    print("home leaders", n_leaders)
+    print("home leaders", len(gen.LEADERS), "recent", RECENT_LIMIT)
 
 
 def patch_op17() -> None:
