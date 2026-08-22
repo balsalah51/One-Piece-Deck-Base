@@ -10,11 +10,13 @@ BOT_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(BOT_DIR))
 
 from opdb_bot.config import (  # noqa: E402
+    COLOR_HEX,
     LEADERS,
     METAS,
     channel_name,
     emoji_name,
     leaders_for_meta,
+    load_site_generator_leaders,
     planned_channel_names,
     role_name,
 )
@@ -31,21 +33,31 @@ EMOJI_NAME_RE = re.compile(r"^[a-z0-9_]{2,32}$")
 
 
 class LayoutTests(unittest.TestCase):
-    def test_fourteen_site_leaders(self):
-        self.assertEqual(len(LEADERS), 14)
-        self.assertEqual(len({L["id"] for L in LEADERS}), 14)
-        self.assertEqual(len({L["key"] for L in LEADERS}), 14)
+    def test_follows_every_site_leader(self):
+        site = load_site_generator_leaders()
+        self.assertGreaterEqual(len(site), 23)
+        self.assertEqual({L["id"] for L in LEADERS}, {L["id"] for L in site})
+        self.assertEqual({L["key"] for L in LEADERS}, {L["key"] for L in site})
+        self.assertEqual(len({L["id"] for L in LEADERS}), len(LEADERS))
+        self.assertEqual(len({L["key"] for L in LEADERS}), len(LEADERS))
+        for leader in LEADERS:
+            self.assertIn(leader["color"], COLOR_HEX, leader["id"])
 
-    def test_matches_site_generator(self):
-        import importlib.util
-
-        spec = importlib.util.spec_from_file_location(
-            "genlists", BOT_DIR.parent / "scripts" / "generate-tournament-lists.py"
-        )
-        gen = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(gen)
-        self.assertEqual({L["id"] for L in LEADERS}, {L["id"] for L in gen.LEADERS})
-        self.assertEqual({L["key"] for L in LEADERS}, {L["key"] for L in gen.LEADERS})
+    def test_new_format_leaders_are_present(self):
+        keys = {L["key"] for L in LEADERS}
+        for key in (
+            "gb-luffy",
+            "blackbeard",
+            "rosinante",
+            "lucy",
+            "yamato",
+            "koby",
+            "doffy",
+            "buggy",
+            "sengoku",
+            "charlotte-katakuri",
+        ):
+            self.assertIn(key, keys)
 
     def test_op17_meta_has_six_set_leaders(self):
         op17 = leaders_for_meta("op17")
@@ -57,7 +69,7 @@ class LayoutTests(unittest.TestCase):
             "OP17-079",
             "OP17-099",
         ])
-        self.assertEqual(len(leaders_for_meta("format")), 8)
+        self.assertGreaterEqual(len(leaders_for_meta("format")), 17)
 
     def test_channel_names_are_discord_safe_and_unique(self):
         names = planned_channel_names()

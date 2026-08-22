@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import discord
 
-from .config import LEADERS, FLAIR_BODY, COLOR_UNICODE, emoji_name, leader_by_key, role_name
+from .config import FLAIR_BODY, COLOR_UNICODE, LEADERS, emoji_name, flair_leaders, leader_by_key, role_name
 
 
 FLAIR_PREFIX = "opdb:flair:"
@@ -62,9 +62,11 @@ class ClearFlairButton(discord.ui.Button):
 class FlairView(discord.ui.View):
     def __init__(self, guild: discord.Guild | None = None):
         super().__init__(timeout=None)
-        for i, leader in enumerate(LEADERS):
+        leaders = flair_leaders()
+        for i, leader in enumerate(leaders):
             self.add_item(FlairButton(leader, guild_emoji(guild, leader), row=i // 5))
-        self.add_item(ClearFlairButton(row=min(4, (len(LEADERS) // 5) + (1 if len(LEADERS) % 5 else 0))))
+        extra = 1 if len(leaders) % 5 else 0
+        self.add_item(ClearFlairButton(row=min(4, (len(leaders) // 5) + extra)))
 
 
 async def strip_leader_roles(member: discord.Member) -> list[discord.Role]:
@@ -103,7 +105,7 @@ def flair_embed(guild: discord.Guild | None = None) -> discord.Embed:
         color=0xB71C1C,
     )
     lines = []
-    for leader in LEADERS:
+    for leader in flair_leaders():
         emoji = guild_emoji(guild, leader)
         mark = str(emoji)
         lines.append(f"{mark} **{leader['name']}** · `{leader['id']}`")

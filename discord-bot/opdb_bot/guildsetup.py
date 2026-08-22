@@ -11,11 +11,12 @@ import discord
 from .config import (
     ANNOUNCEMENTS_BODY,
     ASSETS_DIR,
-    COLOR_HEX,
     GENERIC_CATEGORIES,
     INVITE_URL,
     LEADERS,
     METAS,
+    color_hex,
+    refresh_leaders,
     RULES_BODY,
     SITE_URL,
     STATE_PATH,
@@ -148,7 +149,7 @@ async def ensure_text_channel(
 async def ensure_role(guild: discord.Guild, leader: dict) -> discord.Role:
     name = role_name(leader)
     existing = discord.utils.get(guild.roles, name=name)
-    color = discord.Color(COLOR_HEX[leader["color"]])
+    color = discord.Color(color_hex(leader))
     if existing:
         if existing.color.value != color.value:
             await existing.edit(colour=color, reason="OPDB setup")
@@ -215,7 +216,7 @@ def mention(channel: discord.abc.GuildChannel | None, fallback: str) -> str:
 
 
 def color_for(leader: dict) -> int:
-    return COLOR_HEX[leader["color"]]
+    return color_hex(leader)
 
 
 def discord_embed_from_plan(plan: dict, leader: dict) -> discord.Embed:
@@ -296,8 +297,9 @@ async def setup_guild(guild: discord.Guild, *, post_lists: bool = True) -> dict[
     Leader rooms and pinned lists come first. Emoji uploads are last and
     time out quickly so Discord rate limits cannot stall the whole setup.
     """
+    refresh_leaders()
     log: dict[str, str] = {}
-    ensure_all_faces()
+    ensure_all_faces(download=False)
 
     channels: dict[str, discord.TextChannel] = {}
 

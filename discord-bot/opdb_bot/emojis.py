@@ -66,8 +66,20 @@ def ensure_face_png(leader: dict, force: bool = False) -> Path:
     return path
 
 
-def ensure_all_faces(force: bool = False) -> list[Path]:
-    return [ensure_face_png(leader, force=force) for leader in LEADERS]
+def ensure_all_faces(force: bool = False, *, download: bool = True) -> list[Path]:
+    paths: list[Path] = []
+    for leader in LEADERS:
+        path = asset_path(leader)
+        if path.exists() and path.stat().st_size > 0 and not force:
+            paths.append(path)
+            continue
+        if not download:
+            continue
+        try:
+            paths.append(ensure_face_png(leader, force=force))
+        except Exception as exc:  # noqa: BLE001
+            print("skip face", leader["key"], exc, flush=True)
+    return paths
 
 
 def _norm(text: str) -> str:

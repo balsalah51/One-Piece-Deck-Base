@@ -18,6 +18,10 @@ UA = "OnePieceDeckBase/1.0 (+https://onepiecedeckbase.com)"
 MAX_LISTS = 8
 MIN_CARDS = 45
 TOURNAMENT_LIMIT = 80
+# Official constructed ban (Blue Charlotte Pudding, including parallels).
+# Other Pudding prints stay legal: OP17-109, ST20-004, EB03-035, OP12-071,
+# OP08-067, OP11-070, PRB02-010.
+BANNED_CARDS = {"OP06-047"}
 
 LEADERS = [
     {
@@ -188,6 +192,114 @@ LEADERS = [
         "pool_heading": "Card pictures",
         "pool_note": "English names and art from Limitless",
     },
+    {
+        "id": "OP16-022",
+        "key": "gb-luffy",
+        "page": "decklists/gb-luffy.html",
+        "dir": "decklists/gb-luffy",
+        "name": "GB Luffy",
+        "color": "color-green-blue",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP16-080",
+        "key": "blackbeard",
+        "page": "decklists/blackbeard.html",
+        "dir": "decklists/blackbeard",
+        "name": "Blackbeard",
+        "color": "color-black-yellow",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP12-061",
+        "key": "rosinante",
+        "page": "decklists/rosinante.html",
+        "dir": "decklists/rosinante",
+        "name": "Rosinante",
+        "color": "color-purple-yellow",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP15-002",
+        "key": "lucy",
+        "page": "decklists/lucy.html",
+        "dir": "decklists/lucy",
+        "name": "Lucy",
+        "color": "color-red-blue",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP16-079",
+        "key": "yamato",
+        "page": "decklists/yamato.html",
+        "dir": "decklists/yamato",
+        "name": "Yamato",
+        "color": "color-black",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP11-001",
+        "key": "koby",
+        "page": "decklists/koby.html",
+        "dir": "decklists/koby",
+        "name": "Koby",
+        "color": "color-red-black",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP14-060",
+        "key": "doffy",
+        "page": "decklists/doffy.html",
+        "dir": "decklists/doffy",
+        "name": "Doffy",
+        "color": "color-purple",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP16-041",
+        "key": "buggy",
+        "page": "decklists/buggy.html",
+        "dir": "decklists/buggy",
+        "name": "Buggy",
+        "color": "color-blue",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP16-060",
+        "key": "sengoku",
+        "page": "decklists/sengoku.html",
+        "dir": "decklists/sengoku",
+        "name": "Sengoku",
+        "color": "color-purple",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
 ]
 
 
@@ -274,6 +386,14 @@ def count_cards(dl: dict) -> int:
     return total
 
 
+def deck_has_banned(dl: dict) -> bool:
+    return any(item["id"] in BANNED_CARDS for item in flatten_cards(dl))
+
+
+def page_has_banned(text: str) -> bool:
+    return any(cid in text for cid in BANNED_CARDS)
+
+
 def flatten_cards(dl: dict) -> list[dict]:
     out = []
     leader = dl.get("leader") or {}
@@ -300,6 +420,14 @@ def flatten_cards(dl: dict) -> list[dict]:
     return out
 
 
+def date_sort_key(entry: dict) -> tuple:
+    """Newest Limitless event date first; better placing breaks a same-day tie."""
+    date = entry.get("date") or "0000-00-00"
+    placing = entry.get("placing")
+    placing_n = int(placing) if placing is not None else 10_000
+    return (date, -placing_n)
+
+
 def quality_key(entry: dict) -> tuple:
     placing = entry.get("placing")
     placing_n = int(placing) if placing is not None else 10_000
@@ -317,6 +445,8 @@ def select_lists(entries: list[dict], limit: int = MAX_LISTS) -> list[dict]:
     for entry in sorted(entries, key=quality_key):
         dl = entry.get("decklist") or {}
         if count_cards(dl) < MIN_CARDS:
+            continue
+        if deck_has_banned(dl):
             continue
         sig = deck_signature(dl)
         if sig in seen:
@@ -697,7 +827,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
-  <link rel="stylesheet" href="/css/site.css" />
+  <link rel="stylesheet" href="/css/site.css?v=sim-copy" />
 </head>
 <body class="{html.escape(color)}">
   <div class="wrap">
@@ -706,14 +836,14 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
         <div class="logo">OP</div>
         <div>
           <h1>One Piece Deck Base</h1>
-          <div class="subtitle">Decklists, community, and custom gear</div>
+          <div class="subtitle">OPTCG decklists</div>
         </div>
       </a>
       <nav aria-label="Primary">
         <a href="/#decklists"{deck_cur}>Decklists</a>
-        <a href="/decklists/op17.html"{op17_cur}>OP17</a>
-        <a href="/shop/">Shop</a>
-        <a href="/#community">Community</a>
+        <a href="/decklists/op17.html"{op17_cur}>Leaders</a>
+        <a href="/format.html">Format</a>
+        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
       </nav>
     </header>
 
@@ -723,7 +853,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
       </div>
     </main>
     <footer>
-      © <span id="year"></span> One Piece Deck Base — Built with community in mind. <a href="/shop/">Shop</a>
+      © <span id="year"></span> One Piece Deck Base — Built with community in mind.
     </footer>
   </div>
   <script>
@@ -777,6 +907,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
       }});
     }})();
   </script>
+  <script src="/js/site.js?v=sim-copy"></script>
 </body>
 </html>
 """
@@ -825,6 +956,145 @@ def card_image_url(cid: str) -> str:
     return f"https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/{set_code}/{cid}_EN.webp"
 
 
+TEXT_QTY_RE = re.compile(
+    r'<span class="qty">(\d+)x</span>.*?<span class="muted card-id">([^<]+)</span>',
+    re.S,
+)
+
+
+def sim_text_from_cards(cards: list[dict]) -> str:
+    lines = []
+    for item in cards:
+        try:
+            n = int(item.get("count") or 0)
+        except (TypeError, ValueError):
+            continue
+        cid = (item.get("id") or "").strip()
+        if n and cid:
+            lines.append(f"{n}x{cid}")
+    return "\n".join(lines)
+
+
+def sim_text_from_decklist(dl: dict) -> str:
+    return sim_text_from_cards(flatten_cards(dl or {}))
+
+
+def sim_text_from_html(page: str) -> str:
+    block = page
+    m = re.search(r'<section class="text-deck">.*?</section>', page, re.S)
+    if m:
+        block = m.group(0)
+    lines = [f"{n}x{cid.strip()}" for n, cid in TEXT_QTY_RE.findall(block)]
+    return "\n".join(lines)
+
+
+def sim_text_for_entry(leader: dict, entry: dict) -> str:
+    raw = entry.get("sim_text")
+    if raw:
+        return raw
+    dl = entry.get("decklist")
+    if dl:
+        return sim_text_from_decklist(dl)
+    slug = entry.get("slug")
+    if slug:
+        path = ROOT / leader["dir"] / f"{slug}.html"
+        if path.exists():
+            return sim_text_from_html(path.read_text())
+    href = entry.get("href") or ""
+    if href.startswith("/"):
+        path = ROOT / href.lstrip("/")
+        if path.exists():
+            return sim_text_from_html(path.read_text())
+    return ""
+
+
+def sim_compact(text: str) -> str:
+    return " ".join(text.split())
+
+
+def copy_sim_button(sim_text: str) -> str:
+    compact = sim_compact(sim_text)
+    if not compact:
+        return ""
+    return (
+        f'<button type="button" class="copy-sim" data-copy-sim data-sim="{html.escape(compact, quote=True)}">'
+        "Copy to OP TCG SIM</button>"
+    )
+
+
+def event_bucket(name: str) -> str:
+    n = (name or "").lower()
+    if "treasure" in n:
+        return "treasure"
+    if "regional" in n:
+        return "regional"
+    if "championship" in n or "flagship" in n:
+        return "championship"
+    return "other"
+
+
+def counter_value(meta: dict) -> int:
+    raw = meta.get("counter")
+    if raw is None:
+        return 0
+    m = re.search(r"(\d+)", str(raw))
+    return int(m.group(1)) if m else 0
+
+
+def render_deck_stats(items: list[dict], cache: dict) -> str:
+    curve = {str(i): 0 for i in range(0, 10)}
+    curve["10+"] = 0
+    counters = {"2k": 0, "1k": 0, "0": 0}
+    copies = 0
+    for item in items:
+        if item.get("group") == "Leader":
+            continue
+        n = int(item.get("count") or 0)
+        copies += n
+        meta = cache.get(item["id"]) or {}
+        try:
+            cost = int(meta.get("cost"))
+        except (TypeError, ValueError):
+            cost = 0
+        key = "10+" if cost >= 10 else str(max(0, cost))
+        curve[key] += n
+        cv = counter_value(meta)
+        if cv >= 2000:
+            counters["2k"] += n
+        elif cv >= 1000:
+            counters["1k"] += n
+        else:
+            counters["0"] += n
+    if copies <= 0:
+        return ""
+    max_c = max(curve.values()) or 1
+    bars = []
+    for key in [str(i) for i in range(1, 10)] + ["10+"]:
+        h = int(round(56 * curve[key] / max_c)) if curve[key] else 2
+        bars.append(
+            f'<span style="height:{h}px" title="{html.escape(key)} DON!! · {curve[key]}"><em>{html.escape(key)}</em></span>'
+        )
+    return f"""        <!-- DECK_STATS -->
+        <section class="deck-stats">
+          <div class="kicker">List snapshot</div>
+          <div class="stat-grid">
+            <div>
+              <div class="muted">DON!! curve</div>
+              <div class="curve" aria-hidden="true">{"".join(bars)}</div>
+            </div>
+            <div>
+              <div class="muted">Counters in the 50</div>
+              <div class="counter-pills">
+                <span class="pill">{counters["2k"]}× 2k</span>
+                <span class="pill">{counters["1k"]}× 1k</span>
+                <span class="pill">{counters["0"]}× no counter</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- /DECK_STATS -->"""
+
+
 def render_text_deck(grouped: dict, cache: dict, order: list[str], totals: dict) -> str:
     total = 1 + sum(totals.values())
     cols = []
@@ -846,7 +1116,7 @@ def render_text_deck(grouped: dict, cache: dict, order: list[str], totals: dict)
             </li>"""
             )
         cols.append(
-            f"""          <div>
+            f"""          <div{' class="text-deck-leader"' if group == "Leader" else ""}>
             <h4>{html.escape(group)}</h4>
             <ul class="text-lines">
 {chr(10).join(lines)}
@@ -856,9 +1126,9 @@ def render_text_deck(grouped: dict, cache: dict, order: list[str], totals: dict)
     return f"""        <section class="text-deck">
           <div class="section-title">
             <h3>Text list</h3>
-            <div class="muted">{total} cards</div>
+            <button type="button" class="copy-sim" data-copy-sim>Copy to OP TCG SIM</button>
           </div>
-          <p class="muted">Hover or tap a card name to see the picture.</p>
+          <p class="muted">Hover or tap a card name to see the picture. Copy pastes <code>NxSET-NNN</code> lines for OP TCG SIM import.</p>
           <div class="text-deck-cols">
 {chr(10).join(cols)}
           </div>
@@ -891,6 +1161,7 @@ def render_deck_page(leader: dict, entry: dict, cache: dict) -> str:
                 display_name(cache.get(it["id"], {}).get("name") or it["name"]),
             )
         )
+    leader_block = ""
     sections = []
     for group in order:
         items = grouped.get(group) or []
@@ -898,7 +1169,7 @@ def render_deck_page(leader: dict, entry: dict, cache: dict) -> str:
             continue
         count_label = "1 card" if group == "Leader" else f"{totals[group]} cards"
         entries = "\n".join(render_card_entry(it, cache.get(it["id"], {"name": it["name"], "category": group.rstrip("s"), "id": it["id"]})) for it in items)
-        sections.append(f"""        <section style="margin-top:22px">
+        block = f"""        <section class="{'leader-block' if group == 'Leader' else 'picture-group'}" style="margin-top:22px">
           <div class="section-title">
             <h3>{html.escape(group)}</h3>
             <div class="muted">{html.escape(count_label)}</div>
@@ -906,8 +1177,13 @@ def render_deck_page(leader: dict, entry: dict, cache: dict) -> str:
           <div class="card-grid">
 {entries}
           </div>
-        </section>""")
+        </section>"""
+        if group == "Leader":
+            leader_block = block
+        else:
+            sections.append(block)
     text_list = render_text_deck(grouped, cache, order, totals)
+    stats = render_deck_stats(cards, cache)
     picture = f"""        <section class="picture-summary">
           <div class="section-title">
             <h3>Card pictures</h3>
@@ -927,6 +1203,8 @@ def render_deck_page(leader: dict, entry: dict, cache: dict) -> str:
     body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="{html.escape(crumb_href)}">{html.escape(crumb_label)}</a> / <a href="{html.escape(parent_href)}">{html.escape(leader['name'])}</a> / Decklist</div>
         <h2>{html.escape(title)}</h2>
         <p>{html.escape(subtitle)}</p>
+{leader_block}
+{stats}
 {text_list}
 {picture}
         <p class="muted" style="margin-top:22px">{html.escape(kind_note)} Source: <a href="{html.escape(source)}">{html.escape(source)}</a>. Images hosted by Limitless. Not affiliated with Bandai.</p>"""
@@ -941,6 +1219,99 @@ def render_pool_heading(leader: dict) -> str:
           <div class="muted">{html.escape(leader["pool_note"])}</div>
         </div>
         <!-- /CARD_POOL_HEADING -->"""
+
+
+HUB_INTRO = {
+    "OP16-022": (
+        "Green/Blue OP16 Monkey D. Luffy. Impel Down / Straw Hat Crew. "
+        "If your board is only Impel Down characters, set up to 2 DON!! active. "
+        "Not red/green OP13 Luffy and not black OP17 Elbaph Luffy."
+    ),
+    "OP16-080": (
+        "Black/Yellow OP16 Marshall D. Teach. Blackbeard Pirates. "
+        "Your characters cost +1 on the opponent's turn; trash a Trigger to retarget an attack."
+    ),
+    "OP12-061": (
+        "Purple/Yellow Donquixote Rosinante. Navy / Donquixote Pirates. "
+        "You can pay a Life instead of letting Trafalgar Law die, then DON!! −1 to discount a 4-cost or higher Law."
+    ),
+    "OP15-002": (
+        "Red/Blue Lucy is Dressrosa Luffy in disguise. "
+        "Trash events or stages for power, then draw if you already played a 3-cost or higher event. Not red/blue OP13 Ace."
+    ),
+    "OP16-079": (
+        "Black OP16 Yamato. Land of Wano. "
+        "A Wano character played from trash gains Rush that turn. Not a Kaido character card."
+    ),
+    "OP11-001": (
+        "Red/Black Koby. Navy / SWORD. "
+        "SWORD characters can attack the turn they are played. A 7000-power-or-less Navy body can be saved from removal."
+    ),
+    "OP14-060": (
+        "Purple OP14 Donquixote Doflamingo is the Dressrosa retarget leader — not blue OP01-060 Doffy. "
+        "Once per opponent attack, DON!! −1 to send that attack at Doffy or a Donquixote Pirates character."
+    ),
+    "OP16-041": (
+        "Blue OP16 Buggy. Impel Down / Buggy Pirates. "
+        "When an Impel Down character leaves the field, DON!! ×1 lets you play a Prisoner of Impel Down from hand. Not a character in GB Luffy."
+    ),
+    "OP16-060": (
+        "Purple OP16 Sengoku. Navy. "
+        "Return 8 active DON!! to play up to 3 differently named Admirals from hand. Not Enel and not Katakuri."
+    ),
+}
+
+
+def render_hub_page(leader: dict, cache: dict) -> str:
+    meta = cache.get(leader["id"]) or {}
+    name = display_name(meta.get("name") or leader["name"])
+    color = meta.get("color") or ""
+    life = meta.get("life") or ""
+    power = meta.get("power") or ""
+    attr = meta.get("attribute") or ""
+    types = meta.get("types") or ""
+    effect = meta.get("effect") or ""
+    intro = HUB_INTRO.get(leader["id"]) or f"{leader['name']} constructed lists from Limitless events."
+    pills = []
+    if color:
+        pills.append(f"{color} Leader")
+    pills.append(leader["id"])
+    if life:
+        pills.append(f"{life} Life")
+    if power:
+        pills.append(f"{power} Power")
+    if attr:
+        pills.append(attr)
+    if types:
+        pills.append(types)
+    pill_html = "".join(f'<span class="pill">{html.escape(p)}</span>' for p in pills)
+    img = card_image_url(leader["id"])
+    crumb_href, crumb_label = leader["crumb"]
+    body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="{html.escape(crumb_href)}">{html.escape(crumb_label)}</a> / {html.escape(leader["name"])}</div>
+        <div class="leader-hero">
+          <img src="{html.escape(img)}" alt="{html.escape(leader["name"])} leader" />
+          <div>
+            <h2>{html.escape(leader["name"])}</h2>
+            <p>{html.escape(intro)}</p>
+            <div class="stat-row">
+              {pill_html}
+            </div>
+            <div class="effect">{html.escape(effect)}</div>
+            <p class="muted" style="margin-top:12px">{html.escape(name)} · {html.escape(leader["id"])}</p>
+          </div>
+        </div>
+        <!-- TOURNAMENT_DECKLISTS -->
+        <section class="deck-index" style="margin-top:22px">
+          <div class="section-title">
+            <h3>Tournament decklists</h3>
+            <div class="muted">0 lists</div>
+          </div>
+          <p class="muted">No tournament lists found for this leader yet.</p>
+        </section>
+        <!-- /TOURNAMENT_DECKLISTS -->
+{render_pool_heading(leader)}"""
+    desc = f"{leader['name']} — {color} leader page and scraped tournament lists."
+    return page_chrome(f"{leader['name']} decklist", desc[:160], leader["color"], leader["nav_op17"], body)
 
 
 def render_index_section(leader: dict, lists: list[dict]) -> str:
@@ -959,28 +1330,57 @@ def render_index_section(leader: dict, lists: list[dict]) -> str:
     intro = (
         "No Limitless tournament results for this leader yet, so these are sample 50-card lists from the OP17 Red pool. Each row opens a full list."
         if sample_only
-        else "Each row opens a separate 50-card list. Taken from recent Limitless Play events."
+        else "Newest Limitless events first. Each row opens a separate 50-card list."
     )
     rows = []
-    for entry in lists:
+    for entry in sorted(lists, key=date_sort_key, reverse=True):
         href = entry["href"]
         title, subtitle = list_heading(entry, leader["name"])
-        place = ordinal(entry.get("placing")) or record_text(entry.get("record")) or "View"
+        right = entry.get("date") or ordinal(entry.get("placing")) or record_text(entry.get("record")) or "View"
         if entry.get("kind") == "sample":
-            place = "Sample"
-        elif entry.get("kind") == "featured":
-            place = ordinal(entry.get("placing")) or "List"
+            right = "Sample"
+        elif entry.get("kind") in ("youtube", "web", "x") and not entry.get("date"):
+            right = "List"
+        placing = entry.get("placing")
+        placing_s = "" if placing is None else str(placing)
+        date_s = entry.get("date") or ""
+        bucket = event_bucket(entry.get("tournament_name") or entry.get("tournament") or "")
+        copy_btn = copy_sim_button(sim_text_for_entry(leader, entry))
         rows.append(
-            f"""            <li>
+            f"""            <li class="list-row" data-date="{html.escape(date_s)}" data-placing="{html.escape(placing_s)}" data-event="{html.escape(bucket)}">
               <a class="item" href="{html.escape(href)}">
                 <div>
                   <div style="font-weight:700">{html.escape(title)}</div>
                   <div class="muted" style="font-size:13px">{html.escape(subtitle)}</div>
                 </div>
-                <div class="link">{html.escape(place)} →</div>
+                <div class="link">{html.escape(str(right))} →</div>
               </a>
+              {copy_btn}
             </li>"""
         )
+    filters = ""
+    if not sample_only and len(lists) >= 8:
+        filters = """          <div class="list-filters" data-hub-filters>
+            <input type="search" data-filter="q" placeholder="Filter player or event" aria-label="Filter lists" />
+            <select data-filter="when" aria-label="Date">
+              <option value="">Any date</option>
+              <option value="jul">Since July 2026</option>
+              <option value="aug">Since August 2026</option>
+            </select>
+            <select data-filter="place" aria-label="Placing">
+              <option value="">Any placing</option>
+              <option value="top8">Top 8</option>
+              <option value="win">1st only</option>
+            </select>
+            <select data-filter="event" aria-label="Event type">
+              <option value="">Any event</option>
+              <option value="regional">Regional</option>
+              <option value="treasure">Treasure Cup</option>
+              <option value="championship">Championship / Flagship</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+"""
     return f"""        <!-- TOURNAMENT_DECKLISTS -->
         <section class="deck-index" style="margin-top:22px">
           <div class="section-title">
@@ -988,7 +1388,7 @@ def render_index_section(leader: dict, lists: list[dict]) -> str:
             <div class="muted">{len(lists)} lists</div>
           </div>
           <p class="muted">{html.escape(intro)}</p>
-          <ul class="list" aria-label="{html.escape(heading)}">
+{filters}          <ul class="list" aria-label="{html.escape(heading)}">
 {chr(10).join(rows)}
           </ul>
         </section>
@@ -1056,7 +1456,11 @@ def main() -> None:
     for leader in LEADERS:
         lid = leader["id"]
         entries = by_leader.get(lid) or []
-        featured_entries = [e for e in entries if e.get("kind") == "featured"]
+        featured_entries = [
+            e
+            for e in entries
+            if e.get("kind") == "featured" and not deck_has_banned(e.get("decklist") or {})
+        ]
         rest = [e for e in entries if e.get("kind") != "featured"]
         picked = select_lists(rest, limit=MAX_LISTS)
         if featured_entries:
@@ -1089,7 +1493,11 @@ def main() -> None:
                 old.unlink()
         out_dir.mkdir(parents=True, exist_ok=True)
         used_slugs: set[str] = set()
-        lists = selected[leader["id"]]
+        lists = [
+            e
+            for e in selected[leader["id"]]
+            if not deck_has_banned(e.get("decklist") or {})
+        ]
         public = []
         for entry in lists:
             slug = unique_slug(entry, used_slugs)

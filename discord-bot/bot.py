@@ -22,6 +22,7 @@ from opdb_bot.config import (  # noqa: E402
     SITE_URL,
     leaders_for_meta,
     planned_channel_names,
+    refresh_leaders,
 )
 from opdb_bot.data import all_planned_messages, load_card_cache, load_consensus  # noqa: E402
 from opdb_bot.emojis import ensure_all_faces  # noqa: E402
@@ -99,7 +100,8 @@ async def run_bot() -> None:
 
     @bot.event
     async def on_ready() -> None:
-        ensure_all_faces()
+        refresh_leaders()
+        ensure_all_faces(download=False)
         bot.add_view(FlairView())
         try:
             if guild_id:
@@ -134,6 +136,7 @@ async def run_bot() -> None:
             return
         await interaction.response.defer(ephemeral=True, thinking=True)
         assert interaction.guild is not None
+        refresh_leaders()
         try:
             log = await setup_guild(interaction.guild, post_lists=True)
         except Exception as exc:  # noqa: BLE001
@@ -157,6 +160,7 @@ async def run_bot() -> None:
             return
         await interaction.response.defer(ephemeral=True, thinking=True)
         assert interaction.guild is not None
+        refresh_leaders()
         updated = 0
         missing = []
         for leader in LEADERS:
@@ -176,6 +180,7 @@ async def run_bot() -> None:
             return
         await interaction.response.defer(ephemeral=True, thinking=True)
         assert interaction.guild is not None
+        refresh_leaders()
         flair = discord.utils.get(interaction.guild.text_channels, name="flair")
         if flair is None:
             await interaction.followup.send("No #flair channel. Run `/opdb-setup` first.", ephemeral=True)
