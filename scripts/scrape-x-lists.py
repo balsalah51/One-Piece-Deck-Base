@@ -81,6 +81,11 @@ SEARCHES = [
     'site:x.com "4xOP17"',
     'site:twitter.com "4xOP17-040"',
     'site:x.com "1xOP17-001" decklist',
+    'site:x.com "1xOP17-020" decklist',
+    'site:x.com "1xOP17-039" decklist',
+    'site:x.com "1xOP17-058" decklist',
+    'site:x.com "1xOP17-079" decklist',
+    'site:x.com "1xOP17-099" decklist',
     'site:x.com "1xOP16-001"',
     "site:x.com MarinefordTCG OP17 decklist",
     "site:x.com StrawHatPecan OP17 list",
@@ -91,6 +96,8 @@ SEARCHES = [
     'site:x.com "1xOP15-002" Lucy',
     'site:x.com "1xOP16-080" Blackbeard',
     "site:x.com Doffy OP14-060 decklist",
+    "site:x.com OP17 decklist since:2026-08-20",
+    "site:twitter.com OP17 decklist since:2026-08-20",
 ]
 
 
@@ -250,12 +257,24 @@ def main() -> None:
         hits = card_hits(blob)
         lists = complete_lists(hits)
         tweet = (data.get("tweet") or {}) if isinstance(data, dict) else {}
+        created = (
+            (tweet.get("created_at") or tweet.get("date") or tweet.get("created_timestamp") or "")
+        )
+        created_s = str(created)
+        too_old = False
+        if created_s:
+            # 2026-08-20, 2026-08-20T..., or a unix timestamp.
+            if created_s[:10] < "2026-08-20" and not created_s.isdigit():
+                too_old = True
+            elif created_s.isdigit() and int(created_s) < 1787184000:
+                too_old = True
         row = {
             "handle": handle,
             "id": sid,
             "url": f"https://x.com/{handle}/status/{sid}",
             "http": status,
             "text": (tweet.get("text") or "")[:400],
+            "created": created_s[:24],
             "card_lines": len(hits),
             "complete_lists": len(lists),
         }
@@ -266,7 +285,10 @@ def main() -> None:
         if handle.lower() == "silvers_d_foxy" and "op17" not in text_l and "one piece" not in text_l and "optcg" not in text_l:
             continue
         out["tweets"].append(row)
-        out["complete_lists"].extend({"source": row["url"], "handle": handle, **item} for item in lists)
+        if too_old:
+            log("skip old tweet", handle, sid, created_s[:10])
+        else:
+            out["complete_lists"].extend({"source": row["url"], "handle": handle, **item} for item in lists)
         if hits and not lists:
             out["partial_id_hits"].append({"source": row["url"], "hits": hits})
         time.sleep(0.15)

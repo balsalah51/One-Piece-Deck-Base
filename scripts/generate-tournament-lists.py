@@ -1195,7 +1195,7 @@ def render_deck_page(leader: dict, entry: dict, cache: dict) -> str:
     kind_note = {
         "sample": "Sample 50-card list built from the OP17 Red card pool. Not taken from a tournament.",
         "featured": "Featured list and English card text from Limitless One Piece.",
-        "tournament": "Tournament list scraped from Limitless Play. English card text from Limitless One Piece.",
+        "tournament": "Tournament list from Limitless Play. English card text from Limitless One Piece.",
         "youtube": "List from a YouTube deck profile. English card text from Limitless One Piece.",
         "web": "Community list from a public deck builder. English card text from Limitless One Piece.",
         "x": "List copied from a public X/Twitter post. English card text from Limitless One Piece.",
@@ -1310,7 +1310,7 @@ def render_hub_page(leader: dict, cache: dict) -> str:
         </section>
         <!-- /TOURNAMENT_DECKLISTS -->
 {render_pool_heading(leader)}"""
-    desc = f"{leader['name']} — {color} leader page and scraped tournament lists."
+    desc = f"{leader['name']} — {color} leader page and tournament lists."
     return page_chrome(f"{leader['name']} decklist", desc[:160], leader["color"], leader["nav_op17"], body)
 
 
