@@ -5,15 +5,13 @@ from __future__ import annotations
 
 import argparse
 import asyncio
-import os
 import sys
 from pathlib import Path
 
-from dotenv import load_dotenv
-
 BOT_DIR = Path(__file__).resolve().parent
-load_dotenv(BOT_DIR / ".env")
 sys.path.insert(0, str(BOT_DIR))
+
+from opdb_bot.envload import describe_token_search, load_guild_id, load_token  # noqa: E402
 
 from opdb_bot.config import (  # noqa: E402
     GENERIC_CATEGORIES,
@@ -71,14 +69,24 @@ async def run_bot() -> None:
     from opdb_bot.guildsetup import post_consensus, post_info_pages, setup_guild
     from opdb_bot.config import channel_name
 
-    token = os.environ.get("DISCORD_TOKEN", "").strip()
+    token, token_source = load_token(BOT_DIR)
     if not token:
         raise SystemExit(
-            "DISCORD_TOKEN is missing. Copy discord-bot/.env.example to .env and paste the bot token."
+            "No bot token found.\n"
+            f"{describe_token_search(BOT_DIR)}\n"
+            "In this same Command Prompt run:\n"
+            "  set /p DISCORD_TOKEN=Paste token and press Enter: \n"
+            "  set PYTHONUTF8=1\n"
+            "  python bot.py"
         )
 
-    guild_id_raw = os.environ.get("DISCORD_GUILD_ID", "").strip()
-    guild_id = int(guild_id_raw) if guild_id_raw else None
+    guild_id_raw = load_guild_id(BOT_DIR)
+    try:
+        guild_id = int(guild_id_raw) if guild_id_raw else None
+    except ValueError:
+        raise SystemExit(
+            "DISCORD_GUILD_ID must be empty or the server number. Do not put the token there."
+        )
 
     intents = discord.Intents.default()
     intents.guilds = True
@@ -210,7 +218,14 @@ async def run_bot() -> None:
         await post_consensus(channel, match)
         await interaction.followup.send(f"Posted {match['name']} consensus.")
 
-    await bot.start(token)
+    try:
+        print(f"Starting bot (token from {token_source}, {len(token)} chars)")
+        await bot.start(token)
+    except discord.LoginFailure:
+        raise SystemExit(
+            "Discord rejected the token (401). Use Bot → Reset Token → Copy, "
+            "not the Application ID or Client Secret. Then run the set /p line again."
+        )
 
 
 def main() -> None:

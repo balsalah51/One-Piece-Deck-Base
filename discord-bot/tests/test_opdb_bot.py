@@ -180,5 +180,44 @@ class EmojiTests(unittest.TestCase):
         self.assertIsNone(match_catalog_emoji(luffy, catalog))
 
 
+class EnvLoadTests(unittest.TestCase):
+    def test_reads_token_txt_and_ignores_placeholder(self):
+        import os
+        import tempfile
+
+        from opdb_bot.envload import clean_token, load_token, parse_env_text
+
+        self.assertEqual(clean_token("  DISCORD_TOKEN=abc.def.ghi  "), "abc.def.ghi")
+        self.assertEqual(clean_token("paste-bot-token-here"), "")
+        self.assertEqual(parse_env_text("DISCORD_TOKEN=abc\nDISCORD_GUILD_ID=\n")["DISCORD_TOKEN"], "abc")
+
+        old = os.environ.pop("DISCORD_TOKEN", None)
+        self.addCleanup(lambda: os.environ.update({"DISCORD_TOKEN": old}) if old else None)
+        with tempfile.TemporaryDirectory() as tmp:
+            bot_dir = Path(tmp)
+            (bot_dir / "token.txt").write_text("  MTAxxx.yyy.zzz \n", encoding="utf-8")
+            token, source = load_token(bot_dir)
+            self.assertEqual(token, "MTAxxx.yyy.zzz")
+            self.assertEqual(source, "token.txt")
+
+    def test_reads_utf16_env_and_guild_swap(self):
+        import os
+        import tempfile
+
+        from opdb_bot.envload import load_guild_id, load_token
+
+        old = os.environ.pop("DISCORD_TOKEN", None)
+        self.addCleanup(lambda: os.environ.update({"DISCORD_TOKEN": old}) if old else None)
+        with tempfile.TemporaryDirectory() as tmp:
+            bot_dir = Path(tmp)
+            (bot_dir / ".env.txt").write_bytes(
+                "DISCORD_TOKEN=real.token.here\r\nDISCORD_GUILD_ID=\r\n".encode("utf-16")
+            )
+            token, source = load_token(bot_dir)
+            self.assertEqual(token, "real.token.here")
+            self.assertEqual(source, ".env.txt")
+            self.assertEqual(load_guild_id(bot_dir), "")
+
+
 if __name__ == "__main__":
     unittest.main()
