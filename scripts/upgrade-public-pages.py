@@ -257,12 +257,12 @@ def recent_rows_html(rows: list[dict]) -> str:
 def render_home_body() -> str:
     cards = leader_cards_html()
     recent = pick_recent_lists(collect_home_lists())
-    luffy = gen.card_image_url("OP13-001")
+    rocks = gen.card_image_url("OP17-039")
     return f"""        <!-- HOME_BODY -->
         <section class="home-splash" aria-label="One Piece Deck Base">
           <img class="home-splash-bg" src="/img/opdb-hero.jpg" alt="OPDB" />
-          <a class="home-splash-luffy" href="/decklists/rg-luffy.html">
-            <img src="{luffy}" alt="Monkey D. Luffy" />
+          <a class="home-splash-luffy" href="/decklists/op17/rocks-d-xebec.html">
+            <img src="{rocks}" alt="Rocks D. Xebec" />
           </a>
           <div class="home-splash-bar">
             <h2>One Piece Deck Base</h2>
