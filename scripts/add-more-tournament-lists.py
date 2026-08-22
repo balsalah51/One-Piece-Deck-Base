@@ -144,6 +144,9 @@ def rebuild_hubs(index: dict) -> None:
     for leader in gen.LEADERS:
         lid = leader["id"]
         page_path = ROOT / leader["page"]
+        if not page_path.exists():
+            print("skip missing hub", page_path)
+            continue
         page = page_path.read_text()
         comm_lists = community_entries(leader)
         tour_lists = tournament_entries(leader, index.get(lid) or [])
@@ -244,16 +247,17 @@ def pick_fresh(leader: dict, entries: list[dict], index: dict) -> list[dict]:
     return fresh
 
 
-def fetch_more(index: dict, pages: int = PAGES) -> dict:
-    target_ids = {L["id"] for L in gen.LEADERS}
+def fetch_more(index: dict, pages: int = PAGES, only_ids: set[str] | None = None) -> dict:
+    target_ids = only_ids or {L["id"] for L in gen.LEADERS}
+    leaders = [L for L in gen.LEADERS if L["id"] in target_ids]
     print("fetching tournament pages", pages)
     tournaments = fetch_tournament_pages(pages=pages)
-    print("tournaments", len(tournaments), "rescanning all events for every leader")
+    print("tournaments", len(tournaments), "scanning", sorted(target_ids))
     by_leader = gen.fetch_standings(tournaments, target_ids)
     cache = gen.load_card_cache()
     needed = set()
     planned: dict[str, list] = {}
-    for leader in gen.LEADERS:
+    for leader in leaders:
         lid = leader["id"]
         fresh = pick_fresh(leader, by_leader.get(lid) or [], index)
         planned[lid] = fresh
@@ -262,7 +266,7 @@ def fetch_more(index: dict, pages: int = PAGES) -> dict:
                 needed.add(item["id"])
         print(lid, "new lists", len(fresh), "raw", len(by_leader.get(lid) or []))
     cache = gen.ensure_cards(needed, cache)
-    for leader in gen.LEADERS:
+    for leader in leaders:
         lid = leader["id"]
         fresh = planned.get(lid) or []
         if not fresh:

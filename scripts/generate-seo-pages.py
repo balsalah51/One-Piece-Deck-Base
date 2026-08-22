@@ -30,6 +30,12 @@ LEADERS = [
     ("Imu", "/decklists/imu.html", "OP13 Black Mary Geoise"),
     ("Enel", "/decklists/enel.html", "OP15 Purple Sky Island"),
     ("Charlotte Katakuri", "/decklists/charlotte-katakuri.html", "OP11 Purple Big Mom Pirates"),
+    ("GB Luffy", "/decklists/gb-luffy.html", "OP16 Green/Blue Impel Down Luffy"),
+    ("Blackbeard", "/decklists/blackbeard.html", "OP16 Black/Yellow Marshall D. Teach"),
+    ("Rosinante", "/decklists/rosinante.html", "OP12 Purple/Yellow Donquixote Rosinante"),
+    ("Lucy", "/decklists/lucy.html", "OP15 Red/Blue Lucy"),
+    ("Yamato", "/decklists/yamato.html", "OP16 Black Yamato"),
+    ("Koby", "/decklists/koby.html", "OP11 Red/Black Koby"),
 ]
 
 
@@ -42,7 +48,7 @@ def chrome(title: str, description: str, body: str) -> str:
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
   <link rel="canonical" href="{html.escape(SITE)}" />
-  <link rel="stylesheet" href="/css/site.css" />
+  <link rel="stylesheet" href="/css/site.css?v=meta-tools" />
 </head>
 <body>
   <div class="wrap">
@@ -56,8 +62,9 @@ def chrome(title: str, description: str, body: str) -> str:
       </a>
       <nav aria-label="Primary">
         <a href="/#decklists">Decklists</a>
-        <a href="/decklists/op17.html">OP17</a>
-        <a href="/#community">Community</a>
+        <a href="/decklists/op17.html">Leaders</a>
+        <a href="/format.html">Format</a>
+        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
       </nav>
     </header>
     <main class="single">
@@ -70,6 +77,7 @@ def chrome(title: str, description: str, body: str) -> str:
     </footer>
   </div>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="/js/site.js?v=meta-tools"></script>
 </body>
 </html>
 """
@@ -371,7 +379,7 @@ TOPICS = [
 
 # name, slug, blurb, related leader keys (index into LEADERS)
 CHARACTERS = [
-    ("Monkey D. Luffy", "monkey-d-luffy", "Straw Hat captain and the most-searched OPTCG name. Black OP17 Luffy and RG Luffy are the two constructed leaders on this site.", [4, 6]),
+    ("Monkey D. Luffy", "monkey-d-luffy", "Straw Hat captain and the most-searched OPTCG name. Black OP17 Luffy, RG Luffy, and green/blue OP16 Impel Down Luffy are constructed leaders here.", [4, 6, 14]),
     ("Roronoa Zoro", "roronoa-zoro", "First mate and swordsman. Zoro cards show up in Mihawk and RG Luffy OPTCG lists.", [8, 6]),
     ("Nami", "nami", "Straw Hat navigator. Nami is the blue/yellow OPTCG leader; green Shanks lists also play Nami cards.", [7, 1]),
     ("Usopp", "usopp", "Sniper of the Straw Hats. Usopp cards appear in RG Luffy and Black Luffy OPTCG decklists.", [6, 4]),
@@ -402,7 +410,7 @@ CHARACTERS = [
     ("King", "king", "All-Star of the Beasts. King cards are common in purple Kaido OPTCG lists.", [3]),
     ("Queen", "queen", "All-Star of the Beasts. Queen cards show up next to Kaido in purple OPTCG lists.", [3]),
     ("Jack", "jack", "Drought Jack of the Beasts. See purple Kaido OPTCG decklists.", [3]),
-    ("Yamato", "yamato", "Oden’s name successor. Yamato cards appear in Kaido OPTCG lists.", [3]),
+    ("Yamato", "yamato", "Oden’s name successor. Black OP16 Yamato is the constructed Wano leader; Yamato cards also appear in Kaido lists.", [18, 3]),
     ("Ulti", "ulti", "Tobi Roppo. Ulti & Page One show up in purple Kaido OPTCG lists.", [3]),
     ("Page One", "page-one", "Tobi Roppo. Paired with Ulti in some Kaido OPTCG decklists.", [3]),
     ("Charlotte Linlin", "charlotte-linlin", "Big Mom and OP17 yellow leader. Yellow Linlin OPTCG lists are on her leader page.", [5]),
@@ -412,12 +420,12 @@ CHARACTERS = [
     ("Charlotte Cracker", "charlotte-cracker", "Thousand Arms Cracker. Yellow Linlin OPTCG is the matching leader.", [5]),
     ("Charlotte Perospero", "charlotte-perospero", "First son of Big Mom. See Linlin OPTCG decklists.", [5]),
     ("Dracule Mihawk", "dracule-mihawk", "World’s Strongest Swordsman and green OPTCG leader. Mihawk has tournament lists on this site.", [8]),
-    ("Trafalgar Law", "trafalgar-law", "Surgeon of Death. Law cards appear in RG Luffy and other green OPTCG lists.", [6, 8]),
+    ("Trafalgar Law", "trafalgar-law", "Surgeon of Death. Purple/Yellow Rosinante is the Law-partner leader; Law cards also appear in RG Luffy lists.", [16, 6, 8]),
     ("Eustass Kid", "eustass-kid", "Captain of the Kid Pirates. Kid is a common OPTCG search; start from the OP17 hub and RG Luffy.", [6, 4]),
     ("Killer", "killer", "Kid Pirates combatant. Related OPTCG lists sit with supernova packages on RG Luffy.", [6]),
     ("Jewelry Bonney", "jewelry-bonney", "Supernova captain. Bonney names often land next to other supernova OPTCG lists.", [6]),
-    ("Marshall D. Teach", "marshall-d-teach", "Blackbeard. There is not a dedicated Teach leader page yet; start from OP17 and Kaido/Luffy lists.", [3, 4]),
-    ("Blackbeard", "blackbeard", "Same person as Marshall D. Teach. Use the OP17 hub until a Teach leader page exists.", [4, 3]),
+    ("Marshall D. Teach", "marshall-d-teach", "Blackbeard. Black/Yellow OP16 Marshall D. Teach is the constructed leader on this site.", [15]),
+    ("Blackbeard", "blackbeard", "Same person as Marshall D. Teach. Open the OP16 Blackbeard leader page for 50-card lists.", [15]),
     ("Buggy", "buggy", "Warlord and Emperor. Buggy searches should still land on this OPTCG hub and the OP17 leaders.", [1, 4]),
     ("Crocodile", "crocodile", "Former Warlord. No Crocodile leader page yet; the OP17 decklist hub is the start.", [2, 5]),
     ("Donquixote Doflamingo", "donquixote-doflamingo", "Heavenly Demon. Doflamingo is a frequent OPTCG search; open the hub then a color that matches your list.", [8, 2]),
@@ -431,24 +439,28 @@ CHARACTERS = [
     ("Aokiji", "aokiji", "Kuzan. Cross-guild and marine searches still belong on this OPTCG site hub.", [2]),
     ("Kizaru", "kizaru", "Borsalino. Admiral searches should land here, then move to a leader list.", [8]),
     ("Fujitora", "fujitora", "Issho. Another admiral name that should resolve to this OPTCG hub.", [8]),
-    ("Coby", "coby", "Marine prodigy. Coby searches can start at Luffy-related OPTCG pages.", [4]),
+    ("Coby", "coby", "Marine prodigy. Red/Black OP11 Koby is the constructed Navy / SWORD leader.", [19]),
+    ("Koby", "koby", "Same search as Coby. Red/Black OP11 Koby is the constructed Navy / SWORD leader.", [19]),
     ("Smoker", "smoker", "White Hunter of the Marines. Use the OPTCG hub.", [7]),
     ("Rob Lucci", "rob-lucci", "CP0. Lucci is a popular OPTCG name; start from the hub if you do not see a dedicated leader.", [8, 4]),
     ("Perona", "perona", "Ghost Princess. Perona cards can show up in Mihawk-adjacent OPTCG packages.", [8]),
     ("Mr 2 Bon Kurei", "mr-2-bon-kurei", "Bentham. A fun OPTCG character name that should still reach this site.", [3, 5]),
-    ("Emporio Ivankov", "emporio-ivankov", "Queen of the Kamabakka Kingdom. Related constructed lists start at Luffy pages.", [4]),
+    ("Emporio Ivankov", "emporio-ivankov", "Queen of the Kamabakka Kingdom. Green/Blue OP16 Impel Down Luffy is the closest constructed leader.", [14, 4]),
     ("Uta", "uta", "New Genesis. Uta cards appear in some red Newgate OPTCG lists.", [0]),
     ("Loki", "loki", "Prince of Elbaph. Black OP17 Luffy is the Elbaph OPTCG leader on this site.", [4]),
     ("Harald", "harald", "King of Elbaph. Black Luffy OPTCG lists are the Elbaph constructed pages.", [4]),
     ("Shakuyaku", "shakuyaku", "Shakky of the Rocks era. Blue Rocks D. Xebec is the matching OP17 OPTCG leader.", [2]),
-    ("Luffy", "luffy", "Same search as Monkey D. Luffy. Black OP17 Luffy and RG Luffy are the constructed OPTCG leaders.", [4, 6]),
+    ("Luffy", "luffy", "Same search as Monkey D. Luffy. Black OP17 Luffy, RG Luffy, and GB Impel Down Luffy are constructed leaders.", [4, 6, 14]),
     ("Zoro", "zoro", "Same search as Roronoa Zoro. Mihawk and RG Luffy lists are the closest OPTCG pages.", [8, 6]),
     ("Mihawk", "mihawk", "Same search as Dracule Mihawk. Green Mihawk has tournament OPTCG lists on this site.", [8]),
     ("Newgate", "newgate", "Same person as Edward Newgate / Whitebeard. Red OP17 is the constructed page.", [0]),
     ("Xebec", "xebec", "Same search as Rocks D. Xebec. Blue OP17 is the constructed OPTCG leader.", [2]),
     ("Rocks", "rocks", "Short name for Rocks D. Xebec and the Rocks Pirates OPTCG package.", [2]),
     ("Linlin", "linlin", "Same person as Charlotte Linlin / Big Mom. Yellow OP17 is the constructed page.", [5]),
-    ("Law", "law", "Same search as Trafalgar Law. RG Luffy and Mihawk lists are the closest OPTCG pages.", [6, 8]),
+    ("Law", "law", "Same search as Trafalgar Law. Rosinante is the Law-partner leader; RG Luffy lists also play Law cards.", [16, 6]),
+    ("Donquixote Rosinante", "donquixote-rosinante", "Corazon. Purple/Yellow OP12 Rosinante is the Law-partner constructed leader.", [16]),
+    ("Rosinante", "rosinante", "Same search as Donquixote Rosinante / Corazon. Open the purple/yellow leader page.", [16]),
+    ("Corazon", "corazon", "Codename of Donquixote Rosinante. Purple/Yellow OP12 is the constructed leader.", [16]),
     ("Kid", "kid", "Same search as Eustass Kid. Start from RG Luffy and the OP17 hub.", [6, 4]),
     ("Ace", "ace", "Same search as Portgas D. Ace. OP16 Ace is the constructed red leader; OP13 Ace is the red/blue leader.", [9, 10]),
     ("Roger", "roger", "Same search as Gol D. Roger. Roger cards show up in Newgate and Rocks OPTCG lists.", [0, 2]),
@@ -460,7 +472,7 @@ CHARACTERS = [
     ("Lucci", "lucci", "Same search as Rob Lucci. Start from the hub, Mihawk, or Black Luffy pages.", [8, 4]),
     ("Doflamingo", "doflamingo", "Same search as Donquixote Doflamingo. Use the OPTCG hub and green lists.", [8, 2]),
     ("Hancock", "hancock", "Same search as Boa Hancock. Start from the OP17 hub and yellow/black lists.", [5, 4]),
-    ("Teach", "teach", "Same search as Marshall D. Teach / Blackbeard. Use the OP17 hub until a Teach leader exists.", [3, 4]),
+    ("Teach", "teach", "Same search as Marshall D. Teach / Blackbeard. Open the OP16 Blackbeard leader page.", [15]),
     ("Garp", "garp", "Same search as Monkey D. Garp. Luffy OPTCG pages are the closest constructed lists.", [4, 6]),
     ("Dragon", "dragon", "Same search as Monkey D. Dragon. Black Luffy OPTCG is the related constructed page.", [4]),
     ("Nefertari Vivi", "nefertari-vivi", "Princess of Alabasta. Straw Hat adjacent; start from Luffy and Nami OPTCG pages.", [4, 7]),
@@ -476,12 +488,12 @@ CHARACTERS = [
     ("Borsalino", "borsalino", "Admiral Kizaru. Use the OPTCG hub, then a leader that matches your list.", [8]),
     ("Issho", "issho", "Admiral Fujitora. Another marine name that should resolve to this OPTCG hub.", [8]),
     ("Sentomaru", "sentomaru", "Marine scientist escort. Egghead-era searches can start at the OPTCG hub.", [4, 8]),
-    ("Magellan", "magellan", "Warden of Impel Down. Poison searches can start at black Luffy or the hub.", [4]),
-    ("Shiryu", "shiryu", "Blackbeard Pirates swordsman. Use the hub until a Teach leader page exists.", [3, 8]),
-    ("Jesus Burgess", "jesus-burgess", "Champion of the Blackbeard Pirates. Start from the OP17 hub.", [3, 4]),
-    ("Van Augur", "van-augur", "Blackbeard Pirates sniper. Use the OPTCG hub.", [3]),
-    ("Lafitte", "lafitte", "Blackbeard Pirates navigator. Use the OPTCG hub.", [3]),
-    ("Doc Q", "doc-q", "Blackbeard Pirates doctor. Use the OPTCG hub.", [3]),
+    ("Magellan", "magellan", "Warden of Impel Down. Green/Blue OP16 Luffy is the Impel Down constructed leader.", [14, 4]),
+    ("Shiryu", "shiryu", "Blackbeard Pirates swordsman. Open the OP16 Blackbeard leader page.", [15, 8]),
+    ("Jesus Burgess", "jesus-burgess", "Champion of the Blackbeard Pirates. Open the OP16 Blackbeard leader page.", [15]),
+    ("Van Augur", "van-augur", "Blackbeard Pirates sniper. Open the OP16 Blackbeard leader page.", [15]),
+    ("Lafitte", "lafitte", "Blackbeard Pirates navigator. Open the OP16 Blackbeard leader page.", [15]),
+    ("Doc Q", "doc-q", "Blackbeard Pirates doctor. Open the OP16 Blackbeard leader page.", [15]),
     ("Shirahoshi", "shirahoshi", "Princess of the Ryugu Kingdom. Jinbe and Luffy OPTCG pages are related.", [4]),
     ("Neptune", "neptune", "King of the Ryugu Kingdom. Fish-Man searches can start at Jinbe/Luffy pages.", [4]),
     ("Fisher Tiger", "fisher-tiger", "Sun Pirates founder. Jinbe-related OPTCG searches start at Black Luffy.", [4]),
@@ -500,7 +512,7 @@ CHARACTERS = [
     ("Ryuma", "ryuma", "Legendary samurai zombie. Zoro and Mihawk OPTCG pages are the closest lists.", [8, 6]),
     ("Caesar Clown", "caesar-clown", "Scientist of Punk Hazard. Law-related searches can start at RG Luffy.", [6]),
     ("Monet", "monet", "Snow woman of Punk Hazard. Use the OPTCG hub.", [6, 7]),
-    ("Vergo", "vergo", "Corazon’s former vice admiral cover. Law searches start at RG Luffy.", [6]),
+    ("Vergo", "vergo", "Corazon’s former vice admiral cover. Law searches start at the Rosinante leader page.", [16, 6]),
     ("Kinemon", "kinemon", "Kozuki retainer. Wano searches can start at Kaido or Luffy OPTCG pages.", [3, 4]),
     ("Kouzuki Momonosuke", "kouzuki-momonosuke", "Shogun of Wano. Kaido and Luffy OPTCG pages are related constructed lists.", [3, 4]),
     ("Kouzuki Hiyori", "kouzuki-hiyori", "Princess of Wano. Nami and Wano-adjacent OPTCG lists are the start.", [7, 3]),
@@ -509,7 +521,7 @@ CHARACTERS = [
     ("Raizo", "raizo", "Ninja of Wano. Start from Luffy or Kaido OPTCG pages.", [4, 3]),
     ("Kikunojo", "kikunojo", "Kozuki retainer. Wano searches can start at Kaido or Luffy.", [3, 4]),
     ("Shinobu", "shinobu", "Wano kunoichi. Use the OPTCG hub and Luffy pages.", [4]),
-    ("Tama", "tama", "Kibi child of Wano. Yamato and Kaido OPTCG pages are nearby.", [3]),
+    ("Tama", "tama", "Kibi child of Wano. Black OP16 Yamato and purple Kaido are nearby constructed pages.", [18, 3]),
     ("Who's Who", "whos-who", "Tobi Roppo. Purple Kaido OPTCG lists are the matching constructed pages.", [3]),
     ("Sasaki", "sasaki", "Tobi Roppo. Purple Kaido OPTCG lists are the matching constructed pages.", [3]),
     ("Black Maria", "black-maria", "Tobi Roppo. Purple Kaido OPTCG lists are the matching constructed pages.", [3]),
@@ -589,7 +601,7 @@ CHARACTERS = [
     ("Drought Jack", "drought-jack", "Jack of the Beasts. Purple Kaido OPTCG lists are the constructed pages.", [3]),
     ("Sweet Commander", "sweet-commander", "Katakuri, Smoothie, and Cracker. Yellow Linlin OPTCG is the matching leader.", [5]),
     ("Red-Haired Shanks", "red-haired-shanks", "Full search for OP17 green Shanks. Open the Shanks leader page for OPTCG lists.", [1]),
-    ("Blackbeard Pirates", "blackbeard-pirates", "Marshall D. Teach’s crew. Use the OP17 hub until a Teach leader page exists.", [3, 4]),
+    ("Blackbeard Pirates", "blackbeard-pirates", "Marshall D. Teach’s crew. Open the OP16 Blackbeard leader page for constructed lists.", [15]),
     ("Heart Pirates", "heart-pirates", "Trafalgar Law’s crew. Law cards show up in RG Luffy OPTCG lists.", [6]),
     ("Kid Pirates", "kid-pirates", "Eustass Kid’s crew. Start from RG Luffy and the OP17 hub.", [6, 4]),
     ("Sun Pirates", "sun-pirates", "Jinbe and Fisher Tiger. Black Luffy OPTCG is a related constructed page.", [4]),
@@ -611,11 +623,11 @@ CHARACTERS = [
     ("Karasu", "karasu", "Revolutionary Army commander. Use Luffy OPTCG pages.", [4]),
     ("Morley", "morley", "Revolutionary Army commander. Use Luffy OPTCG pages.", [4]),
     ("Lindbergh", "lindbergh", "Revolutionary Army commander. Use Luffy OPTCG pages.", [4]),
-    ("Yamato Oden", "yamato-oden", "Yamato using Oden’s name. Purple Kaido OPTCG lists are related.", [3]),
+    ("Yamato Oden", "yamato-oden", "Yamato using Oden’s name. Black OP16 Yamato is the constructed Wano leader.", [18, 3]),
     ("Onami", "onami", "Nami’s Wano alias. Nami is the constructed OPTCG leader.", [7]),
     ("O-Soba Mask", "o-soba-mask", "Sanji’s raid suit alias. Newgate and RG Luffy lists may play Sanji cards.", [0, 6]),
     ("Sogeking", "sogeking", "Usopp’s Sniper Island alias. Luffy OPTCG pages are related.", [4, 6]),
-    ("Lucy", "lucy", "Luffy’s Dressrosa alias. Black Luffy and RG Luffy are the constructed pages.", [4, 6]),
+    ("Lucy", "lucy", "Luffy’s Dressrosa alias and red/blue OP15 leader. Not red/blue OP13 Ace.", [17, 10]),
     ("Straw Hat", "straw-hat", "Luffy’s epithet and crew name. Open the Luffy OPTCG leader pages.", [4, 6]),
     ("Gum-Gum", "gum-gum", "Luffy’s Devil Fruit name search. Open Monkey D. Luffy OPTCG lists.", [4, 6]),
     ("Haki", "haki", "OPTCG cards reference Haki in effects. Open any leader list to see constructed cards.", [4, 1]),

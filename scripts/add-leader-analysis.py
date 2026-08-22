@@ -97,6 +97,36 @@ TAKES = {
         "Trash a card to give −2000, then draw when you take damage or a 6000-power body dies. "
         "Core is Monkey D. Garp, Otama, Izo, Marco, Yamato, OP13 Edward Newgate, and I Am Whitebeard; Uta, Jozu, Atmos, and Roger finish."
     ),
+    "OP16-022": (
+        "Green/Blue OP16 Monkey D. Luffy is Impel Down tempo — not red/green OP13 Luffy and not black OP17 Elbaph Luffy. "
+        "If the only characters on your field are Impel Down, set up to 2 DON!! active. "
+        "Averaged lists are built from the Impel Down / Straw Hat package on this page."
+    ),
+    "OP16-080": (
+        "Black/Yellow OP16 Marshall D. Teach is Blackbeard, not a different Teach printing. "
+        "Your characters cost +1 on the opponent's turn; trash a Trigger to retarget an attack. "
+        "Averaged lists use the Blackbeard Pirates and Trigger package that shows up on this page."
+    ),
+    "OP12-061": (
+        "Purple/Yellow Donquixote Rosinante is the Law partner leader. "
+        "Once per turn you can pay a Life instead of letting Law die, then DON!! −1 to discount a 4-cost or higher Law. "
+        "Averaged lists are the Law / Navy pile from tournaments on this page."
+    ),
+    "OP15-002": (
+        "Red/Blue Lucy is Dressrosa Luffy in the colosseum disguise — not red/blue OP13 Ace. "
+        "Trash events or stages for power, then draw if you already fired a 3-cost or higher event. "
+        "Averaged lists follow the event-heavy Lucy package on this page."
+    ),
+    "OP16-079": (
+        "Black OP16 Yamato is the Wano leader, not a character in Kaido. "
+        "A Land of Wano character played from trash gains Rush that turn. "
+        "Averaged lists are the Wano trash package from tournaments on this page."
+    ),
+    "OP11-001": (
+        "Red/Black Koby is Navy / SWORD. "
+        "SWORD characters can attack the turn they come down, and a 7000-or-less Navy body can be saved from removal. "
+        "Averaged lists follow the SWORD package on this page."
+    ),
 }
 
 POPUP_JS = r"""
@@ -252,12 +282,18 @@ def grouped_from_picks(leader: dict, picks: list[tuple[str, int, float]], cache:
 
 def analysis_block(leader: dict, n: int, take: str, text_deck: str) -> str:
     text_deck = text_deck.replace("<h3>Text list</h3>", "<h3>Consensus list</h3>", 1)
+    averaged = (
+        f'<p class="muted">Averaged from {n} lists on this page, then filled to 50 cards. '
+        "Hover or tap a name for the picture. Copy pastes the IDs for OPTCGSim.</p>"
+    )
+    text_deck = text_deck.replace(
+        '<p class="muted">Hover or tap a card name to see the picture. Copy pastes <code>NxSET-NNN</code> for OPTCGSim.</p>',
+        averaged,
+        1,
+    )
     text_deck = text_deck.replace(
         '<p class="muted">Hover or tap a card name to see the picture.</p>',
-        (
-            f'<p class="muted">Averaged from {n} lists on this page, then filled to 50 cards. '
-            "Hover or tap a name for the picture.</p>"
-        ),
+        averaged,
         1,
     )
     return f"""        <!-- LEADER_ANALYSIS -->
