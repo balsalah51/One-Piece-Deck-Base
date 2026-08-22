@@ -22,8 +22,8 @@ aspec.loader.exec_module(ana)
 
 ROOT = gen.ROOT
 LINE_RE = ana.LINE_RE
-CSS_NEW = "/css/site.css?v=home-recent"
-JS_NEW = "/js/site.js?v=home-recent"
+CSS_NEW = "/css/site.css?v=home-hub"
+JS_NEW = "/js/site.js?v=home-hub"
 NAV_OLD_PATTERNS = [
     (
         '        <a href="/decklists/op17.html">OP17</a>\n        <a href="/#community">Community</a>',
@@ -257,18 +257,68 @@ def recent_rows_html(rows: list[dict]) -> str:
 def render_home_body() -> str:
     cards = leader_cards_html()
     recent = pick_recent_lists(collect_home_lists())
-    n = len(gen.LEADERS)
+    luffy = gen.card_image_url("OP13-001")
     return f"""        <!-- HOME_BODY -->
-        <h2>One Piece Deck Base</h2>
-        <p>Every leader on this site. Open a picture, or jump to leaders and recent lists.</p>
-        <div class="leader-cards home-cards" aria-label="All leader card pictures">
+        <section class="home-splash" aria-label="One Piece Deck Base">
+          <img class="home-splash-bg" src="/img/opdb-hero.jpg" alt="OPDB" />
+          <a class="home-splash-luffy" href="/decklists/rg-luffy.html">
+            <img src="{luffy}" alt="Monkey D. Luffy" />
+          </a>
+          <div class="home-splash-bar">
+            <h2>One Piece Deck Base</h2>
+            <p>OPTCG decklists. Jump a section, or keep scrolling into the leaders.</p>
+          </div>
+        </section>
+
+        <nav class="home-big3" aria-label="Main sections">
+          <a class="home-big home-big-recent" href="#recent">
+            <span class="home-big-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                <path d="M8 7h11M8 12h11M8 17h11M4 7h.01M4 12h.01M4 17h.01"/>
+              </svg>
+            </span>
+            <span class="home-big-title">Recent Lists</span>
+            <span class="home-big-note">Newest 50-card results from every leader</span>
+          </a>
+          <a class="home-big home-big-leaders" href="#leaders">
+            <span class="home-big-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="5" width="12" height="16" rx="2"/>
+                <rect x="9" y="3" width="12" height="16" rx="2"/>
+              </svg>
+            </span>
+            <span class="home-big-title">Leaders</span>
+            <span class="home-big-note">Every leader picture on this site</span>
+          </a>
+          <a class="home-big home-big-discord" href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">
+            <span class="home-big-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.3 5.2A17.4 17.4 0 0 0 14.9 4l-.2.4a15.2 15.2 0 0 1 3.6 1.1c-3.3-1.5-6.6-1.5-9.8 0 .4-.2.9-.4 1.3-.6l-.2-.4A17.3 17.3 0 0 0 4.7 5.2C1.9 9.4 1.1 13.5 1.5 17.5a17.7 17.7 0 0 0 5.4 2.7l.7-1.1a11.5 11.5 0 0 1-2.1-1l.2-.1c1.6.7 3.3 1.2 5.1 1.2s3.5-.4 5.1-1.2l.2.1a11.5 11.5 0 0 1-2.1 1l.7 1.1a17.7 17.7 0 0 0 5.4-2.7c.5-4.6-.7-8.7-3.8-12.3ZM8.8 14.8c-1 0-1.9-.9-1.9-2s.8-2 1.9-2 1.9.9 1.9 2-.8 2-1.9 2Zm6.4 0c-1 0-1.9-.9-1.9-2s.8-2 1.9-2 1.9.9 1.9 2-.8 2-1.9 2Z"/>
+              </svg>
+            </span>
+            <span class="home-big-title">Discord</span>
+            <span class="home-big-note">Talk lists, flair, and the crew</span>
+          </a>
+        </nav>
+
+        <div class="home-flow">
+          <span class="home-flow-line" aria-hidden="true"></span>
+          <p>Or keep scrolling — the leaders start here.</p>
+          <span class="home-flow-line" aria-hidden="true"></span>
+        </div>
+
+        <section class="card home-panel" id="leaders">
+          <div class="section-title">
+            <h3>Leaders</h3>
+            <a href="/decklists/op17.html">All leader pages →</a>
+          </div>
+          <p class="muted">Pick a picture. Each page has lists for that leader.</p>
+          <div class="leader-cards home-cards" aria-label="All leader card pictures">
 {cards}
-        </div>
-        <div class="home-jump">
-          <a class="home-jump-leaders" href="/decklists/op17.html">Leaders</a>
-          <a class="home-jump-recent" href="/#recent">Recent lists</a>
-        </div>
-        <section id="recent">
+          </div>
+        </section>
+
+        <section class="card home-panel" id="recent">
           <div class="section-title">
             <h3>Recent lists</h3>
             <div class="muted">{len(recent)} lists</div>
@@ -298,6 +348,14 @@ def patch_home() -> None:
     path = ROOT / "index.html"
     text = path.read_text()
     body = render_home_body()
+    text = text.replace(
+        '    <main class="single">\n      <div class="card hero" role="main">\n',
+        '    <main class="single home" role="main">\n',
+    )
+    text = text.replace(
+        '        <!-- /HOME_BODY -->\n      </div>\n    </main>',
+        '        <!-- /HOME_BODY -->\n    </main>',
+    )
     if "<!-- HOME_BODY -->" in text:
         text = re.sub(
             r"        <!-- HOME_BODY -->.*?        <!-- /HOME_BODY -->",
@@ -315,6 +373,14 @@ def patch_home() -> None:
             flags=re.S,
         )
     text = text.replace('href="/#decklists"', 'href="/#recent"')
+    text = text.replace(
+        '        <a href="/#recent" aria-current="page">Recent lists</a>\n        <a href="/decklists/op17.html">Leaders</a>',
+        '        <a href="#recent">Recent lists</a>\n        <a href="#leaders">Leaders</a>',
+    )
+    text = text.replace(
+        '        <a href="/#recent">Recent lists</a>\n        <a href="/decklists/op17.html">Leaders</a>',
+        '        <a href="#recent">Recent lists</a>\n        <a href="#leaders">Leaders</a>',
+    )
     text = patch_nav_and_assets(text)
     path.write_text(text)
     print("home leaders", len(gen.LEADERS), "recent", RECENT_LIMIT)
