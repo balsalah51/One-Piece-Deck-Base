@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>RG Luffy decklist</title>
   <meta name="description" content="RG Luffy — Red/Green Monkey D. Luffy leader page and scraped tournament list." />
-  <link rel="stylesheet" href="/css/site.css?v=stack-left" />
+  <link rel="stylesheet" href="/css/site.css?v=meta-tools" />
 </head>
 <body class="color-red-green">
   <div class="wrap">
@@ -19,8 +19,9 @@
       </a>
       <nav aria-label="Primary">
         <a href="/#decklists" aria-current="page">Decklists</a>
-        <a href="/decklists/op17.html">OP17</a>
-        <a href="/#community">Community</a>
+        <a href="/decklists/op17.html">Leaders</a>
+        <a href="/format.html">Format</a>
+        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
       </nav>
     </header>
 
@@ -220,8 +221,28 @@
             <div class="muted">184 lists</div>
           </div>
           <p class="muted">Newest Limitless events first. Each row opens a separate 50-card list.</p>
+          <div class="list-filters" data-hub-filters>
+            <input type="search" data-filter="q" placeholder="Filter player or event" aria-label="Filter lists" />
+            <select data-filter="when" aria-label="Date">
+              <option value="">Any date</option>
+              <option value="jul">Since July 2026</option>
+              <option value="aug">Since August 2026</option>
+            </select>
+            <select data-filter="place" aria-label="Placing">
+              <option value="">Any placing</option>
+              <option value="top8">Top 8</option>
+              <option value="win">1st only</option>
+            </select>
+            <select data-filter="event" aria-label="Event type">
+              <option value="">Any event</option>
+              <option value="regional">Regional</option>
+              <option value="treasure">Treasure Cup</option>
+              <option value="championship">Championship / Flagship</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
           <ul class="list" aria-label="Tournament decklists">
-            <li>
+            <li data-date="2026-08-18" data-placing="5" data-event="other">
               <a class="item" href="/decklists/rg-luffy/5th-nahuel-del-muro-liga-phoenix-2026-one-piece-mana-32.html">
                 <div>
                   <div style="font-weight:700">Nahuel Del muro — RG Luffy</div>
@@ -230,7 +251,7 @@
                 <div class="link">2026-08-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-17" data-placing="1" data-event="other">
               <a class="item" href="/decklists/rg-luffy/1st-nahuel-del-muro-liga-phoenix-2026-one-piece-mana-31.html">
                 <div>
                   <div style="font-weight:700">Nahuel Del muro — RG Luffy</div>
@@ -239,7 +260,7 @@
                 <div class="link">2026-08-17 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-17" data-placing="5" data-event="other">
               <a class="item" href="/decklists/rg-luffy/5th-tom-s-larrondo-liga-phoenix-2026-one-piece-mana-31.html">
                 <div>
                   <div style="font-weight:700">Tomás Larrondo — RG Luffy</div>
@@ -248,7 +269,7 @@
                 <div class="link">2026-08-17 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-13" data-placing="4" data-event="other">
               <a class="item" href="/decklists/rg-luffy/4th-overlord28-op-tcg-ua-weekly-webcam-tournament.html">
                 <div>
                   <div style="font-weight:700">overLord28 — RG Luffy</div>
@@ -257,7 +278,7 @@
                 <div class="link">2026-08-13 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-13" data-placing="8" data-event="other">
               <a class="item" href="/decklists/rg-luffy/8th-patricio-girondo-phoenix-la-plata-one-piece-17.html">
                 <div>
                   <div style="font-weight:700">Patricio Girondo — RG Luffy</div>
@@ -266,7 +287,7 @@
                 <div class="link">2026-08-13 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-13" data-placing="12" data-event="other">
               <a class="item" href="/decklists/rg-luffy/12th-tom-s-larrondo-phoenix-la-plata-one-piece-17.html">
                 <div>
                   <div style="font-weight:700">Tomás Larrondo — RG Luffy</div>
@@ -275,7 +296,7 @@
                 <div class="link">2026-08-13 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-12" data-placing="4" data-event="other">
               <a class="item" href="/decklists/rg-luffy/4th-toan2610-chinoizecup-96-wednesday.html">
                 <div>
                   <div style="font-weight:700">Toan2610 — RG Luffy</div>
@@ -284,7 +305,7 @@
                 <div class="link">2026-08-12 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-12" data-placing="5" data-event="other">
               <a class="item" href="/decklists/rg-luffy/5th-gefen-h-chinoizecup-96-wednesday.html">
                 <div>
                   <div style="font-weight:700">Gefen H — RG Luffy</div>
@@ -293,7 +314,7 @@
                 <div class="link">2026-08-12 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-12" data-placing="6" data-event="other">
               <a class="item" href="/decklists/rg-luffy/6th-phuocke-chinoizecup-96-wednesday.html">
                 <div>
                   <div style="font-weight:700">PhuocKe — RG Luffy</div>
@@ -302,7 +323,7 @@
                 <div class="link">2026-08-12 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-12" data-placing="9" data-event="other">
               <a class="item" href="/decklists/rg-luffy/9th-snorlax1cynda-chinoizecup-96-wednesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -311,7 +332,7 @@
                 <div class="link">2026-08-12 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-11" data-placing="2" data-event="other">
               <a class="item" href="/decklists/rg-luffy/2nd-ricmasterflash-chinoizecup-95-tuesday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -320,7 +341,7 @@
                 <div class="link">2026-08-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-10" data-placing="2" data-event="other">
               <a class="item" href="/decklists/rg-luffy/2nd-snorlax1cynda-chinoizecup-94-monday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -329,7 +350,7 @@
                 <div class="link">2026-08-10 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-10" data-placing="5" data-event="other">
               <a class="item" href="/decklists/rg-luffy/5th-gefen-h-chinoizecup-94-monday.html">
                 <div>
                   <div style="font-weight:700">Gefen H — RG Luffy</div>
@@ -338,7 +359,7 @@
                 <div class="link">2026-08-10 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-10" data-placing="14" data-event="other">
               <a class="item" href="/decklists/rg-luffy/14th-polgofo-chinoizecup-94-monday.html">
                 <div>
                   <div style="font-weight:700">PolGoFo — RG Luffy</div>
@@ -347,7 +368,7 @@
                 <div class="link">2026-08-10 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-09" data-placing="3" data-event="other">
               <a class="item" href="/decklists/rg-luffy/3rd-trollet-miniature-metropolis-box-tournament.html">
                 <div>
                   <div style="font-weight:700">Trollet — RG Luffy</div>
@@ -356,7 +377,7 @@
                 <div class="link">2026-08-09 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-09" data-placing="8" data-event="other">
               <a class="item" href="/decklists/rg-luffy/8th-dejwono-miniature-metropolis-box-tournament.html">
                 <div>
                   <div style="font-weight:700">Dejwono — RG Luffy</div>
@@ -365,7 +386,7 @@
                 <div class="link">2026-08-09 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-09" data-placing="12" data-event="other">
               <a class="item" href="/decklists/rg-luffy/12th-elanka39-miniature-metropolis-box-tournament.html">
                 <div>
                   <div style="font-weight:700">elanka39 — RG Luffy</div>
@@ -374,7 +395,7 @@
                 <div class="link">2026-08-09 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-06" data-placing="1" data-event="other">
               <a class="item" href="/decklists/rg-luffy/1st-beton1996-ger-dressrosa-tournament-op16-5.html">
                 <div>
                   <div style="font-weight:700">Beton1996 — RG Luffy</div>
@@ -383,7 +404,7 @@
                 <div class="link">2026-08-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-06" data-placing="6" data-event="other">
               <a class="item" href="/decklists/rg-luffy/6th-henri21-ger-dressrosa-tournament-op16-5.html">
                 <div>
                   <div style="font-weight:700">Henri21 — RG Luffy</div>
@@ -392,7 +413,7 @@
                 <div class="link">2026-08-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-06" data-placing="8" data-event="other">
               <a class="item" href="/decklists/rg-luffy/8th-tom-s-larrondo-phoenix-la-plata-one-piece-16.html">
                 <div>
                   <div style="font-weight:700">Tomás Larrondo — RG Luffy</div>
@@ -401,7 +422,7 @@
                 <div class="link">2026-08-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-06" data-placing="11" data-event="other">
               <a class="item" href="/decklists/rg-luffy/11th-patricio-girondo-phoenix-la-plata-one-piece-16.html">
                 <div>
                   <div style="font-weight:700">Patricio Girondo — RG Luffy</div>
@@ -410,7 +431,7 @@
                 <div class="link">2026-08-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-05" data-placing="11" data-event="other">
               <a class="item" href="/decklists/rg-luffy/11th-phuocke-chinoizecup-93-wednesday.html">
                 <div>
                   <div style="font-weight:700">PhuocKe — RG Luffy</div>
@@ -419,7 +440,7 @@
                 <div class="link">2026-08-05 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-04" data-placing="1" data-event="other">
               <a class="item" href="/decklists/rg-luffy/1st-tom-s-larrondo-liga-phoenix-2026-one-piece-mana-30.html">
                 <div>
                   <div style="font-weight:700">Tomás Larrondo — RG Luffy</div>
@@ -428,7 +449,7 @@
                 <div class="link">2026-08-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-04" data-placing="5" data-event="other">
               <a class="item" href="/decklists/rg-luffy/5th-igot2staydown-chinoizecup-92-tuesday.html">
                 <div>
                   <div style="font-weight:700">igot2staydown — RG Luffy</div>
@@ -437,7 +458,7 @@
                 <div class="link">2026-08-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-04" data-placing="6" data-event="other">
               <a class="item" href="/decklists/rg-luffy/6th-ricmasterflash-chinoizecup-92-tuesday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -446,7 +467,7 @@
                 <div class="link">2026-08-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-04" data-placing="9" data-event="other">
               <a class="item" href="/decklists/rg-luffy/9th-nahuel-del-muro-liga-phoenix-2026-one-piece-mana-30.html">
                 <div>
                   <div style="font-weight:700">Nahuel Del muro — RG Luffy</div>
@@ -455,7 +476,7 @@
                 <div class="link">2026-08-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-04" data-placing="10" data-event="other">
               <a class="item" href="/decklists/rg-luffy/10th-suppy-chinoizecup-92-tuesday.html">
                 <div>
                   <div style="font-weight:700">Suppy — RG Luffy</div>
@@ -464,7 +485,7 @@
                 <div class="link">2026-08-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-04" data-placing="14" data-event="other">
               <a class="item" href="/decklists/rg-luffy/14th-rotisserie15-chinoizecup-92-tuesday.html">
                 <div>
                   <div style="font-weight:700">Rotisserie15 — RG Luffy</div>
@@ -473,7 +494,7 @@
                 <div class="link">2026-08-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-03" data-placing="1" data-event="other">
               <a class="item" href="/decklists/rg-luffy/1st-adimski-chinoizecup-91-monday.html">
                 <div>
                   <div style="font-weight:700">Adimski — RG Luffy</div>
@@ -482,7 +503,7 @@
                 <div class="link">2026-08-03 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-03" data-placing="3" data-event="other">
               <a class="item" href="/decklists/rg-luffy/3rd-mirkosp95-chinoizecup-91-monday.html">
                 <div>
                   <div style="font-weight:700">mirkosp95 — RG Luffy</div>
@@ -491,7 +512,7 @@
                 <div class="link">2026-08-03 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-03" data-placing="10" data-event="other">
               <a class="item" href="/decklists/rg-luffy/10th-petemess-chinoizecup-91-monday.html">
                 <div>
                   <div style="font-weight:700">petemess — RG Luffy</div>
@@ -500,7 +521,7 @@
                 <div class="link">2026-08-03 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-08-03" data-placing="11" data-event="other">
               <a class="item" href="/decklists/rg-luffy/11th-impeldown-chinoizecup-91-monday.html">
                 <div>
                   <div style="font-weight:700">ImpelDown — RG Luffy</div>
@@ -509,7 +530,7 @@
                 <div class="link">2026-08-03 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-30" data-placing="2" data-event="other">
               <a class="item" href="/decklists/rg-luffy/2nd-petemess-op16-5-win-a-box-tuesday-aegean-pirate-cup-3.html">
                 <div>
                   <div style="font-weight:700">petemess — RG Luffy</div>
@@ -518,7 +539,7 @@
                 <div class="link">2026-07-30 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-30" data-placing="5" data-event="other">
               <a class="item" href="/decklists/rg-luffy/5th-dominicanosjr-op16-5-win-a-box-tuesday-aegean-pirate-cup-3.html">
                 <div>
                   <div style="font-weight:700">DominicanosJr — RG Luffy</div>
@@ -527,7 +548,7 @@
                 <div class="link">2026-07-30 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-30" data-placing="8" data-event="other">
               <a class="item" href="/decklists/rg-luffy/8th-fransal97-versus-cup.html">
                 <div>
                   <div style="font-weight:700">Fransal97 — RG Luffy</div>
@@ -536,7 +557,7 @@
                 <div class="link">2026-07-30 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-30" data-placing="11" data-event="other">
               <a class="item" href="/decklists/rg-luffy/11th-vince4-rumble-league-vol-2-op16-5.html">
                 <div>
                   <div style="font-weight:700">Vince4 — RG Luffy</div>
@@ -545,7 +566,7 @@
                 <div class="link">2026-07-30 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-29" data-placing="14" data-event="other">
               <a class="item" href="/decklists/rg-luffy/14th-snorlax1cynda-chinoizecup-90-wednesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -554,7 +575,7 @@
                 <div class="link">2026-07-29 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-28" data-placing="2" data-event="other">
               <a class="item" href="/decklists/rg-luffy/2nd-frodon-chinoizecup-89-tuesday.html">
                 <div>
                   <div style="font-weight:700">Frodon — RG Luffy</div>
@@ -563,7 +584,7 @@
                 <div class="link">2026-07-28 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-28" data-placing="8" data-event="other">
               <a class="item" href="/decklists/rg-luffy/8th-ricmasterflash-chinoizecup-89-tuesday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -572,7 +593,7 @@
                 <div class="link">2026-07-28 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-27" data-placing="2" data-event="other">
               <a class="item" href="/decklists/rg-luffy/2nd-beton1996-chinoizecup-88-monday.html">
                 <div>
                   <div style="font-weight:700">Beton1996 — RG Luffy</div>
@@ -581,7 +602,7 @@
                 <div class="link">2026-07-27 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-27" data-placing="4" data-event="other">
               <a class="item" href="/decklists/rg-luffy/4th-kevyzhou-chinoizecup-88-monday.html">
                 <div>
                   <div style="font-weight:700">kevyzhou — RG Luffy</div>
@@ -590,7 +611,7 @@
                 <div class="link">2026-07-27 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-27" data-placing="4" data-event="other">
               <a class="item" href="/decklists/rg-luffy/4th-brunoxyrx-club-tv-24-simulador-op16-5.html">
                 <div>
                   <div style="font-weight:700">brunoxyrx — RG Luffy</div>
@@ -599,7 +620,7 @@
                 <div class="link">2026-07-27 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-27" data-placing="6" data-event="other">
               <a class="item" href="/decklists/rg-luffy/6th-henri21-ger-dressrosa-tournament-op16-st-31-36.html">
                 <div>
                   <div style="font-weight:700">Henri21 — RG Luffy</div>
@@ -608,7 +629,7 @@
                 <div class="link">2026-07-27 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-27" data-placing="7" data-event="other">
               <a class="item" href="/decklists/rg-luffy/7th-starkky-club-tv-24-simulador-op16-5.html">
                 <div>
                   <div style="font-weight:700">Starkky — RG Luffy</div>
@@ -617,7 +638,7 @@
                 <div class="link">2026-07-27 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-23" data-placing="2" data-event="other">
               <a class="item" href="/decklists/rg-luffy/2nd-list-op-tcg-ua-weekly-chill-tournament.html">
                 <div>
                   <div style="font-weight:700">Олексій Ковальов — RG Luffy</div>
@@ -626,7 +647,7 @@
                 <div class="link">2026-07-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-23" data-placing="7" data-event="other">
               <a class="item" href="/decklists/rg-luffy/7th-lmrtns-maca-ba-tcg-simulador-2-edi-o.html">
                 <div>
                   <div style="font-weight:700">Lmrtns — RG Luffy</div>
@@ -635,7 +656,7 @@
                 <div class="link">2026-07-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-23" data-placing="11" data-event="other">
               <a class="item" href="/decklists/rg-luffy/11th-kingmonkeyjc-rumble-league-vol-1-op16-st31-36.html">
                 <div>
                   <div style="font-weight:700">kingmonkeyjc — RG Luffy</div>
@@ -644,7 +665,7 @@
                 <div class="link">2026-07-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-23" data-placing="11" data-event="other">
               <a class="item" href="/decklists/rg-luffy/11th-rhaexo-ger-dressrosa-tournament-op16-st-31-36.html">
                 <div>
                   <div style="font-weight:700">Rhaexo — RG Luffy</div>
@@ -653,7 +674,7 @@
                 <div class="link">2026-07-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-23" data-placing="12" data-event="other">
               <a class="item" href="/decklists/rg-luffy/12th-henri21-ger-dressrosa-tournament-op16-st-31-36.html">
                 <div>
                   <div style="font-weight:700">Henri21 — RG Luffy</div>
@@ -662,7 +683,7 @@
                 <div class="link">2026-07-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-22" data-placing="8" data-event="other">
               <a class="item" href="/decklists/rg-luffy/8th-igot2staydown-chinoizecup-87-wednesday.html">
                 <div>
                   <div style="font-weight:700">igot2staydown — RG Luffy</div>
@@ -671,7 +692,7 @@
                 <div class="link">2026-07-22 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-22" data-placing="13" data-event="other">
               <a class="item" href="/decklists/rg-luffy/13th-luzsnikov-chinoizecup-87-wednesday.html">
                 <div>
                   <div style="font-weight:700">luzsnikov — RG Luffy</div>
@@ -680,7 +701,7 @@
                 <div class="link">2026-07-22 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-21" data-placing="1" data-event="other">
               <a class="item" href="/decklists/rg-luffy/1st-igot2staydown-chinoizecup-86-tuesday.html">
                 <div>
                   <div style="font-weight:700">igot2staydown — RG Luffy</div>
@@ -689,7 +710,7 @@
                 <div class="link">2026-07-21 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-21" data-placing="7" data-event="other">
               <a class="item" href="/decklists/rg-luffy/7th-luzsnikov-chinoizecup-86-tuesday.html">
                 <div>
                   <div style="font-weight:700">luzsnikov — RG Luffy</div>
@@ -698,7 +719,7 @@
                 <div class="link">2026-07-21 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-21" data-placing="13" data-event="other">
               <a class="item" href="/decklists/rg-luffy/13th-tonybojji-chinoizecup-86-tuesday.html">
                 <div>
                   <div style="font-weight:700">TonyBojji — RG Luffy</div>
@@ -707,7 +728,7 @@
                 <div class="link">2026-07-21 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-20" data-placing="1" data-event="other">
               <a class="item" href="/decklists/rg-luffy/1st-frodon-chinoizecup-85-monday.html">
                 <div>
                   <div style="font-weight:700">Frodon — RG Luffy</div>
@@ -716,7 +737,7 @@
                 <div class="link">2026-07-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-20" data-placing="4" data-event="other">
               <a class="item" href="/decklists/rg-luffy/4th-tommy-n-chinoizecup-85-monday.html">
                 <div>
                   <div style="font-weight:700">Tommy N — RG Luffy</div>
@@ -725,7 +746,7 @@
                 <div class="link">2026-07-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-20" data-placing="4" data-event="other">
               <a class="item" href="/decklists/rg-luffy/4th-henri21-ger-dressrosa-tournament-op16-st-31-36.html">
                 <div>
                   <div style="font-weight:700">Henri21 — RG Luffy</div>
@@ -734,7 +755,7 @@
                 <div class="link">2026-07-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-20" data-placing="9" data-event="other">
               <a class="item" href="/decklists/rg-luffy/9th-snorlax1cynda-chinoizecup-85-monday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -743,7 +764,7 @@
                 <div class="link">2026-07-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-20" data-placing="11" data-event="other">
               <a class="item" href="/decklists/rg-luffy/11th-namik-ger-dressrosa-tournament-op16-st-31-36.html">
                 <div>
                   <div style="font-weight:700">Namik — RG Luffy</div>
@@ -752,7 +773,7 @@
                 <div class="link">2026-07-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-19" data-placing="6" data-event="other">
               <a class="item" href="/decklists/rg-luffy/6th-list-grand-line-time-for-battle-1.html">
                 <div>
                   <div style="font-weight:700">Олексій Любименко — RG Luffy</div>
@@ -761,7 +782,7 @@
                 <div class="link">2026-07-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-16" data-placing="2" data-event="other">
               <a class="item" href="/decklists/rg-luffy/2nd-petemess-op16-win-a-box-tuesday-aegean-pirate-cup-2.html">
                 <div>
                   <div style="font-weight:700">petemess — RG Luffy</div>
@@ -770,7 +791,7 @@
                 <div class="link">2026-07-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-16" data-placing="10" data-event="other">
               <a class="item" href="/decklists/rg-luffy/10th-dominicanosjr-op16-win-a-box-tuesday-aegean-pirate-cup-2.html">
                 <div>
                   <div style="font-weight:700">DominicanosJr — RG Luffy</div>
@@ -779,7 +800,7 @@
                 <div class="link">2026-07-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-15" data-placing="4" data-event="other">
               <a class="item" href="/decklists/rg-luffy/4th-igot2staydown-chinoizecup-200.html">
                 <div>
                   <div style="font-weight:700">igot2staydown — RG Luffy</div>
@@ -788,7 +809,7 @@
                 <div class="link">2026-07-15 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-15" data-placing="10" data-event="other">
               <a class="item" href="/decklists/rg-luffy/10th-palziejp-chinoizecup-200.html">
                 <div>
                   <div style="font-weight:700">PalzieJP — RG Luffy</div>
@@ -797,7 +818,7 @@
                 <div class="link">2026-07-15 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-14" data-placing="13" data-event="other">
               <a class="item" href="/decklists/rg-luffy/13th-agustin-garcia-liga-phoenix-2026-one-piece-mana-27.html">
                 <div>
                   <div style="font-weight:700">Agustin Garcia — RG Luffy</div>
@@ -806,7 +827,7 @@
                 <div class="link">2026-07-14 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-13" data-placing="5" data-event="other">
               <a class="item" href="/decklists/rg-luffy/5th-ricmasterflash-chinoizecup-82-monday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -815,7 +836,7 @@
                 <div class="link">2026-07-13 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-09" data-placing="9" data-event="other">
               <a class="item" href="/decklists/rg-luffy/9th-agustin-garcia-phoenix-la-plata-one-piece-12.html">
                 <div>
                   <div style="font-weight:700">Agustin Garcia — RG Luffy</div>
@@ -824,7 +845,7 @@
                 <div class="link">2026-07-09 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-08" data-placing="3" data-event="other">
               <a class="item" href="/decklists/rg-luffy/3rd-snorlax1cynda-chinoizecup-81-wednesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -833,7 +854,7 @@
                 <div class="link">2026-07-08 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-08" data-placing="11" data-event="other">
               <a class="item" href="/decklists/rg-luffy/11th-suppy-chinoizecup-81-wednesday.html">
                 <div>
                   <div style="font-weight:700">Suppy — RG Luffy</div>
@@ -842,7 +863,7 @@
                 <div class="link">2026-07-08 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-07" data-placing="11" data-event="other">
               <a class="item" href="/decklists/rg-luffy/11th-agustin-garcia-liga-phoenix-2026-one-piece-mana-26.html">
                 <div>
                   <div style="font-weight:700">Agustin Garcia — RG Luffy</div>
@@ -851,7 +872,7 @@
                 <div class="link">2026-07-07 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-01" data-placing="9" data-event="other">
               <a class="item" href="/decklists/rg-luffy/9th-snorlax1cynda-chinoizecup-78-wednesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -860,7 +881,7 @@
                 <div class="link">2026-07-01 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-24" data-placing="6" data-event="other">
               <a class="item" href="/decklists/rg-luffy/6th-ccopie-chinoizecup-75-wednesday.html">
                 <div>
                   <div style="font-weight:700">Ccopie — RG Luffy</div>
@@ -869,7 +890,7 @@
                 <div class="link">2026-06-24 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-18" data-placing="6" data-event="other">
               <a class="item" href="/decklists/rg-luffy/6th-fransal97-versus-cup.html">
                 <div>
                   <div style="font-weight:700">Fransal97 — RG Luffy</div>
@@ -878,7 +899,7 @@
                 <div class="link">2026-06-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-17" data-placing="2" data-event="other">
               <a class="item" href="/decklists/rg-luffy/2nd-ccopie-chinoizecup-72-wednesday.html">
                 <div>
                   <div style="font-weight:700">Ccopie — RG Luffy</div>
@@ -887,7 +908,7 @@
                 <div class="link">2026-06-17 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-15" data-placing="13" data-event="other">
               <a class="item" href="/decklists/rg-luffy/13th-leandro-pelozo-liga-phoenix-2026-one-piece-mana-23.html">
                 <div>
                   <div style="font-weight:700">Leandro Pelozo — RG Luffy</div>
@@ -896,7 +917,7 @@
                 <div class="link">2026-06-15 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-11" data-placing="1" data-event="other">
               <a class="item" href="/decklists/rg-luffy/1st-fainirael-op-tcg-ua-random-tournament.html">
                 <div>
                   <div style="font-weight:700">Fainirael — RG Luffy</div>
@@ -905,7 +926,7 @@
                 <div class="link">2026-06-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-11" data-placing="3" data-event="other">
               <a class="item" href="/decklists/rg-luffy/3rd-patricio-girondo-phoenix-la-plata-one-piece-8.html">
                 <div>
                   <div style="font-weight:700">Patricio Girondo — RG Luffy</div>
@@ -914,7 +935,7 @@
                 <div class="link">2026-06-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-11" data-placing="12" data-event="other">
               <a class="item" href="/decklists/rg-luffy/12th-fransal97-versus-cup.html">
                 <div>
                   <div style="font-weight:700">Fransal97 — RG Luffy</div>
@@ -923,7 +944,7 @@
                 <div class="link">2026-06-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-08" data-placing="3" data-event="other">
               <a class="item" href="/decklists/rg-luffy/3rd-ricmasterflash-chinoizecup-67-monday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -932,7 +953,7 @@
                 <div class="link">2026-06-08 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-04" data-placing="4" data-event="other">
               <a class="item" href="/decklists/rg-luffy/4th-juli-n-piergiacomi-phoenix-la-plata-one-piece-7.html">
                 <div>
                   <div style="font-weight:700">Julián Piergiacomi — RG Luffy</div>
@@ -941,7 +962,7 @@
                 <div class="link">2026-06-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-04" data-placing="6" data-event="other">
               <a class="item" href="/decklists/rg-luffy/6th-nick-zaitsev-op-tcg-ua-weekly-webcam-tournament.html">
                 <div>
                   <div style="font-weight:700">Nick Zaitsev — RG Luffy</div>
@@ -950,7 +971,7 @@
                 <div class="link">2026-06-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-03" data-placing="10" data-event="other">
               <a class="item" href="/decklists/rg-luffy/10th-frodon-chinoizecup-66-wednesday.html">
                 <div>
                   <div style="font-weight:700">Frodon — RG Luffy</div>
@@ -959,7 +980,7 @@
                 <div class="link">2026-06-03 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-27" data-placing="3" data-event="other">
               <a class="item" href="/decklists/rg-luffy/3rd-snorlax1cynda-chinoizecup-63-wednesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -968,7 +989,7 @@
                 <div class="link">2026-05-27 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-27" data-placing="9" data-event="other">
               <a class="item" href="/decklists/rg-luffy/9th-gefen-h-chinoizecup-63-wednesday.html">
                 <div>
                   <div style="font-weight:700">Gefen H — RG Luffy</div>
@@ -977,7 +998,7 @@
                 <div class="link">2026-05-27 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-26" data-placing="3" data-event="other">
               <a class="item" href="/decklists/rg-luffy/3rd-kevyzhou-chinoizecup-62-tuesday.html">
                 <div>
                   <div style="font-weight:700">kevyzhou — RG Luffy</div>
@@ -986,7 +1007,7 @@
                 <div class="link">2026-05-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-26" data-placing="9" data-event="other">
               <a class="item" href="/decklists/rg-luffy/9th-malick-b-chinoizecup-62-tuesday.html">
                 <div>
                   <div style="font-weight:700">Malick B — RG Luffy</div>
@@ -995,7 +1016,7 @@
                 <div class="link">2026-05-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-23" data-placing="4" data-event="championship">
               <a class="item" href="/decklists/rg-luffy/4th-rasmus-lindgren-one-piece-tcg-swedish-championship-2026.html">
                 <div>
                   <div style="font-weight:700">Rasmus Lindgren — RG Luffy</div>
@@ -1004,7 +1025,7 @@
                 <div class="link">2026-05-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-23" data-placing="14" data-event="championship">
               <a class="item" href="/decklists/rg-luffy/14th-alexok-one-piece-tcg-swedish-championship-2026.html">
                 <div>
                   <div style="font-weight:700">AlexOK — RG Luffy</div>
@@ -1013,7 +1034,7 @@
                 <div class="link">2026-05-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-20" data-placing="1" data-event="other">
               <a class="item" href="/decklists/rg-luffy/1st-gefen-h-chinoizecup-60-wednesday-extra-grand-battle.html">
                 <div>
                   <div style="font-weight:700">Gefen H — RG Luffy</div>
@@ -1022,7 +1043,7 @@
                 <div class="link">2026-05-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-20" data-placing="3" data-event="other">
               <a class="item" href="/decklists/rg-luffy/3rd-frodon-chinoizecup-60-wednesday-extra-grand-battle.html">
                 <div>
                   <div style="font-weight:700">Frodon — RG Luffy</div>
@@ -1031,7 +1052,7 @@
                 <div class="link">2026-05-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-19" data-placing="2" data-event="other">
               <a class="item" href="/decklists/rg-luffy/2nd-ricmasterflash-chinoizecup-59-tuesday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -1040,7 +1061,7 @@
                 <div class="link">2026-05-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-14" data-placing="8" data-event="other">
               <a class="item" href="/decklists/rg-luffy/8th-sergiomiedes-versus-cup-picking.html">
                 <div>
                   <div style="font-weight:700">SergioMiedes — RG Luffy</div>
@@ -1049,7 +1070,7 @@
                 <div class="link">2026-05-14 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-13" data-placing="2" data-event="other">
               <a class="item" href="/decklists/rg-luffy/2nd-ezpirit-supernova-rumble-1-raphterra-cs.html">
                 <div>
                   <div style="font-weight:700">Ezpirit — RG Luffy</div>
@@ -1058,7 +1079,7 @@
                 <div class="link">2026-05-13 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-13" data-placing="6" data-event="other">
               <a class="item" href="/decklists/rg-luffy/6th-snorlax1cynda-chinoizecup-57-wednesday-extra-grand-battle.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1067,7 +1088,7 @@
                 <div class="link">2026-05-13 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-12" data-placing="5" data-event="other">
               <a class="item" href="/decklists/rg-luffy/5th-igot2staydown-chinoizecup-56-tuesday.html">
                 <div>
                   <div style="font-weight:700">igot2staydown — RG Luffy</div>
@@ -1076,7 +1097,7 @@
                 <div class="link">2026-05-12 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-11" data-placing="3" data-event="other">
               <a class="item" href="/decklists/rg-luffy/3rd-ricmasterflash-chinoizecup-55-monday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -1085,7 +1106,7 @@
                 <div class="link">2026-05-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-07" data-placing="11" data-event="other">
               <a class="item" href="/decklists/rg-luffy/11th-rhaexo-ger-dressrosa-tournament-extra-battle.html">
                 <div>
                   <div style="font-weight:700">Rhaexo — RG Luffy</div>
@@ -1094,7 +1115,7 @@
                 <div class="link">2026-05-07 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-04" data-placing="1" data-event="other">
               <a class="item" href="/decklists/rg-luffy/1st-ricmasterflash-chinoizecup-52-monday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -1103,7 +1124,7 @@
                 <div class="link">2026-05-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-29" data-placing="11" data-event="other">
               <a class="item" href="/decklists/rg-luffy/11th-snorlax1cynda-chinoizecup-51-wednesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1112,7 +1133,7 @@
                 <div class="link">2026-04-29 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-28" data-placing="14" data-event="other">
               <a class="item" href="/decklists/rg-luffy/14th-entaku-chinoizecup-50-tuesday.html">
                 <div>
                   <div style="font-weight:700">entaku — RG Luffy</div>
@@ -1121,7 +1142,7 @@
                 <div class="link">2026-04-28 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-27" data-placing="14" data-event="other">
               <a class="item" href="/decklists/rg-luffy/14th-palziejp-chinoizecup-49-monday.html">
                 <div>
                   <div style="font-weight:700">PalzieJP — RG Luffy</div>
@@ -1130,7 +1151,7 @@
                 <div class="link">2026-04-27 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-23" data-placing="4" data-event="other">
               <a class="item" href="/decklists/rg-luffy/4th-pdpd-trader-ger-dressrosa-tournament-op15-remote.html">
                 <div>
                   <div style="font-weight:700">PDPD_Trader — RG Luffy</div>
@@ -1139,7 +1160,7 @@
                 <div class="link">2026-04-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-23" data-placing="10" data-event="other">
               <a class="item" href="/decklists/rg-luffy/10th-lemben15-versus-cup-picking.html">
                 <div>
                   <div style="font-weight:700">lemben15 — RG Luffy</div>
@@ -1148,7 +1169,7 @@
                 <div class="link">2026-04-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-22" data-placing="3" data-event="other">
               <a class="item" href="/decklists/rg-luffy/3rd-igot2staydown-chinoizecup-48-wednesday.html">
                 <div>
                   <div style="font-weight:700">igot2staydown — RG Luffy</div>
@@ -1157,7 +1178,7 @@
                 <div class="link">2026-04-22 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-22" data-placing="7" data-event="other">
               <a class="item" href="/decklists/rg-luffy/7th-adimski-chinoizecup-48-wednesday.html">
                 <div>
                   <div style="font-weight:700">Adimski — RG Luffy</div>
@@ -1166,7 +1187,7 @@
                 <div class="link">2026-04-22 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-22" data-placing="9" data-event="other">
               <a class="item" href="/decklists/rg-luffy/9th-snorlax1cynda-chinoizecup-48-wednesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1175,7 +1196,7 @@
                 <div class="link">2026-04-22 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-21" data-placing="9" data-event="other">
               <a class="item" href="/decklists/rg-luffy/9th-igot2staydown-chinoizecup-47-tuesday.html">
                 <div>
                   <div style="font-weight:700">igot2staydown — RG Luffy</div>
@@ -1184,7 +1205,7 @@
                 <div class="link">2026-04-21 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-21" data-placing="12" data-event="other">
               <a class="item" href="/decklists/rg-luffy/12th-snorlax1cynda-chinoizecup-47-tuesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1193,7 +1214,7 @@
                 <div class="link">2026-04-21 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-20" data-placing="2" data-event="other">
               <a class="item" href="/decklists/rg-luffy/2nd-dropchronic-clubtv-15-simulador-feat-maca-ba-tcg.html">
                 <div>
                   <div style="font-weight:700">Dropchronic — RG Luffy</div>
@@ -1202,7 +1223,7 @@
                 <div class="link">2026-04-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-20" data-placing="6" data-event="other">
               <a class="item" href="/decklists/rg-luffy/6th-ricmasterflash-chinoizecup-46-monday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -1211,7 +1232,7 @@
                 <div class="link">2026-04-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-16" data-placing="5" data-event="other">
               <a class="item" href="/decklists/rg-luffy/5th-pdpd-trader-ger-dressrosa-tournament-op15-remote.html">
                 <div>
                   <div style="font-weight:700">PDPD_Trader — RG Luffy</div>
@@ -1220,7 +1241,7 @@
                 <div class="link">2026-04-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-15" data-placing="5" data-event="other">
               <a class="item" href="/decklists/rg-luffy/5th-snorlax1cynda-chinoizecup-45-wednesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1229,7 +1250,7 @@
                 <div class="link">2026-04-15 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-15" data-placing="9" data-event="other">
               <a class="item" href="/decklists/rg-luffy/9th-igot2staydown-chinoizecup-45-wednesday.html">
                 <div>
                   <div style="font-weight:700">igot2staydown — RG Luffy</div>
@@ -1238,7 +1259,7 @@
                 <div class="link">2026-04-15 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-14" data-placing="9" data-event="other">
               <a class="item" href="/decklists/rg-luffy/9th-entaku-chinoizecup-44-tuesday.html">
                 <div>
                   <div style="font-weight:700">entaku — RG Luffy</div>
@@ -1247,7 +1268,7 @@
                 <div class="link">2026-04-14 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-13" data-placing="1" data-event="other">
               <a class="item" href="/decklists/rg-luffy/1st-ricmasterflash-chinoizecup-43-monday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -1256,7 +1277,7 @@
                 <div class="link">2026-04-13 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-13" data-placing="2" data-event="other">
               <a class="item" href="/decklists/rg-luffy/2nd-gefen-h-chinoizecup-43-monday.html">
                 <div>
                   <div style="font-weight:700">Gefen H — RG Luffy</div>
@@ -1265,7 +1286,7 @@
                 <div class="link">2026-04-13 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-09" data-placing="1" data-event="other">
               <a class="item" href="/decklists/rg-luffy/1st-sergiomiedes-versus-cup-picking.html">
                 <div>
                   <div style="font-weight:700">SergioMiedes — RG Luffy</div>
@@ -1274,7 +1295,7 @@
                 <div class="link">2026-04-09 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-09" data-placing="4" data-event="other">
               <a class="item" href="/decklists/rg-luffy/4th-kintxo123-versus-cup-picking.html">
                 <div>
                   <div style="font-weight:700">Kintxo123 — RG Luffy</div>
@@ -1283,7 +1304,7 @@
                 <div class="link">2026-04-09 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-08" data-placing="2" data-event="other">
               <a class="item" href="/decklists/rg-luffy/2nd-snorlax1cynda-chinoizecup-42-wednesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1292,7 +1313,7 @@
                 <div class="link">2026-04-08 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-08" data-placing="4" data-event="other">
               <a class="item" href="/decklists/rg-luffy/4th-adimski-chinoizecup-42-wednesday.html">
                 <div>
                   <div style="font-weight:700">Adimski — RG Luffy</div>
@@ -1301,7 +1322,7 @@
                 <div class="link">2026-04-08 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-06" data-placing="2" data-event="other">
               <a class="item" href="/decklists/rg-luffy/2nd-outrotaz-clubtv-13-simulador-feat-maca-ba-tcg.html">
                 <div>
                   <div style="font-weight:700">OutroTaz — RG Luffy</div>
@@ -1310,7 +1331,7 @@
                 <div class="link">2026-04-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-06" data-placing="11" data-event="other">
               <a class="item" href="/decklists/rg-luffy/11th-adimski-chinoizecup-40-monday.html">
                 <div>
                   <div style="font-weight:700">Adimski — RG Luffy</div>
@@ -1319,7 +1340,7 @@
                 <div class="link">2026-04-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-01" data-placing="1" data-event="other">
               <a class="item" href="/decklists/rg-luffy/1st-adimski-chinoizecup-39-wednesday.html">
                 <div>
                   <div style="font-weight:700">Adimski — RG Luffy</div>
@@ -1328,7 +1349,7 @@
                 <div class="link">2026-04-01 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-01" data-placing="9" data-event="other">
               <a class="item" href="/decklists/rg-luffy/9th-ricmasterflash-chinoizecup-39-wednesday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -1337,7 +1358,7 @@
                 <div class="link">2026-04-01 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-19" data-placing="11" data-event="other">
               <a class="item" href="/decklists/rg-luffy/11th-amoner-versus-cup-picking.html">
                 <div>
                   <div style="font-weight:700">Amoner — RG Luffy</div>
@@ -1346,7 +1367,7 @@
                 <div class="link">2026-03-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-18" data-placing="10" data-event="other">
               <a class="item" href="/decklists/rg-luffy/10th-snorlax1cynda-chinoizecup-33-wednesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1355,7 +1376,7 @@
                 <div class="link">2026-03-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-14" data-placing="10" data-event="other">
               <a class="item" href="/decklists/rg-luffy/10th-mikepsomas-chinoizecup-season-qualifier-1.html">
                 <div>
                   <div style="font-weight:700">MikePsomas — RG Luffy</div>
@@ -1364,7 +1385,7 @@
                 <div class="link">2026-03-14 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-10" data-placing="10" data-event="other">
               <a class="item" href="/decklists/rg-luffy/10th-snorlax1cynda-chinoizecup-29-tuesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1373,7 +1394,7 @@
                 <div class="link">2026-03-10 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-10" data-placing="11" data-event="other">
               <a class="item" href="/decklists/rg-luffy/11th-ricmasterflash-chinoizecup-29-tuesday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -1382,7 +1403,7 @@
                 <div class="link">2026-03-10 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-09" data-placing="3" data-event="other">
               <a class="item" href="/decklists/rg-luffy/3rd-rhaexo-ger-dressrosa-tournament-op14-eb03.html">
                 <div>
                   <div style="font-weight:700">Rhaexo — RG Luffy</div>
@@ -1391,7 +1412,7 @@
                 <div class="link">2026-03-09 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-09" data-placing="10" data-event="other">
               <a class="item" href="/decklists/rg-luffy/10th-palziejp-chinoizecup-28-monday.html">
                 <div>
                   <div style="font-weight:700">PalzieJP — RG Luffy</div>
@@ -1400,7 +1421,7 @@
                 <div class="link">2026-03-09 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-05" data-placing="5" data-event="other">
               <a class="item" href="/decklists/rg-luffy/5th-javifertur-versus-cup-picking.html">
                 <div>
                   <div style="font-weight:700">javifertur — RG Luffy</div>
@@ -1409,7 +1430,7 @@
                 <div class="link">2026-03-05 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-04" data-placing="10" data-event="other">
               <a class="item" href="/decklists/rg-luffy/10th-snorlax1cynda-chinoizecup-27-wednesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1418,7 +1439,7 @@
                 <div class="link">2026-03-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-02" data-placing="4" data-event="other">
               <a class="item" href="/decklists/rg-luffy/4th-ricmasterflash-chinoizecup-25-monday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -1427,7 +1448,7 @@
                 <div class="link">2026-03-02 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-26" data-placing="1" data-event="other">
               <a class="item" href="/decklists/rg-luffy/1st-rhaexo-ger-dressrosa-tournament-op14-eb03.html">
                 <div>
                   <div style="font-weight:700">Rhaexo — RG Luffy</div>
@@ -1436,7 +1457,7 @@
                 <div class="link">2026-02-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-24" data-placing="7" data-event="other">
               <a class="item" href="/decklists/rg-luffy/7th-skylinexxxgtr34-chinoizecup-23-tuesday.html">
                 <div>
                   <div style="font-weight:700">skylinexxxgtr34 — RG Luffy</div>
@@ -1445,7 +1466,7 @@
                 <div class="link">2026-02-24 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-23" data-placing="6" data-event="other">
               <a class="item" href="/decklists/rg-luffy/6th-ricmasterflash-chinoizecup-22-monday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -1454,7 +1475,7 @@
                 <div class="link">2026-02-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-18" data-placing="13" data-event="other">
               <a class="item" href="/decklists/rg-luffy/13th-snorlax1cynda-chinoizecup-21-wednesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1463,7 +1484,7 @@
                 <div class="link">2026-02-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-16" data-placing="3" data-event="other">
               <a class="item" href="/decklists/rg-luffy/3rd-snorlax1cynda-chinoizecup-19-monday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1472,7 +1493,7 @@
                 <div class="link">2026-02-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-11" data-placing="1" data-event="other">
               <a class="item" href="/decklists/rg-luffy/1st-kevyzhou-chinoizecup-18-wednesday.html">
                 <div>
                   <div style="font-weight:700">kevyzhou — RG Luffy</div>
@@ -1481,7 +1502,7 @@
                 <div class="link">2026-02-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-11" data-placing="6" data-event="other">
               <a class="item" href="/decklists/rg-luffy/6th-snorlax1cynda-chinoizecup-18-wednesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1490,7 +1511,7 @@
                 <div class="link">2026-02-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-11" data-placing="8" data-event="other">
               <a class="item" href="/decklists/rg-luffy/8th-spartacus2224-chinoizecup-18-wednesday.html">
                 <div>
                   <div style="font-weight:700">Spartacus2224 — RG Luffy</div>
@@ -1499,7 +1520,7 @@
                 <div class="link">2026-02-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-10" data-placing="7" data-event="other">
               <a class="item" href="/decklists/rg-luffy/7th-snorlax1cynda-chinoizecup-17-tuesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1508,7 +1529,7 @@
                 <div class="link">2026-02-10 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-09" data-placing="2" data-event="other">
               <a class="item" href="/decklists/rg-luffy/2nd-kevyzhou-chinoizecup-16-monday.html">
                 <div>
                   <div style="font-weight:700">kevyzhou — RG Luffy</div>
@@ -1517,7 +1538,7 @@
                 <div class="link">2026-02-09 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-03" data-placing="4" data-event="other">
               <a class="item" href="/decklists/rg-luffy/4th-ricmasterflash-chinoizecup-14-tuesday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -1526,7 +1547,7 @@
                 <div class="link">2026-02-03 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-03" data-placing="8" data-event="other">
               <a class="item" href="/decklists/rg-luffy/8th-badov-chinoizecup-14-tuesday.html">
                 <div>
                   <div style="font-weight:700">Badov — RG Luffy</div>
@@ -1535,7 +1556,7 @@
                 <div class="link">2026-02-03 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-03" data-placing="9" data-event="other">
               <a class="item" href="/decklists/rg-luffy/9th-frodon-chinoizecup-14-tuesday.html">
                 <div>
                   <div style="font-weight:700">Frodon — RG Luffy</div>
@@ -1544,7 +1565,7 @@
                 <div class="link">2026-02-03 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-02" data-placing="1" data-event="other">
               <a class="item" href="/decklists/rg-luffy/1st-snorlax1cynda-chinoizecup-13-monday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1553,7 +1574,7 @@
                 <div class="link">2026-02-02 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-02" data-placing="4" data-event="other">
               <a class="item" href="/decklists/rg-luffy/4th-carloshximenes-clubtv-5-simulador.html">
                 <div>
                   <div style="font-weight:700">carloshximenes — RG Luffy</div>
@@ -1562,7 +1583,7 @@
                 <div class="link">2026-02-02 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-02" data-placing="14" data-event="other">
               <a class="item" href="/decklists/rg-luffy/14th-kyomaycry-ger-dressrosa-tournament-op14-eb03.html">
                 <div>
                   <div style="font-weight:700">kyomaycry — RG Luffy</div>
@@ -1571,7 +1592,7 @@
                 <div class="link">2026-02-02 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-29" data-placing="5" data-event="other">
               <a class="item" href="/decklists/rg-luffy/5th-sungodnika1996-ger-dressrosa-tournament-the-azure-sea-s-seven.html">
                 <div>
                   <div style="font-weight:700">SunGodNika1996 — RG Luffy</div>
@@ -1580,7 +1601,7 @@
                 <div class="link">2026-01-29 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-28" data-placing="5" data-event="other">
               <a class="item" href="/decklists/rg-luffy/5th-spartacus2224-chinoizecup-12-wednesday.html">
                 <div>
                   <div style="font-weight:700">Spartacus2224 — RG Luffy</div>
@@ -1589,7 +1610,7 @@
                 <div class="link">2026-01-28 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-27" data-placing="3" data-event="other">
               <a class="item" href="/decklists/rg-luffy/3rd-ricmasterflash-chinoizecup-11-tuesday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -1598,7 +1619,7 @@
                 <div class="link">2026-01-27 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-26" data-placing="2" data-event="other">
               <a class="item" href="/decklists/rg-luffy/2nd-ricmasterflash-chinoizecup-10-monday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -1607,7 +1628,7 @@
                 <div class="link">2026-01-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-26" data-placing="2" data-event="other">
               <a class="item" href="/decklists/rg-luffy/2nd-kyomaycry-ger-dressrosa-tournament-the-azure-sea-s-seven.html">
                 <div>
                   <div style="font-weight:700">kyomaycry — RG Luffy</div>
@@ -1616,7 +1637,7 @@
                 <div class="link">2026-01-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-26" data-placing="3" data-event="other">
               <a class="item" href="/decklists/rg-luffy/3rd-spartacus2224-chinoizecup-10-monday.html">
                 <div>
                   <div style="font-weight:700">Spartacus2224 — RG Luffy</div>
@@ -1625,7 +1646,7 @@
                 <div class="link">2026-01-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-26" data-placing="8" data-event="other">
               <a class="item" href="/decklists/rg-luffy/8th-carloshximenes-clubtv-4-simulador.html">
                 <div>
                   <div style="font-weight:700">carloshximenes — RG Luffy</div>
@@ -1634,7 +1655,7 @@
                 <div class="link">2026-01-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-26" data-placing="11" data-event="other">
               <a class="item" href="/decklists/rg-luffy/11th-sungodnika1996-ger-dressrosa-tournament-the-azure-sea-s-seven.html">
                 <div>
                   <div style="font-weight:700">SunGodNika1996 — RG Luffy</div>
@@ -1643,7 +1664,7 @@
                 <div class="link">2026-01-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-21" data-placing="8" data-event="other">
               <a class="item" href="/decklists/rg-luffy/8th-snorlax1cynda-chinoizecup-9-wednesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1652,7 +1673,7 @@
                 <div class="link">2026-01-21 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-21" data-placing="9" data-event="other">
               <a class="item" href="/decklists/rg-luffy/9th-shady-89-op14-eb04-western-format-blist-x-oracle.html">
                 <div>
                   <div style="font-weight:700">Shady_89 — RG Luffy</div>
@@ -1661,7 +1682,7 @@
                 <div class="link">2026-01-21 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-20" data-placing="6" data-event="other">
               <a class="item" href="/decklists/rg-luffy/6th-ricmasterflash-chinoizecup-8-tuesday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -1670,7 +1691,7 @@
                 <div class="link">2026-01-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-20" data-placing="8" data-event="other">
               <a class="item" href="/decklists/rg-luffy/8th-kevyzhou-chinoizecup-8-tuesday.html">
                 <div>
                   <div style="font-weight:700">kevyzhou — RG Luffy</div>
@@ -1679,7 +1700,7 @@
                 <div class="link">2026-01-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-20" data-placing="11" data-event="other">
               <a class="item" href="/decklists/rg-luffy/11th-snorlax1cynda-chinoizecup-8-tuesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1688,7 +1709,7 @@
                 <div class="link">2026-01-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-19" data-placing="1" data-event="other">
               <a class="item" href="/decklists/rg-luffy/1st-ricmasterflash-chinoizecup-7-monday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -1697,7 +1718,7 @@
                 <div class="link">2026-01-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-19" data-placing="9" data-event="other">
               <a class="item" href="/decklists/rg-luffy/9th-snorlax1cynda-chinoizecup-7-monday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1706,7 +1727,7 @@
                 <div class="link">2026-01-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-19" data-placing="9" data-event="other">
               <a class="item" href="/decklists/rg-luffy/9th-sungodnika1996-ger-dressrosa-tournament-the-azure-sea-s-seven.html">
                 <div>
                   <div style="font-weight:700">SunGodNika1996 — RG Luffy</div>
@@ -1715,7 +1736,7 @@
                 <div class="link">2026-01-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-13" data-placing="7" data-event="other">
               <a class="item" href="/decklists/rg-luffy/7th-snorlax1cynda-chinoizecup-5-tuesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1724,7 +1745,7 @@
                 <div class="link">2026-01-13 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-12" data-placing="2" data-event="other">
               <a class="item" href="/decklists/rg-luffy/2nd-carloshximenes-clubtv-2-simulador.html">
                 <div>
                   <div style="font-weight:700">carloshximenes — RG Luffy</div>
@@ -1733,7 +1754,7 @@
                 <div class="link">2026-01-12 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-12" data-placing="11" data-event="other">
               <a class="item" href="/decklists/rg-luffy/11th-snorlax1cynda-chinoizecup-4-monday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1742,7 +1763,7 @@
                 <div class="link">2026-01-12 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-07" data-placing="1" data-event="other">
               <a class="item" href="/decklists/rg-luffy/1st-ricmasterflash-chinoizecup-3-wednesday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -1751,7 +1772,7 @@
                 <div class="link">2026-01-07 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-07" data-placing="9" data-event="other">
               <a class="item" href="/decklists/rg-luffy/9th-snorlax1cynda-chinoizecup-3-wednesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1760,7 +1781,7 @@
                 <div class="link">2026-01-07 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-06" data-placing="9" data-event="other">
               <a class="item" href="/decklists/rg-luffy/9th-snorlax1cynda-chinoizecup-2-tuesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1769,7 +1790,7 @@
                 <div class="link">2026-01-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-29" data-placing="4" data-event="other">
               <a class="item" href="/decklists/rg-luffy/4th-snorlax1cynda-op14-new-year-chinoizecup.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1778,7 +1799,7 @@
                 <div class="link">2025-12-29 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-22" data-placing="6" data-event="other">
               <a class="item" href="/decklists/rg-luffy/6th-snorlax1cynda-op14-christmas-chinoizecup.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1787,7 +1808,7 @@
                 <div class="link">2025-12-22 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-15" data-placing="1" data-event="other">
               <a class="item" href="/decklists/rg-luffy/1st-snorlax1cynda-op14-chinoizecup-114-monday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1796,7 +1817,7 @@
                 <div class="link">2025-12-15 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-03" data-placing="2" data-event="other">
               <a class="item" href="/decklists/rg-luffy/2nd-snorlax1cynda-chinoizecup-110-wednesday.html">
                 <div>
                   <div style="font-weight:700">snorlax1cynda — RG Luffy</div>
@@ -1805,7 +1826,7 @@
                 <div class="link">2025-12-03 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-30" data-placing="11" data-event="other">
               <a class="item" href="/decklists/rg-luffy/11th-brasiljuuni-ryou-x-umai-cup-2.html">
                 <div>
                   <div style="font-weight:700">Brasiljuuni — RG Luffy</div>
@@ -1814,7 +1835,7 @@
                 <div class="link">2025-11-30 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-24" data-placing="11" data-event="other">
               <a class="item" href="/decklists/rg-luffy/11th-carloshximenes-copa-tv-3x3.html">
                 <div>
                   <div style="font-weight:700">carloshximenes — RG Luffy</div>
@@ -1823,7 +1844,7 @@
                 <div class="link">2025-11-24 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-19" data-placing="4" data-event="other">
               <a class="item" href="/decklists/rg-luffy/4th-ricmasterflash-chinoizecup-104-wednesday.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -1832,7 +1853,7 @@
                 <div class="link">2025-11-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-18" data-placing="4" data-event="other">
               <a class="item" href="/decklists/rg-luffy/4th-badov-chinoizecup-103-tuesday.html">
                 <div>
                   <div style="font-weight:700">Badov — RG Luffy</div>
@@ -1841,7 +1862,7 @@
                 <div class="link">2025-11-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-12" data-placing="11" data-event="other">
               <a class="item" href="/decklists/rg-luffy/11th-badov-chinoizecup-101-wednesday.html">
                 <div>
                   <div style="font-weight:700">Badov — RG Luffy</div>
@@ -1850,7 +1871,7 @@
                 <div class="link">2025-11-12 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-10" data-placing="14" data-event="other">
               <a class="item" href="/decklists/rg-luffy/14th-dima-ger-carrying-on-his-will.html">
                 <div>
                   <div style="font-weight:700">dima — RG Luffy</div>
@@ -1859,7 +1880,7 @@
                 <div class="link">2025-11-10 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-05" data-placing="4" data-event="other">
               <a class="item" href="/decklists/rg-luffy/4th-ricmasterflash-chinoizecup-98-wednesday-op13-legal.html">
                 <div>
                   <div style="font-weight:700">ricmasterflash — RG Luffy</div>
@@ -1868,7 +1889,7 @@
                 <div class="link">2025-11-05 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="" data-placing="9" data-event="regional">
               <a class="item" href="/decklists/rg-luffy/featured-ricmasterflash.html">
                 <div>
                   <div style="font-weight:700">Ricmasterflash — RG Luffy</div>
@@ -2119,5 +2140,6 @@
     })();
 
   </script>
+  <script src="/js/site.js?v=meta-tools"></script>
 </body>
 </html>

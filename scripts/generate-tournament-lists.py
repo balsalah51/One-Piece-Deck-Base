@@ -192,6 +192,78 @@ LEADERS = [
         "pool_heading": "Card pictures",
         "pool_note": "English names and art from Limitless",
     },
+    {
+        "id": "OP16-022",
+        "key": "gb-luffy",
+        "page": "decklists/gb-luffy.html",
+        "dir": "decklists/gb-luffy",
+        "name": "GB Luffy",
+        "color": "color-green-blue",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP16-080",
+        "key": "blackbeard",
+        "page": "decklists/blackbeard.html",
+        "dir": "decklists/blackbeard",
+        "name": "Blackbeard",
+        "color": "color-black-yellow",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP12-061",
+        "key": "rosinante",
+        "page": "decklists/rosinante.html",
+        "dir": "decklists/rosinante",
+        "name": "Rosinante",
+        "color": "color-purple-yellow",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP15-002",
+        "key": "lucy",
+        "page": "decklists/lucy.html",
+        "dir": "decklists/lucy",
+        "name": "Lucy",
+        "color": "color-red-blue",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP16-079",
+        "key": "yamato",
+        "page": "decklists/yamato.html",
+        "dir": "decklists/yamato",
+        "name": "Yamato",
+        "color": "color-black",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
+    {
+        "id": "OP11-001",
+        "key": "koby",
+        "page": "decklists/koby.html",
+        "dir": "decklists/koby",
+        "name": "Koby",
+        "color": "color-red-black",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
 ]
 
 
@@ -719,7 +791,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
-  <link rel="stylesheet" href="/css/site.css?v=stack-left" />
+  <link rel="stylesheet" href="/css/site.css?v=meta-tools" />
 </head>
 <body class="{html.escape(color)}">
   <div class="wrap">
@@ -733,8 +805,9 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
       </a>
       <nav aria-label="Primary">
         <a href="/#decklists"{deck_cur}>Decklists</a>
-        <a href="/decklists/op17.html"{op17_cur}>OP17</a>
-        <a href="/#community">Community</a>
+        <a href="/decklists/op17.html"{op17_cur}>Leaders</a>
+        <a href="/format.html">Format</a>
+        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
       </nav>
     </header>
 
@@ -798,6 +871,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
       }});
     }})();
   </script>
+  <script src="/js/site.js?v=meta-tools"></script>
 </body>
 </html>
 """
@@ -846,6 +920,79 @@ def card_image_url(cid: str) -> str:
     return f"https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/{set_code}/{cid}_EN.webp"
 
 
+def event_bucket(name: str) -> str:
+    n = (name or "").lower()
+    if "treasure" in n:
+        return "treasure"
+    if "regional" in n:
+        return "regional"
+    if "championship" in n or "flagship" in n:
+        return "championship"
+    return "other"
+
+
+def counter_value(meta: dict) -> int:
+    raw = meta.get("counter")
+    if raw is None:
+        return 0
+    m = re.search(r"(\d+)", str(raw))
+    return int(m.group(1)) if m else 0
+
+
+def render_deck_stats(items: list[dict], cache: dict) -> str:
+    curve = {str(i): 0 for i in range(0, 10)}
+    curve["10+"] = 0
+    counters = {"2k": 0, "1k": 0, "0": 0}
+    copies = 0
+    for item in items:
+        if item.get("group") == "Leader":
+            continue
+        n = int(item.get("count") or 0)
+        copies += n
+        meta = cache.get(item["id"]) or {}
+        try:
+            cost = int(meta.get("cost"))
+        except (TypeError, ValueError):
+            cost = 0
+        key = "10+" if cost >= 10 else str(max(0, cost))
+        curve[key] += n
+        cv = counter_value(meta)
+        if cv >= 2000:
+            counters["2k"] += n
+        elif cv >= 1000:
+            counters["1k"] += n
+        else:
+            counters["0"] += n
+    if copies <= 0:
+        return ""
+    max_c = max(curve.values()) or 1
+    bars = []
+    for key in [str(i) for i in range(1, 10)] + ["10+"]:
+        h = int(round(56 * curve[key] / max_c)) if curve[key] else 2
+        bars.append(
+            f'<span style="height:{h}px" title="{html.escape(key)} DON!! · {curve[key]}"><em>{html.escape(key)}</em></span>'
+        )
+    return f"""        <!-- DECK_STATS -->
+        <section class="deck-stats">
+          <div class="kicker">List snapshot</div>
+          <div class="stat-grid">
+            <div>
+              <div class="muted">DON!! curve</div>
+              <div class="curve" aria-hidden="true">{"".join(bars)}</div>
+            </div>
+            <div>
+              <div class="muted">Counters in the 50</div>
+              <div class="counter-pills">
+                <span class="pill">{counters["2k"]}× 2k</span>
+                <span class="pill">{counters["1k"]}× 1k</span>
+                <span class="pill">{counters["0"]}× no counter</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- /DECK_STATS -->"""
+
+
 def render_text_deck(grouped: dict, cache: dict, order: list[str], totals: dict) -> str:
     total = 1 + sum(totals.values())
     cols = []
@@ -877,9 +1024,9 @@ def render_text_deck(grouped: dict, cache: dict, order: list[str], totals: dict)
     return f"""        <section class="text-deck">
           <div class="section-title">
             <h3>Text list</h3>
-            <div class="muted">{total} cards</div>
+            <button type="button" class="copy-sim" data-copy-sim>Copy for sim</button>
           </div>
-          <p class="muted">Hover or tap a card name to see the picture.</p>
+          <p class="muted">Hover or tap a card name to see the picture. Copy pastes <code>NxSET-NNN</code> for OPTCGSim.</p>
           <div class="text-deck-cols">
 {chr(10).join(cols)}
           </div>
@@ -934,6 +1081,7 @@ def render_deck_page(leader: dict, entry: dict, cache: dict) -> str:
         else:
             sections.append(block)
     text_list = render_text_deck(grouped, cache, order, totals)
+    stats = render_deck_stats(cards, cache)
     picture = f"""        <section class="picture-summary">
           <div class="section-title">
             <h3>Card pictures</h3>
@@ -954,6 +1102,7 @@ def render_deck_page(leader: dict, entry: dict, cache: dict) -> str:
         <h2>{html.escape(title)}</h2>
         <p>{html.escape(subtitle)}</p>
 {leader_block}
+{stats}
 {text_list}
 {picture}
         <p class="muted" style="margin-top:22px">{html.escape(kind_note)} Source: <a href="{html.escape(source)}">{html.escape(source)}</a>. Images hosted by Limitless. Not affiliated with Bandai.</p>"""
@@ -968,6 +1117,87 @@ def render_pool_heading(leader: dict) -> str:
           <div class="muted">{html.escape(leader["pool_note"])}</div>
         </div>
         <!-- /CARD_POOL_HEADING -->"""
+
+
+HUB_INTRO = {
+    "OP16-022": (
+        "Green/Blue OP16 Monkey D. Luffy. Impel Down / Straw Hat Crew. "
+        "If your board is only Impel Down characters, set up to 2 DON!! active. "
+        "Not red/green OP13 Luffy and not black OP17 Elbaph Luffy."
+    ),
+    "OP16-080": (
+        "Black/Yellow OP16 Marshall D. Teach. Blackbeard Pirates. "
+        "Your characters cost +1 on the opponent's turn; trash a Trigger to retarget an attack."
+    ),
+    "OP12-061": (
+        "Purple/Yellow Donquixote Rosinante. Navy / Donquixote Pirates. "
+        "You can pay a Life instead of letting Trafalgar Law die, then DON!! −1 to discount a 4-cost or higher Law."
+    ),
+    "OP15-002": (
+        "Red/Blue Lucy is Dressrosa Luffy in disguise. "
+        "Trash events or stages for power, then draw if you already played a 3-cost or higher event. Not red/blue OP13 Ace."
+    ),
+    "OP16-079": (
+        "Black OP16 Yamato. Land of Wano. "
+        "A Wano character played from trash gains Rush that turn. Not a Kaido character card."
+    ),
+    "OP11-001": (
+        "Red/Black Koby. Navy / SWORD. "
+        "SWORD characters can attack the turn they are played. A 7000-power-or-less Navy body can be saved from removal."
+    ),
+}
+
+
+def render_hub_page(leader: dict, cache: dict) -> str:
+    meta = cache.get(leader["id"]) or {}
+    name = display_name(meta.get("name") or leader["name"])
+    color = meta.get("color") or ""
+    life = meta.get("life") or ""
+    power = meta.get("power") or ""
+    attr = meta.get("attribute") or ""
+    types = meta.get("types") or ""
+    effect = meta.get("effect") or ""
+    intro = HUB_INTRO.get(leader["id"]) or f"{leader['name']} constructed lists from Limitless events."
+    pills = []
+    if color:
+        pills.append(f"{color} Leader")
+    pills.append(leader["id"])
+    if life:
+        pills.append(f"{life} Life")
+    if power:
+        pills.append(f"{power} Power")
+    if attr:
+        pills.append(attr)
+    if types:
+        pills.append(types)
+    pill_html = "".join(f'<span class="pill">{html.escape(p)}</span>' for p in pills)
+    img = card_image_url(leader["id"])
+    crumb_href, crumb_label = leader["crumb"]
+    body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="{html.escape(crumb_href)}">{html.escape(crumb_label)}</a> / {html.escape(leader["name"])}</div>
+        <div class="leader-hero">
+          <img src="{html.escape(img)}" alt="{html.escape(leader["name"])} leader" />
+          <div>
+            <h2>{html.escape(leader["name"])}</h2>
+            <p>{html.escape(intro)}</p>
+            <div class="stat-row">
+              {pill_html}
+            </div>
+            <div class="effect">{html.escape(effect)}</div>
+            <p class="muted" style="margin-top:12px">{html.escape(name)} · {html.escape(leader["id"])}</p>
+          </div>
+        </div>
+        <!-- TOURNAMENT_DECKLISTS -->
+        <section class="deck-index" style="margin-top:22px">
+          <div class="section-title">
+            <h3>Tournament decklists</h3>
+            <div class="muted">0 lists</div>
+          </div>
+          <p class="muted">No tournament lists found for this leader yet.</p>
+        </section>
+        <!-- /TOURNAMENT_DECKLISTS -->
+{render_pool_heading(leader)}"""
+    desc = f"{leader['name']} — {color} leader page and scraped tournament lists."
+    return page_chrome(f"{leader['name']} decklist", desc[:160], leader["color"], leader["nav_op17"], body)
 
 
 def render_index_section(leader: dict, lists: list[dict]) -> str:
@@ -997,8 +1227,12 @@ def render_index_section(leader: dict, lists: list[dict]) -> str:
             right = "Sample"
         elif entry.get("kind") in ("youtube", "web", "x") and not entry.get("date"):
             right = "List"
+        placing = entry.get("placing")
+        placing_s = "" if placing is None else str(placing)
+        date_s = entry.get("date") or ""
+        bucket = event_bucket(entry.get("tournament_name") or entry.get("tournament") or "")
         rows.append(
-            f"""            <li>
+            f"""            <li data-date="{html.escape(date_s)}" data-placing="{html.escape(placing_s)}" data-event="{html.escape(bucket)}">
               <a class="item" href="{html.escape(href)}">
                 <div>
                   <div style="font-weight:700">{html.escape(title)}</div>
@@ -1008,6 +1242,29 @@ def render_index_section(leader: dict, lists: list[dict]) -> str:
               </a>
             </li>"""
         )
+    filters = ""
+    if not sample_only and len(lists) >= 8:
+        filters = """          <div class="list-filters" data-hub-filters>
+            <input type="search" data-filter="q" placeholder="Filter player or event" aria-label="Filter lists" />
+            <select data-filter="when" aria-label="Date">
+              <option value="">Any date</option>
+              <option value="jul">Since July 2026</option>
+              <option value="aug">Since August 2026</option>
+            </select>
+            <select data-filter="place" aria-label="Placing">
+              <option value="">Any placing</option>
+              <option value="top8">Top 8</option>
+              <option value="win">1st only</option>
+            </select>
+            <select data-filter="event" aria-label="Event type">
+              <option value="">Any event</option>
+              <option value="regional">Regional</option>
+              <option value="treasure">Treasure Cup</option>
+              <option value="championship">Championship / Flagship</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+"""
     return f"""        <!-- TOURNAMENT_DECKLISTS -->
         <section class="deck-index" style="margin-top:22px">
           <div class="section-title">
@@ -1015,7 +1272,7 @@ def render_index_section(leader: dict, lists: list[dict]) -> str:
             <div class="muted">{len(lists)} lists</div>
           </div>
           <p class="muted">{html.escape(intro)}</p>
-          <ul class="list" aria-label="{html.escape(heading)}">
+{filters}          <ul class="list" aria-label="{html.escape(heading)}">
 {chr(10).join(rows)}
           </ul>
         </section>

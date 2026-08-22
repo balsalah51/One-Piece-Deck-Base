@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Imu decklist</title>
   <meta name="description" content="Imu — Black leader page and scraped tournament lists." />
-  <link rel="stylesheet" href="/css/site.css?v=stack-left" />
+  <link rel="stylesheet" href="/css/site.css?v=meta-tools" />
 </head>
 <body class="color-black">
   <div class="wrap">
@@ -19,8 +19,9 @@
       </a>
       <nav aria-label="Primary">
         <a href="/#decklists" aria-current="page">Decklists</a>
-        <a href="/decklists/op17.html">OP17</a>
-        <a href="/#community">Community</a>
+        <a href="/decklists/op17.html">Leaders</a>
+        <a href="/format.html">Format</a>
+        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
       </nav>
     </header>
 
@@ -222,8 +223,28 @@
             <div class="muted">175 lists</div>
           </div>
           <p class="muted">Newest Limitless events first. Each row opens a separate 50-card list.</p>
+          <div class="list-filters" data-hub-filters>
+            <input type="search" data-filter="q" placeholder="Filter player or event" aria-label="Filter lists" />
+            <select data-filter="when" aria-label="Date">
+              <option value="">Any date</option>
+              <option value="jul">Since July 2026</option>
+              <option value="aug">Since August 2026</option>
+            </select>
+            <select data-filter="place" aria-label="Placing">
+              <option value="">Any placing</option>
+              <option value="top8">Top 8</option>
+              <option value="win">1st only</option>
+            </select>
+            <select data-filter="event" aria-label="Event type">
+              <option value="">Any event</option>
+              <option value="regional">Regional</option>
+              <option value="treasure">Treasure Cup</option>
+              <option value="championship">Championship / Flagship</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
           <ul class="list" aria-label="Tournament decklists">
-            <li>
+            <li data-date="2026-08-06" data-placing="6" data-event="other">
               <a class="item" href="/decklists/imu/6th-ivo-balduzzi-phoenix-la-plata-one-piece-16.html">
                 <div>
                   <div style="font-weight:700">Ivo Balduzzi — Imu</div>
@@ -232,7 +253,7 @@
                 <div class="link">2026-08-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-07-23" data-placing="8" data-event="other">
               <a class="item" href="/decklists/imu/8th-sombra-lucas-maca-ba-tcg-simulador-2-edi-o.html">
                 <div>
                   <div style="font-weight:700">Sombra_Lucas — Imu</div>
@@ -241,7 +262,7 @@
                 <div class="link">2026-07-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-30" data-placing="9" data-event="other">
               <a class="item" href="/decklists/imu/9th-gonzalo-bilbao-liga-phoenix-2026-one-piece-mana-25.html">
                 <div>
                   <div style="font-weight:700">Gonzalo Bilbao — Imu</div>
@@ -250,7 +271,7 @@
                 <div class="link">2026-06-30 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-21" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-udit-choudhary-optcg-india-op16-tournament-21st-june.html">
                 <div>
                   <div style="font-weight:700">Udit Choudhary — Imu</div>
@@ -259,7 +280,7 @@
                 <div class="link">2026-06-21 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-18" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-ivo-balduzzi-phoenix-la-plata-one-piece-9.html">
                 <div>
                   <div style="font-weight:700">Ivo Balduzzi — Imu</div>
@@ -268,7 +289,7 @@
                 <div class="link">2026-06-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-18" data-placing="4" data-event="other">
               <a class="item" href="/decklists/imu/4th-arhont-romanov-op-tcg-ua-weekly-webcam-tournament.html">
                 <div>
                   <div style="font-weight:700">Arhont_Romanov — Imu</div>
@@ -277,7 +298,7 @@
                 <div class="link">2026-06-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-06-11" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-styxpro-op-tcg-ua-random-tournament.html">
                 <div>
                   <div style="font-weight:700">styxpro — Imu</div>
@@ -286,7 +307,7 @@
                 <div class="link">2026-06-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-26" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-juli-n-cassano-ghio-liga-phoenix-2026-one-piece-mana-20.html">
                 <div>
                   <div style="font-weight:700">Julián Cassano ghio — Imu</div>
@@ -295,7 +316,7 @@
                 <div class="link">2026-05-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-25" data-placing="6" data-event="other">
               <a class="item" href="/decklists/imu/6th-mrupperhand-ger-dressrosa-tournament-extra-battle.html">
                 <div>
                   <div style="font-weight:700">MrUpperhand — Imu</div>
@@ -304,7 +325,7 @@
                 <div class="link">2026-05-25 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-05-21" data-placing="8" data-event="other">
               <a class="item" href="/decklists/imu/8th-ruso7-versus-cup-picking.html">
                 <div>
                   <div style="font-weight:700">Ruso7 — Imu</div>
@@ -313,7 +334,7 @@
                 <div class="link">2026-05-21 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-23" data-placing="6" data-event="other">
               <a class="item" href="/decklists/imu/6th-rostom-versus-cup-picking.html">
                 <div>
                   <div style="font-weight:700">Rostom — Imu</div>
@@ -322,7 +343,7 @@
                 <div class="link">2026-04-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-16" data-placing="4" data-event="other">
               <a class="item" href="/decklists/imu/4th-rostom-versus-cup-picking.html">
                 <div>
                   <div style="font-weight:700">Rostom — Imu</div>
@@ -331,7 +352,7 @@
                 <div class="link">2026-04-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-08" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-juli-n-cassano-ghio-liga-phoenix-2026-one-piece-mana-14.html">
                 <div>
                   <div style="font-weight:700">Julián Cassano ghio — Imu</div>
@@ -340,7 +361,7 @@
                 <div class="link">2026-04-08 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-04-05" data-placing="9" data-event="other">
               <a class="item" href="/decklists/imu/9th-naeem-bada-one-piece-rand-show-tournament.html">
                 <div>
                   <div style="font-weight:700">Naeem Bada — Imu</div>
@@ -349,7 +370,7 @@
                 <div class="link">2026-04-05 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-24" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-facundo-gabarrot-liga-phoenix-2026-one-piece-mana-12.html">
                 <div>
                   <div style="font-weight:700">Facundo Gabarrot — Imu</div>
@@ -358,7 +379,7 @@
                 <div class="link">2026-03-24 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-19" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-ruso7-versus-cup-picking.html">
                 <div>
                   <div style="font-weight:700">Ruso7 — Imu</div>
@@ -367,7 +388,7 @@
                 <div class="link">2026-03-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-19" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-rostom-versus-cup-picking.html">
                 <div>
                   <div style="font-weight:700">Rostom — Imu</div>
@@ -376,7 +397,7 @@
                 <div class="link">2026-03-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-18" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-iacca7-chinoizecup-33-wednesday.html">
                 <div>
                   <div style="font-weight:700">iacca7 — Imu</div>
@@ -385,7 +406,7 @@
                 <div class="link">2026-03-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-18" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-jose-laaz-liga-phoenix-2026-one-piece-mana-11.html">
                 <div>
                   <div style="font-weight:700">Jose Laaz — Imu</div>
@@ -394,7 +415,7 @@
                 <div class="link">2026-03-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-18" data-placing="7" data-event="other">
               <a class="item" href="/decklists/imu/7th-reydelospiratas-chinoizecup-33-wednesday.html">
                 <div>
                   <div style="font-weight:700">ReydelosPiratas — Imu</div>
@@ -403,7 +424,7 @@
                 <div class="link">2026-03-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-16" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-flamineo-clubtv-10-simulador.html">
                 <div>
                   <div style="font-weight:700">Flamineo — Imu</div>
@@ -412,7 +433,7 @@
                 <div class="link">2026-03-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-16" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-igorkerlon-clubtv-10-simulador.html">
                 <div>
                   <div style="font-weight:700">Igorkerlon — Imu</div>
@@ -421,7 +442,7 @@
                 <div class="link">2026-03-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-14" data-placing="7" data-event="other">
               <a class="item" href="/decklists/imu/7th-david-melendo-villena-chinoizecup-season-qualifier-1.html">
                 <div>
                   <div style="font-weight:700">DAVID MELENDO VILLENA — Imu</div>
@@ -430,7 +451,7 @@
                 <div class="link">2026-03-14 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-12" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-gortiz-versus-cup-picking.html">
                 <div>
                   <div style="font-weight:700">Gortiz — Imu</div>
@@ -439,7 +460,7 @@
                 <div class="link">2026-03-12 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-10" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-tomas-uriel-perez-liga-phoenix-2026-one-piece-mana-10.html">
                 <div>
                   <div style="font-weight:700">Tomas Uriel Perez — Imu</div>
@@ -448,7 +469,7 @@
                 <div class="link">2026-03-10 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-09" data-placing="7" data-event="other">
               <a class="item" href="/decklists/imu/7th-iacca7-chinoizecup-28-monday.html">
                 <div>
                   <div style="font-weight:700">iacca7 — Imu</div>
@@ -457,7 +478,7 @@
                 <div class="link">2026-03-09 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-09" data-placing="8" data-event="other">
               <a class="item" href="/decklists/imu/8th-pedrohenrique-clubtv-9-simulador.html">
                 <div>
                   <div style="font-weight:700">PedroHenrique — Imu</div>
@@ -466,7 +487,7 @@
                 <div class="link">2026-03-09 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-08" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-alexis-le-tan-ryou-x-umai-cup-3.html">
                 <div>
                   <div style="font-weight:700">Alexis Le-Tan — Imu</div>
@@ -475,7 +496,7 @@
                 <div class="link">2026-03-08 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-04" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-fuat-chinoizecup-27-wednesday.html">
                 <div>
                   <div style="font-weight:700">fuat — Imu</div>
@@ -484,7 +505,7 @@
                 <div class="link">2026-03-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-03" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-iacca7-chinoizecup-26-tuesday.html">
                 <div>
                   <div style="font-weight:700">iacca7 — Imu</div>
@@ -493,7 +514,7 @@
                 <div class="link">2026-03-03 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-03-02" data-placing="10" data-event="other">
               <a class="item" href="/decklists/imu/10th-solmyr-chinoizecup-25-monday.html">
                 <div>
                   <div style="font-weight:700">Solmyr — Imu</div>
@@ -502,7 +523,7 @@
                 <div class="link">2026-03-02 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-26" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-beton1996-ger-dressrosa-tournament-op14-eb03.html">
                 <div>
                   <div style="font-weight:700">Beton1996 — Imu</div>
@@ -511,7 +532,7 @@
                 <div class="link">2026-02-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-26" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-gortiz-versus-cup-picking.html">
                 <div>
                   <div style="font-weight:700">Gortiz — Imu</div>
@@ -520,7 +541,7 @@
                 <div class="link">2026-02-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-25" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-philippe-l-chinoizecup-24-wednesday.html">
                 <div>
                   <div style="font-weight:700">Philippe L — Imu</div>
@@ -529,7 +550,7 @@
                 <div class="link">2026-02-25 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-23" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-beton1996-chinoizecup-22-monday.html">
                 <div>
                   <div style="font-weight:700">Beton1996 — Imu</div>
@@ -538,7 +559,7 @@
                 <div class="link">2026-02-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-23" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-trex94-ger-dressrosa-tournament-op14-eb03.html">
                 <div>
                   <div style="font-weight:700">TRex94 — Imu</div>
@@ -547,7 +568,7 @@
                 <div class="link">2026-02-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-23" data-placing="4" data-event="other">
               <a class="item" href="/decklists/imu/4th-fuat-chinoizecup-22-monday.html">
                 <div>
                   <div style="font-weight:700">fuat — Imu</div>
@@ -556,7 +577,7 @@
                 <div class="link">2026-02-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-23" data-placing="7" data-event="other">
               <a class="item" href="/decklists/imu/7th-debeast-ger-dressrosa-tournament-op14-eb03.html">
                 <div>
                   <div style="font-weight:700">Debeast — Imu</div>
@@ -565,7 +586,7 @@
                 <div class="link">2026-02-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-19" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-beton1996-ger-dressrosa-tournament-op14-eb03-2.html">
                 <div>
                   <div style="font-weight:700">Beton1996 — Imu</div>
@@ -574,7 +595,7 @@
                 <div class="link">2026-02-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-18" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-umbiven94-chinoizecup-21-wednesday.html">
                 <div>
                   <div style="font-weight:700">Umbiven94 — Imu</div>
@@ -583,7 +604,7 @@
                 <div class="link">2026-02-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-17" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-renenene-chinoizecup-20-tuesday.html">
                 <div>
                   <div style="font-weight:700">renenene — Imu</div>
@@ -592,7 +613,7 @@
                 <div class="link">2026-02-17 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-17" data-placing="6" data-event="other">
               <a class="item" href="/decklists/imu/6th-juli-n-cassano-ghio-liga-phoenix-2026-one-piece-mana-7.html">
                 <div>
                   <div style="font-weight:700">Julián Cassano ghio — Imu</div>
@@ -601,7 +622,7 @@
                 <div class="link">2026-02-17 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-17" data-placing="8" data-event="other">
               <a class="item" href="/decklists/imu/8th-kalil-lanfredi-liga-phoenix-2026-one-piece-mana-7.html">
                 <div>
                   <div style="font-weight:700">Kalil Lanfredi — Imu</div>
@@ -610,7 +631,7 @@
                 <div class="link">2026-02-17 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-16" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-beton1996-ger-dressrosa-tournament-op14-eb03.html">
                 <div>
                   <div style="font-weight:700">Beton1996 — Imu</div>
@@ -619,7 +640,7 @@
                 <div class="link">2026-02-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-16" data-placing="9" data-event="other">
               <a class="item" href="/decklists/imu/9th-fist-ger-dressrosa-tournament-op14-eb03.html">
                 <div>
                   <div style="font-weight:700">FiST — Imu</div>
@@ -628,7 +649,7 @@
                 <div class="link">2026-02-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-11" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-juli-n-cassano-ghio-liga-phoenix-2026-one-piece-mana-6.html">
                 <div>
                   <div style="font-weight:700">Julián Cassano ghio — Imu</div>
@@ -637,7 +658,7 @@
                 <div class="link">2026-02-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-11" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-gortiz-chinoizecup-18-wednesday.html">
                 <div>
                   <div style="font-weight:700">Gortiz — Imu</div>
@@ -646,7 +667,7 @@
                 <div class="link">2026-02-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-11" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-andres-siri-liga-phoenix-2026-one-piece-mana-6.html">
                 <div>
                   <div style="font-weight:700">Andres Siri — Imu</div>
@@ -655,7 +676,7 @@
                 <div class="link">2026-02-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-11" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-aceprado-chinoizecup-18-wednesday.html">
                 <div>
                   <div style="font-weight:700">AcePrado — Imu</div>
@@ -664,7 +685,7 @@
                 <div class="link">2026-02-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-11" data-placing="7" data-event="other">
               <a class="item" href="/decklists/imu/7th-captivat3-chinoizecup-18-wednesday.html">
                 <div>
                   <div style="font-weight:700">Captivat3 — Imu</div>
@@ -673,7 +694,7 @@
                 <div class="link">2026-02-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-10" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-mblawluffy-chinoizecup-17-tuesday.html">
                 <div>
                   <div style="font-weight:700">mblawluffy — Imu</div>
@@ -682,7 +703,7 @@
                 <div class="link">2026-02-10 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-09" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-mblawluffy-chinoizecup-16-monday.html">
                 <div>
                   <div style="font-weight:700">mblawluffy — Imu</div>
@@ -691,7 +712,7 @@
                 <div class="link">2026-02-09 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-04" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-reydelospiratas-chinoizecup-15-wednesday.html">
                 <div>
                   <div style="font-weight:700">ReydelosPiratas — Imu</div>
@@ -700,7 +721,7 @@
                 <div class="link">2026-02-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-04" data-placing="4" data-event="other">
               <a class="item" href="/decklists/imu/4th-californiium-chinoizecup-15-wednesday.html">
                 <div>
                   <div style="font-weight:700">Californiium — Imu</div>
@@ -709,7 +730,7 @@
                 <div class="link">2026-02-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-04" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-juli-n-cassano-ghio-liga-phoenix-2026-one-piece-mana-5.html">
                 <div>
                   <div style="font-weight:700">Julián Cassano ghio — Imu</div>
@@ -718,7 +739,7 @@
                 <div class="link">2026-02-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-04" data-placing="6" data-event="other">
               <a class="item" href="/decklists/imu/6th-facundo-gabarrot-liga-phoenix-2026-one-piece-mana-5.html">
                 <div>
                   <div style="font-weight:700">Facundo Gabarrot — Imu</div>
@@ -727,7 +748,7 @@
                 <div class="link">2026-02-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-02" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-gortiz-chinoizecup-13-monday.html">
                 <div>
                   <div style="font-weight:700">Gortiz — Imu</div>
@@ -736,7 +757,7 @@
                 <div class="link">2026-02-02 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-02" data-placing="6" data-event="other">
               <a class="item" href="/decklists/imu/6th-czoro-clubtv-5-simulador.html">
                 <div>
                   <div style="font-weight:700">CZoro — Imu</div>
@@ -745,7 +766,7 @@
                 <div class="link">2026-02-02 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-02-02" data-placing="7" data-event="other">
               <a class="item" href="/decklists/imu/7th-kizarusenpai-chinoizecup-13-monday.html">
                 <div>
                   <div style="font-weight:700">Kizarusenpai — Imu</div>
@@ -754,7 +775,7 @@
                 <div class="link">2026-02-02 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-28" data-placing="7" data-event="other">
               <a class="item" href="/decklists/imu/7th-andres-siri-liga-phoenix-2026-one-piece-mana-4.html">
                 <div>
                   <div style="font-weight:700">Andres Siri — Imu</div>
@@ -763,7 +784,7 @@
                 <div class="link">2026-01-28 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-26" data-placing="4" data-event="other">
               <a class="item" href="/decklists/imu/4th-beton1996-ger-dressrosa-tournament-the-azure-sea-s-seven.html">
                 <div>
                   <div style="font-weight:700">Beton1996 — Imu</div>
@@ -772,7 +793,7 @@
                 <div class="link">2026-01-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-21" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-mikaeel-d-op14-eb04-western-format-blist-x-oracle.html">
                 <div>
                   <div style="font-weight:700">Mikaeel D — Imu</div>
@@ -781,7 +802,7 @@
                 <div class="link">2026-01-21 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-19" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-mrupperhand-ger-dressrosa-tournament-the-azure-sea-s-seven.html">
                 <div>
                   <div style="font-weight:700">MrUpperhand — Imu</div>
@@ -790,7 +811,7 @@
                 <div class="link">2026-01-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-19" data-placing="7" data-event="other">
               <a class="item" href="/decklists/imu/7th-kevyzhou-chinoizecup-7-monday.html">
                 <div>
                   <div style="font-weight:700">kevyzhou — Imu</div>
@@ -799,7 +820,7 @@
                 <div class="link">2026-01-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-18" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-an-marinkovi-tcg-park-one-piece-set-turnir-s2-2.html">
                 <div>
                   <div style="font-weight:700">Žan Marinković — Imu</div>
@@ -808,7 +829,7 @@
                 <div class="link">2026-01-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-18" data-placing="6" data-event="other">
               <a class="item" href="/decklists/imu/6th-anej-brus-tcg-park-one-piece-set-turnir-s2-2.html">
                 <div>
                   <div style="font-weight:700">Anej Brus — Imu</div>
@@ -817,7 +838,7 @@
                 <div class="link">2026-01-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-15" data-placing="4" data-event="other">
               <a class="item" href="/decklists/imu/4th-beton1996-ger-the-azure-sea-s-seven.html">
                 <div>
                   <div style="font-weight:700">Beton1996 — Imu</div>
@@ -826,7 +847,7 @@
                 <div class="link">2026-01-15 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-14" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-juli-n-cassano-ghio-liga-phoenix-2026-one-piece-mana-2.html">
                 <div>
                   <div style="font-weight:700">Julián Cassano ghio — Imu</div>
@@ -835,7 +856,7 @@
                 <div class="link">2026-01-14 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-14" data-placing="9" data-event="other">
               <a class="item" href="/decklists/imu/9th-kalil-lanfredi-liga-phoenix-2026-one-piece-mana-2.html">
                 <div>
                   <div style="font-weight:700">Kalil Lanfredi — Imu</div>
@@ -844,7 +865,7 @@
                 <div class="link">2026-01-14 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-13" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-ilfranco-chinoizecup-5-tuesday.html">
                 <div>
                   <div style="font-weight:700">IlFranco — Imu</div>
@@ -853,7 +874,7 @@
                 <div class="link">2026-01-13 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-07" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-kondoriano98-chinoizecup-3-wednesday.html">
                 <div>
                   <div style="font-weight:700">Kondoriano98 — Imu</div>
@@ -862,7 +883,7 @@
                 <div class="link">2026-01-07 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-06" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-frodon-chinoizecup-2-tuesday.html">
                 <div>
                   <div style="font-weight:700">Frodon — Imu</div>
@@ -871,7 +892,7 @@
                 <div class="link">2026-01-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2026-01-05" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-beton1996-ger-the-azure-sea-s-seven-pre-realase-event.html">
                 <div>
                   <div style="font-weight:700">Beton1996 — Imu</div>
@@ -880,7 +901,7 @@
                 <div class="link">2026-01-05 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-28" data-placing="3" data-event="championship">
               <a class="item" href="/decklists/imu/3rd-zan-marinkovic-tcg-park-one-piece-store-championship-s2-5.html">
                 <div>
                   <div style="font-weight:700">zan marinkovic — Imu</div>
@@ -889,7 +910,7 @@
                 <div class="link">2025-12-28 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-22" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-frodon-op14-christmas-chinoizecup.html">
                 <div>
                   <div style="font-weight:700">Frodon — Imu</div>
@@ -898,7 +919,7 @@
                 <div class="link">2025-12-22 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-21" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-tune-team-lunti-one-piece-weekly-webcam-61.html">
                 <div>
                   <div style="font-weight:700">Tune — Imu</div>
@@ -907,7 +928,7 @@
                 <div class="link">2025-12-21 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-20" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-dehan69-op13-box-tournament-20-of-november.html">
                 <div>
                   <div style="font-weight:700">dehan69 — Imu</div>
@@ -916,7 +937,7 @@
                 <div class="link">2025-12-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-18" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-kuuna-ger-carrying-on-his-will.html">
                 <div>
                   <div style="font-weight:700">Kuuna — Imu</div>
@@ -925,7 +946,7 @@
                 <div class="link">2025-12-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-18" data-placing="7" data-event="other">
               <a class="item" href="/decklists/imu/7th-harti-ger-carrying-on-his-will.html">
                 <div>
                   <div style="font-weight:700">Harti — Imu</div>
@@ -934,7 +955,7 @@
                 <div class="link">2025-12-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-17" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-davidmele-lcq-chinoizecup.html">
                 <div>
                   <div style="font-weight:700">Davidmele — Imu</div>
@@ -943,7 +964,7 @@
                 <div class="link">2025-12-17 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-17" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-tinnoy-lcq-chinoizecup.html">
                 <div>
                   <div style="font-weight:700">tinnoy — Imu</div>
@@ -952,7 +973,7 @@
                 <div class="link">2025-12-17 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-17" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-ponina-lcq-chinoizecup.html">
                 <div>
                   <div style="font-weight:700">Ponina — Imu</div>
@@ -961,7 +982,7 @@
                 <div class="link">2025-12-17 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-16" data-placing="8" data-event="other">
               <a class="item" href="/decklists/imu/8th-tonybojji-op14-chinoizecup-115-tuesday.html">
                 <div>
                   <div style="font-weight:700">TonyBojji — Imu</div>
@@ -970,7 +991,7 @@
                 <div class="link">2025-12-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-09" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-ninja1k-chinoizecup-112-tuesday.html">
                 <div>
                   <div style="font-weight:700">Ninja1k — Imu</div>
@@ -979,7 +1000,7 @@
                 <div class="link">2025-12-09 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-09" data-placing="9" data-event="other">
               <a class="item" href="/decklists/imu/9th-tonybojji-chinoizecup-112-tuesday.html">
                 <div>
                   <div style="font-weight:700">TonyBojji — Imu</div>
@@ -988,7 +1009,7 @@
                 <div class="link">2025-12-09 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-08" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-patpat-chinoizecup-111-monday.html">
                 <div>
                   <div style="font-weight:700">Patpat — Imu</div>
@@ -997,7 +1018,7 @@
                 <div class="link">2025-12-08 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-08" data-placing="7" data-event="other">
               <a class="item" href="/decklists/imu/7th-texxirloaded-chinoizecup-111-monday.html">
                 <div>
                   <div style="font-weight:700">Texxirloaded — Imu</div>
@@ -1006,7 +1027,7 @@
                 <div class="link">2025-12-08 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-07" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-kuraschi-5face-casetournament.html">
                 <div>
                   <div style="font-weight:700">Kuraschi — Imu</div>
@@ -1015,7 +1036,7 @@
                 <div class="link">2025-12-07 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-07" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-juan-sebasti-n-donnini-rancho-special-event-one-piece-domingo-07-1.html">
                 <div>
                   <div style="font-weight:700">Juan Sebastián Donnini — Imu</div>
@@ -1024,7 +1045,7 @@
                 <div class="link">2025-12-07 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-07" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-djabundance-5face-casetournament.html">
                 <div>
                   <div style="font-weight:700">Djabundance — Imu</div>
@@ -1033,7 +1054,7 @@
                 <div class="link">2025-12-07 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-07" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-imscreex-5face-casetournament.html">
                 <div>
                   <div style="font-weight:700">ImScreex — Imu</div>
@@ -1042,7 +1063,7 @@
                 <div class="link">2025-12-07 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-07" data-placing="7" data-event="other">
               <a class="item" href="/decklists/imu/7th-kondoriano98-ger-carrying-on-his-will.html">
                 <div>
                   <div style="font-weight:700">Kondoriano98 — Imu</div>
@@ -1051,7 +1072,7 @@
                 <div class="link">2025-12-07 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-07" data-placing="8" data-event="other">
               <a class="item" href="/decklists/imu/8th-mrupperhand-ger-carrying-on-his-will.html">
                 <div>
                   <div style="font-weight:700">MrUpperhand — Imu</div>
@@ -1060,7 +1081,7 @@
                 <div class="link">2025-12-07 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-04" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-layroon-ger-carrying-on-his-will.html">
                 <div>
                   <div style="font-weight:700">Layroon — Imu</div>
@@ -1069,7 +1090,7 @@
                 <div class="link">2025-12-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-04" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-noahred7-ger-carrying-on-his-will.html">
                 <div>
                   <div style="font-weight:700">NoahRed7 — Imu</div>
@@ -1078,7 +1099,7 @@
                 <div class="link">2025-12-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-03" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-tinnoy-chinoizecup-110-wednesday.html">
                 <div>
                   <div style="font-weight:700">tinnoy — Imu</div>
@@ -1087,7 +1108,7 @@
                 <div class="link">2025-12-03 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-03" data-placing="6" data-event="other">
               <a class="item" href="/decklists/imu/6th-simpiii-chinoizecup-110-wednesday.html">
                 <div>
                   <div style="font-weight:700">Simpiii — Imu</div>
@@ -1096,7 +1117,7 @@
                 <div class="link">2025-12-03 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-03" data-placing="9" data-event="other">
               <a class="item" href="/decklists/imu/9th-dearcan-chinoizecup-110-wednesday.html">
                 <div>
                   <div style="font-weight:700">Dearcan — Imu</div>
@@ -1105,7 +1126,7 @@
                 <div class="link">2025-12-03 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-02" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-prettyv-chinoizecup-109-tuesday.html">
                 <div>
                   <div style="font-weight:700">PrettyV — Imu</div>
@@ -1114,7 +1135,7 @@
                 <div class="link">2025-12-02 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-02" data-placing="4" data-event="other">
               <a class="item" href="/decklists/imu/4th-darkdreamer78-chinoizecup-109-tuesday.html">
                 <div>
                   <div style="font-weight:700">Darkdreamer78 — Imu</div>
@@ -1123,7 +1144,7 @@
                 <div class="link">2025-12-02 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-02" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-tinnoy-chinoizecup-109-tuesday.html">
                 <div>
                   <div style="font-weight:700">tinnoy — Imu</div>
@@ -1132,7 +1153,7 @@
                 <div class="link">2025-12-02 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-01" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-ninja1k-chinoizecup-108-monday.html">
                 <div>
                   <div style="font-weight:700">Ninja1k — Imu</div>
@@ -1141,7 +1162,7 @@
                 <div class="link">2025-12-01 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-01" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-marblelous-ger-carrying-on-his-will.html">
                 <div>
                   <div style="font-weight:700">Marblelous — Imu</div>
@@ -1150,7 +1171,7 @@
                 <div class="link">2025-12-01 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-01" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-imscreex-chinoizecup-108-monday.html">
                 <div>
                   <div style="font-weight:700">ImScreex — Imu</div>
@@ -1159,7 +1180,7 @@
                 <div class="link">2025-12-01 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-01" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-arcanaknight-chinoizecup-108-monday.html">
                 <div>
                   <div style="font-weight:700">Arcanaknight — Imu</div>
@@ -1168,7 +1189,7 @@
                 <div class="link">2025-12-01 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-01" data-placing="4" data-event="other">
               <a class="item" href="/decklists/imu/4th-layroon-ger-carrying-on-his-will.html">
                 <div>
                   <div style="font-weight:700">Layroon — Imu</div>
@@ -1177,7 +1198,7 @@
                 <div class="link">2025-12-01 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-12-01" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-mrupperhand-ger-carrying-on-his-will.html">
                 <div>
                   <div style="font-weight:700">MrUpperhand — Imu</div>
@@ -1186,7 +1207,7 @@
                 <div class="link">2025-12-01 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-30" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-tune-team-lunti-one-piece-weekly-webcam-60.html">
                 <div>
                   <div style="font-weight:700">Tune — Imu</div>
@@ -1195,7 +1216,7 @@
                 <div class="link">2025-11-30 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-30" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-n-wuethrich-ryou-x-umai-cup-2.html">
                 <div>
                   <div style="font-weight:700">N_Wuethrich — Imu</div>
@@ -1204,7 +1225,7 @@
                 <div class="link">2025-11-30 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-30" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-vincii-ryou-x-umai-cup-2.html">
                 <div>
                   <div style="font-weight:700">Vincii — Imu</div>
@@ -1213,7 +1234,7 @@
                 <div class="link">2025-11-30 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-29" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-alvaro-carmona-xi-aniversario-homelands-one-piece.html">
                 <div>
                   <div style="font-weight:700">Alvaro Carmona — Imu</div>
@@ -1222,7 +1243,7 @@
                 <div class="link">2025-11-29 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-29" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-takaya-sugiyama-xi-aniversario-homelands-one-piece.html">
                 <div>
                   <div style="font-weight:700">Takaya Sugiyama — Imu</div>
@@ -1231,7 +1252,7 @@
                 <div class="link">2025-11-29 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-29" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-daniel-rubio-maestre-xi-aniversario-homelands-one-piece.html">
                 <div>
                   <div style="font-weight:700">Daniel Rubio Maestre — Imu</div>
@@ -1240,7 +1261,7 @@
                 <div class="link">2025-11-29 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-26" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-simpiii-chinoizecup-107-wednesday.html">
                 <div>
                   <div style="font-weight:700">Simpiii — Imu</div>
@@ -1249,7 +1270,7 @@
                 <div class="link">2025-11-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-25" data-placing="6" data-event="other">
               <a class="item" href="/decklists/imu/6th-captivat3-chinoizecup-106-tuesday.html">
                 <div>
                   <div style="font-weight:700">Captivat3 — Imu</div>
@@ -1258,7 +1279,7 @@
                 <div class="link">2025-11-25 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-24" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-jan-birkemeyer-chinoizecup-105-monday.html">
                 <div>
                   <div style="font-weight:700">Jan Birkemeyer — Imu</div>
@@ -1267,7 +1288,7 @@
                 <div class="link">2025-11-24 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-24" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-tetevss-copa-tv-3x3.html">
                 <div>
                   <div style="font-weight:700">tetevss — Imu</div>
@@ -1276,7 +1297,7 @@
                 <div class="link">2025-11-24 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-24" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-mrupperhand-ger-carrying-on-his-will.html">
                 <div>
                   <div style="font-weight:700">MrUpperhand — Imu</div>
@@ -1285,7 +1306,7 @@
                 <div class="link">2025-11-24 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-24" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-behemus-chinoizecup-105-monday.html">
                 <div>
                   <div style="font-weight:700">Behemus — Imu</div>
@@ -1294,7 +1315,7 @@
                 <div class="link">2025-11-24 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-24" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-tv-borges-borges-copa-tv-3x3.html">
                 <div>
                   <div style="font-weight:700">TV・Borges Borges — Imu</div>
@@ -1303,7 +1324,7 @@
                 <div class="link">2025-11-24 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-24" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-patpat-chinoizecup-105-monday.html">
                 <div>
                   <div style="font-weight:700">Patpat — Imu</div>
@@ -1312,7 +1333,7 @@
                 <div class="link">2025-11-24 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-24" data-placing="4" data-event="other">
               <a class="item" href="/decklists/imu/4th-fujitorahs-chinoizecup-105-monday.html">
                 <div>
                   <div style="font-weight:700">fujitorahs — Imu</div>
@@ -1321,7 +1342,7 @@
                 <div class="link">2025-11-24 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-24" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-noahred7-ger-carrying-on-his-will.html">
                 <div>
                   <div style="font-weight:700">NoahRed7 — Imu</div>
@@ -1330,7 +1351,7 @@
                 <div class="link">2025-11-24 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-24" data-placing="6" data-event="other">
               <a class="item" href="/decklists/imu/6th-davidorze-copa-tv-3x3.html">
                 <div>
                   <div style="font-weight:700">davidorze — Imu</div>
@@ -1339,7 +1360,7 @@
                 <div class="link">2025-11-24 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-24" data-placing="6" data-event="other">
               <a class="item" href="/decklists/imu/6th-marblelous-ger-carrying-on-his-will.html">
                 <div>
                   <div style="font-weight:700">Marblelous — Imu</div>
@@ -1348,7 +1369,7 @@
                 <div class="link">2025-11-24 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-23" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-tune-team-lunti-one-piece-weekly-webcam-59.html">
                 <div>
                   <div style="font-weight:700">Tune — Imu</div>
@@ -1357,7 +1378,7 @@
                 <div class="link">2025-11-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-23" data-placing="5" data-event="championship">
               <a class="item" href="/decklists/imu/5th-anzej-lah-tcg-park-one-piece-store-championship-s2-4.html">
                 <div>
                   <div style="font-weight:700">anzej lah — Imu</div>
@@ -1366,7 +1387,7 @@
                 <div class="link">2025-11-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-23" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-imscreex-team-lunti-one-piece-weekly-webcam-59.html">
                 <div>
                   <div style="font-weight:700">ImScreex — Imu</div>
@@ -1375,7 +1396,7 @@
                 <div class="link">2025-11-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-23" data-placing="6" data-event="championship">
               <a class="item" href="/decklists/imu/6th-tim-vehovar-tcg-park-one-piece-store-championship-s2-4.html">
                 <div>
                   <div style="font-weight:700">Tim Vehovar — Imu</div>
@@ -1384,7 +1405,7 @@
                 <div class="link">2025-11-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-23" data-placing="6" data-event="other">
               <a class="item" href="/decklists/imu/6th-kohairichi-team-lunti-one-piece-weekly-webcam-59.html">
                 <div>
                   <div style="font-weight:700">Kohairichi — Imu</div>
@@ -1393,7 +1414,7 @@
                 <div class="link">2025-11-23 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-20" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-turtledcuo-ger-carrying-on-his-will.html">
                 <div>
                   <div style="font-weight:700">TurtleDcuo — Imu</div>
@@ -1402,7 +1423,7 @@
                 <div class="link">2025-11-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-20" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-smile-versus-cup-win-a-box.html">
                 <div>
                   <div style="font-weight:700">Smile — Imu</div>
@@ -1411,7 +1432,7 @@
                 <div class="link">2025-11-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-20" data-placing="4" data-event="other">
               <a class="item" href="/decklists/imu/4th-hilko-ger-carrying-on-his-will.html">
                 <div>
                   <div style="font-weight:700">Hilko — Imu</div>
@@ -1420,7 +1441,7 @@
                 <div class="link">2025-11-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-20" data-placing="9" data-event="other">
               <a class="item" href="/decklists/imu/9th-jdaigo-versus-cup-win-a-box.html">
                 <div>
                   <div style="font-weight:700">JDaigo — Imu</div>
@@ -1429,7 +1450,7 @@
                 <div class="link">2025-11-20 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-19" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-simpiii-chinoizecup-104-wednesday.html">
                 <div>
                   <div style="font-weight:700">Simpiii — Imu</div>
@@ -1438,7 +1459,7 @@
                 <div class="link">2025-11-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-19" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-roronoah-chinoizecup-104-wednesday.html">
                 <div>
                   <div style="font-weight:700">Roronoah — Imu</div>
@@ -1447,7 +1468,7 @@
                 <div class="link">2025-11-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-19" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-jajanken-chinoizecup-104-wednesday.html">
                 <div>
                   <div style="font-weight:700">Jajanken — Imu</div>
@@ -1456,7 +1477,7 @@
                 <div class="link">2025-11-19 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-18" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-achlane-majura-tcg-tournament-op13.html">
                 <div>
                   <div style="font-weight:700">achlane — Imu</div>
@@ -1465,7 +1486,7 @@
                 <div class="link">2025-11-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-18" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-sungodnika1996-majura-tcg-tournament-op13.html">
                 <div>
                   <div style="font-weight:700">SunGodNika1996 — Imu</div>
@@ -1474,7 +1495,7 @@
                 <div class="link">2025-11-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-18" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-xexagon-majura-tcg-tournament-op13.html">
                 <div>
                   <div style="font-weight:700">Xexagon — Imu</div>
@@ -1483,7 +1504,7 @@
                 <div class="link">2025-11-18 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-17" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-jan-birkemeyer-chinoizecup-102-monday.html">
                 <div>
                   <div style="font-weight:700">Jan Birkemeyer — Imu</div>
@@ -1492,7 +1513,7 @@
                 <div class="link">2025-11-17 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-17" data-placing="7" data-event="other">
               <a class="item" href="/decklists/imu/7th-roronoah-chinoizecup-102-monday.html">
                 <div>
                   <div style="font-weight:700">Roronoah — Imu</div>
@@ -1501,7 +1522,7 @@
                 <div class="link">2025-11-17 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-17" data-placing="9" data-event="other">
               <a class="item" href="/decklists/imu/9th-prettyv-chinoizecup-102-monday.html">
                 <div>
                   <div style="font-weight:700">PrettyV — Imu</div>
@@ -1510,7 +1531,7 @@
                 <div class="link">2025-11-17 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-16" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-tune-team-lunti-one-piece-weekly-webcam-58.html">
                 <div>
                   <div style="font-weight:700">Tune — Imu</div>
@@ -1519,7 +1540,7 @@
                 <div class="link">2025-11-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-16" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-davidschulz-phobos-case-tournament-16-11-2025.html">
                 <div>
                   <div style="font-weight:700">DavidSchulz — Imu</div>
@@ -1528,7 +1549,7 @@
                 <div class="link">2025-11-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-16" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-marshil-qazizada-geek-event-tournament-2025.html">
                 <div>
                   <div style="font-weight:700">Marshil Qazizada — Imu</div>
@@ -1537,7 +1558,7 @@
                 <div class="link">2025-11-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-16" data-placing="4" data-event="other">
               <a class="item" href="/decklists/imu/4th-princebankai-team-lunti-one-piece-weekly-webcam-58.html">
                 <div>
                   <div style="font-weight:700">PrinceBankai — Imu</div>
@@ -1546,7 +1567,7 @@
                 <div class="link">2025-11-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-16" data-placing="4" data-event="other">
               <a class="item" href="/decklists/imu/4th-julien-bastian-geek-event-tournament-2025.html">
                 <div>
                   <div style="font-weight:700">Julien Bastian — Imu</div>
@@ -1555,7 +1576,7 @@
                 <div class="link">2025-11-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-16" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-mexxfall-phobos-case-tournament-16-11-2025.html">
                 <div>
                   <div style="font-weight:700">Mexxfall — Imu</div>
@@ -1564,7 +1585,7 @@
                 <div class="link">2025-11-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-16" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-dorian-bourahla-geek-event-tournament-2025.html">
                 <div>
                   <div style="font-weight:700">Dorian Bourahla — Imu</div>
@@ -1573,7 +1594,7 @@
                 <div class="link">2025-11-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-16" data-placing="6" data-event="other">
               <a class="item" href="/decklists/imu/6th-schurabura404-team-lunti-one-piece-weekly-webcam-58.html">
                 <div>
                   <div style="font-weight:700">SchuraBura404 — Imu</div>
@@ -1582,7 +1603,7 @@
                 <div class="link">2025-11-16 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-13" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-sungodnika1996-ger-carrying-on-his-will.html">
                 <div>
                   <div style="font-weight:700">SunGodNika1996 — Imu</div>
@@ -1591,7 +1612,7 @@
                 <div class="link">2025-11-13 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-13" data-placing="4" data-event="other">
               <a class="item" href="/decklists/imu/4th-pandaeleven-ger-carrying-on-his-will.html">
                 <div>
                   <div style="font-weight:700">PandaEleven — Imu</div>
@@ -1600,7 +1621,7 @@
                 <div class="link">2025-11-13 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-13" data-placing="6" data-event="other">
               <a class="item" href="/decklists/imu/6th-dima-ger-carrying-on-his-will.html">
                 <div>
                   <div style="font-weight:700">dima — Imu</div>
@@ -1609,7 +1630,7 @@
                 <div class="link">2025-11-13 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-11" data-placing="2" data-event="other">
               <a class="item" href="/decklists/imu/2nd-roronoah-chinoizecup-100-tuesday.html">
                 <div>
                   <div style="font-weight:700">Roronoah — Imu</div>
@@ -1618,7 +1639,7 @@
                 <div class="link">2025-11-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-11" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-sungodnika1996-majura-tcg-tournament-op13-proxy.html">
                 <div>
                   <div style="font-weight:700">SunGodNika1996 — Imu</div>
@@ -1627,7 +1648,7 @@
                 <div class="link">2025-11-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-11" data-placing="4" data-event="other">
               <a class="item" href="/decklists/imu/4th-renenene-majura-tcg-tournament-op13-proxy.html">
                 <div>
                   <div style="font-weight:700">renenene — Imu</div>
@@ -1636,7 +1657,7 @@
                 <div class="link">2025-11-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-11" data-placing="6" data-event="other">
               <a class="item" href="/decklists/imu/6th-achlane-majura-tcg-tournament-op13-proxy.html">
                 <div>
                   <div style="font-weight:700">achlane — Imu</div>
@@ -1645,7 +1666,7 @@
                 <div class="link">2025-11-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-11" data-placing="8" data-event="other">
               <a class="item" href="/decklists/imu/8th-roberto-s-chinoizecup-100-tuesday.html">
                 <div>
                   <div style="font-weight:700">Roberto S — Imu</div>
@@ -1654,7 +1675,7 @@
                 <div class="link">2025-11-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-11" data-placing="10" data-event="other">
               <a class="item" href="/decklists/imu/10th-behemus-chinoizecup-100-tuesday.html">
                 <div>
                   <div style="font-weight:700">Behemus — Imu</div>
@@ -1663,7 +1684,7 @@
                 <div class="link">2025-11-11 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-10" data-placing="4" data-event="other">
               <a class="item" href="/decklists/imu/4th-mrupperhand-ger-carrying-on-his-will.html">
                 <div>
                   <div style="font-weight:700">MrUpperhand — Imu</div>
@@ -1672,7 +1693,7 @@
                 <div class="link">2025-11-10 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-10" data-placing="4" data-event="other">
               <a class="item" href="/decklists/imu/4th-jan-birkemeyer-chinoizecup-99-monday.html">
                 <div>
                   <div style="font-weight:700">Jan Birkemeyer — Imu</div>
@@ -1681,7 +1702,7 @@
                 <div class="link">2025-11-10 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-10" data-placing="6" data-event="other">
               <a class="item" href="/decklists/imu/6th-king187-chinoizecup-99-monday.html">
                 <div>
                   <div style="font-weight:700">King187 — Imu</div>
@@ -1690,7 +1711,7 @@
                 <div class="link">2025-11-10 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-10" data-placing="7" data-event="other">
               <a class="item" href="/decklists/imu/7th-simpiii-chinoizecup-99-monday.html">
                 <div>
                   <div style="font-weight:700">Simpiii — Imu</div>
@@ -1699,7 +1720,7 @@
                 <div class="link">2025-11-10 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-09" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-blacklotus96-team-lunti-one-piece-weekly-webcam-57.html">
                 <div>
                   <div style="font-weight:700">BlackLotus96 — Imu</div>
@@ -1708,7 +1729,7 @@
                 <div class="link">2025-11-09 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-06" data-placing="3" data-event="other">
               <a class="item" href="/decklists/imu/3rd-minivillena11-versus-cup-win-a-box.html">
                 <div>
                   <div style="font-weight:700">minivillena11 — Imu</div>
@@ -1717,7 +1738,7 @@
                 <div class="link">2025-11-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-06" data-placing="6" data-event="other">
               <a class="item" href="/decklists/imu/6th-gortiz-versus-cup-win-a-box.html">
                 <div>
                   <div style="font-weight:700">Gortiz — Imu</div>
@@ -1726,7 +1747,7 @@
                 <div class="link">2025-11-06 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-05" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-jan-birkemeyer-chinoizecup-98-wednesday-op13-legal.html">
                 <div>
                   <div style="font-weight:700">Jan Birkemeyer — Imu</div>
@@ -1735,7 +1756,7 @@
                 <div class="link">2025-11-05 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-04" data-placing="5" data-event="other">
               <a class="item" href="/decklists/imu/5th-chrispak-chinoizecup-97-tuesday-op13-legal.html">
                 <div>
                   <div style="font-weight:700">ChrisPak — Imu</div>
@@ -1744,7 +1765,7 @@
                 <div class="link">2025-11-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-04" data-placing="8" data-event="other">
               <a class="item" href="/decklists/imu/8th-canepis-chinoizecup-97-tuesday-op13-legal.html">
                 <div>
                   <div style="font-weight:700">Canepis — Imu</div>
@@ -1753,7 +1774,7 @@
                 <div class="link">2025-11-04 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-11-03" data-placing="7" data-event="other">
               <a class="item" href="/decklists/imu/7th-patpat-chinoizecup-96-monday-op13-legal.html">
                 <div>
                   <div style="font-weight:700">Patpat — Imu</div>
@@ -1762,7 +1783,7 @@
                 <div class="link">2025-11-03 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-10-29" data-placing="4" data-event="other">
               <a class="item" href="/decklists/imu/4th-duschdmarke-chinoizecup-95-wednesday.html">
                 <div>
                   <div style="font-weight:700">duschdmarke — Imu</div>
@@ -1771,7 +1792,7 @@
                 <div class="link">2025-10-29 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-10-26" data-placing="1" data-event="other">
               <a class="item" href="/decklists/imu/1st-jajanken-op13-warm-up-event-chinoizecup.html">
                 <div>
                   <div style="font-weight:700">Jajanken — Imu</div>
@@ -1780,7 +1801,7 @@
                 <div class="link">2025-10-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-10-26" data-placing="6" data-event="other">
               <a class="item" href="/decklists/imu/6th-vlets-op13-warm-up-event-chinoizecup.html">
                 <div>
                   <div style="font-weight:700">Vlets — Imu</div>
@@ -1789,7 +1810,7 @@
                 <div class="link">2025-10-26 →</div>
               </a>
             </li>
-            <li>
+            <li data-date="2025-10-26" data-placing="7" data-event="other">
               <a class="item" href="/decklists/imu/7th-talkat1ve-op13-warm-up-event-chinoizecup.html">
                 <div>
                   <div style="font-weight:700">Talkat1ve — Imu</div>
@@ -1859,5 +1880,6 @@
       });
     })();
   </script>
+  <script src="/js/site.js?v=meta-tools"></script>
 </body>
 </html>
