@@ -803,7 +803,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
-  <link rel="stylesheet" href="/css/site.css?v=meta-tools" />
+  <link rel="stylesheet" href="/css/site.css?v=copy-sim" />
 </head>
 <body class="{html.escape(color)}">
   <div class="wrap">
@@ -883,7 +883,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
       }});
     }})();
   </script>
-  <script src="/js/site.js?v=meta-tools"></script>
+  <script src="/js/site.js?v=copy-sim"></script>
 </body>
 </html>
 """
@@ -1036,9 +1036,9 @@ def render_text_deck(grouped: dict, cache: dict, order: list[str], totals: dict)
     return f"""        <section class="text-deck">
           <div class="section-title">
             <h3>Text list</h3>
-            <button type="button" class="copy-sim" data-copy-sim>Copy for sim</button>
+            <button type="button" class="copy-sim" data-copy-sim>Copy for OPTCGSim</button>
           </div>
-          <p class="muted">Hover or tap a card name to see the picture. Copy pastes <code>NxSET-NNN</code> for OPTCGSim.</p>
+          <p class="muted">Hover or tap a card name to see the picture. Copy pastes <code>NxSET-NNN</code> for OPTCGSim Deck Editor → Import from clipboard.</p>
           <div class="text-deck-cols">
 {chr(10).join(cols)}
           </div>

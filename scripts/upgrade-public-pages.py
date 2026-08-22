@@ -21,7 +21,17 @@ aspec.loader.exec_module(ana)
 
 ROOT = gen.ROOT
 LINE_RE = ana.LINE_RE
-CSS_NEW = "/css/site.css?v=meta-tools"
+CSS_NEW = "/css/site.css?v=copy-sim"
+JS_NEW = "/js/site.js?v=copy-sim"
+COPY_BTN = '<button type="button" class="copy-sim" data-copy-sim>Copy for OPTCGSim</button>'
+TEXT_DECK_TITLE_RE = re.compile(
+    r'(<section class="text-deck">\s*<div class="section-title">)(.*?)(^\s*</div>)',
+    re.S | re.M,
+)
+BROKEN_COPY_RE = re.compile(
+    r'(<div class="muted">)([^<]*?)\s*<button type="button" class="copy-sim" data-copy-sim>Copy for OPTCGSim</button>\s*</div>\s*</div>',
+    re.S,
+)
 NAV_OLD_PATTERNS = [
     (
         '        <a href="/decklists/op17.html">OP17</a>\n        <a href="/#community">Community</a>',
@@ -42,13 +52,29 @@ NAV_OLD_PATTERNS = [
 ]
 
 
+def ensure_copy_button(text: str) -> str:
+    text = text.replace(">Copy for sim<", ">Copy for OPTCGSim<")
+    text = BROKEN_COPY_RE.sub(
+        rf'\1\2</div>\n            {COPY_BTN}\n          </div>',
+        text,
+    )
+    def add_btn(match: re.Match[str]) -> str:
+        inner = match.group(2)
+        if "data-copy-sim" in inner:
+            return match.group(0)
+        return f"{match.group(1)}{inner}\n            {COPY_BTN}\n{match.group(3)}"
+
+    return TEXT_DECK_TITLE_RE.sub(add_btn, text)
+
+
 def patch_nav_and_assets(text: str) -> str:
     text = re.sub(r'href="/css/site\.css(?:\?[^"]*)?"', f'href="{CSS_NEW}"', text)
+    text = re.sub(r'src="/js/site\.js(?:\?[^"]*)?"', f'src="{JS_NEW}"', text)
     for old, new in NAV_OLD_PATTERNS:
         text = text.replace(old, new)
     if "/js/site.js" not in text:
-        text = text.replace("</body>", '  <script src="/js/site.js?v=meta-tools"></script>\n</body>')
-    return text
+        text = text.replace("</body>", f'  <script src="{JS_NEW}"></script>\n</body>')
+    return ensure_copy_button(text)
 
 
 def grouped_from_counts(leader: dict, counts: dict[str, int], cache: dict) -> tuple[list[dict], dict]:
@@ -169,7 +195,12 @@ def patch_home() -> None:
     text = path.read_text()
     rows = meta_rows()
     n_leaders = len(gen.LEADERS)
-    text = text.replace("All 14 leader pages on this site. Click a name or a card picture.", f"All {n_leaders} leader pages on this site. Click a name or a card picture.")
+    text = re.sub(
+        r"All \d+ leader pages on this site\. Click a name or a card picture\.",
+        f"All {n_leaders} leader pages on this site. Click a name or a card picture.",
+        text,
+        count=1,
+    )
     if "Format &amp; banlist" not in text:
         text = text.replace(
             '<a class="home-ghost" href="/decklists/op17.html">All leader pages</a>',

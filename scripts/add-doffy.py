@@ -68,7 +68,7 @@ def rebuild_new_analysis(cache: dict) -> None:
         page = ana.inject(page_path.read_text(), block)
         page = ana.ensure_popup_js(page)
         if "/js/site.js" not in page:
-            page = page.replace("</body>", '  <script src="/js/site.js?v=meta-tools"></script>\n</body>')
+            page = page.replace("</body>", '  <script src="/js/site.js?v=copy-sim"></script>\n</body>')
         page_path.write_text(page)
         cons[lid] = {
             "lists": len(decks),

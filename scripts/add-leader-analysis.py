@@ -130,7 +130,8 @@ TAKES = {
     "OP14-060": (
         "Purple OP14 Donquixote Doflamingo is the Dressrosa retarget leader — not blue OP01-060 Doffy and not purple Katakuri. "
         "Once per opponent attack, DON!! −1 to send that attack at Doffy or a Donquixote Pirates body. "
-        "Averaged lists are the Donquixote Pirates / On K.O. package from tournaments on this page."
+        "Averaged lists lock Dellinger, 1-cost Sugar, 8-cost Doffy, 10-cost Doffy, Baby 5, Monet, and Vergo; "
+        "Slow-Slow Beam Sword, Divine Departure, Uso-Hachi, Trebol, and Rosinante follow."
     ),
 }
 
@@ -289,7 +290,7 @@ def analysis_block(leader: dict, n: int, take: str, text_deck: str) -> str:
     text_deck = text_deck.replace("<h3>Text list</h3>", "<h3>Consensus list</h3>", 1)
     averaged = (
         f'<p class="muted">Averaged from {n} lists on this page, then filled to 50 cards. '
-        "Hover or tap a name for the picture. Copy pastes the IDs for OPTCGSim.</p>"
+        "Hover or tap a name for the picture. Copy pastes <code>NxSET-NNN</code> for OPTCGSim.</p>"
     )
     text_deck = text_deck.replace(
         '<p class="muted">Hover or tap a card name to see the picture. Copy pastes <code>NxSET-NNN</code> for OPTCGSim.</p>',

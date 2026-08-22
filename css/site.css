@@ -190,8 +190,8 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
 .swatch.dual-purple-yellow{background:linear-gradient(90deg,#6a1b9a 50%,#c9a227 50%)}
 .swatch.dual-red-black{background:linear-gradient(90deg,#b71c1c 50%,#212121 50%)}
 .copy-sim{
-  margin-left:auto;padding:6px 10px;border-radius:8px;border:1px solid rgba(183,28,28,0.28);
-  background:#fff;color:var(--accent);font:inherit;font-size:12px;font-weight:800;cursor:pointer
+  margin-left:auto;padding:8px 12px;border-radius:8px;border:1px solid var(--accent);
+  background:var(--accent);color:#fff;font:inherit;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap
 }
 .copy-sim:hover{border-color:var(--accent)}
 .deck-stats{margin-top:16px;padding:12px 14px;border-radius:12px;border:1px solid rgba(0,0,0,0.06);background:#fff}

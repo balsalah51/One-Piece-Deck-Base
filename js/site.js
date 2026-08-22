@@ -42,7 +42,7 @@
       btn.type = "button";
       btn.className = "copy-sim";
       btn.setAttribute("data-copy-sim", "");
-      btn.textContent = "Copy for sim";
+      btn.textContent = "Copy for OPTCGSim";
       title.appendChild(btn);
     });
   }

@@ -49,7 +49,7 @@ def chrome(title: str, description: str, body: str) -> str:
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
   <link rel="canonical" href="{html.escape(SITE)}" />
-  <link rel="stylesheet" href="/css/site.css?v=meta-tools" />
+  <link rel="stylesheet" href="/css/site.css?v=copy-sim" />
 </head>
 <body>
   <div class="wrap">
@@ -78,7 +78,7 @@ def chrome(title: str, description: str, body: str) -> str:
     </footer>
   </div>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-  <script src="/js/site.js?v=meta-tools"></script>
+  <script src="/js/site.js?v=copy-sim"></script>
 </body>
 </html>
 """
