@@ -11811,5 +11811,20 @@
     "effect": "[On Play] If your Leader has the {Navy} type, add up to 1 DON!! card from your DON!! deck and set it as active, and add up to 1 additional DON!! card and rest it.",
     "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP16/OP16-075_EN.webp",
     "source": "https://onepiece.limitlesstcg.com/cards/OP16-075"
+  },
+  "OP15-009": {
+    "id": "OP15-009",
+    "name": "Koby",
+    "category": "Character",
+    "color": "Red",
+    "life": null,
+    "cost": "1",
+    "power": "2000",
+    "counter": "+2000",
+    "attribute": "Strike",
+    "types": "East Blue/Navy",
+    "effect": "If your Character with 7000 base power or less would be removed from the field by your opponent's effect, you may give your Leader −2000 power during this turn instead.",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP15/OP15-009_EN.webp",
+    "source": "https://onepiece.limitlesstcg.com/cards/OP15-009"
   }
 }

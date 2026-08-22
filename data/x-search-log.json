@@ -4,7 +4,7 @@
       "handle": "MarinefordTCG",
       "url": "https://r.jina.ai/https://x.com/MarinefordTCG",
       "status": 403,
-      "chars": 597,
+      "chars": 541,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -14,7 +14,7 @@
       "handle": "StrawHatPecan",
       "url": "https://r.jina.ai/https://x.com/StrawHatPecan",
       "status": 403,
-      "chars": 597,
+      "chars": 541,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -24,7 +24,7 @@
       "handle": "BenSchumi7",
       "url": "https://r.jina.ai/https://x.com/BenSchumi7",
       "status": 403,
-      "chars": 597,
+      "chars": 541,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -34,7 +34,7 @@
       "handle": "CardKaizoku",
       "url": "https://r.jina.ai/https://x.com/CardKaizoku",
       "status": 403,
-      "chars": 597,
+      "chars": 541,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -44,7 +44,7 @@
       "handle": "BlaisePlays",
       "url": "https://r.jina.ai/https://x.com/BlaisePlays",
       "status": 403,
-      "chars": 597,
+      "chars": 541,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -54,7 +54,7 @@
       "handle": "BlaisePlaysTCG",
       "url": "https://r.jina.ai/https://x.com/BlaisePlaysTCG",
       "status": 403,
-      "chars": 597,
+      "chars": 541,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -64,7 +64,7 @@
       "handle": "NightingaleTCG",
       "url": "https://r.jina.ai/https://x.com/NightingaleTCG",
       "status": 403,
-      "chars": 597,
+      "chars": 541,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -74,7 +74,7 @@
       "handle": "michaelartress",
       "url": "https://r.jina.ai/https://x.com/michaelartress",
       "status": 403,
-      "chars": 597,
+      "chars": 541,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -84,7 +84,7 @@
       "handle": "ONEPIECE_tcg_EN",
       "url": "https://r.jina.ai/https://x.com/ONEPIECE_tcg_EN",
       "status": 403,
-      "chars": 597,
+      "chars": 541,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -94,7 +94,7 @@
       "handle": "Silvers_D_Foxy",
       "url": "https://r.jina.ai/https://x.com/Silvers_D_Foxy",
       "status": 403,
-      "chars": 597,
+      "chars": 541,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -104,7 +104,7 @@
       "handle": "LimitlessTCG",
       "url": "https://r.jina.ai/https://x.com/LimitlessTCG",
       "status": 403,
-      "chars": 597,
+      "chars": 541,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -115,7 +115,7 @@
     {
       "query": "site:x.com \"4xOP17\"",
       "status": 202,
-      "chars": 14232,
+      "chars": 14238,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0
@@ -123,13 +123,53 @@
     {
       "query": "site:twitter.com \"4xOP17-040\"",
       "status": 202,
-      "chars": 14264,
+      "chars": 14246,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
     },
     {
       "query": "site:x.com \"1xOP17-001\" decklist",
+      "status": 202,
+      "chars": 14276,
+      "tweet_ids": [],
+      "card_lines": 2,
+      "complete_lists": 0
+    },
+    {
+      "query": "site:x.com \"1xOP17-020\" decklist",
+      "status": 202,
+      "chars": 14276,
+      "tweet_ids": [],
+      "card_lines": 2,
+      "complete_lists": 0
+    },
+    {
+      "query": "site:x.com \"1xOP17-039\" decklist",
+      "status": 202,
+      "chars": 14258,
+      "tweet_ids": [],
+      "card_lines": 2,
+      "complete_lists": 0
+    },
+    {
+      "query": "site:x.com \"1xOP17-058\" decklist",
+      "status": 202,
+      "chars": 14276,
+      "tweet_ids": [],
+      "card_lines": 2,
+      "complete_lists": 0
+    },
+    {
+      "query": "site:x.com \"1xOP17-079\" decklist",
+      "status": 202,
+      "chars": 14264,
+      "tweet_ids": [],
+      "card_lines": 2,
+      "complete_lists": 0
+    },
+    {
+      "query": "site:x.com \"1xOP17-099\" decklist",
       "status": 202,
       "chars": 14264,
       "tweet_ids": [],
@@ -139,7 +179,7 @@
     {
       "query": "site:x.com \"1xOP16-001\"",
       "status": 202,
-      "chars": 14234,
+      "chars": 14264,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
@@ -155,7 +195,7 @@
     {
       "query": "site:x.com StrawHatPecan OP17 list",
       "status": 202,
-      "chars": 14254,
+      "chars": 14253,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0
@@ -163,7 +203,7 @@
     {
       "query": "site:x.com CardKaizoku Ace OP16-001",
       "status": 202,
-      "chars": 14244,
+      "chars": 14250,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0
@@ -179,7 +219,7 @@
     {
       "query": "site:x.com \"1xOP16-041\" Buggy",
       "status": 202,
-      "chars": 14251,
+      "chars": 14246,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
@@ -187,7 +227,7 @@
     {
       "query": "site:x.com \"1xOP16-060\" Sengoku",
       "status": 202,
-      "chars": 14268,
+      "chars": 14261,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
@@ -195,7 +235,7 @@
     {
       "query": "site:x.com \"1xOP15-002\" Lucy",
       "status": 202,
-      "chars": 14262,
+      "chars": 14274,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
@@ -203,7 +243,7 @@
     {
       "query": "site:x.com \"1xOP16-080\" Blackbeard",
       "status": 202,
-      "chars": 14268,
+      "chars": 14262,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
@@ -211,7 +251,23 @@
     {
       "query": "site:x.com Doffy OP14-060 decklist",
       "status": 202,
-      "chars": 14254,
+      "chars": 14248,
+      "tweet_ids": [],
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "query": "site:x.com OP17 decklist since:2026-08-20",
+      "status": 202,
+      "chars": 14280,
+      "tweet_ids": [],
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "query": "site:twitter.com OP17 decklist since:2026-08-20",
+      "status": 202,
+      "chars": 14268,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0
@@ -224,6 +280,7 @@
       "url": "https://x.com/Silvers_D_Foxy/status/2090197490913902734",
       "http": 200,
       "text": "The “Elite Four” of the OP17 Meta",
+      "created": "Wed Aug 19 22:01:30 +000",
       "card_lines": 0,
       "complete_lists": 0
     },
@@ -233,6 +290,7 @@
       "url": "https://x.com/MarinefordTCG/status/2089448508684189741",
       "http": 200,
       "text": "",
+      "created": "Mon Aug 17 20:25:19 +000",
       "card_lines": 0,
       "complete_lists": 0
     },
@@ -242,6 +300,7 @@
       "url": "https://x.com/MarinefordTCG/status/2088771006592663815",
       "http": 200,
       "text": "Removing 6c Newgate with this shit is like crack",
+      "created": "Sat Aug 15 23:33:10 +000",
       "card_lines": 0,
       "complete_lists": 0
     },
@@ -251,6 +310,7 @@
       "url": "https://x.com/cardkaizoku/status/2089597170316144997",
       "http": 200,
       "text": "Top 8 TCG channels for constipated players",
+      "created": "Tue Aug 18 06:16:02 +000",
       "card_lines": 0,
       "complete_lists": 0
     },
@@ -260,6 +320,7 @@
       "url": "https://x.com/cardkaizoku/status/2089491621176029306",
       "http": 200,
       "text": "Sabo and Rocks continue to climb! The meta is getting more hostile towards Mihawk if all the power down in Sabo, Ace, and Kaido remains. Speaking of Kaido, being pretty decent into the Rocks and Mihawk has given him some meta relevance! And people remembered PEnel existed again",
+      "created": "Mon Aug 17 23:16:38 +000",
       "card_lines": 0,
       "complete_lists": 0
     },
@@ -269,6 +330,7 @@
       "url": "https://x.com/cardkaizoku/status/2088505853402108192",
       "http": 200,
       "text": "You can now make Match History reports by clicking the Match Report button in your match history!\n\nYou can also save them to where you normally save your Tournament Reports!",
+      "created": "Sat Aug 15 05:59:32 +000",
       "card_lines": 0,
       "complete_lists": 0
     },
@@ -278,6 +340,7 @@
       "url": "https://x.com/cardkaizoku/status/2088365415928127503",
       "http": 200,
       "text": "Got my first manga rare and it only took 22 sets",
+      "created": "Fri Aug 14 20:41:29 +000",
       "card_lines": 0,
       "complete_lists": 0
     },
@@ -287,6 +350,7 @@
       "url": "https://x.com/cardkaizoku/status/2086926321696076196",
       "http": 200,
       "text": "Super early Red Ace data. Looks like that new 10 drop and getting a 2nd Whitebeard 2k with 8k power was enough to push him over the edge\n\nLoses to moms and dads though",
+      "created": "Mon Aug 10 21:23:02 +000",
       "card_lines": 0,
       "complete_lists": 0
     }
@@ -316,6 +380,71 @@
         [
           1,
           "OP17-001"
+        ]
+      ]
+    },
+    {
+      "source": "site:x.com \"1xOP17-020\" decklist",
+      "hits": [
+        [
+          1,
+          "OP17-020"
+        ],
+        [
+          1,
+          "OP17-020"
+        ]
+      ]
+    },
+    {
+      "source": "site:x.com \"1xOP17-039\" decklist",
+      "hits": [
+        [
+          1,
+          "OP17-039"
+        ],
+        [
+          1,
+          "OP17-039"
+        ]
+      ]
+    },
+    {
+      "source": "site:x.com \"1xOP17-058\" decklist",
+      "hits": [
+        [
+          1,
+          "OP17-058"
+        ],
+        [
+          1,
+          "OP17-058"
+        ]
+      ]
+    },
+    {
+      "source": "site:x.com \"1xOP17-079\" decklist",
+      "hits": [
+        [
+          1,
+          "OP17-079"
+        ],
+        [
+          1,
+          "OP17-079"
+        ]
+      ]
+    },
+    {
+      "source": "site:x.com \"1xOP17-099\" decklist",
+      "hits": [
+        [
+          1,
+          "OP17-099"
+        ],
+        [
+          1,
+          "OP17-099"
         ]
       ]
     },

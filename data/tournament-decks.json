@@ -1,5 +1,16 @@
 {
-  "OP17-001": [],
+  "OP17-001": [
+    {
+      "slug": "19th-zuramp17-rumble-league-5-op17-free",
+      "href": "/decklists/op17/edward-newgate/19th-zuramp17-rumble-league-5-op17-free.html",
+      "player": "Zuramp17",
+      "tournament": "Rumble league #5|OP17 | FREE",
+      "placing": 19,
+      "date": "2026-08-20",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7eaffc78baaa6d1c21edca/standings"
+    }
+  ],
   "OP17-020": [
     {
       "slug": "37th-paranoidnightstalker-op17-chinoizecup-99-wednesday",
@@ -582,6 +593,116 @@
       "date": "2026-08-18",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "27th-morow-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/op17/rocks-d-xebec/27th-morow-op17-chinoizecup-99-wednesday.html",
+      "player": "Morow",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": 27,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "38th-mrpolypous-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/op17/rocks-d-xebec/38th-mrpolypous-op17-chinoizecup-99-wednesday.html",
+      "player": "MrPolypous",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": 38,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "46th-maxitcg-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/op17/rocks-d-xebec/46th-maxitcg-op17-chinoizecup-99-wednesday.html",
+      "player": "MaxiTcg",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": 46,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "3-3-nyler-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/op17/rocks-d-xebec/3-3-nyler-op17-chinoizecup-99-wednesday.html",
+      "player": "Nyler",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": null,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "2-2-virtu0so-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/op17/rocks-d-xebec/2-2-virtu0so-op17-chinoizecup-99-wednesday.html",
+      "player": "Virtu0so",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": null,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "1-3-prussia-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/op17/rocks-d-xebec/1-3-prussia-op17-chinoizecup-99-wednesday.html",
+      "player": "Prussia",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": null,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "1-2-frodon-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/op17/rocks-d-xebec/1-2-frodon-op17-chinoizecup-99-wednesday.html",
+      "player": "Frodon",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": null,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "0-3-poog-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/op17/rocks-d-xebec/0-3-poog-op17-chinoizecup-99-wednesday.html",
+      "player": "poog",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": null,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "0-1-ywjmanu-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/op17/rocks-d-xebec/0-1-ywjmanu-op17-chinoizecup-99-wednesday.html",
+      "player": "YWJmanu",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": null,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "0-2-rukyy-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/op17/rocks-d-xebec/0-2-rukyy-op17-chinoizecup-99-wednesday.html",
+      "player": "Rukyy",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": null,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "0-2-fuat-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/op17/rocks-d-xebec/0-2-fuat-op17-chinoizecup-99-wednesday.html",
+      "player": "fuat",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": null,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
     }
   ],
   "OP17-058": [
@@ -1104,6 +1225,16 @@
       "date": "2026-08-19",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "12th-vins14-rumble-league-5-op17-free",
+      "href": "/decklists/op17/kaido/12th-vins14-rumble-league-5-op17-free.html",
+      "player": "Vins14",
+      "tournament": "Rumble league #5|OP17 | FREE",
+      "placing": 12,
+      "date": "2026-08-20",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7eaffc78baaa6d1c21edca/standings"
     }
   ],
   "OP17-079": [
@@ -1266,6 +1397,16 @@
       "date": "2026-08-18",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "4th-itzfalco-rumble-league-5-op17-free",
+      "href": "/decklists/op17/monkey-d-luffy/4th-itzfalco-rumble-league-5-op17-free.html",
+      "player": "itzfalco",
+      "tournament": "Rumble league #5|OP17 | FREE",
+      "placing": 4,
+      "date": "2026-08-20",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7eaffc78baaa6d1c21edca/standings"
     }
   ],
   "OP17-099": [
@@ -1418,6 +1559,16 @@
       "date": "2026-08-19",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "11th-anatema-rumble-league-5-op17-free",
+      "href": "/decklists/op17/charlotte-linlin/11th-anatema-rumble-league-5-op17-free.html",
+      "player": "Anatema",
+      "tournament": "Rumble league #5|OP17 | FREE",
+      "placing": 11,
+      "date": "2026-08-20",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7eaffc78baaa6d1c21edca/standings"
     }
   ],
   "OP13-001": [
@@ -3260,6 +3411,46 @@
       "date": "2026-02-02",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/697e75459c739a2ff7bfd0d8/standings"
+    },
+    {
+      "slug": "45th-rapsushs-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/rg-luffy/45th-rapsushs-op17-chinoizecup-98-tuesday.html",
+      "player": "rapsushs",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": 45,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "1-2-ricmasterflash-op17-chinoizecup-97-monday",
+      "href": "/decklists/rg-luffy/1-2-ricmasterflash-op17-chinoizecup-97-monday.html",
+      "player": "ricmasterflash",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": null,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
+    },
+    {
+      "slug": "1-2-rapsushs-op17-chinoizecup-97-monday",
+      "href": "/decklists/rg-luffy/1-2-rapsushs-op17-chinoizecup-97-monday.html",
+      "player": "rapsushs",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": null,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
+    },
+    {
+      "slug": "0-2-snorlax1cynda-op17-chinoizecup-97-monday",
+      "href": "/decklists/rg-luffy/0-2-snorlax1cynda-op17-chinoizecup-97-monday.html",
+      "player": "snorlax1cynda",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": null,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
     }
   ],
   "OP11-041": [
@@ -6424,6 +6615,496 @@
       "date": "2026-03-19",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/69b9d233ccdfe3b78e576004/standings"
+    },
+    {
+      "slug": "10th-lykoi763-ger-dressrosa-tournament-op17",
+      "href": "/decklists/mihawk/10th-lykoi763-ger-dressrosa-tournament-op17.html",
+      "player": "Lykoi763",
+      "tournament": "[GER] Dressrosa Tournament-OP17",
+      "placing": 10,
+      "date": "2026-08-20",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a6f17112b308b6067b47957/standings"
+    },
+    {
+      "slug": "9th-imanol-calvo-liga-phoenix-2026-one-piece-mana-31",
+      "href": "/decklists/mihawk/9th-imanol-calvo-liga-phoenix-2026-one-piece-mana-31.html",
+      "player": "Imanol Calvo",
+      "tournament": "Liga Phoenix 2026 -  ONE PIECE - MANA 31°",
+      "placing": 9,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a79f521cdc0391d7fa62c79/standings"
+    },
+    {
+      "slug": "12th-dearcan-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/mihawk/12th-dearcan-op17-chinoizecup-99-wednesday.html",
+      "player": "Dearcan",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": 12,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "13th-dragoatx-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/mihawk/13th-dragoatx-op17-chinoizecup-98-tuesday.html",
+      "player": "DragoATX",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": 13,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "19th-alfrix22-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/mihawk/19th-alfrix22-op17-chinoizecup-99-wednesday.html",
+      "player": "Alfrix22",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": 19,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "20th-freajski-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/mihawk/20th-freajski-op17-chinoizecup-99-wednesday.html",
+      "player": "freajski",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": 20,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "23rd-gortiz-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/mihawk/23rd-gortiz-op17-chinoizecup-99-wednesday.html",
+      "player": "Gortiz",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": 23,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "24th-mik9-op17-chinoizecup-97-monday",
+      "href": "/decklists/mihawk/24th-mik9-op17-chinoizecup-97-monday.html",
+      "player": "Mik9",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": 24,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
+    },
+    {
+      "slug": "25th-kai-d-mugen-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/mihawk/25th-kai-d-mugen-op17-chinoizecup-98-tuesday.html",
+      "player": "Kai_D_Mugen",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": 25,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "26th-dragoatx-op17-chinoizecup-97-monday",
+      "href": "/decklists/mihawk/26th-dragoatx-op17-chinoizecup-97-monday.html",
+      "player": "DragoATX",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": 26,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
+    },
+    {
+      "slug": "30th-arcanaknight-op17-chinoizecup-97-monday",
+      "href": "/decklists/mihawk/30th-arcanaknight-op17-chinoizecup-97-monday.html",
+      "player": "Arcanaknight",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": 30,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
+    },
+    {
+      "slug": "31st-lurzuk-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/mihawk/31st-lurzuk-op17-chinoizecup-99-wednesday.html",
+      "player": "Lurzuk",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": 31,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "31st-izanagi-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/mihawk/31st-izanagi-op17-chinoizecup-98-tuesday.html",
+      "player": "Izanagi",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": 31,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "32nd-dissonance075-op17-chinoizecup-97-monday",
+      "href": "/decklists/mihawk/32nd-dissonance075-op17-chinoizecup-97-monday.html",
+      "player": "Dissonance075",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": 32,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
+    },
+    {
+      "slug": "32nd-kyodaija-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/mihawk/32nd-kyodaija-op17-chinoizecup-98-tuesday.html",
+      "player": "Kyodaija",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": 32,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "33rd-gortiz-op17-chinoizecup-97-monday",
+      "href": "/decklists/mihawk/33rd-gortiz-op17-chinoizecup-97-monday.html",
+      "player": "Gortiz",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": 33,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
+    },
+    {
+      "slug": "35th-slodea-op17-chinoizecup-97-monday",
+      "href": "/decklists/mihawk/35th-slodea-op17-chinoizecup-97-monday.html",
+      "player": "Slodea",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": 35,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
+    },
+    {
+      "slug": "36th-freajski-op17-chinoizecup-97-monday",
+      "href": "/decklists/mihawk/36th-freajski-op17-chinoizecup-97-monday.html",
+      "player": "freajski",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": 36,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
+    },
+    {
+      "slug": "41st-smoki-op17-chinoizecup-97-monday",
+      "href": "/decklists/mihawk/41st-smoki-op17-chinoizecup-97-monday.html",
+      "player": "Smoki",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": 41,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
+    },
+    {
+      "slug": "41st-val999-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/mihawk/41st-val999-op17-chinoizecup-99-wednesday.html",
+      "player": "Val999",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": 41,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "42nd-bastzi91-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/mihawk/42nd-bastzi91-op17-chinoizecup-99-wednesday.html",
+      "player": "bastzi91",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": 42,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "49th-jordanmoore-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/mihawk/49th-jordanmoore-op17-chinoizecup-98-tuesday.html",
+      "player": "JordanMoore",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": 49,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "50th-rodolfos-op17-chinoizecup-97-monday",
+      "href": "/decklists/mihawk/50th-rodolfos-op17-chinoizecup-97-monday.html",
+      "player": "Rodolfos",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": 50,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
+    },
+    {
+      "slug": "52nd-gloubs-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/mihawk/52nd-gloubs-op17-chinoizecup-99-wednesday.html",
+      "player": "Gloubs",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": 52,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "53rd-papagoriraman-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/mihawk/53rd-papagoriraman-op17-chinoizecup-99-wednesday.html",
+      "player": "papagoriraman",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": 53,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "54th-jakearrrrr-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/mihawk/54th-jakearrrrr-op17-chinoizecup-98-tuesday.html",
+      "player": "jakearrrrr",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": 54,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "54th-bcartmill-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/mihawk/54th-bcartmill-op17-chinoizecup-99-wednesday.html",
+      "player": "bcartmill",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": 54,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "3-2-dzayas-op17-chinoizecup-97-monday",
+      "href": "/decklists/mihawk/3-2-dzayas-op17-chinoizecup-97-monday.html",
+      "player": "DZayas",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": null,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
+    },
+    {
+      "slug": "3-3-musataro-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/mihawk/3-3-musataro-op17-chinoizecup-99-wednesday.html",
+      "player": "MusaTaro",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": null,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "3-2-ups-employee-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/mihawk/3-2-ups-employee-op17-chinoizecup-98-tuesday.html",
+      "player": "UPS_Employee",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": null,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "3-2-elementaltoons-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/mihawk/3-2-elementaltoons-op17-chinoizecup-98-tuesday.html",
+      "player": "Elementaltoons",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": null,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "2-2-bruno1401-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/mihawk/2-2-bruno1401-op17-chinoizecup-99-wednesday.html",
+      "player": "Bruno1401",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": null,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "2-3-twnety-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/mihawk/2-3-twnety-op17-chinoizecup-98-tuesday.html",
+      "player": "Twnety",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": null,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "1-2-thepokemaniac-op17-chinoizecup-97-monday",
+      "href": "/decklists/mihawk/1-2-thepokemaniac-op17-chinoizecup-97-monday.html",
+      "player": "ThePokemaniac",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": null,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
+    },
+    {
+      "slug": "1-3-dajoosh-op17-chinoizecup-97-monday",
+      "href": "/decklists/mihawk/1-3-dajoosh-op17-chinoizecup-97-monday.html",
+      "player": "DaJoosh",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": null,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
+    },
+    {
+      "slug": "1-1-hendrok-op17-chinoizecup-97-monday",
+      "href": "/decklists/mihawk/1-1-hendrok-op17-chinoizecup-97-monday.html",
+      "player": "Hendrok",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": null,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
+    },
+    {
+      "slug": "1-4-homunculiii-op17-chinoizecup-97-monday",
+      "href": "/decklists/mihawk/1-4-homunculiii-op17-chinoizecup-97-monday.html",
+      "player": "Homunculiii",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": null,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
+    },
+    {
+      "slug": "1-2-thepokemaniac-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/mihawk/1-2-thepokemaniac-op17-chinoizecup-99-wednesday.html",
+      "player": "ThePokemaniac",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": null,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "1-2-lurzuk-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/mihawk/1-2-lurzuk-op17-chinoizecup-98-tuesday.html",
+      "player": "Lurzuk",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": null,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "1-2-thepokemaniac-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/mihawk/1-2-thepokemaniac-op17-chinoizecup-98-tuesday.html",
+      "player": "ThePokemaniac",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": null,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "1-3-rodolfos-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/mihawk/1-3-rodolfos-op17-chinoizecup-98-tuesday.html",
+      "player": "Rodolfos",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": null,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "1-5-deaven-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/mihawk/1-5-deaven-op17-chinoizecup-98-tuesday.html",
+      "player": "Deaven",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": null,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "1-3-woodmann95-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/mihawk/1-3-woodmann95-op17-chinoizecup-98-tuesday.html",
+      "player": "woodmann95",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": null,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "0-1-aconite-op17-chinoizecup-97-monday",
+      "href": "/decklists/mihawk/0-1-aconite-op17-chinoizecup-97-monday.html",
+      "player": "Aconite",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": null,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
+    },
+    {
+      "slug": "0-2-ups-employee-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/mihawk/0-2-ups-employee-op17-chinoizecup-99-wednesday.html",
+      "player": "UPS_Employee",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": null,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "0-3-thomoose-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/mihawk/0-3-thomoose-op17-chinoizecup-99-wednesday.html",
+      "player": "Thomoose",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": null,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "0-2-sakuramatou0306-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/mihawk/0-2-sakuramatou0306-op17-chinoizecup-99-wednesday.html",
+      "player": "sakuramatou0306",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": null,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "0-3-saidtcg-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/mihawk/0-3-saidtcg-op17-chinoizecup-98-tuesday.html",
+      "player": "Saidtcg",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": null,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "0-2-virtu0so-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/mihawk/0-2-virtu0so-op17-chinoizecup-98-tuesday.html",
+      "player": "Virtu0so",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": null,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
     }
   ],
   "OP16-001": [
@@ -7406,6 +8087,26 @@
       "date": "2026-07-23",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a4e7e4a65724db9ded4049f/standings"
+    },
+    {
+      "slug": "9th-kennimlt-rumble-league-5-op17-free",
+      "href": "/decklists/portgas-d-ace/9th-kennimlt-rumble-league-5-op17-free.html",
+      "player": "kennimlt",
+      "tournament": "Rumble league #5|OP17 | FREE",
+      "placing": 9,
+      "date": "2026-08-20",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7eaffc78baaa6d1c21edca/standings"
+    },
+    {
+      "slug": "13th-anacleto-rumble-league-5-op17-free",
+      "href": "/decklists/portgas-d-ace/13th-anacleto-rumble-league-5-op17-free.html",
+      "player": "Anacleto",
+      "tournament": "Rumble league #5|OP17 | FREE",
+      "placing": 13,
+      "date": "2026-08-20",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7eaffc78baaa6d1c21edca/standings"
     }
   ],
   "OP15-058": [
@@ -9088,6 +9789,136 @@
       "date": "2026-04-02",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/69c5926036f5b5c303dbe262/standings"
+    },
+    {
+      "slug": "35th-bahp-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/enel/35th-bahp-op17-chinoizecup-99-wednesday.html",
+      "player": "Bahp",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": 35,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "44th-lordrafa-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/enel/44th-lordrafa-op17-chinoizecup-98-tuesday.html",
+      "player": "lordRafa",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": 44,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "48th-lordrafa-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/enel/48th-lordrafa-op17-chinoizecup-99-wednesday.html",
+      "player": "lordRafa",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": 48,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "3-2-chrisbeast47-op17-chinoizecup-97-monday",
+      "href": "/decklists/enel/3-2-chrisbeast47-op17-chinoizecup-97-monday.html",
+      "player": "ChrisBeast47",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": null,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
+    },
+    {
+      "slug": "2-4-clairvoyant-op17-chinoizecup-97-monday",
+      "href": "/decklists/enel/2-4-clairvoyant-op17-chinoizecup-97-monday.html",
+      "player": "Clairvoyant",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": null,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
+    },
+    {
+      "slug": "1-2-ewinrivers-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/enel/1-2-ewinrivers-op17-chinoizecup-99-wednesday.html",
+      "player": "ewinrivers",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": null,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "1-3-kazzer-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/enel/1-3-kazzer-op17-chinoizecup-98-tuesday.html",
+      "player": "Kazzer",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": null,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "0-3-robsdrobs-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/enel/0-3-robsdrobs-op17-chinoizecup-99-wednesday.html",
+      "player": "RobsDrobs",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": null,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "0-3-leagueoflulz-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/enel/0-3-leagueoflulz-op17-chinoizecup-99-wednesday.html",
+      "player": "LeagueOfLulz",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": null,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "0-1-dzayas-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/enel/0-1-dzayas-op17-chinoizecup-99-wednesday.html",
+      "player": "DZayas",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": null,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "0-3-daniar-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/enel/0-3-daniar-op17-chinoizecup-99-wednesday.html",
+      "player": "daniar",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": null,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "0-2-klaing88-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/enel/0-2-klaing88-op17-chinoizecup-98-tuesday.html",
+      "player": "Klaing88",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": null,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "0-2-wortaxx-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/enel/0-2-wortaxx-op17-chinoizecup-98-tuesday.html",
+      "player": "Wortaxx",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": null,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
     }
   ],
   "OP11-062": [
@@ -10440,6 +11271,16 @@
       "date": "2025-07-17",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/68767ed178c544eaa1dcb4eb/standings"
+    },
+    {
+      "slug": "8th-freeangel-rumble-league-5-op17-free",
+      "href": "/decklists/charlotte-katakuri/8th-freeangel-rumble-league-5-op17-free.html",
+      "player": "FreeAngel",
+      "tournament": "Rumble league #5|OP17 | FREE",
+      "placing": 8,
+      "date": "2026-08-20",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7eaffc78baaa6d1c21edca/standings"
     }
   ],
   "OP13-079": [
@@ -13406,6 +14247,26 @@
       "date": "2026-06-23",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a32ae47e334c3c9befd88d9/standings"
+    },
+    {
+      "slug": "10th-juli-n-piergiacomi-liga-phoenix-2026-one-piece-mana-32",
+      "href": "/decklists/gb-luffy/10th-juli-n-piergiacomi-liga-phoenix-2026-one-piece-mana-32.html",
+      "player": "Julián Piergiacomi",
+      "tournament": "Liga Phoenix 2026 -  ONE PIECE - MANA 32°",
+      "placing": 10,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a83736278baaa6d1c2226d3/standings"
+    },
+    {
+      "slug": "53rd-cloudman-op17-chinoizecup-97-monday",
+      "href": "/decklists/gb-luffy/53rd-cloudman-op17-chinoizecup-97-monday.html",
+      "player": "cloudman",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": 53,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
     }
   ],
   "OP16-080": [
@@ -14208,6 +15069,16 @@
       "date": "2026-06-22",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a2ae689e334c3c9befd3d63/standings"
+    },
+    {
+      "slug": "27th-umiwara-op17-chinoizecup-97-monday",
+      "href": "/decklists/blackbeard/27th-umiwara-op17-chinoizecup-97-monday.html",
+      "player": "Umiwara",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": 27,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
     }
   ],
   "OP12-061": [
@@ -15010,6 +15881,26 @@
       "date": "2026-07-14",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a4e0ea4063cb29d318e6838/standings"
+    },
+    {
+      "slug": "3-3-kungar-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/rosinante/3-3-kungar-op17-chinoizecup-98-tuesday.html",
+      "player": "Kungar",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": null,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
+    },
+    {
+      "slug": "0-2-lukas123-op17-chinoizecup-97-monday",
+      "href": "/decklists/rosinante/0-2-lukas123-op17-chinoizecup-97-monday.html",
+      "player": "lukas123",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": null,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
     }
   ],
   "OP15-002": [
@@ -16614,6 +17505,26 @@
       "date": "2026-06-03",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a1711658c163b809799866b/standings"
+    },
+    {
+      "slug": "2-3-asakogei-op17-chinoizecup-99-wednesday",
+      "href": "/decklists/yamato/2-3-asakogei-op17-chinoizecup-99-wednesday.html",
+      "player": "asakogei",
+      "tournament": "[OP17] ChinoizeCup #99 Wednesday",
+      "placing": null,
+      "date": "2026-08-19",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7ed32b308b6067b529d0/standings"
+    },
+    {
+      "slug": "0-2-asakogei-op17-chinoizecup-98-tuesday",
+      "href": "/decklists/yamato/0-2-asakogei-op17-chinoizecup-98-tuesday.html",
+      "player": "asakogei",
+      "tournament": "[OP17] ChinoizeCup #98 Tuesday",
+      "placing": null,
+      "date": "2026-08-18",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d7b64cdc0391d7fa65402/standings"
     }
   ],
   "OP11-001": [
@@ -17416,6 +18327,16 @@
       "date": "2025-12-28",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/694bfc0f4500833d87017195/standings"
+    },
+    {
+      "slug": "56th-ibmk57-op17-chinoizecup-97-monday",
+      "href": "/decklists/koby/56th-ibmk57-op17-chinoizecup-97-monday.html",
+      "player": "IBMK57",
+      "tournament": "[OP17] ChinoizeCup #97 Monday",
+      "placing": 56,
+      "date": "2026-08-17",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a7d793c2b308b6067b529c9/standings"
     }
   ],
   "OP14-060": [
