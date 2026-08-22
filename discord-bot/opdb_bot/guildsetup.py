@@ -57,11 +57,21 @@ def find_channel(guild: discord.Guild, name: str) -> discord.abc.GuildChannel | 
     return discord.utils.get(guild.channels, name=name)
 
 
-async def ensure_category(guild: discord.Guild, name: str) -> discord.CategoryChannel:
+async def ensure_category(
+    guild: discord.Guild, name: str, *, position: int | None = None
+) -> discord.CategoryChannel:
     existing = find_category(guild, name)
     if existing:
+        if position is not None:
+            try:
+                await existing.edit(position=position, reason="OPDB setup")
+            except discord.HTTPException:
+                pass
         return existing
-    return await guild.create_category(name, reason="OPDB setup")
+    kwargs: dict[str, Any] = {"reason": "OPDB setup"}
+    if position is not None:
+        kwargs["position"] = position
+    return await guild.create_category(name, **kwargs)
 
 
 def readonly_overwrites(guild: discord.Guild) -> dict:
@@ -291,9 +301,9 @@ async def setup_guild(guild: discord.Guild, *, post_lists: bool = True) -> dict[
 
     channels: dict[str, discord.TextChannel] = {}
 
-    for spec in GENERIC_CATEGORIES:
+    for i, spec in enumerate(GENERIC_CATEGORIES):
         try:
-            category = await ensure_category(guild, spec["name"])
+            category = await ensure_category(guild, spec["name"], position=i)
         except discord.HTTPException as exc:
             print("skip category", spec["name"], exc, flush=True)
             continue
@@ -315,9 +325,11 @@ async def setup_guild(guild: discord.Guild, *, post_lists: bool = True) -> dict[
             log[ch["name"]] = str(created.id)
             print("channel", ch["name"], flush=True)
 
-    for meta in METAS:
+    for j, meta in enumerate(METAS):
         try:
-            category = await ensure_category(guild, meta["category"])
+            category = await ensure_category(
+                guild, meta["category"], position=len(GENERIC_CATEGORIES) + j
+            )
         except discord.HTTPException as exc:
             print("skip category", meta["category"], exc, flush=True)
             continue

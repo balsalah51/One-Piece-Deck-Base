@@ -78,9 +78,19 @@ class LayoutTests(unittest.TestCase):
 
     def test_generic_pages_exist(self):
         names = set(planned_channel_names())
-        for page in ("welcome", "rules", "announcements", "flair"):
+        for page in ("welcome", "rules", "announcements", "flair", "general"):
             self.assertIn(page, names)
         self.assertEqual({m["key"] for m in METAS}, {"op17", "format"})
+        from opdb_bot.config import GENERIC_CATEGORIES
+
+        keys = [c["key"] for c in GENERIC_CATEGORIES]
+        self.assertEqual(keys[0], "information")
+        self.assertEqual(keys[1], "general")
+        general = next(c for c in GENERIC_CATEGORIES if c["key"] == "general")
+        self.assertEqual(general["name"], "GENERAL")
+        self.assertEqual([ch["name"] for ch in general["channels"]], ["general"])
+        community = next(c for c in GENERIC_CATEGORIES if c["key"] == "community")
+        self.assertNotIn("general", [ch["name"] for ch in community["channels"]])
 
 
 class ConsensusTests(unittest.TestCase):

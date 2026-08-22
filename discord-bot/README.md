@@ -13,9 +13,13 @@ Invite the bot, run `/opdb-setup` once, then `/opdb-consensus` whenever the site
 - `#announcements`
 - `#flair` — button picker, one favorite leader at a time
 
+**GENERAL** (own section, easy to find)
+
+- `#general`
+
 **Community**
 
-- `#general` `#deck-help` `#tournament-talk` `#shop-orders` `#off-topic`
+- `#deck-help` `#tournament-talk` `#shop-orders` `#off-topic`
 
 **OP17 · World's Strongest Warriors**
 

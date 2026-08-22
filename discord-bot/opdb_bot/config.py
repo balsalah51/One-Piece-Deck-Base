@@ -304,16 +304,22 @@ GENERIC_CATEGORIES: list[dict] = [
         ],
     },
     {
-        "key": "community",
-        "name": "Community",
+        "key": "general",
+        "name": "GENERAL",
         "channels": [
             {
                 "key": "general",
                 "name": "general",
                 "kind": "text",
                 "readonly": False,
-                "topic": "Anything OPTCG that does not belong in a leader room.",
+                "topic": "Hang out. Anything that is not a leader-room list.",
             },
+        ],
+    },
+    {
+        "key": "community",
+        "name": "Community",
+        "channels": [
             {
                 "key": "deck-help",
                 "name": "deck-help",
