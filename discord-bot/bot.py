@@ -134,10 +134,19 @@ async def run_bot() -> None:
             return
         await interaction.response.defer(ephemeral=True, thinking=True)
         assert interaction.guild is not None
-        log = await setup_guild(interaction.guild, post_lists=True)
+        try:
+            log = await setup_guild(interaction.guild, post_lists=True)
+        except Exception as exc:  # noqa: BLE001
+            await interaction.followup.send(
+                f"Setup stopped: {exc}. Check Command Prompt. Run /opdb-setup again to continue.",
+                ephemeral=True,
+            )
+            raise
         bot.add_view(FlairView())
+        leaders_made = sum(1 for L in LEADERS if L["key"] in log)
         await interaction.followup.send(
-            f"Setup complete. {len(log)} records. Re-run anytime — it updates in place.",
+            f"Setup complete. {leaders_made}/{len(LEADERS)} leader rooms. "
+            "Check OP17 and Format staples on the left. Re-run anytime.",
             ephemeral=True,
         )
 

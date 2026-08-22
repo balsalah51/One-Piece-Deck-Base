@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 from typing import Any
 
@@ -108,12 +109,16 @@ async def ensure_text_channel(
     existing = find_channel(guild, name)
     overwrites = readonly_overwrites(guild) if readonly else chat_overwrites(guild)
     if isinstance(existing, discord.TextChannel):
-        kwargs: dict[str, Any] = {"overwrites": overwrites}
-        if existing.category_id != category.id:
-            kwargs["category"] = category
-        if (existing.topic or "") != topic:
-            kwargs["topic"] = topic[:1024]
-        await existing.edit(**kwargs, reason="OPDB setup")
+        try:
+            kwargs: dict[str, Any] = {}
+            if existing.category_id != category.id:
+                kwargs["category"] = category
+            if (existing.topic or "") != topic:
+                kwargs["topic"] = topic[:1024]
+            if kwargs:
+                await existing.edit(**kwargs, reason="OPDB setup")
+        except discord.HTTPException as exc:
+            print("skip edit", name, exc)
         return existing
     kwargs = {
         "name": name,
@@ -156,8 +161,12 @@ async def ensure_leader_emoji(guild: discord.Guild, leader: dict) -> discord.Emo
     if not path.exists():
         return None
     try:
-        return await guild.create_custom_emoji(name=name, image=path.read_bytes(), reason="OPDB leader face")
-    except discord.HTTPException:
+        return await asyncio.wait_for(
+            guild.create_custom_emoji(name=name, image=path.read_bytes(), reason="OPDB leader face"),
+            timeout=8,
+        )
+    except (asyncio.TimeoutError, discord.HTTPException) as exc:
+        print("skip emoji", name, exc)
         return discord.utils.get(guild.emojis, name=name)
 
 
@@ -272,64 +281,107 @@ async def post_consensus(channel: discord.TextChannel, leader: dict) -> discord.
 
 
 async def setup_guild(guild: discord.Guild, *, post_lists: bool = True) -> dict[str, str]:
-    """Create the full OPDB layout. Safe to re-run."""
+    """Create the full OPDB layout. Safe to re-run.
+
+    Leader rooms and pinned lists come first. Emoji uploads are last and
+    time out quickly so Discord rate limits cannot stall the whole setup.
+    """
     log: dict[str, str] = {}
     ensure_all_faces()
 
     channels: dict[str, discord.TextChannel] = {}
 
     for spec in GENERIC_CATEGORIES:
-        category = await ensure_category(guild, spec["name"])
+        try:
+            category = await ensure_category(guild, spec["name"])
+        except discord.HTTPException as exc:
+            print("skip category", spec["name"], exc, flush=True)
+            continue
         for ch in spec["channels"]:
-            news = ch.get("kind") == "news"
-            created = await ensure_text_channel(
-                guild,
-                name=ch["name"],
-                category=category,
-                topic=ch["topic"],
-                readonly=bool(ch.get("readonly")),
-                news=news,
-            )
+            try:
+                news = ch.get("kind") == "news"
+                created = await ensure_text_channel(
+                    guild,
+                    name=ch["name"],
+                    category=category,
+                    topic=ch["topic"],
+                    readonly=bool(ch.get("readonly")),
+                    news=news,
+                )
+            except discord.HTTPException as exc:
+                print("skip channel", ch["name"], exc, flush=True)
+                continue
             channels[ch["key"]] = created
             log[ch["name"]] = str(created.id)
-
-    for leader in LEADERS:
-        await ensure_role(guild, leader)
-        emoji = await ensure_leader_emoji(guild, leader)
-        log[f"emoji:{emoji_name(leader)}"] = str(emoji.id) if emoji else "missing"
+            print("channel", ch["name"], flush=True)
 
     for meta in METAS:
-        category = await ensure_category(guild, meta["category"])
-        discussion = await ensure_text_channel(
-            guild,
-            name=meta["discussion"],
-            category=category,
-            topic=meta["topic"],
-            readonly=False,
-        )
+        try:
+            category = await ensure_category(guild, meta["category"])
+        except discord.HTTPException as exc:
+            print("skip category", meta["category"], exc, flush=True)
+            continue
+        print("category", meta["category"], flush=True)
+        try:
+            discussion = await ensure_text_channel(
+                guild,
+                name=meta["discussion"],
+                category=category,
+                topic=meta["topic"],
+                readonly=False,
+            )
+        except discord.HTTPException as exc:
+            print("skip channel", meta["discussion"], exc, flush=True)
+            continue
         channels[meta["discussion"]] = discussion
         log[meta["discussion"]] = str(discussion.id)
         for leader in leaders_for_meta(meta["key"]):
             topic = (
                 f"{leader['name']} · {leader['id']} · consensus pinned · {site_url(leader)}"
             )
-            created = await ensure_text_channel(
-                guild,
-                name=channel_name(leader),
-                category=category,
-                topic=topic,
-                readonly=False,
-            )
+            try:
+                created = await ensure_text_channel(
+                    guild,
+                    name=channel_name(leader),
+                    category=category,
+                    topic=topic,
+                    readonly=False,
+                )
+            except discord.HTTPException as exc:
+                print("skip channel", leader["key"], exc, flush=True)
+                continue
             channels[leader["key"]] = created
             log[leader["key"]] = str(created.id)
+            print("leader channel", leader["key"], flush=True)
             if post_lists:
-                await post_consensus(created, leader)
+                try:
+                    await post_consensus(created, leader)
+                    print("pinned", leader["id"], flush=True)
+                except discord.HTTPException as exc:
+                    print("skip pin", leader["id"], exc, flush=True)
 
-    await post_info_pages(guild, channels)
+    try:
+        await post_info_pages(guild, channels)
+    except discord.HTTPException as exc:
+        print("skip info pages", exc, flush=True)
+
+    for leader in LEADERS:
+        try:
+            await ensure_role(guild, leader)
+        except discord.HTTPException as exc:
+            print("skip role", leader["key"], exc, flush=True)
+        emoji = await ensure_leader_emoji(guild, leader)
+        log[f"emoji:{emoji_name(leader)}"] = str(emoji.id) if emoji else "missing"
+
+    try:
+        await post_info_pages(guild, channels)
+    except discord.HTTPException as exc:
+        print("skip flair refresh", exc, flush=True)
 
     state = load_state()
     gs = guild_state(state, guild.id)
     gs["channels"] = {k: str(v.id) for k, v in channels.items()}
     save_state(state)
     log["guild"] = str(guild.id)
+    print("setup done", flush=True)
     return log
