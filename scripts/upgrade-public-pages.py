@@ -21,7 +21,8 @@ aspec.loader.exec_module(ana)
 
 ROOT = gen.ROOT
 LINE_RE = ana.LINE_RE
-CSS_NEW = "/css/site.css?v=meta-tools"
+CSS_NEW = "/css/site.css?v=sim-copy"
+JS_NEW = "/js/site.js?v=sim-copy"
 NAV_OLD_PATTERNS = [
     (
         '        <a href="/decklists/op17.html">OP17</a>\n        <a href="/#community">Community</a>',
@@ -46,8 +47,11 @@ def patch_nav_and_assets(text: str) -> str:
     text = re.sub(r'href="/css/site\.css(?:\?[^"]*)?"', f'href="{CSS_NEW}"', text)
     for old, new in NAV_OLD_PATTERNS:
         text = text.replace(old, new)
+    text = re.sub(r'src="/js/site\.js(?:\?[^"]*)?"', f'src="{JS_NEW}"', text)
+    text = text.replace(">Copy for sim<", ">Copy to OP TCG SIM<")
+    text = text.replace("for OPTCGSim.", "for OP TCG SIM.")
     if "/js/site.js" not in text:
-        text = text.replace("</body>", '  <script src="/js/site.js?v=meta-tools"></script>\n</body>')
+        text = text.replace("</body>", f'  <script src="{JS_NEW}"></script>\n</body>')
     return text
 
 
@@ -169,7 +173,12 @@ def patch_home() -> None:
     text = path.read_text()
     rows = meta_rows()
     n_leaders = len(gen.LEADERS)
-    text = text.replace("All 14 leader pages on this site. Click a name or a card picture.", f"All {n_leaders} leader pages on this site. Click a name or a card picture.")
+    text = re.sub(
+        r"All \d+ leader pages on this site\.",
+        f"All {n_leaders} leader pages on this site.",
+        text,
+        count=1,
+    )
     if "Format &amp; banlist" not in text:
         text = text.replace(
             '<a class="home-ghost" href="/decklists/op17.html">All leader pages</a>',
@@ -254,7 +263,7 @@ def main() -> None:
     patch_op17()
     # leftover html (guides, format)
     for path in ROOT.rglob("*.html"):
-        if any(p in path.parts for p in (".git", "scripts", "node_modules", "shop", "discord-bot")):
+        if any(p in path.parts for p in (".git", "scripts", "node_modules", "shop", "discord-bot", "ballkeep")):
             continue
         text = path.read_text()
         new = patch_nav_and_assets(text)

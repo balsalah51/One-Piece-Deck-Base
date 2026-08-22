@@ -36,6 +36,9 @@ LEADERS = [
     ("Lucy", "/decklists/lucy.html", "OP15 Red/Blue Lucy"),
     ("Yamato", "/decklists/yamato.html", "OP16 Black Yamato"),
     ("Koby", "/decklists/koby.html", "OP11 Red/Black Koby"),
+    ("Doffy", "/decklists/doffy.html", "OP14 Purple Donquixote Doflamingo"),
+    ("Buggy", "/decklists/buggy.html", "OP16 Blue Buggy"),
+    ("Sengoku", "/decklists/sengoku.html", "OP16 Purple Sengoku"),
 ]
 
 
@@ -48,7 +51,7 @@ def chrome(title: str, description: str, body: str) -> str:
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
   <link rel="canonical" href="{html.escape(SITE)}" />
-  <link rel="stylesheet" href="/css/site.css?v=meta-tools" />
+  <link rel="stylesheet" href="/css/site.css?v=sim-copy" />
 </head>
 <body>
   <div class="wrap">
@@ -77,7 +80,7 @@ def chrome(title: str, description: str, body: str) -> str:
     </footer>
   </div>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-  <script src="/js/site.js?v=meta-tools"></script>
+  <script src="/js/site.js?v=sim-copy"></script>
 </body>
 </html>
 """
@@ -426,9 +429,9 @@ CHARACTERS = [
     ("Jewelry Bonney", "jewelry-bonney", "Supernova captain. Bonney names often land next to other supernova OPTCG lists.", [6]),
     ("Marshall D. Teach", "marshall-d-teach", "Blackbeard. Black/Yellow OP16 Marshall D. Teach is the constructed leader on this site.", [15]),
     ("Blackbeard", "blackbeard", "Same person as Marshall D. Teach. Open the OP16 Blackbeard leader page for 50-card lists.", [15]),
-    ("Buggy", "buggy", "Warlord and Emperor. Buggy searches should still land on this OPTCG hub and the OP17 leaders.", [1, 4]),
+    ("Buggy", "buggy", "Warlord and Emperor. Blue OP16 Buggy is the constructed Impel Down leader.", [21, 14]),
     ("Crocodile", "crocodile", "Former Warlord. No Crocodile leader page yet; the OP17 decklist hub is the start.", [2, 5]),
-    ("Donquixote Doflamingo", "donquixote-doflamingo", "Heavenly Demon. Doflamingo is a frequent OPTCG search; open the hub then a color that matches your list.", [8, 2]),
+    ("Donquixote Doflamingo", "donquixote-doflamingo", "Heavenly Demon. Purple OP14 Doffy is the constructed leader; not blue OP01-060 Doffy.", [20, 16]),
     ("Boa Hancock", "boa-hancock", "Empress of Amazon Lily. Hancock searches can start at the OP17 hub.", [5, 4]),
     ("Gecko Moria", "gecko-moria", "Former Warlord. Use the OPTCG hub while looking for a matching leader.", [8]),
     ("Bartholomew Kuma", "bartholomew-kuma", "Tyrant and former Warlord. Start from the One Piece TCG hub on this site.", [4]),
@@ -470,7 +473,7 @@ CHARACTERS = [
     ("Rayleigh", "rayleigh", "Same search as Silvers Rayleigh. Newgate and Rocks pages are the closest lists.", [0, 2]),
     ("Enel", "enel", "God of Skypeia. Purple OP15 Enel is the constructed OPTCG leader on this site.", [12]),
     ("Lucci", "lucci", "Same search as Rob Lucci. Start from the hub, Mihawk, or Black Luffy pages.", [8, 4]),
-    ("Doflamingo", "doflamingo", "Same search as Donquixote Doflamingo. Use the OPTCG hub and green lists.", [8, 2]),
+    ("Doflamingo", "doflamingo", "Same search as Donquixote Doflamingo. Open the purple OP14 Doffy leader page.", [20]),
     ("Hancock", "hancock", "Same search as Boa Hancock. Start from the OP17 hub and yellow/black lists.", [5, 4]),
     ("Teach", "teach", "Same search as Marshall D. Teach / Blackbeard. Open the OP16 Blackbeard leader page.", [15]),
     ("Garp", "garp", "Same search as Monkey D. Garp. Luffy OPTCG pages are the closest constructed lists.", [4, 6]),
@@ -482,7 +485,7 @@ CHARACTERS = [
     ("Alvida", "alvida", "Iron Mace Alvida. Early One Piece name; use the OPTCG hub and Luffy pages.", [4]),
     ("Helmeppo", "helmeppo", "Marine from Shells Town. Coby and Garp searches sit next to Luffy OPTCG pages.", [4]),
     ("Tashigi", "tashigi", "Marine swordsman. Smoker and Mihawk pages are the closest OPTCG starts.", [7, 8]),
-    ("Sengoku", "sengoku", "Former Fleet Admiral. Marineford-era searches can start at Newgate and Luffy lists.", [0, 4]),
+    ("Sengoku", "sengoku", "Former Fleet Admiral. Purple OP16 Sengoku is the constructed Navy leader.", [22, 19]),
     ("Sakazuki", "sakazuki", "Fleet Admiral, also searched as Akainu. Use the OPTCG hub and Luffy pages.", [4]),
     ("Kuzan", "kuzan", "Former Admiral, also searched as Aokiji. Rocks and the hub are fair starts.", [2]),
     ("Borsalino", "borsalino", "Admiral Kizaru. Use the OPTCG hub, then a leader that matches your list.", [8]),
@@ -542,14 +545,14 @@ CHARACTERS = [
     ("Capone Bege", "capone-bege", "Fire Tank Pirates. Big Mom-adjacent searches can start at Linlin.", [5]),
     ("Cavendish", "cavendish", "Pretty Pirates captain. Supernova searches can start at RG Luffy.", [6]),
     ("Bartolomeo", "bartolomeo", "Barto Club. Straw Hat fan; start from Luffy OPTCG pages.", [4, 6]),
-    ("Rebecca", "rebecca", "Dressrosa princess. Doflamingo-adjacent searches start at the hub.", [8, 2]),
-    ("Kyros", "kyros", "Dressrosa gladiator. Use the OPTCG hub.", [8]),
-    ("Sugar", "sugar", "Donquixote family. Doflamingo searches can start at the hub.", [8, 2]),
-    ("Trebol", "trebol", "Donquixote executive. Use the OPTCG hub.", [8, 2]),
-    ("Diamante", "diamante", "Donquixote executive. Use the OPTCG hub.", [8]),
-    ("Pica", "pica", "Donquixote executive. Use the OPTCG hub.", [8]),
-    ("Senor Pink", "senor-pink", "Donquixote family. Use the OPTCG hub.", [8, 2]),
-    ("Baby 5", "baby-5", "Donquixote family. Use the OPTCG hub.", [8]),
+    ("Rebecca", "rebecca", "Dressrosa princess. Lucy and purple Doffy are the constructed pages.", [17, 20]),
+    ("Kyros", "kyros", "Dressrosa gladiator. Lucy and purple Doffy are nearby constructed pages.", [17, 20]),
+    ("Sugar", "sugar", "Donquixote family. Open the purple OP14 Doffy leader page.", [20]),
+    ("Trebol", "trebol", "Donquixote executive. Open the purple OP14 Doffy leader page.", [20]),
+    ("Diamante", "diamante", "Donquixote executive. Open the purple OP14 Doffy leader page.", [20]),
+    ("Pica", "pica", "Donquixote executive. Open the purple OP14 Doffy leader page.", [20]),
+    ("Senor Pink", "senor-pink", "Donquixote family. Open the purple OP14 Doffy leader page.", [20]),
+    ("Baby 5", "baby-5", "Donquixote family. Open the purple OP14 Doffy leader page.", [20]),
     ("Sai", "sai", "Happo Navy. Dressrosa supernova-adjacent searches can start at RG Luffy.", [6]),
     ("Ideo", "ideo", "XXX Gym. Use the OPTCG hub or RG Luffy.", [6]),
     ("Hajrudin", "hajrudin", "Giant pirate. Elbaph Luffy is the OP17 constructed page.", [4]),
@@ -592,7 +595,7 @@ CHARACTERS = [
     ("Pirate King", "pirate-king", "Gol D. Roger’s title, and Luffy’s goal. Roger and Luffy OPTCG pages are related.", [0, 4]),
     ("Fire Fist", "fire-fist", "Portgas D. Ace’s epithet. OP16 Ace and OP13 Ace are both constructed leaders; Ace cards also show up in Edward Newgate lists.", [9, 10, 0]),
     ("Surgeon of Death", "surgeon-of-death", "Trafalgar Law’s epithet. RG Luffy lists are a common home for Law cards.", [6]),
-    ("Heavenly Demon", "heavenly-demon", "Doflamingo’s epithet. Use the OPTCG hub and green lists.", [8]),
+    ("Heavenly Demon", "heavenly-demon", "Doflamingo’s epithet. Open the purple OP14 Doffy leader page.", [20]),
     ("Tyrant", "tyrant", "Bartholomew Kuma’s epithet. Start from the One Piece TCG hub.", [4]),
     ("Hero of the Marines", "hero-of-the-marines", "Monkey D. Garp’s epithet. Luffy OPTCG pages are the closest lists.", [4, 6]),
     ("Dark King", "dark-king", "Silvers Rayleigh’s epithet. Newgate and Rocks pages are related OPTCG lists.", [0, 2]),
@@ -607,7 +610,7 @@ CHARACTERS = [
     ("Sun Pirates", "sun-pirates", "Jinbe and Fisher Tiger. Black Luffy OPTCG is a related constructed page.", [4]),
     ("Revolutionary Army", "revolutionary-army", "Dragon, Sabo, Koala, Ivankov. Luffy OPTCG pages are the related lists.", [4, 0]),
     ("Marines", "marines", "Garp, Sengoku, admirals, Coby, Smoker. Start from the OPTCG hub, then a leader list.", [4, 8]),
-    ("Warlords", "warlords", "Mihawk, Hancock, Doflamingo, Kuma, Moria, Crocodile, Buggy, Law, Jinbe. Open the matching leader or hub.", [8, 5]),
+    ("Warlords", "warlords", "Mihawk, Hancock, Doflamingo, Kuma, Moria, Crocodile, Buggy, Law, Jinbe. Open the matching leader or hub.", [8, 20, 21, 5]),
     ("Supernovas", "supernovas", "Luffy, Zoro, Law, Kid, Killer, Bonney, Bege, Urouge, Apoo, Hawkins. Start from Luffy and RG Luffy.", [4, 6]),
     ("Urouge", "urouge", "Supernova captain. Start from the OPTCG hub or RG Luffy.", [6]),
     ("Scratchmen Apoo", "scratchmen-apoo", "Supernova captain. Start from the OPTCG hub or Kaido-adjacent lists.", [3, 6]),

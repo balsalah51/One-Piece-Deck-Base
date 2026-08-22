@@ -127,6 +127,19 @@ TAKES = {
         "SWORD characters can attack the turn they come down, and a 7000-or-less Navy body can be saved from removal. "
         "Averaged lists lock Kujyaku, Aramaki, Helmeppo, Ripper, and I'm Gonna Be a Navy Officer; Doll, both Koby bodies, Prince Grus, and Hibari are the next cuts."
     ),
+    "OP14-060": (
+        "Purple OP14 Donquixote Doflamingo is the Dressrosa retarget leader — not blue OP01-060 Doffy and not purple Katakuri. "
+        "Once per opponent attack, DON!! −1 to send that attack at Doffy or a Donquixote Pirates body. "
+        "Averaged lists are the Donquixote Pirates / On K.O. package from tournaments on this page."
+    ),
+    "OP16-041": (
+        "Blue OP16 Buggy is the Impel Down / Buggy's Delivery leader — not a character in GB Luffy. "
+        "A 5-life Marineford pile. Averaged lists take the most common Impel Down and Buggy-package cards from this page."
+    ),
+    "OP16-060": (
+        "Purple OP16 Sengoku is the Navy Marineford ramp leader — not Enel and not Katakuri. "
+        "Build DON!! then cash it in. Averaged lists take the most common Navy cards from tournaments on this page."
+    ),
 }
 
 POPUP_JS = r"""
@@ -284,7 +297,12 @@ def analysis_block(leader: dict, n: int, take: str, text_deck: str) -> str:
     text_deck = text_deck.replace("<h3>Text list</h3>", "<h3>Consensus list</h3>", 1)
     averaged = (
         f'<p class="muted">Averaged from {n} lists on this page, then filled to 50 cards. '
-        "Hover or tap a name for the picture. Copy pastes the IDs for OPTCGSim.</p>"
+        "Hover or tap a name for the picture. Copy pastes the IDs for OP TCG SIM.</p>"
+    )
+    text_deck = text_deck.replace(
+        '<p class="muted">Hover or tap a card name to see the picture. Copy pastes <code>NxSET-NNN</code> lines for OP TCG SIM import.</p>',
+        averaged,
+        1,
     )
     text_deck = text_deck.replace(
         '<p class="muted">Hover or tap a card name to see the picture. Copy pastes <code>NxSET-NNN</code> for OPTCGSim.</p>',

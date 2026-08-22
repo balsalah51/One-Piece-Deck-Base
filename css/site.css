@@ -191,9 +191,12 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
 .swatch.dual-red-black{background:linear-gradient(90deg,#b71c1c 50%,#212121 50%)}
 .copy-sim{
   margin-left:auto;padding:6px 10px;border-radius:8px;border:1px solid rgba(183,28,28,0.28);
-  background:#fff;color:var(--accent);font:inherit;font-size:12px;font-weight:800;cursor:pointer
+  background:#fff;color:var(--accent);font:inherit;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap
 }
 .copy-sim:hover{border-color:var(--accent)}
+.list-row{display:flex;align-items:stretch;gap:8px}
+.list-row > .item{flex:1;min-width:0}
+.list-row > .copy-sim{margin-left:0;align-self:center;flex-shrink:0}
 .deck-stats{margin-top:16px;padding:12px 14px;border-radius:12px;border:1px solid rgba(0,0,0,0.06);background:#fff}
 .deck-stats .kicker{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:800}
 .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
