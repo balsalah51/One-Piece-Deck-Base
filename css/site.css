@@ -48,6 +48,7 @@ main.single{grid-template-columns:1fr}
 .home-shop .shop-mock{height:72px}
 .section-title a{color:var(--accent);font-weight:700;text-decoration:none;font-size:13px}
 .home-cards{grid-template-columns:repeat(4,1fr);margin-top:18px}
+.leader-cards.home-cards{grid-template-columns:repeat(4,1fr)}
 .home-jump{display:flex;gap:10px;margin:20px 0 8px}
 .home-jump a{
   flex:1;display:block;text-align:center;padding:12px 16px;border-radius:10px;
@@ -121,6 +122,25 @@ main.single{grid-template-columns:1fr}
   margin:0;font-weight:800;font-size:14px;letter-spacing:.02em;white-space:nowrap
 }
 .home-flow-line{flex:1;height:3px;border-radius:99px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.55}
+.home-leaders-flow{margin-top:28px}
+.home-leaders-intro{
+  padding:22px 22px 18px;border-radius:16px 16px 0 0;color:#fff;
+  background:linear-gradient(135deg,#c62828 0%,#8b1010 55%,#7a1212)
+}
+.home-leaders-kicker{
+  margin:0 0 6px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  font-weight:800;opacity:.82
+}
+.home-leaders-intro h3{margin:0;font-size:28px;color:#fff;letter-spacing:-.02em}
+.home-leaders-intro p{margin:6px 0 0;font-weight:600;opacity:.92}
+.home-leaders-intro-row{display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
+.home-leaders-intro a{
+  color:#fff;font-weight:800;text-decoration:none;white-space:nowrap;
+  border-bottom:2px solid rgba(255,255,255,.4)
+}
+.home-leaders-intro a:hover{border-bottom-color:#fff}
+.home-leaders-grid{border-radius:0 0 16px 16px}
+.home-leaders-grid .home-cards{margin-top:0}
 .home-panel{margin:0}
 .home-panel + .home-panel{margin-top:18px}
 #leaders,#recent{scroll-margin-top:18px}
@@ -329,6 +349,8 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
   .home-splash-bar h2{font-size:16px}
   .home-flow{margin:16px 0 10px}
   .home-flow p{white-space:normal;text-align:center}
+  .home-leaders-intro-row{flex-direction:column;align-items:flex-start}
+  .leader-cards.home-cards{grid-template-columns:repeat(2,1fr)}
 }
 @media (min-width:1100px){
   .leader-hero{

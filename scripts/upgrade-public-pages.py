@@ -22,7 +22,7 @@ aspec.loader.exec_module(ana)
 
 ROOT = gen.ROOT
 LINE_RE = ana.LINE_RE
-CSS_NEW = "/css/site.css?v=home-hub"
+CSS_NEW = "/css/site.css?v=home-hub2"
 JS_NEW = "/js/site.js?v=home-hub"
 NAV_OLD_PATTERNS = [
     (
@@ -301,20 +301,21 @@ def render_home_body() -> str:
           </a>
         </nav>
 
-        <div class="home-flow">
-          <span class="home-flow-line" aria-hidden="true"></span>
-          <p>Or keep scrolling — the leaders start here.</p>
-          <span class="home-flow-line" aria-hidden="true"></span>
-        </div>
-
-        <section class="card home-panel" id="leaders">
-          <div class="section-title">
-            <h3>Leaders</h3>
-            <a href="/decklists/op17.html">All leader pages →</a>
+        <section class="home-leaders-flow" id="leaders">
+          <div class="home-leaders-intro">
+            <p class="home-leaders-kicker">The crew</p>
+            <div class="home-leaders-intro-row">
+              <div>
+                <h3>Leaders</h3>
+                <p>Pick a picture. Each page has lists for that leader.</p>
+              </div>
+              <a href="/decklists/op17.html">All leader pages →</a>
+            </div>
           </div>
-          <p class="muted">Pick a picture. Each page has lists for that leader.</p>
-          <div class="leader-cards home-cards" aria-label="All leader card pictures">
+          <div class="card home-panel home-leaders-grid">
+            <div class="leader-cards home-cards" aria-label="All leader card pictures">
 {cards}
+            </div>
           </div>
         </section>
 
