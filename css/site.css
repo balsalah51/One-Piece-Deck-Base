@@ -325,6 +325,14 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
 .meta-strip a{color:var(--accent);font-weight:800;text-decoration:none}
 .meta-strip .share{color:var(--muted);font-size:13px;font-weight:700;white-space:nowrap}
 .format-note{margin-top:8px;font-size:13px;line-height:1.5}
+.meta-take p{color:var(--text);line-height:1.6}
+.meta-take a{color:var(--accent);font-weight:800;text-decoration:none}
+.meta-blurbs{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-direction:column;gap:10px}
+.meta-blurbs li{
+  padding:12px 14px;border-radius:12px;border:1px solid rgba(0,0,0,0.06);background:#fff
+}
+.meta-blurbs a{display:inline-block;margin-right:8px}
+.meta-blurbs p{margin:6px 0 0;font-size:14px;line-height:1.55;color:var(--text)}
 @media (max-width:880px){
   .stat-grid{grid-template-columns:1fr}
   main{grid-template-columns:1fr}
