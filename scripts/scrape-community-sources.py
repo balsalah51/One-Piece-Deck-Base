@@ -31,25 +31,31 @@ mspec.loader.exec_module(more)
 ROOT = gen.ROOT
 UA = "OnePieceDeckBase/1.0 (+https://onepiecedeckbase.com; public OPTCG list scrape)"
 LINE_RE = comm.LINE_RE
-TARGET_IDS = {
-    "OP15-002": "lucy",
-    "OP14-060": "doffy",
-    "OP16-080": "blackbeard",
-    "OP16-001": "portgas-d-ace",
-    "OP16-022": "gb-luffy",
-    "OP16-041": "buggy",
-    "OP16-060": "sengoku",
-    "OP16-079": "yamato",
-}
+TARGET_IDS = {L["id"]: L["key"] for L in gen.LEADERS}
 OPDB_SLUGS = {
-    "OP15-002": "lucy-op15-002",
-    "OP14-060": "donquixote-doflamingo-op14-060",
-    "OP16-080": "marshall-d-teach-op16-080",
+    "OP17-001": "edward-newgate-op17-001",
+    "OP17-020": "shanks-op17-020",
+    "OP17-039": "rocks-d-xebec-op17-039",
+    "OP17-058": "kaido-op17-058",
+    "OP17-079": "monkey-d-luffy-op17-079",
+    "OP17-099": "charlotte-linlin-op17-099",
+    "OP13-001": "monkey-d-luffy-op13-001",
+    "OP11-041": "nami-op11-041",
+    "OP14-020": "dracule-mihawk-op14-020",
     "OP16-001": "portgas-d-ace-op16-001",
+    "OP15-058": "enel-op15-058",
+    "OP11-062": "charlotte-katakuri-op11-062",
+    "OP13-079": "imu-op13-079",
+    "OP13-002": "portgas-d-ace-op13-002",
     "OP16-022": "monkey-d-luffy-op16-022",
+    "OP16-080": "marshall-d-teach-op16-080",
+    "OP12-061": "donquixote-rosinante-op12-061",
+    "OP15-002": "lucy-op15-002",
+    "OP16-079": "yamato-op16-079",
+    "OP11-001": "koby-op11-001",
+    "OP14-060": "donquixote-doflamingo-op14-060",
     "OP16-041": "buggy-op16-041",
     "OP16-060": "sengoku-op16-060",
-    "OP16-079": "yamato-op16-079",
 }
 YOUTUBE_ID_RE = re.compile(r"(?:youtube\.com/watch\?v=|youtu\.be/)([A-Za-z0-9_-]{8,})", re.I)
 DECK_HREF_RE = re.compile(r'href="(https?://onepiecedb\.io/[^"]+)"')
@@ -123,12 +129,19 @@ def ddg(query: str) -> str:
 
 def scrape_youtube(found: list[dict], seen: set[str]) -> None:
     queries = [
+        "OP17 Rocks Xebec OP17-039 decklist youtube",
+        "OP17 Kaido OP17-058 decklist youtube",
+        "OP17 Luffy OP17-079 decklist youtube",
+        "OP17 Shanks OP17-020 decklist youtube",
+        "OP17 Linlin OP17-099 decklist youtube",
+        "OP17 Newgate OP17-001 decklist youtube",
+        "OP16 Ace OP16-001 decklist youtube August 2026",
+        "OP14 Mihawk decklist youtube August 2026",
         "OP16 Buggy OP16-041 decklist youtube",
         "OP16 Sengoku OP16-060 decklist youtube",
         "OP14 Doflamingo OP14-060 decklist youtube",
         "OP15 Lucy OP15-002 decklist youtube",
         "OP16 Blackbeard OP16-080 decklist youtube",
-        "OP16 Ace OP16-001 decklist youtube",
         "OP16 Yamato OP16-079 decklist youtube",
         "OP16 GB Luffy OP16-022 decklist youtube",
     ]
@@ -161,7 +174,7 @@ def scrape_youtube(found: list[dict], seen: set[str]) -> None:
                 "kind": "youtube",
                 "player": "YouTube",
                 "title": title,
-                "subtitle": "YouTube deck profile scraped from a public description",
+                "subtitle": "YouTube deck profile from a public description",
                 "source_url": url,
                 "slug": slug_for("yt", "youtube", f"{TARGET_IDS[lid]}-{vid}"),
                 "raw": raw,
