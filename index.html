@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>One Piece TCG Decklists (OPTCG) | One Piece Deck Base</title>
   <meta name="description" content="OPTCG decklists for the Bandai ONE PIECE CARD GAME. Leader pictures and recent 50-card lists." />
-  <link rel="stylesheet" href="/css/site.css?v=home-recent" />
+  <link rel="stylesheet" href="/css/site.css?v=home-hub2" />
 </head>
 <body>
   <div class="wrap">
@@ -18,19 +18,70 @@
         </div>
       </a>
       <nav aria-label="Primary">
-        <a href="/#recent" aria-current="page">Recent lists</a>
-        <a href="/decklists/op17.html">Leaders</a>
+        <a href="#recent">Recent lists</a>
+        <a href="#leaders">Leaders</a>
         <a href="/format.html">Format</a>
         <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
       </nav>
     </header>
 
-    <main class="single">
-      <div class="card hero" role="main">
+    <main class="single home" role="main">
         <!-- HOME_BODY -->
-        <h2>One Piece Deck Base</h2>
-        <p>Every leader on this site. Open a picture, or jump to leaders and recent lists.</p>
-        <div class="leader-cards home-cards" aria-label="All leader card pictures">
+        <section class="home-splash" aria-label="One Piece Deck Base">
+          <img class="home-splash-bg" src="/img/opdb-hero.jpg" alt="OPDB" />
+          <a class="home-splash-luffy" href="/decklists/rg-luffy.html">
+            <img src="https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP13/OP13-001_EN.webp" alt="Monkey D. Luffy" />
+          </a>
+          <div class="home-splash-bar">
+            <h2>One Piece Deck Base</h2>
+            <p>OPTCG decklists. Jump a section, or keep scrolling into the leaders.</p>
+          </div>
+        </section>
+
+        <nav class="home-big3" aria-label="Main sections">
+          <a class="home-big home-big-recent" href="#recent">
+            <span class="home-big-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                <path d="M8 7h11M8 12h11M8 17h11M4 7h.01M4 12h.01M4 17h.01"/>
+              </svg>
+            </span>
+            <span class="home-big-title">Recent Lists</span>
+            <span class="home-big-note">Newest 50-card results from every leader</span>
+          </a>
+          <a class="home-big home-big-leaders" href="#leaders">
+            <span class="home-big-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="5" width="12" height="16" rx="2"/>
+                <rect x="9" y="3" width="12" height="16" rx="2"/>
+              </svg>
+            </span>
+            <span class="home-big-title">Leaders</span>
+            <span class="home-big-note">Every leader picture on this site</span>
+          </a>
+          <a class="home-big home-big-discord" href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">
+            <span class="home-big-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.3 5.2A17.4 17.4 0 0 0 14.9 4l-.2.4a15.2 15.2 0 0 1 3.6 1.1c-3.3-1.5-6.6-1.5-9.8 0 .4-.2.9-.4 1.3-.6l-.2-.4A17.3 17.3 0 0 0 4.7 5.2C1.9 9.4 1.1 13.5 1.5 17.5a17.7 17.7 0 0 0 5.4 2.7l.7-1.1a11.5 11.5 0 0 1-2.1-1l.2-.1c1.6.7 3.3 1.2 5.1 1.2s3.5-.4 5.1-1.2l.2.1a11.5 11.5 0 0 1-2.1 1l.7 1.1a17.7 17.7 0 0 0 5.4-2.7c.5-4.6-.7-8.7-3.8-12.3ZM8.8 14.8c-1 0-1.9-.9-1.9-2s.8-2 1.9-2 1.9.9 1.9 2-.8 2-1.9 2Zm6.4 0c-1 0-1.9-.9-1.9-2s.8-2 1.9-2 1.9.9 1.9 2-.8 2-1.9 2Z"/>
+              </svg>
+            </span>
+            <span class="home-big-title">Discord</span>
+            <span class="home-big-note">Talk lists, flair, and the crew</span>
+          </a>
+        </nav>
+
+        <section class="home-leaders-flow" id="leaders">
+          <div class="home-leaders-intro">
+            <p class="home-leaders-kicker">The crew</p>
+            <div class="home-leaders-intro-row">
+              <div>
+                <h3>Leaders</h3>
+                <p>Pick a picture. Each page has lists for that leader.</p>
+              </div>
+              <a href="/decklists/op17.html">All leader pages →</a>
+            </div>
+          </div>
+          <div class="card home-panel home-leaders-grid">
+            <div class="leader-cards home-cards" aria-label="All leader card pictures">
             <a class="leader-card-link" href="/decklists/op17/edward-newgate.html">
               <img src="https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP17/OP17-001_EN.webp" alt="Edward Newgate leader card" />
               <div class="caption">Edward Newgate</div>
@@ -123,12 +174,11 @@
               <img src="https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP16/OP16-060_EN.webp" alt="Sengoku leader card" />
               <div class="caption">Sengoku</div>
             </a>
-        </div>
-        <div class="home-jump">
-          <a class="home-jump-leaders" href="/decklists/op17.html">Leaders</a>
-          <a class="home-jump-recent" href="/#recent">Recent lists</a>
-        </div>
-        <section id="recent">
+            </div>
+          </div>
+        </section>
+
+        <section class="card home-panel" id="recent">
           <div class="section-title">
             <h3>Recent lists</h3>
             <div class="muted">100 lists</div>
@@ -1138,7 +1188,6 @@
           </ul>
         </section>
         <!-- /HOME_BODY -->
-      </div>
     </main>
     <footer>
       © <span id="year"></span> One Piece Deck Base — Fan site, not affiliated with Bandai or Shueisha.
@@ -1148,6 +1197,6 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
-  <script src="/js/site.js?v=home-recent"></script>
+  <script src="/js/site.js?v=home-hub"></script>
 </body>
 </html>
