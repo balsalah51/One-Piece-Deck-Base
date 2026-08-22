@@ -1252,12 +1252,12 @@ HUB_INTRO = {
         "Once per opponent attack, DON!! −1 to send that attack at Doffy or a Donquixote Pirates character."
     ),
     "OP16-041": (
-        "Blue OP16 Buggy. Impel Down / Buggy's Delivery. "
-        "A 5-life Marineford-era leader. Not a character card in GB Luffy."
+        "Blue OP16 Buggy. Impel Down / Buggy Pirates. "
+        "When an Impel Down character leaves the field, DON!! ×1 lets you play a Prisoner of Impel Down from hand. Not a character in GB Luffy."
     ),
     "OP16-060": (
         "Purple OP16 Sengoku. Navy. "
-        "Marineford ramp: build DON!! then cash it in. Not the same deck as purple Enel or Katakuri."
+        "Return 8 active DON!! to play up to 3 differently named Admirals from hand. Not Enel and not Katakuri."
     ),
 }
 

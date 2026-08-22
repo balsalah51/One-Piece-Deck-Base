@@ -130,15 +130,17 @@ TAKES = {
     "OP14-060": (
         "Purple OP14 Donquixote Doflamingo is the Dressrosa retarget leader — not blue OP01-060 Doffy and not purple Katakuri. "
         "Once per opponent attack, DON!! −1 to send that attack at Doffy or a Donquixote Pirates body. "
-        "Averaged lists are the Donquixote Pirates / On K.O. package from tournaments on this page."
+        "Averaged lists lock Sugar, Dellinger, 8-cost Doffy, Monet, Vergo, Baby 5, and 10-cost Doffy; Uso-Hachi, Slow-Slow Beam Sword, Divine Departure, and Trebol finish the 50."
     ),
     "OP16-041": (
-        "Blue OP16 Buggy is the Impel Down / Buggy's Delivery leader — not a character in GB Luffy. "
-        "A 5-life Marineford pile. Averaged lists take the most common Impel Down and Buggy-package cards from this page."
+        "Blue OP16 Buggy is the Impel Down / Buggy Pirates leader — not a character in GB Luffy. "
+        "When an Impel Down body leaves the field, DON!! ×1 plays a Prisoner of Impel Down from hand. "
+        "Averaged lists lock Prisoner of Impel Down, Mr. 1, Mr. 2, Mr. 3, Buggy, and Crocodile; Slave Arrow and Miss Olive are the next cuts."
     ),
     "OP16-060": (
-        "Purple OP16 Sengoku is the Navy Marineford ramp leader — not Enel and not Katakuri. "
-        "Build DON!! then cash it in. Averaged lists take the most common Navy cards from tournaments on this page."
+        "Purple OP16 Sengoku is the Navy Admiral drop leader — not Enel and not Katakuri. "
+        "Return 8 active DON!! to play up to 3 differently named Admirals from hand. "
+        "Averaged lists lock Koby, Sakazuki, Sengoku, Buddha Sengoku, Mamaragan, Borsalino, and Kuzan; Tsuru is a near 4-of."
     ),
 }
 
