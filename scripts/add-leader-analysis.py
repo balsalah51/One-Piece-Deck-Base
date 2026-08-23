@@ -25,6 +25,8 @@ BLOCK_RE = re.compile(
     re.S,
 )
 TARGET = 50
+MIN_OP17_COPIES = 8
+OP17_SUBSET_MIN = 3
 
 TAKES = {
     "OP17-001": (
@@ -214,7 +216,11 @@ def parse_deck(path: Path, leader_id: str) -> dict[str, int] | None:
     return cards
 
 
-def consensus_list(decks: list[dict[str, int]]) -> list[tuple[str, int, float]]:
+def _has_op17(deck: dict[str, int]) -> bool:
+    return any(cid.startswith("OP17-") for cid in deck)
+
+
+def _average_decks(decks: list[dict[str, int]]) -> list[tuple[str, int, float]]:
     n = len(decks)
     play: dict[str, int] = defaultdict(int)
     copy_sum: dict[str, int] = defaultdict(int)
@@ -251,6 +257,72 @@ def consensus_list(decks: list[dict[str, int]]) -> list[tuple[str, int, float]]:
             if total >= TARGET:
                 break
     return picked
+
+
+def _ensure_op17(
+    picks: list[tuple[str, int, float]],
+    op17_decks: list[dict[str, int]],
+) -> list[tuple[str, int, float]]:
+    have_copies = sum(c for cid, c, _r in picks if cid.startswith("OP17-"))
+    if have_copies >= MIN_OP17_COPIES:
+        return picks
+    play: dict[str, int] = defaultdict(int)
+    copy_sum: dict[str, int] = defaultdict(int)
+    n = len(op17_decks)
+    for deck in op17_decks:
+        for cid, count in deck.items():
+            if not cid.startswith("OP17-"):
+                continue
+            play[cid] += 1
+            copy_sum[cid] += count
+    ranked = sorted(play, key=lambda cid: (-play[cid] / n, -copy_sum[cid] / play[cid], cid))
+    picked = {cid: (cid, copies, rate) for cid, copies, rate in picks}
+    need = MIN_OP17_COPIES - have_copies
+    for cid in ranked:
+        if need <= 0:
+            break
+        copies = max(1, min(4, int(round(copy_sum[cid] / play[cid]))))
+        if cid in picked:
+            extra = min(4 - picked[cid][1], need)
+            if extra <= 0:
+                continue
+            _id, old, rate = picked[cid]
+            picked[cid] = (_id, old + extra, rate)
+            need -= extra
+            continue
+        take = min(copies, need)
+        picked[cid] = (cid, take, play[cid] / n)
+        need -= take
+    out = list(picked.values())
+    total = sum(c for _i, c, _r in out)
+    if total <= TARGET:
+        return out
+    # Drop the least-played non-OP17 cards until we are back at 50.
+    flex = sorted(
+        [row for row in out if not row[0].startswith("OP17-")],
+        key=lambda row: (row[2], row[1], row[0]),
+    )
+    overflow = total - TARGET
+    kept = {row[0]: row for row in out}
+    for cid, copies, rate in flex:
+        if overflow <= 0:
+            break
+        cut = min(copies, overflow)
+        if cut >= copies:
+            kept.pop(cid, None)
+        else:
+            kept[cid] = (cid, copies - cut, rate)
+        overflow -= cut
+    return list(kept.values())
+
+
+def consensus_list(decks: list[dict[str, int]]) -> list[tuple[str, int, float]]:
+    op17_decks = [deck for deck in decks if _has_op17(deck)]
+    source = op17_decks if len(op17_decks) >= OP17_SUBSET_MIN else decks
+    picks = _average_decks(source)
+    if op17_decks:
+        picks = _ensure_op17(picks, op17_decks)
+    return picks
 
 
 def grouped_from_picks(leader: dict, picks: list[tuple[str, int, float]], cache: dict) -> tuple[dict, dict]:
@@ -300,10 +372,19 @@ def grouped_from_picks(leader: dict, picks: list[tuple[str, int, float]], cache:
     return grouped, totals
 
 
-def analysis_block(leader: dict, n: int, take: str, text_deck: str) -> str:
+def analysis_block(leader: dict, n: int, take: str, text_deck: str, op17_n: int = 0) -> str:
     text_deck = text_deck.replace("<h3>Text list</h3>", "<h3>Consensus list</h3>", 1)
+    if op17_n >= OP17_SUBSET_MIN:
+        extra = f", using the {op17_n} that play OP17 so the 50-card core includes the new set"
+    elif op17_n:
+        extra = (
+            f", then folding in OP17 cards from the {op17_n} current-format "
+            f"{'list' if op17_n == 1 else 'lists'}"
+        )
+    else:
+        extra = ""
     averaged = (
-        f'<p class="muted">Averaged from {n} lists on this page, then filled to 50 cards. '
+        f'<p class="muted">Averaged from {n} lists on this page{extra}, then filled to 50 cards. '
         "Hover or tap a name for the picture. Copy pastes the IDs for OP TCG SIM.</p>"
     )
     text_deck = text_deck.replace(
@@ -374,13 +455,16 @@ def main() -> None:
         if not raw_decks:
             print(lid, "no decks")
             continue
+        op17_n = sum(1 for d in raw_decks if _has_op17(d))
         picks = consensus_list(raw_decks)
         total = sum(c for _i, c, _r in picks)
-        print(lid, "from", len(raw_decks), "lists", "cards", total)
+        op17_c = sum(c for i, c, _r in picks if i.startswith("OP17-"))
+        used = op17_n if op17_n >= OP17_SUBSET_MIN else len(raw_decks)
+        print(lid, "from", used, "of", len(raw_decks), "lists", "cards", total, "op17", op17_c)
         grouped, totals = grouped_from_picks(leader, picks, cache)
         text_deck = gen.render_text_deck(grouped, cache, ["Leader", "Characters", "Events", "Stages"], totals)
         take = TAKES[lid]
-        block = analysis_block(leader, len(raw_decks), take, text_deck)
+        block = analysis_block(leader, len(raw_decks), take, text_deck, op17_n)
         page_path = ROOT / leader["page"]
         page = inject(page_path.read_text(), block)
         page = ensure_popup_js(page)
