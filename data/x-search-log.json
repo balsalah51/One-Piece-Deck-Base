@@ -4,7 +4,7 @@
       "handle": "MarinefordTCG",
       "url": "https://r.jina.ai/https://x.com/MarinefordTCG",
       "status": 403,
-      "chars": 541,
+      "chars": 539,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -14,7 +14,7 @@
       "handle": "StrawHatPecan",
       "url": "https://r.jina.ai/https://x.com/StrawHatPecan",
       "status": 403,
-      "chars": 541,
+      "chars": 539,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -24,7 +24,7 @@
       "handle": "BenSchumi7",
       "url": "https://r.jina.ai/https://x.com/BenSchumi7",
       "status": 403,
-      "chars": 541,
+      "chars": 539,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -34,7 +34,7 @@
       "handle": "CardKaizoku",
       "url": "https://r.jina.ai/https://x.com/CardKaizoku",
       "status": 403,
-      "chars": 541,
+      "chars": 539,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -44,7 +44,7 @@
       "handle": "BlaisePlays",
       "url": "https://r.jina.ai/https://x.com/BlaisePlays",
       "status": 403,
-      "chars": 541,
+      "chars": 539,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -54,7 +54,7 @@
       "handle": "BlaisePlaysTCG",
       "url": "https://r.jina.ai/https://x.com/BlaisePlaysTCG",
       "status": 403,
-      "chars": 541,
+      "chars": 539,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -64,7 +64,7 @@
       "handle": "NightingaleTCG",
       "url": "https://r.jina.ai/https://x.com/NightingaleTCG",
       "status": 403,
-      "chars": 541,
+      "chars": 539,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -74,7 +74,7 @@
       "handle": "michaelartress",
       "url": "https://r.jina.ai/https://x.com/michaelartress",
       "status": 403,
-      "chars": 541,
+      "chars": 539,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -84,7 +84,7 @@
       "handle": "ONEPIECE_tcg_EN",
       "url": "https://r.jina.ai/https://x.com/ONEPIECE_tcg_EN",
       "status": 403,
-      "chars": 541,
+      "chars": 539,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -94,7 +94,7 @@
       "handle": "Silvers_D_Foxy",
       "url": "https://r.jina.ai/https://x.com/Silvers_D_Foxy",
       "status": 403,
-      "chars": 541,
+      "chars": 539,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -104,7 +104,7 @@
       "handle": "LimitlessTCG",
       "url": "https://r.jina.ai/https://x.com/LimitlessTCG",
       "status": 403,
-      "chars": 541,
+      "chars": 539,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0,
@@ -115,7 +115,7 @@
     {
       "query": "site:x.com \"4xOP17\"",
       "status": 202,
-      "chars": 14238,
+      "chars": 14232,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0
@@ -123,7 +123,7 @@
     {
       "query": "site:twitter.com \"4xOP17-040\"",
       "status": 202,
-      "chars": 14246,
+      "chars": 14258,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
@@ -131,7 +131,7 @@
     {
       "query": "site:x.com \"1xOP17-001\" decklist",
       "status": 202,
-      "chars": 14276,
+      "chars": 14270,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
@@ -139,7 +139,7 @@
     {
       "query": "site:x.com \"1xOP17-020\" decklist",
       "status": 202,
-      "chars": 14276,
+      "chars": 14258,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
@@ -147,7 +147,7 @@
     {
       "query": "site:x.com \"1xOP17-039\" decklist",
       "status": 202,
-      "chars": 14258,
+      "chars": 14276,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
@@ -155,7 +155,7 @@
     {
       "query": "site:x.com \"1xOP17-058\" decklist",
       "status": 202,
-      "chars": 14276,
+      "chars": 14270,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
@@ -179,7 +179,7 @@
     {
       "query": "site:x.com \"1xOP16-001\"",
       "status": 202,
-      "chars": 14264,
+      "chars": 14251,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
@@ -187,7 +187,7 @@
     {
       "query": "site:x.com MarinefordTCG OP17 decklist",
       "status": 202,
-      "chars": 14250,
+      "chars": 14262,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0
@@ -195,7 +195,7 @@
     {
       "query": "site:x.com StrawHatPecan OP17 list",
       "status": 202,
-      "chars": 14253,
+      "chars": 14240,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0
@@ -203,7 +203,7 @@
     {
       "query": "site:x.com CardKaizoku Ace OP16-001",
       "status": 202,
-      "chars": 14250,
+      "chars": 14262,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0
@@ -211,7 +211,7 @@
     {
       "query": "site:x.com \"1xOP14-060\" decklist",
       "status": 202,
-      "chars": 14252,
+      "chars": 14258,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
@@ -227,7 +227,7 @@
     {
       "query": "site:x.com \"1xOP16-060\" Sengoku",
       "status": 202,
-      "chars": 14261,
+      "chars": 14256,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
@@ -235,7 +235,7 @@
     {
       "query": "site:x.com \"1xOP15-002\" Lucy",
       "status": 202,
-      "chars": 14274,
+      "chars": 14255,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
@@ -243,7 +243,7 @@
     {
       "query": "site:x.com \"1xOP16-080\" Blackbeard",
       "status": 202,
-      "chars": 14262,
+      "chars": 14274,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
@@ -251,7 +251,7 @@
     {
       "query": "site:x.com Doffy OP14-060 decklist",
       "status": 202,
-      "chars": 14248,
+      "chars": 14260,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0
@@ -259,7 +259,7 @@
     {
       "query": "site:x.com OP17 decklist since:2026-08-20",
       "status": 202,
-      "chars": 14280,
+      "chars": 14250,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0
@@ -267,7 +267,31 @@
     {
       "query": "site:twitter.com OP17 decklist since:2026-08-20",
       "status": 202,
-      "chars": 14268,
+      "chars": 14274,
+      "tweet_ids": [],
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "query": "site:x.com \"1xOP11-040\" decklist",
+      "status": 202,
+      "chars": 14263,
+      "tweet_ids": [],
+      "card_lines": 2,
+      "complete_lists": 0
+    },
+    {
+      "query": "site:x.com UP Luffy OP11-040 decklist",
+      "status": 202,
+      "chars": 14266,
+      "tweet_ids": [],
+      "card_lines": 0,
+      "complete_lists": 0
+    },
+    {
+      "query": "site:x.com Blue Purple Luffy OP17 list",
+      "status": 202,
+      "chars": 14250,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0
@@ -523,6 +547,19 @@
         [
           1,
           "OP16-080"
+        ]
+      ]
+    },
+    {
+      "source": "site:x.com \"1xOP11-040\" decklist",
+      "hits": [
+        [
+          1,
+          "OP11-040"
+        ],
+        [
+          1,
+          "OP11-040"
         ]
       ]
     }

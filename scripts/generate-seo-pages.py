@@ -39,6 +39,7 @@ LEADERS = [
     ("Doffy", "/decklists/doffy.html", "OP14 Purple Donquixote Doflamingo"),
     ("Buggy", "/decklists/buggy.html", "OP16 Blue Buggy"),
     ("Sengoku", "/decklists/sengoku.html", "OP16 Purple Sengoku"),
+    ("UP Luffy", "/decklists/up-luffy.html", "OP11 Blue/Purple Monkey D. Luffy"),
 ]
 
 
@@ -382,7 +383,7 @@ TOPICS = [
 
 # name, slug, blurb, related leader keys (index into LEADERS)
 CHARACTERS = [
-    ("Monkey D. Luffy", "monkey-d-luffy", "Straw Hat captain and the most-searched OPTCG name. Black OP17 Luffy, RG Luffy, and green/blue OP16 Impel Down Luffy are constructed leaders here.", [4, 6, 14]),
+    ("Monkey D. Luffy", "monkey-d-luffy", "Straw Hat captain and the most-searched OPTCG name. Black OP17 Luffy, RG Luffy, green/blue OP16 Impel Down Luffy, and blue/purple UP Luffy (OP11-040) are constructed leaders here.", [4, 6, 14, 23]),
     ("Roronoa Zoro", "roronoa-zoro", "First mate and swordsman. Zoro cards show up in Mihawk and RG Luffy OPTCG lists.", [8, 6]),
     ("Nami", "nami", "Straw Hat navigator. Nami is the blue/yellow OPTCG leader; green Shanks lists also play Nami cards.", [7, 1]),
     ("Usopp", "usopp", "Sniper of the Straw Hats. Usopp cards appear in RG Luffy and Black Luffy OPTCG decklists.", [6, 4]),
@@ -453,7 +454,8 @@ CHARACTERS = [
     ("Loki", "loki", "Prince of Elbaph. Black OP17 Luffy is the Elbaph OPTCG leader on this site.", [4]),
     ("Harald", "harald", "King of Elbaph. Black Luffy OPTCG lists are the Elbaph constructed pages.", [4]),
     ("Shakuyaku", "shakuyaku", "Shakky of the Rocks era. Blue Rocks D. Xebec is the matching OP17 OPTCG leader.", [2]),
-    ("Luffy", "luffy", "Same search as Monkey D. Luffy. Black OP17 Luffy, RG Luffy, and GB Impel Down Luffy are constructed leaders.", [4, 6, 14]),
+    ("Luffy", "luffy", "Same search as Monkey D. Luffy. Black OP17 Luffy, RG Luffy, GB Impel Down Luffy, and blue/purple UP Luffy are constructed leaders.", [4, 6, 14, 23]),
+    ("UP Luffy", "up-luffy", "Community name for blue/purple OP11-040 Monkey D. Luffy. U is blue, P is purple. Look 5 Straw Hats once you hit 8 DON!!.", [23, 4, 6, 14]),
     ("Zoro", "zoro", "Same search as Roronoa Zoro. Mihawk and RG Luffy lists are the closest OPTCG pages.", [8, 6]),
     ("Mihawk", "mihawk", "Same search as Dracule Mihawk. Green Mihawk has tournament OPTCG lists on this site.", [8]),
     ("Newgate", "newgate", "Same person as Edward Newgate / Whitebeard. Red OP17 is the constructed page.", [0]),

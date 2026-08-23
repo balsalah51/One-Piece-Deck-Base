@@ -16,7 +16,7 @@ gen = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(gen)
 
 ROOT = gen.ROOT
-LINE_RE = re.compile(r"(?i)(\d+)\s*x\s*((?:OP|ST|EB|PRB)\d{2}-\d{3}|P-\d{3})")
+LINE_RE = re.compile(r"(?i)(\d+)\s*[x×]\s*((?:OP|ST|EB|PRB)\d{2}-\d{3}|P-\d{3})")
 
 COMMUNITY = {
     "OP17-001": [
@@ -219,6 +219,28 @@ COMMUNITY = {
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=L7f95snVnB4",
             "raw": "1xOP17-099 3xEB01-056 4xOP17-113 2xOP11-106 2xOP17-104 3xOP17-107 3xOP17-108 4xOP17-109 4xOP17-102 4xOP17-106 4xOP17-103 4xOP17-114 3xOP17-110 4xOP17-112 3xOP17-115 3xOP17-117",
+        },
+    ],
+    "OP11-040": [
+        {
+            "slug": "yt-youtube-up-luffy-rlffbode4qs",
+            "player": "NightingaleTCG",
+            "title": "OP17 UP Luffy gets TWO new 9 costs — Nightingale",
+            "subtitle": "YouTube deck profile · also on X @BenSchumi7",
+            "kind": "youtube",
+            "source_url": "https://www.youtube.com/watch?v=rlffBOdE4qs",
+            "extra": "https://x.com/BenSchumi7",
+            "raw": "1xOP11-040 4xOP13-043 3xOP16-056 3xOP17-046 4xOP11-054 4xOP06-119 4xOP05-067 4xOP17-074 4xST18-001 4xEB01-061 4xP-107 2xOP17-064 2xOP17-065 4xOP09-078 4xOP11-080",
+        },
+        {
+            "slug": "yt-artress-up-luffy-m5jw91p5be",
+            "player": "ArtressTCG",
+            "title": "Mr.3 Brings Back UP Luffy — Artress",
+            "subtitle": "YouTube + EgmanEvents deck builder",
+            "kind": "youtube",
+            "source_url": "https://www.youtube.com/watch?v=-M5JW91P5BE",
+            "extra": "https://deckbuilder.egmanevents.com/?deck=OP11-040:1,OP15-047:1,OP06-119:4,P-107:4,OP07-051:4,OP07-064:2,ST18-001:4,OP11-054:4,P-053:2,EB03-034:2,OP16-056:4,OP09-078:4,OP11-080:4,OP14-077:2,OP08-076:4,OP06-058:1,EB01-061:4&type=optcg",
+            "raw": "1xOP11-040 1xOP15-047 4xOP06-119 4xP-107 4xOP07-051 2xOP07-064 4xST18-001 4xOP11-054 2xP-053 2xEB03-034 4xOP16-056 4xOP09-078 4xOP11-080 2xOP14-077 4xOP08-076 1xOP06-058 4xEB01-061",
         },
     ],
     "OP13-001": [

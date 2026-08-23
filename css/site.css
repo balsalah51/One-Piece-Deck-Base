@@ -292,6 +292,7 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
 .color-black-yellow{--tile:#212121}
 .color-purple-yellow{--tile:#6a1b9a}
 .color-red-black{--tile:#b71c1c}
+.color-blue-purple{--tile:#1565c0}
 .swatch.dual-red-green{background:linear-gradient(90deg,#b71c1c 50%,#2e7d32 50%)}
 .swatch.dual-blue-yellow{background:linear-gradient(90deg,#1565c0 50%,#c9a227 50%)}
 .swatch.dual-red-blue{background:linear-gradient(90deg,#b71c1c 50%,#1565c0 50%)}
@@ -299,6 +300,7 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
 .swatch.dual-black-yellow{background:linear-gradient(90deg,#212121 50%,#c9a227 50%)}
 .swatch.dual-purple-yellow{background:linear-gradient(90deg,#6a1b9a 50%,#c9a227 50%)}
 .swatch.dual-red-black{background:linear-gradient(90deg,#b71c1c 50%,#212121 50%)}
+.swatch.dual-blue-purple{background:linear-gradient(90deg,#1565c0 50%,#6a1b9a 50%)}
 .copy-sim{
   margin-left:auto;padding:6px 10px;border-radius:8px;border:1px solid rgba(183,28,28,0.28);
   background:#fff;color:var(--accent);font:inherit;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap
