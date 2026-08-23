@@ -27,8 +27,8 @@ nav a{color:var(--muted);text-decoration:none;margin-left:14px;font-weight:600}
 nav a:hover,nav a[aria-current="page"]{color:var(--accent)}
 main{margin-top:22px;display:grid;grid-template-columns:1fr 340px;gap:22px;align-items:start}
 main.single{grid-template-columns:1fr}
-.card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
-.hero{padding:28px;border-radius:10px;background:linear-gradient(180deg,rgba(183,28,28,0.03),transparent);border:1px solid rgba(0,0,0,0.03)}
+.card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;min-width:0;max-width:100%}
+.hero{padding:28px;border-radius:10px;background:linear-gradient(180deg,rgba(183,28,28,0.03),transparent);border:1px solid rgba(0,0,0,0.03);min-width:0}
 .hero h2{color:var(--accent);margin:0;font-size:28px}
 .hero p{color:var(--muted);margin-top:10px;line-height:1.5}
 .home-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px}
@@ -159,10 +159,12 @@ main.single{grid-template-columns:1fr}
 .recent-item .meta{font-size:12px;margin-top:2px}
 .recent-item .when{margin-left:auto;font-size:12px;color:var(--muted);white-space:nowrap;font-weight:700}
 .leader-take{color:var(--text);margin-top:10px;line-height:1.65;font-size:15px}
-.section-title{display:flex;align-items:end;justify-content:space-between;margin-bottom:10px;gap:12px}
-.section-title h3{margin:0;font-size:18px;color:var(--text)}
-.list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
-.item{display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:10px;background:linear-gradient(180deg,rgba(0,0,0,0.01),transparent);border:1px solid rgba(0,0,0,0.04);gap:12px;text-decoration:none;color:inherit}
+.section-title{display:flex;align-items:end;justify-content:space-between;margin-bottom:10px;gap:12px;flex-wrap:wrap;min-width:0}
+.section-title h3{margin:0;font-size:18px;color:var(--text);min-width:0;overflow-wrap:anywhere}
+.list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+.item{display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:10px;background:linear-gradient(180deg,rgba(0,0,0,0.01),transparent);border:1px solid rgba(0,0,0,0.04);gap:12px;text-decoration:none;color:inherit;min-width:0}
+.item > div:first-child{min-width:0;flex:1}
+.item > div:first-child > div{overflow-wrap:anywhere}
 a.item{cursor:pointer}
 a.item:hover{border-color:rgba(183,28,28,0.25)}
 .item a,.item .link{color:var(--accent);font-weight:700;text-decoration:none}
@@ -306,7 +308,7 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
   background:#fff;color:var(--accent);font:inherit;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap
 }
 .copy-sim:hover{border-color:var(--accent)}
-.list-row{display:flex;align-items:stretch;gap:8px}
+.list-row{display:flex;align-items:stretch;gap:8px;min-width:0;width:100%}
 .list-row > .item{flex:1;min-width:0}
 .list-row > .copy-sim{margin-left:0;align-self:center;flex-shrink:0}
 .deck-stats{margin-top:16px;padding:12px 14px;border-radius:12px;border:1px solid rgba(0,0,0,0.06);background:#fff}
@@ -347,7 +349,19 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
   .hero{padding:18px 14px}
   .card{padding:16px}
   .item{flex-wrap:wrap;align-items:flex-start}
+  .item .link{white-space:normal;flex-shrink:0}
   .deck-index .item .link{white-space:normal}
+  .list-row{flex-direction:column;align-items:stretch;gap:6px}
+  .list-row > .copy-sim{
+    align-self:stretch;width:100%;text-align:center;white-space:normal
+  }
+  .section-title .copy-sim{
+    margin-left:0;width:100%;text-align:center;white-space:normal
+  }
+  .list-filters{flex-direction:column}
+  .list-filters input,.list-filters select{width:100%;min-width:0;flex:1 1 auto}
+  .hero h2,.hero p{overflow-wrap:anywhere}
+  footer{overflow-wrap:anywhere}
   .events-banner{flex-direction:column;align-items:flex-start}
   .recent-item .when{display:none}
   .home-jump{flex-direction:column}

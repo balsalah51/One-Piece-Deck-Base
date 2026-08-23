@@ -843,7 +843,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
-  <link rel="stylesheet" href="/css/site.css?v=sim-copy" />
+  <link rel="stylesheet" href="/css/site.css?v=list-fit" />
 </head>
 <body class="{html.escape(color)}">
   <div class="wrap">

@@ -52,7 +52,7 @@ def chrome(title: str, description: str, body: str) -> str:
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
   <link rel="canonical" href="{html.escape(SITE)}" />
-  <link rel="stylesheet" href="/css/site.css?v=sim-copy" />
+  <link rel="stylesheet" href="/css/site.css?v=list-fit" />
 </head>
 <body>
   <div class="wrap">

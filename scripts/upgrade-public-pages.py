@@ -22,7 +22,7 @@ aspec.loader.exec_module(ana)
 
 ROOT = gen.ROOT
 LINE_RE = ana.LINE_RE
-CSS_NEW = "/css/site.css?v=home-hub2"
+CSS_NEW = "/css/site.css?v=list-fit"
 JS_NEW = "/js/site.js?v=home-hub"
 NAV_OLD_PATTERNS = [
     (
