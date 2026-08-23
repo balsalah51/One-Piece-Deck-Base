@@ -2,13 +2,15 @@
 """Pull new lists dated 2026-08-20+ from Limitless, X, and public deck pages.
 
 Does not wipe existing list pages. Rebuilds hubs, consensus lists, and the homepage.
+Adds UP Luffy (OP11-040) and prefers lists that already play an OP17 card.
 """
 
 from __future__ import annotations
 
 import importlib.util
 
-SINCE = "2026-08-17"
+SINCE = "2026-08-20"
+UP_LUFFY = "OP11-040"
 
 
 def load(name: str, path: str):
@@ -18,11 +20,26 @@ def load(name: str, path: str):
     return mod
 
 
+def write_up_luffy_hub(gen) -> None:
+    cache = gen.ensure_cards({UP_LUFFY}, gen.load_card_cache())
+    leader = next(L for L in gen.LEADERS if L["id"] == UP_LUFFY)
+    path = gen.ROOT / leader["page"]
+    (gen.ROOT / leader["dir"]).mkdir(parents=True, exist_ok=True)
+    if path.exists():
+        print("hub exists", path)
+        return
+    path.write_text(gen.render_hub_page(leader, cache))
+    print("wrote hub", path)
+
+
 def main() -> None:
     more = load("morelists", "/workspace/scripts/add-more-tournament-lists.py")
     commsrc = load("commsrc", "/workspace/scripts/scrape-community-sources.py")
     analysis = load("analysis", "/workspace/scripts/add-leader-analysis.py")
     up = load("upgrade", "/workspace/scripts/upgrade-public-pages.py")
+
+    print("=== UP Luffy hub ===")
+    write_up_luffy_hub(more.gen)
 
     print("=== Limitless Play since", SINCE, "===")
     index = more.load_index()
@@ -35,7 +52,18 @@ def main() -> None:
     )
     more.save_index(index)
 
-    print("=== X / YouTube / OnePieceDB ===")
+    print("=== UP Luffy Limitless (OP17 lists first) ===")
+    index = more.fetch_more(
+        index,
+        pages=20,
+        only_ids={UP_LUFFY},
+        extra_limit=80,
+        per_event=6,
+        since="2026-03-01",
+    )
+    more.save_index(index)
+
+    print("=== X / YouTube / OnePieceDB / weird sources ===")
     commsrc.main()
 
     index = more.load_index()
@@ -48,6 +76,8 @@ def main() -> None:
     print("=== homepage / public pages ===")
     up.patch_home()
     up.patch_op17()
+    seo = load("seo", "/workspace/scripts/generate-seo-pages.py")
+    seo.main()
     print("ingest done")
 
 

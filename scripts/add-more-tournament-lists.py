@@ -238,7 +238,12 @@ def pick_fresh(
     known = known_results(leader, index)
     per_event_counts: dict[str, int] = {}
     fresh = []
-    for entry in sorted(entries, key=gen.quality_key):
+    def pick_key(entry: dict) -> tuple:
+        # Prefer lists that already splash an OP17 card, then the usual quality order.
+        has_op17 = 0 if gen.deck_has_op17(entry.get("decklist") or {}) else 1
+        return (has_op17,) + gen.quality_key(entry)
+
+    for entry in sorted(entries, key=pick_key):
         if entry.get("kind") == "sample":
             continue
         dl = entry.get("decklist") or {}

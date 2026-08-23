@@ -142,6 +142,11 @@ TAKES = {
         "Return 8 active DON!! to play up to 3 differently named Admirals from hand. "
         "Averaged lists lock Koby, Sakazuki, Sengoku, Buddha Sengoku, Mamaragan, Borsalino, and Kuzan; Tsuru is a near 4-of."
     ),
+    "OP11-040": (
+        "UP Luffy is blue/purple OP11-040 — U for blue, P for purple. "
+        "Ramp to 8 DON!! with Zoro-Juurou, Bon Clay, and Gear Two, then Look 5 every turn for Sanji and Straw Hats. "
+        "Averaged lists lock Otama, Uso-Hachi, Zoro-Juurou, Mr. 2, Nami, Sanji, promo Roger, Gear Two, and Gum-Gum Giant. OP17 cards are the current-format flex."
+    ),
 }
 
 POPUP_JS = r"""

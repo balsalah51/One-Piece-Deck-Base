@@ -38,6 +38,7 @@ LEADERS = {
     "OP14-060",
     "OP16-041",
     "OP16-060",
+    "OP11-040",
 }
 
 QUERIES = [
@@ -66,6 +67,11 @@ QUERIES = [
     "OP17 whitebeard 50 card list",
     "OP17 big mom linlin 50 card",
     "one piece tcg sim OP17 decklist paste",
+    "UP Luffy OP11-040 decklist",
+    "Blue Purple Luffy OP11-040 OP17 decklist",
+    "site:mabitcg.com OP17 decklist",
+    "site:opmetagame.com OP11-040",
+    "site:onepiecetopdecks.com OP17",
 ]
 
 PUBLIC_PAGES = [

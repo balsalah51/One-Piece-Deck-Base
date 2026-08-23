@@ -56,6 +56,7 @@ OPDB_SLUGS = {
     "OP14-060": "donquixote-doflamingo-op14-060",
     "OP16-041": "buggy-op16-041",
     "OP16-060": "sengoku-op16-060",
+    "OP11-040": "monkey-d-luffy-op11-040",
 }
 YOUTUBE_ID_RE = re.compile(r"(?:youtube\.com/watch\?v=|youtu\.be/)([A-Za-z0-9_-]{8,})", re.I)
 DECK_HREF_RE = re.compile(r'href="(https?://onepiecedb\.io/[^"]+)"')
@@ -129,6 +130,9 @@ def ddg(query: str) -> str:
 
 def scrape_youtube(found: list[dict], seen: set[str]) -> None:
     queries = [
+        "UP Luffy OP11-040 decklist youtube",
+        "Blue Purple Luffy OP11-040 decklist youtube OP17",
+        "OP11-040 Monkey D Luffy decklist youtube",
         "OP17 Rocks Xebec OP17-039 decklist youtube",
         "OP17 Kaido OP17-058 decklist youtube",
         "OP17 Luffy OP17-079 decklist youtube",
@@ -144,6 +148,7 @@ def scrape_youtube(found: list[dict], seen: set[str]) -> None:
         "OP16 Blackbeard OP16-080 decklist youtube",
         "OP16 Yamato OP16-079 decklist youtube",
         "OP16 GB Luffy OP16-022 decklist youtube",
+        "OP17 deck profile youtube August 2026",
     ]
     video_ids: list[str] = []
     for q in queries:
@@ -153,7 +158,7 @@ def scrape_youtube(found: list[dict], seen: set[str]) -> None:
                 video_ids.append(vid)
         time.sleep(0.2)
     log("youtube ids", len(video_ids))
-    for vid in video_ids[:24]:
+    for vid in video_ids[:36]:
         url = f"https://www.youtube.com/watch?v={vid}"
         status, body = fetch(f"https://r.jina.ai/{url}", timeout=20)
         counts = parse_counts(body)
@@ -282,9 +287,75 @@ def scrape_x(found: list[dict], seen: set[str]) -> None:
         )
 
 
+WEIRD_QUERIES = [
+    "site:mabitcg.com OP17 decklist",
+    "site:mabitcg.com UP Luffy OP11-040",
+    "site:onepiecetopdecks.com OP17 decklist",
+    "site:opmetagame.com OP11-040 decklist",
+    "site:deltiasgaming.com Blue Purple Luffy decklist",
+    "site:overlordtcgz1.blogspot.com OP11-040",
+    "site:hikerukana.com OP11-040",
+    "site:reddit.com/r/OnePieceTCG OP17 decklist 4xOP17",
+    "egmanevents deckbuilder OP17 Rocks",
+    "cardkaizoku OP17 Xebec decklist",
+    "UP Luffy OP11-040 50 card list",
+    "Blue Purple Luffy OP17 Otama decklist",
+]
+PAGE_URL_RE = re.compile(
+    r"https?://(?:www\.)?(?:mabitcg\.com|onepiecetopdecks\.com|opmetagame\.com|"
+    r"deltiasgaming\.com|overlordtcgz1\.blogspot\.com|hikerukana\.com|"
+    r"reddit\.com/r/OnePieceTCG|deckbuilder\.egmanevents\.com|deckbuilder\.cardkaizoku\.com)"
+    r"[^\s\"'<>]*",
+    re.I,
+)
+
+
+def scrape_weird(found: list[dict], seen: set[str]) -> None:
+    pages: list[str] = []
+    for q in WEIRD_QUERIES:
+        body = ddg(q)
+        for href in PAGE_URL_RE.findall(body):
+            href = href.rstrip(").,;]")
+            if href not in pages:
+                pages.append(href)
+        time.sleep(0.2)
+    log("weird pages", len(pages))
+    for href in pages[:40]:
+        status, body = fetch(f"https://r.jina.ai/{href}", timeout=20)
+        counts = parse_counts(body)
+        lid = leader_of(counts)
+        log("weird", status, href[:80], "lines", len(counts), lid or "-")
+        if not lid or not complete(counts, lid):
+            time.sleep(0.12)
+            continue
+        raw = " ".join(f"{n}x{cid}" for cid, n in counts.items())
+        host = urllib.parse.urlparse(href).netloc.replace("www.", "")
+        record(
+            found,
+            {
+                "leader": lid,
+                "kind": "web",
+                "player": host.split(".")[0].title(),
+                "title": f"{TARGET_IDS[lid].replace('-', ' ').title()} — {host}",
+                "subtitle": "Public web list from a community page",
+                "source_url": href,
+                "slug": slug_for("web", host, href),
+                "raw": raw,
+                "cards": sum(n for cid, n in counts.items() if cid != lid),
+            },
+            seen,
+        )
+        time.sleep(0.12)
+
+
 def write_lists(found: list[dict]) -> set[str]:
     if not found:
         return set()
+    found.sort(
+        key=lambda item: 0
+        if any(cid.startswith("OP17-") for cid in comm.parse_raw(item["raw"]))
+        else 1
+    )
     needed = set()
     parsed = []
     for item in found:
@@ -353,6 +424,7 @@ def main() -> None:
     seen: set[str] = set()
     scrape_opdb(found, seen)
     scrape_youtube(found, seen)
+    scrape_weird(found, seen)
     scrape_x(found, seen)
     (ROOT / "data/community-scrape-log.json").write_text(
         json.dumps({"found": found}, indent=2, ensure_ascii=False) + "\n"

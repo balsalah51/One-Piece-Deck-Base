@@ -16,7 +16,7 @@ gen = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(gen)
 
 ROOT = gen.ROOT
-LINE_RE = re.compile(r"(?i)(\d+)\s*x\s*((?:OP|ST|EB|PRB)\d{2}-\d{3}|P-\d{3})")
+LINE_RE = re.compile(r"(?i)(\d+)\s*[x×]\s*((?:OP|ST|EB|PRB)\d{2}-\d{3}|P-\d{3})")
 
 COMMUNITY = {
     "OP17-001": [

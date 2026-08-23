@@ -300,6 +300,18 @@ LEADERS = [
         "pool_heading": "Card pictures",
         "pool_note": "English names and art from Limitless",
     },
+    {
+        "id": "OP11-040",
+        "key": "up-luffy",
+        "page": "decklists/up-luffy.html",
+        "dir": "decklists/up-luffy",
+        "name": "UP Luffy",
+        "color": "color-blue-purple",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
 ]
 
 
@@ -388,6 +400,10 @@ def count_cards(dl: dict) -> int:
 
 def deck_has_banned(dl: dict) -> bool:
     return any(item["id"] in BANNED_CARDS for item in flatten_cards(dl))
+
+
+def deck_has_op17(dl: dict) -> bool:
+    return any((item.get("id") or "").startswith("OP17-") for item in flatten_cards(dl))
 
 
 def page_has_banned(text: str) -> bool:
@@ -1258,6 +1274,11 @@ HUB_INTRO = {
     "OP16-060": (
         "Purple OP16 Sengoku. Navy. "
         "Return 8 active DON!! to play up to 3 differently named Admirals from hand. Not Enel and not Katakuri."
+    ),
+    "OP11-040": (
+        "Blue/Purple OP11 Monkey D. Luffy — UP Luffy in community shorthand (U = blue, P = purple). "
+        "Once you have 8 DON!!, look at 5 and add a Straw Hat. "
+        "Not red/green OP13 Luffy, not green/blue OP16 Impel Down Luffy, and not black OP17 Elbaph Luffy."
     ),
 }
 
