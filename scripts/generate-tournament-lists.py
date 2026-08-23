@@ -870,6 +870,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
     </main>
     <footer>
       © <span id="year"></span> One Piece Deck Base — Built with community in mind.
+      <a href="/privacy.html">Privacy</a>
     </footer>
   </div>
   <script>
