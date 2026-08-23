@@ -78,6 +78,7 @@ def chrome(title: str, description: str, body: str) -> str:
     </main>
     <footer>
       © <span id="year"></span> One Piece Deck Base — Fan site for the Bandai ONE PIECE CARD GAME (OPTCG). Not affiliated with Bandai.
+      <a href="/privacy.html">Privacy</a>
     </footer>
   </div>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>

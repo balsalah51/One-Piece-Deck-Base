@@ -444,6 +444,13 @@ a.shop-card:hover{border-color:rgba(183,28,28,0.28);box-shadow:var(--shadow)}
 }
 .custom-form textarea{min-height:90px;resize:vertical}
 .order-box{margin-top:16px;padding:12px;border-radius:10px;background:var(--accent-bleed);font-size:13px;white-space:pre-wrap}
+.policy section{margin-top:22px}
+.policy h3{margin:0;font-size:18px;color:var(--text)}
+.policy p,.policy li{color:var(--text);line-height:1.65}
+.policy ul{margin:10px 0 0;padding-left:22px}
+.policy li{margin:6px 0}
+.policy a{color:var(--accent);font-weight:700;text-decoration:none}
+.policy a:hover{text-decoration:underline}
 @media (max-width:880px){
   .custom-wrap{grid-template-columns:1fr}
 }
