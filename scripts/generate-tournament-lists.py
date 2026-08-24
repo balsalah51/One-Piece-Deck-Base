@@ -312,6 +312,18 @@ LEADERS = [
         "pool_heading": "Card pictures",
         "pool_note": "English names and art from Limitless",
     },
+    {
+        "id": "OP08-058",
+        "key": "charlotte-pudding",
+        "page": "decklists/charlotte-pudding.html",
+        "dir": "decklists/charlotte-pudding",
+        "name": "Charlotte Pudding",
+        "color": "color-purple-yellow",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
 ]
 
 
@@ -1280,6 +1292,10 @@ HUB_INTRO = {
         "Blue/Purple OP11 Monkey D. Luffy — UP Luffy in community shorthand (U = blue, P = purple). "
         "Once you have 8 DON!!, look at 5 and add a Straw Hat. "
         "Not red/green OP13 Luffy, not green/blue OP16 Impel Down Luffy, and not black OP17 Elbaph Luffy."
+    ),
+    "OP08-058": (
+        "Purple/Yellow OP08 Charlotte Pudding is the Big Mom DON!! ramp leader — not yellow OP17 Linlin and not purple OP11 Katakuri. "
+        "When attacking, turn 2 Life cards face-up to add 1 DON!! from your DON!! deck and rest it."
     ),
 }
 

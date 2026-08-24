@@ -338,6 +338,17 @@ COMMUNITY = {
             "raw": "1xOP13-002 4xOP13-016 4xST23-001 4xEB04-007 2xOP09-118 4xOP13-043 4xST22-002 2xOP08-040 1xOP10-045 4xPRB02-008 4xOP13-054 2xST22-010 1xOP07-051 3xOP08-047 4xOP13-042 3xEB04-008 4xST22-015",
         },
     ],
+    "OP08-058": [
+        {
+            "slug": "reddit-pudding-wjyx7brkbb",
+            "player": "r/OnePieceTCG",
+            "title": "Purple/Yellow Pudding — r/OnePieceTCG",
+            "subtitle": "Community screenshot from r/OnePieceTCG · 2026-08-24",
+            "kind": "web",
+            "source_url": "https://www.reddit.com/r/OnePieceTCG/s/wjyx7BRKbb",
+            "raw": "1xOP08-058 4xOP11-070 4xST34-003 4xOP08-062 4xOP05-073 1xOP08-064 4xOP08-063 3xPRB02-010 4xOP11-067 4xOP03-112 4xOP17-109 4xOP17-103 4xOP17-114 2xOP03-113 4xOP03-114",
+        },
+    ],
 }
 
 

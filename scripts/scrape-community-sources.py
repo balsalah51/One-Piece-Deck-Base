@@ -57,6 +57,7 @@ OPDB_SLUGS = {
     "OP16-041": "buggy-op16-041",
     "OP16-060": "sengoku-op16-060",
     "OP11-040": "monkey-d-luffy-op11-040",
+    "OP08-058": "charlotte-pudding-op08-058",
 }
 YOUTUBE_ID_RE = re.compile(r"(?:youtube\.com/watch\?v=|youtu\.be/)([A-Za-z0-9_-]{8,})", re.I)
 DECK_HREF_RE = re.compile(r'href="(https?://onepiecedb\.io/[^"]+)"')
@@ -133,6 +134,8 @@ def scrape_youtube(found: list[dict], seen: set[str]) -> None:
         "UP Luffy OP11-040 decklist youtube",
         "Blue Purple Luffy OP11-040 decklist youtube OP17",
         "OP11-040 Monkey D Luffy decklist youtube",
+        "Charlotte Pudding OP08-058 decklist youtube",
+        "Purple Yellow Pudding OP08 decklist youtube",
         "OP17 Rocks Xebec OP17-039 decklist youtube",
         "OP17 Kaido OP17-058 decklist youtube",
         "OP17 Luffy OP17-079 decklist youtube",
@@ -300,6 +303,8 @@ WEIRD_QUERIES = [
     "cardkaizoku OP17 Xebec decklist",
     "UP Luffy OP11-040 50 card list",
     "Blue Purple Luffy OP17 Otama decklist",
+    "site:reddit.com/r/OnePieceTCG Charlotte Pudding OP08-058 decklist",
+    "Charlotte Pudding OP08-058 50 card list",
 ]
 PAGE_URL_RE = re.compile(
     r"https?://(?:www\.)?(?:mabitcg\.com|onepiecetopdecks\.com|opmetagame\.com|"

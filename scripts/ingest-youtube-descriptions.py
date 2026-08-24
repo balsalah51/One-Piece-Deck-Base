@@ -53,6 +53,7 @@ def video_ids() -> list[str]:
     for q in (
         "OP17+decklist",
         "UP+Luffy+OP11-040+decklist",
+        "Charlotte+Pudding+OP08-058+decklist",
         "OP17+UP+Luffy",
         "NightingaleTCG+UP+Luffy",
         "OP17+Kaido+decklist",
