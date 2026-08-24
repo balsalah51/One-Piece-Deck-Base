@@ -149,6 +149,11 @@ TAKES = {
         "Ramp to 8 DON!! with Zoro-Juurou, Bon Clay, and Gear Two, then Look 5 every turn for Sanji and Straw Hats. "
         "Averaged lists lock Otama, Uso-Hachi, Zoro-Juurou, Mr. 2, Nami, Sanji, promo Roger, Gear Two, and Gum-Gum Giant. OP17 cards are the current-format flex."
     ),
+    "OP08-058": (
+        "Purple/Yellow OP08 Charlotte Pudding is the Big Mom DON!! ramp leader — not yellow OP17 Linlin and not purple OP11 Katakuri. "
+        "When attacking, turn 2 Life face-up to rest a DON!! from the DON!! deck. "
+        "The hosted list is a 50-card r/OnePieceTCG screenshot: 1-cost Pudding and Brulee, 2-cost Katakuri, Miss Doublefinger, Cracker, 6-cost and 8-cost Katakuri, 7-cost Pudding, yellow searcher Pudding, OP17 yellow Pudding, OP17 Katakuri, Sweet 3 Generals, Perospero, and 10-cost Linlin."
+    ),
 }
 
 POPUP_JS = r"""

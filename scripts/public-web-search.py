@@ -39,6 +39,7 @@ LEADERS = {
     "OP16-041",
     "OP16-060",
     "OP11-040",
+    "OP08-058",
 }
 
 QUERIES = [
@@ -69,6 +70,8 @@ QUERIES = [
     "one piece tcg sim OP17 decklist paste",
     "UP Luffy OP11-040 decklist",
     "Blue Purple Luffy OP11-040 OP17 decklist",
+    "Charlotte Pudding OP08-058 decklist",
+    "Purple Yellow Pudding OP08 decklist",
     "site:mabitcg.com OP17 decklist",
     "site:opmetagame.com OP11-040",
     "site:onepiecetopdecks.com OP17",

@@ -48,6 +48,7 @@ LEADERS = {
     "OP16-041",
     "OP16-060",
     "OP11-040",
+    "OP08-058",
 }
 
 # Public creator accounts that actually post OPTCG content.
@@ -101,6 +102,8 @@ SEARCHES = [
     "site:twitter.com OP17 decklist since:2026-08-20",
     'site:x.com "1xOP11-040" decklist',
     "site:x.com UP Luffy OP11-040 decklist",
+    'site:x.com "1xOP08-058" decklist',
+    "site:x.com Charlotte Pudding OP08-058 decklist",
     "site:x.com Blue Purple Luffy OP17 list",
 ]
 
