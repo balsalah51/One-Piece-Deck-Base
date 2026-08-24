@@ -386,7 +386,7 @@ def write_lists(found: list[dict]) -> set[str]:
             "tournament_name": item["title"],
             "placing": None,
             "record": {},
-            "date": "",
+            "date": item.get("date") or "",
             "decklist": dl,
             "source_url": item["source_url"],
             "kind": item["kind"],
@@ -400,16 +400,17 @@ def write_lists(found: list[dict]) -> set[str]:
         path.write_text(page)
         rows = community.setdefault(leader["id"], [])
         if not any(row.get("slug") == item["slug"] for row in rows):
-            rows.append(
-                {
-                    "slug": item["slug"],
-                    "href": entry["href"],
-                    "title": item["title"],
-                    "subtitle": item.get("subtitle") or "",
-                    "source_url": item["source_url"],
-                    "kind": item["kind"],
-                }
-            )
+            row = {
+                "slug": item["slug"],
+                "href": entry["href"],
+                "title": item["title"],
+                "subtitle": item.get("subtitle") or "",
+                "source_url": item["source_url"],
+                "kind": item["kind"],
+            }
+            if item.get("date"):
+                row["date"] = item["date"]
+            rows.append(row)
         touched.add(leader["id"])
         log("wrote", path)
     more.save_index(index)
