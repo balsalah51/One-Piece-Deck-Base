@@ -772,6 +772,7 @@ def fetch_card(cid: str) -> dict | None:
         "effect": text,
         "image": f"https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/{set_code}/{cid}_EN.webp",
         "source": f"https://onepiece.limitlesstcg.com/cards/{cid}",
+        "tcgplayer_id": data.get("tcgplayer_id"),
     }
 
 
@@ -855,7 +856,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
-  <link rel="stylesheet" href="/css/site.css?v=list-fit2" />
+  <link rel="stylesheet" href="/css/site.css?v=tcg-buy" />
 </head>
 <body class="{html.escape(color)}">
   <div class="wrap">
@@ -936,7 +937,10 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
       }});
     }})();
   </script>
-  <script src="/js/site.js?v=sim-copy"></script>
+  <script src="/js/site.js?v=tcg-buy"></script>
+  <script src="/js/tcgplayer-config.js?v=tcg-buy"></script>
+  <script src="/js/tcgplayer-ids.js?v=tcg-buy"></script>
+  <script src="/js/tcgplayer.js?v=tcg-buy"></script>
 </body>
 </html>
 """
