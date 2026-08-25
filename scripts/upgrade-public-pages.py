@@ -22,8 +22,13 @@ aspec.loader.exec_module(ana)
 
 ROOT = gen.ROOT
 LINE_RE = ana.LINE_RE
-CSS_NEW = "/css/site.css?v=list-fit2"
-JS_NEW = "/js/site.js?v=home-hub"
+CSS_NEW = "/css/site.css?v=tcg-buy"
+JS_NEW = "/js/site.js?v=tcg-buy"
+TCG_SCRIPTS = (
+    '  <script src="/js/tcgplayer-config.js?v=tcg-buy"></script>\n'
+    '  <script src="/js/tcgplayer-ids.js?v=tcg-buy"></script>\n'
+    '  <script src="/js/tcgplayer.js?v=tcg-buy"></script>\n'
+)
 NAV_OLD_PATTERNS = [
     (
         '        <a href="/decklists/op17.html">OP17</a>\n        <a href="/#community">Community</a>',
@@ -53,7 +58,16 @@ def patch_nav_and_assets(text: str) -> str:
     text = text.replace("for OPTCGSim.", "for OP TCG SIM.")
     if "/js/site.js" not in text:
         text = text.replace("</body>", f'  <script src="{JS_NEW}"></script>\n</body>')
+    text = ensure_tcgplayer_scripts(text)
     return text
+
+
+def ensure_tcgplayer_scripts(text: str) -> str:
+    if "/js/tcgplayer.js" in text:
+        return text
+    if not any(mark in text for mark in ('class="text-deck"', 'class="list-row"', 'class="card-entry"')):
+        return text
+    return text.replace("</body>", TCG_SCRIPTS + "</body>")
 
 
 def grouped_from_counts(leader: dict, counts: dict[str, int], cache: dict) -> tuple[list[dict], dict]:
