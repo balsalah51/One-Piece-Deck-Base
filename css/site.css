@@ -57,7 +57,8 @@ main.single{grid-template-columns:1fr}
 .amazon-disclosure p{margin:0 0 8px;color:#3e3208}
 .amazon-disclosure p:last-child{margin-bottom:0}
 .amazon-disclosure a{color:#3e3208;font-weight:800}
-.amazon-disclosure-line{margin:12px 0 0;font-size:13px;color:var(--muted);font-weight:600;line-height:1.45}
+.amazon-disclosure-line{margin:18px 0 0;font-size:13px;color:var(--muted);font-weight:600;line-height:1.45}
+.amazon-disclosure-line a{color:var(--muted);font-weight:700}
 .shop-buy{
   display:inline-block;margin-top:2px;padding:10px 14px;border-radius:10px;
   background:var(--accent);color:#fff;font-weight:800;text-decoration:none;text-align:center

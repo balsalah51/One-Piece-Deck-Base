@@ -64,18 +64,6 @@ DICE = [
     },
 ]
 
-DISCLOSURE = """        <aside class="amazon-disclosure" role="note">
-          <p><strong>Amazon Associates disclosure.</strong> One Piece Deck Base is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com and affiliated sites.</p>
-          <p><strong>As an Amazon Associate I earn from qualifying purchases.</strong> Every “View on Amazon” button is an affiliate link. If you buy through it, Amazon pays this site a commission. It does not change the price you pay. Prices, stock, and shipping are set by Amazon, not by us.</p>
-          <p>This site is a fan site and is not affiliated with Amazon, Bandai, or Shueisha. <a href="/privacy.html">Privacy Policy</a></p>
-        </aside>"""
-
-SHORT_DISCLOSURE = (
-    "        <p class=\"amazon-disclosure-line\">As an Amazon Associate I earn from qualifying purchases. "
-    "Amazon links are affiliate links.</p>"
-)
-
-
 def nav_html(current: str) -> str:
     def item(href: str, label: str, key: str) -> str:
         cur = ' aria-current="page"' if key == current else ""
@@ -111,9 +99,14 @@ def product_grid(items: list[dict]) -> str:
     return '        <div class="shop-grid">\n' + "\n".join(product_card(p) for p in items) + "\n        </div>"
 
 
-def chrome(title: str, desc: str, canonical: str, body: str, *, indexable: bool) -> str:
+def chrome(title: str, desc: str, canonical: str, body: str, *, indexable: bool, amazon: bool) -> str:
     robots = "" if indexable else '  <meta name="robots" content="noindex, nofollow" />\n'
     canon = f'  <link rel="canonical" href="{html.escape(canonical, quote=True)}" />\n' if indexable else ""
+    amazon_line = (
+        "      As an Amazon Associate I earn from qualifying purchases.\n"
+        if amazon
+        else ""
+    )
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -143,9 +136,8 @@ def chrome(title: str, desc: str, canonical: str, body: str, *, indexable: bool)
       </div>
     </main>
     <footer>
-      © <span id="year"></span> One Piece Deck Base — Fan site, not affiliated with Bandai, Shueisha, or Amazon.
-      As an Amazon Associate I earn from qualifying purchases.
-      <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a> · <a href="{DISCORD}" target="_blank" rel="noopener">Discord</a>
+      © <span id="year"></span> One Piece Deck Base — Fan site, not affiliated with Bandai or Shueisha.
+{amazon_line}      <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a> · <a href="{DISCORD}" target="_blank" rel="noopener">Discord</a>
     </footer>
   </div>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
@@ -155,45 +147,41 @@ def chrome(title: str, desc: str, canonical: str, body: str, *, indexable: bool)
 """
 
 
-def write(rel: str, title: str, desc: str, canonical: str, body: str, *, indexable: bool) -> None:
+def write(rel: str, title: str, desc: str, canonical: str, body: str, *, indexable: bool, amazon: bool = False) -> None:
     path = ROOT / rel
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(chrome(title, desc, canonical, body, indexable=indexable))
+    path.write_text(chrome(title, desc, canonical, body, indexable=indexable, amazon=amazon))
     print("wrote", rel, "indexable" if indexable else "unpublished")
 
 
 index_body = f"""        <div class="crumb"><a href="/">Home</a> / Shop</div>
         <h2>Shop</h2>
-        <p>Sleeves and dice for the table. These are Amazon product links, not a store we stock ourselves.</p>
-{DISCLOSURE}
+        <p>Sleeves and dice for the table.</p>
         <div class="section-title" style="margin-top:22px">
           <h3>Sleeves</h3>
           <a href="/shop/sleeves.html">All sleeves →</a>
         </div>
         <p class="muted">Standard 63×88 mm Dragon Shield packs. Enough for a 50-card OPTCG list.</p>
 {product_grid(SLEEVES)}
-{SHORT_DISCLOSURE}
         <div class="section-title" style="margin-top:28px">
           <h3>Dice</h3>
           <a href="/shop/dice.html">All dice →</a>
         </div>
         <p class="muted">Power counters, the official Luffy tin, and a cheap acrylic D6 set.</p>
 {product_grid(DICE)}
-{SHORT_DISCLOSURE}"""
+        <p class="amazon-disclosure-line">As an Amazon Associate I earn from qualifying purchases.</p>"""
 
 sleeves_body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="/shop/">Shop</a> / Sleeves</div>
         <h2>Sleeves</h2>
         <p>Dragon Shield standard-size packs (63×88 mm). Open Amazon for live price and stock.</p>
-{DISCLOSURE}
 {product_grid(SLEEVES)}
-{SHORT_DISCLOSURE}"""
+        <p class="amazon-disclosure-line">As an Amazon Associate I earn from qualifying purchases.</p>"""
 
 dice_body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="/shop/">Shop</a> / Dice</div>
         <h2>Dice</h2>
         <p>Power counters and table dice. Check your locals if custom dice are allowed in official events. Open Amazon for live price and stock.</p>
-{DISCLOSURE}
 {product_grid(DICE)}
-{SHORT_DISCLOSURE}"""
+        <p class="amazon-disclosure-line">As an Amazon Associate I earn from qualifying purchases.</p>"""
 
 playmats_body = f"""        <div class="crumb"><a href="/">Home</a> / Shop / Playmats</div>
         <h2>Playmats</h2>
@@ -229,26 +217,29 @@ def main() -> None:
     write(
         "shop/index.html",
         "Shop | Sleeves and dice | One Piece Deck Base",
-        "OPTCG sleeves and dice via Amazon. As an Amazon Associate I earn from qualifying purchases.",
+        "OPTCG sleeves and dice via Amazon.",
         f"{SITE}/shop/",
         index_body,
         indexable=True,
+        amazon=True,
     )
     write(
         "shop/sleeves.html",
         "Dragon Shield sleeves | One Piece Deck Base shop",
-        "Standard 63×88 mm Dragon Shield sleeves for OPTCG. Amazon Associates links.",
+        "Standard 63×88 mm Dragon Shield sleeves for OPTCG.",
         f"{SITE}/shop/sleeves.html",
         sleeves_body,
         indexable=True,
+        amazon=True,
     )
     write(
         "shop/dice.html",
         "OPTCG dice | One Piece Deck Base shop",
-        "Power counter dice and One Piece dice via Amazon. Amazon Associates links.",
+        "Power counter dice and One Piece dice via Amazon.",
         f"{SITE}/shop/dice.html",
         dice_body,
         indexable=True,
+        amazon=True,
     )
     write(
         "shop/playmats.html",

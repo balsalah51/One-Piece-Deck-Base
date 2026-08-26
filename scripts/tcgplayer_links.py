@@ -1,8 +1,7 @@
 """Build TCGplayer search, product, and mass-entry URLs.
 
-Affiliate tracking is optional. Leave partnerLink blank until Impact
-gives the TCGplayer API link, then set it in js/tcgplayer-config.js
-(and data/tcgplayer.json). Destinations still work without it.
+Buy links wrap through the Impact partner URL in data/tcgplayer.json
+(and js/tcgplayer-config.js as a fallback).
 """
 
 from __future__ import annotations
