@@ -852,16 +852,16 @@ def page_chrome(
     color: str,
     nav_op17: bool,
     body: str,
-    include_tcgplayer: bool = False,
+    include_tcgplayer: bool = True,
 ) -> str:
     deck_cur = "" if nav_op17 else ' aria-current="page"'
     op17_cur = ' aria-current="page"' if nav_op17 else ""
     tcg_scripts = ""
     if include_tcgplayer:
         tcg_scripts = (
-            '  <script src="/js/tcgplayer-config.js?v=tcg-quiet2"></script>\n'
-            '  <script src="/js/tcgplayer-ids.js?v=tcg-quiet2"></script>\n'
-            '  <script src="/js/tcgplayer.js?v=tcg-quiet2"></script>\n'
+            '  <script src="/js/tcgplayer-config.js?v=tcg-pills"></script>\n'
+            '  <script src="/js/tcgplayer-ids.js?v=tcg-pills"></script>\n'
+            '  <script src="/js/tcgplayer.js?v=tcg-pills"></script>\n'
         )
     return f"""<!doctype html>
 <html lang="en">
@@ -870,7 +870,7 @@ def page_chrome(
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
-  <link rel="stylesheet" href="/css/site.css?v=tcg-quiet2" />
+  <link rel="stylesheet" href="/css/site.css?v=tcg-pills" />
 </head>
 <body class="{html.escape(color)}">
   <div class="wrap">
@@ -920,8 +920,8 @@ def page_chrome(
         if (!pop || !title) return;
         resetPop(pop);
         var tr = title.getBoundingClientRect();
-        var width = pop.offsetWidth || 110;
-        var height = pop.offsetHeight || 154;
+        var width = pop.offsetWidth || 220;
+        var height = pop.offsetHeight || 308;
         var left = tr.left;
         var top = tr.top - height - 10;
         if (left + width > window.innerWidth - 12) left = window.innerWidth - width - 12;
@@ -1254,14 +1254,7 @@ def render_deck_page(leader: dict, entry: dict, cache: dict) -> str:
 {picture}
         <p class="muted" style="margin-top:22px">{html.escape(kind_note)} Source: <a href="{html.escape(source)}">{html.escape(source)}</a>. Images hosted by Limitless. Not affiliated with Bandai.</p>"""
     desc = f"{leader['name']} decklist — {subtitle}"[:160]
-    return page_chrome(
-        f"{title}",
-        desc,
-        leader["color"],
-        leader["nav_op17"],
-        body,
-        include_tcgplayer=True,
-    )
+    return page_chrome(f"{title}", desc, leader["color"], leader["nav_op17"], body)
 
 
 def render_pool_heading(leader: dict) -> str:

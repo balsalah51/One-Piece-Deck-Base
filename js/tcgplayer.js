@@ -1,4 +1,5 @@
 (function () {
+  var FALLBACK_PARTNER = "https://partner.tcgplayer.com/c/7670706/1780961/21018";
   var CFG = window.OPDB_TCGPLAYER || {};
   var IDS = window.OPDB_TCGPLAYER_IDS || {};
   var PRODUCT_LINE = "One Piece Card Game";
@@ -8,12 +9,13 @@
   var SIM_RE = /(\d+)\s*[x×]\s*((?:OP|ST|EB|PRB)\d{2}-\d{3}|P-\d{3})/gi;
 
   function partnerLink() {
-    return (CFG.partnerLink || "").trim();
+    return (CFG.partnerLink || FALLBACK_PARTNER).trim() || FALLBACK_PARTNER;
   }
 
   function affiliate(dest) {
+    if (!dest) return dest;
+    if (dest.indexOf("partner.tcgplayer.com") >= 0) return dest;
     var base = partnerLink();
-    if (!base) return dest;
     return base + (base.indexOf("?") >= 0 ? "&" : "?") + "u=" + encodeURIComponent(dest);
   }
 
@@ -81,48 +83,52 @@
     return m ? m[1].toUpperCase() : "";
   }
 
-  function isHome() {
-    return !!(document.querySelector("main.home") || document.getElementById("recent"));
+  function addListButtons() {
+    document.querySelectorAll(".text-deck .section-title").forEach(function (title) {
+      if (title.querySelector(".buy-tcg")) return;
+      var root = title.closest(".text-deck");
+      var cards = parseSim(textList(root));
+      var href = massUrl(cards);
+      if (!href) return;
+      title.appendChild(buyLink(href, "Buy list on TCGplayer", "buy-tcg"));
+    });
+    document.querySelectorAll(".text-deck > p.muted").forEach(function (p) {
+      if (p.dataset.tcgNote) return;
+      p.dataset.tcgNote = "1";
+      p.appendChild(document.createTextNode(" Buy list opens TCGplayer Mass Entry. Individual Buy links open that printing when TCGplayer has it. TCGplayer links are affiliate links."));
+    });
   }
 
-  function isIndividualDecklist() {
-    return !!document.querySelector(".picture-summary") && !!document.querySelector(".text-deck");
-  }
-
-  function addListButton() {
-    var deck = document.querySelector(".text-deck");
-    if (!deck) return;
-    var title = deck.querySelector(".section-title");
-    if (!title || title.querySelector(".buy-tcg")) return;
-    var cards = parseSim(textList(deck));
-    var href = massUrl(cards);
-    if (!href) return;
-    title.appendChild(buyLink(href, "Buy this list on TCGplayer", "buy-tcg"));
-    if (deck.querySelector(".tcg-note")) return;
-    var note = document.createElement("p");
-    note.className = "muted tcg-note";
-    note.textContent = "Opens the full 50-card list in TCGplayer Mass Entry. Affiliate link.";
-    if (title.nextSibling) deck.insertBefore(note, title.nextSibling);
-    else deck.appendChild(note);
+  function addHubButtons() {
+    document.querySelectorAll(".list-row").forEach(function (row) {
+      if (row.querySelector(".buy-tcg")) return;
+      var btn = row.querySelector("[data-copy-sim]");
+      var sim = btn ? btn.getAttribute("data-sim") : "";
+      var href = massUrl(parseSim(sim || ""));
+      if (!href) return;
+      row.appendChild(buyLink(href, "Buy on TCGplayer", "buy-tcg"));
+    });
   }
 
   function addCardButtons() {
-    document.querySelectorAll(".picture-summary .card-entry").forEach(function (entry) {
+    document.querySelectorAll(".text-line").forEach(function (line) {
+      if (line.querySelector(".buy-tcg-inline")) return;
+      var cid = cidFrom(line.querySelector(".card-id")) || cidFrom(line);
+      if (!cid) return;
+      line.appendChild(buyLink(cardUrl(cid), "Buy", "buy-tcg-inline"));
+    });
+    document.querySelectorAll(".card-entry").forEach(function (entry) {
       if (entry.querySelector(".buy-tcg-inline")) return;
       var cid = cidFrom(entry.querySelector(".id")) || cidFrom(entry);
       if (!cid) return;
       var wrap = entry.querySelector("div") || entry;
-      var after = wrap.querySelector(".text") || wrap.querySelector("h4") || wrap;
-      var link = buyLink(cardUrl(cid), "TCGplayer", "buy-tcg-inline");
-      link.title = "This printing on TCGplayer";
-      if (after && after.parentNode === wrap) after.insertAdjacentElement("afterend", link);
-      else wrap.appendChild(link);
+      wrap.appendChild(buyLink(cardUrl(cid), "Buy on TCGplayer", "buy-tcg-inline"));
     });
   }
 
   function ready() {
-    if (isHome() || !isIndividualDecklist()) return;
-    addListButton();
+    addListButtons();
+    addHubButtons();
     addCardButtons();
   }
 
@@ -135,11 +141,6 @@
       .catch(function () {})
       .then(ready);
   }
-
-  window.OPDB_TCGPLAYER_UI = {
-    isHome: isHome,
-    isIndividualDecklist: isIndividualDecklist
-  };
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();

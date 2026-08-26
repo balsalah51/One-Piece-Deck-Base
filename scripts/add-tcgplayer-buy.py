@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-"""Keep TCGplayer scripts on individual decklist pages only.
+"""Add TCGplayer buy scripts to deck pages.
 
-Strips buy-link scripts from the homepage, leader hubs, and other indexes.
 Does not wipe list pages. Does not run generate-tournament-lists.main().
 """
 

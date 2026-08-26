@@ -22,9 +22,9 @@ aspec.loader.exec_module(ana)
 
 ROOT = gen.ROOT
 LINE_RE = ana.LINE_RE
-CSS_NEW = "/css/site.css?v=tcg-quiet2"
+CSS_NEW = "/css/site.css?v=tcg-pills"
 JS_NEW = "/js/site.js?v=amazon-shop"
-TCG_VER = "tcg-quiet2"
+TCG_VER = "tcg-pills"
 TCG_SCRIPTS = (
     f'  <script src="/js/tcgplayer-config.js?v={TCG_VER}"></script>\n'
     f'  <script src="/js/tcgplayer-ids.js?v={TCG_VER}"></script>\n'
@@ -90,6 +90,8 @@ def patch_nav_and_assets(text: str) -> str:
     text = text.replace("for OPTCGSim.", "for OP TCG SIM.")
     if "/js/site.js" not in text:
         text = text.replace("</body>", f'  <script src="{JS_NEW}"></script>\n</body>')
+    text = text.replace("pop.offsetWidth || 110", "pop.offsetWidth || 220")
+    text = text.replace("pop.offsetHeight || 154", "pop.offsetHeight || 308")
     text = ensure_tcgplayer_scripts(text)
     return text
 
@@ -98,17 +100,9 @@ def strip_tcgplayer_scripts(text: str) -> str:
     return TCG_SCRIPT_RE.sub("", text)
 
 
-def is_individual_decklist_html(text: str) -> bool:
-    if re.search(r"<main[^>]*\bhome\b", text) or 'id="recent"' in text:
-        return False
-    return 'class="picture-summary"' in text and 'class="text-deck"' in text
-
-
 def ensure_tcgplayer_scripts(text: str) -> str:
     text = strip_tcgplayer_scripts(text)
-    if not is_individual_decklist_html(text):
-        return text
-    if "/js/tcgplayer.js" in text:
+    if not any(mark in text for mark in ('class="text-deck"', 'class="list-row"', 'class="card-entry"')):
         return text
     return text.replace("</body>", TCG_SCRIPTS + "</body>")
 
