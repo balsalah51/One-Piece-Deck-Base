@@ -325,12 +325,15 @@ def fetch_more(
 
 
 def rewrite_sitemap() -> None:
-    skip = {".git", "scripts", "node_modules", "shop", "discord-bot"}
+    skip = {".git", "scripts", "node_modules", "discord-bot"}
+    skip_files = {"shop/playmats.html", "shop/custom-leaders.html"}
     urls = []
     for p in sorted(ROOT.rglob("*.html")):
         if any(part in p.parts for part in skip):
             continue
         rel = p.relative_to(ROOT).as_posix()
+        if rel in skip_files:
+            continue
         if rel.endswith("index.html"):
             url = SITE + "/" if rel == "index.html" else SITE + "/" + rel[: -len("index.html")]
         else:
