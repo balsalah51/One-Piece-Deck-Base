@@ -66,7 +66,7 @@ def main() -> None:
     up.patch_op17()
     seo = load("seo", "/workspace/scripts/generate-seo-pages.py")
     seo.main()
-    print("=== TCGplayer on individual lists only ===")
+    print("=== TCGplayer buy scripts ===")
     buy = load("tcgbuy", "/workspace/scripts/add-tcgplayer-buy.py")
     buy.main()
     print("ingest done")

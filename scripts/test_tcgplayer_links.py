@@ -26,9 +26,12 @@ class TcgplayerLinksTest(unittest.TestCase):
         self.assertEqual(q["productline"], ["One Piece Card Game"])
         self.assertEqual(q["c"], ["4 OP17-079||1 OP08-058"])
 
-    def test_affiliate_passthrough_when_blank(self):
+    def test_affiliate_wraps_when_partner_blank(self):
         dest = "https://www.tcgplayer.com/product/1"
-        self.assertEqual(affiliate_url(dest, ""), dest)
+        wrapped = affiliate_url(dest, "")
+        self.assertTrue(wrapped.startswith("https://partner.tcgplayer.com/"))
+        q = urllib.parse.parse_qs(urllib.parse.urlparse(wrapped).query)
+        self.assertEqual(q["u"], [dest])
 
     def test_affiliate_wraps_impact_link(self):
         dest = "https://www.tcgplayer.com/product/707123"
@@ -61,29 +64,15 @@ class TcgplayerPlacementTest(unittest.TestCase):
         self.up = __import__("importlib.util").util.module_from_spec(spec)
         spec.loader.exec_module(self.up)
 
-    def test_skips_homepage(self):
-        html = (
-            '<main class="single home" role="main">'
-            '<section class="text-deck"></section>'
-            '<section class="picture-summary"></section>'
-            "</main></body>"
-        )
+    def test_skips_homepage_without_lists(self):
+        html = '<main class="single home" role="main"><section id="recent"></section></main></body>'
         out = self.up.ensure_tcgplayer_scripts(html)
         self.assertNotIn("tcgplayer.js", out)
 
-    def test_skips_recent_strip_page(self):
-        html = '<section id="recent"></section><section class="text-deck"></section></body>'
+    def test_adds_to_leader_hub(self):
+        html = '<li class="list-row"></li></body>'
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertNotIn("tcgplayer.js", out)
-
-    def test_skips_leader_hub(self):
-        html = (
-            '<li class="list-row"></li>'
-            '<section class="text-deck"></section>'
-            "</body>"
-        )
-        out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertNotIn("tcgplayer.js", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-pills", out)
 
     def test_adds_to_individual_decklist(self):
         html = (
@@ -92,10 +81,10 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer.js?v=tcg-quiet2", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-pills", out)
         self.assertEqual(out.count("tcgplayer.js"), 1)
 
-    def test_strips_stale_scripts_from_hub(self):
+    def test_refreshes_stale_script_version(self):
         html = (
             '<li class="list-row"></li>\n'
             '  <script src="/js/tcgplayer-config.js?v=tcg-buy"></script>\n'
@@ -104,20 +93,21 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertNotIn("tcgplayer.js", out)
-        self.assertNotIn("tcgplayer-config.js", out)
+        self.assertIn("v=tcg-pills", out)
+        self.assertNotIn("v=tcg-buy", out)
 
-    def test_js_stays_off_home_and_off_text_lines(self):
+    def test_js_restores_pills_and_always_affiliates(self):
         src = Path("/workspace/js/tcgplayer.js").read_text()
-        self.assertIn("main.home", src)
-        self.assertIn("picture-summary", src)
-        self.assertIn("Buy this list on TCGplayer", src)
-        self.assertNotIn("addHubButtons", src)
-        self.assertNotIn('.text-line', src.split("function addCardButtons")[1].split("function ready")[0])
+        self.assertIn("addHubButtons", src)
+        self.assertIn("Buy list on TCGplayer", src)
+        self.assertIn("Buy on TCGplayer", src)
+        self.assertIn("FALLBACK_PARTNER", src)
+        self.assertIn("partner.tcgplayer.com/c/7670706/1780961/21018", src)
 
-
-if __name__ == "__main__":
-    unittest.main()
+    def test_hover_preview_uses_larger_fallback(self):
+        chrome = Path("/workspace/scripts/generate-tournament-lists.py").read_text()
+        self.assertIn("offsetWidth || 220", chrome)
+        self.assertIn("offsetHeight || 308", chrome)
 
 
 if __name__ == "__main__":

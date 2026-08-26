@@ -14,6 +14,7 @@ from pathlib import Path
 ROOT = Path("/workspace")
 CONFIG_PATH = ROOT / "data/tcgplayer.json"
 IDS_PATH = ROOT / "data/tcgplayer-ids.json"
+DEFAULT_PARTNER = "https://partner.tcgplayer.com/c/7670706/1780961/21018"
 PRODUCT_LINE = "One Piece Card Game"
 SEARCH_LINE = "one-piece-card-game"
 SIM_CHUNK_RE = re.compile(
@@ -43,8 +44,8 @@ def load_ids() -> dict[str, int]:
 def affiliate_url(dest: str, partner_link: str | None = None) -> str:
     if partner_link is None:
         partner_link = str(load_config().get("partnerLink") or "")
-    partner_link = partner_link.strip()
-    if not partner_link:
+    partner_link = (partner_link or DEFAULT_PARTNER).strip() or DEFAULT_PARTNER
+    if "partner.tcgplayer.com" in dest:
         return dest
     sep = "&" if "?" in partner_link else "?"
     return partner_link + sep + "u=" + urllib.parse.quote(dest, safe="")
