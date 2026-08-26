@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
-"""Pull new lists dated 2026-08-20+ from Limitless, X, and public deck pages.
+"""Pull new lists dated yesterday and today from Limitless, X, and public deck pages.
 
 Does not wipe existing list pages. Rebuilds hubs, consensus lists, and the homepage.
-Adds UP Luffy (OP11-040) and prefers lists that already play an OP17 card.
 """
 
 from __future__ import annotations
 
 import importlib.util
 
-SINCE = "2026-08-20"
+SINCE = "2026-08-25"
 UP_LUFFY = "OP11-040"
 
 
@@ -52,17 +51,6 @@ def main() -> None:
     )
     more.save_index(index)
 
-    print("=== UP Luffy Limitless (OP17 lists first) ===")
-    index = more.fetch_more(
-        index,
-        pages=20,
-        only_ids={UP_LUFFY},
-        extra_limit=80,
-        per_event=6,
-        since="2026-03-01",
-    )
-    more.save_index(index)
-
     print("=== X / YouTube / OnePieceDB / weird sources ===")
     commsrc.main()
 
@@ -78,6 +66,9 @@ def main() -> None:
     up.patch_op17()
     seo = load("seo", "/workspace/scripts/generate-seo-pages.py")
     seo.main()
+    print("=== TCGplayer on individual lists only ===")
+    buy = load("tcgbuy", "/workspace/scripts/add-tcgplayer-buy.py")
+    buy.main()
     print("ingest done")
 
 

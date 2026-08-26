@@ -22,12 +22,16 @@ aspec.loader.exec_module(ana)
 
 ROOT = gen.ROOT
 LINE_RE = ana.LINE_RE
-CSS_NEW = "/css/site.css?v=shop-photos"
+CSS_NEW = "/css/site.css?v=tcg-quiet"
 JS_NEW = "/js/site.js?v=amazon-shop"
+TCG_VER = "tcg-quiet"
 TCG_SCRIPTS = (
-    '  <script src="/js/tcgplayer-config.js?v=tcg-buy"></script>\n'
-    '  <script src="/js/tcgplayer-ids.js?v=tcg-buy"></script>\n'
-    '  <script src="/js/tcgplayer.js?v=tcg-buy"></script>\n'
+    f'  <script src="/js/tcgplayer-config.js?v={TCG_VER}"></script>\n'
+    f'  <script src="/js/tcgplayer-ids.js?v={TCG_VER}"></script>\n'
+    f'  <script src="/js/tcgplayer.js?v={TCG_VER}"></script>\n'
+)
+TCG_SCRIPT_RE = re.compile(
+    r'  <script src="/js/tcgplayer(?:-config|-ids)?\.js(?:\?[^"]*)?"></script>\n'
 )
 NAV_LEADERS_SHOP = (
     '        <a href="/decklists/op17.html">Leaders</a>\n'
@@ -90,10 +94,21 @@ def patch_nav_and_assets(text: str) -> str:
     return text
 
 
+def strip_tcgplayer_scripts(text: str) -> str:
+    return TCG_SCRIPT_RE.sub("", text)
+
+
+def is_individual_decklist_html(text: str) -> bool:
+    if re.search(r"<main[^>]*\bhome\b", text) or 'id="recent"' in text:
+        return False
+    return 'class="picture-summary"' in text and 'class="text-deck"' in text
+
+
 def ensure_tcgplayer_scripts(text: str) -> str:
-    if "/js/tcgplayer.js" in text:
+    text = strip_tcgplayer_scripts(text)
+    if not is_individual_decklist_html(text):
         return text
-    if not any(mark in text for mark in ('class="text-deck"', 'class="list-row"', 'class="card-entry"')):
+    if "/js/tcgplayer.js" in text:
         return text
     return text.replace("</body>", TCG_SCRIPTS + "</body>")
 
