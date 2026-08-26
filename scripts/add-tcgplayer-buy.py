@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Add TCGplayer buy scripts to deck pages and refresh card product IDs.
+"""Keep TCGplayer scripts on individual decklist pages only.
 
+Strips buy-link scripts from the homepage, leader hubs, and other indexes.
 Does not wipe list pages. Does not run generate-tournament-lists.main().
 """
 
@@ -20,10 +21,7 @@ def load(name: str, path: str):
 
 
 def main() -> None:
-    ids = load("tcgids", str(ROOT / "scripts/build-tcgplayer-ids.py"))
     up = load("upgrade", str(ROOT / "scripts/upgrade-public-pages.py"))
-    print("=== TCGplayer product IDs ===")
-    ids.main()
     changed = 0
     skipped = (".git", "scripts", "node_modules", "shop", "discord-bot", "ballkeep")
     for path in ROOT.rglob("*.html"):

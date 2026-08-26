@@ -438,6 +438,13 @@ def main() -> None:
         )
 
     path = ROOT / "data/x-search-log.json"
+    if path.exists():
+        try:
+            prev = json.loads(path.read_text())
+        except json.JSONDecodeError:
+            prev = {}
+        if prev.get("hosted") and not out.get("hosted"):
+            out["hosted"] = prev["hosted"]
     path.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n")
     log("in-window tweets", len(out["in_window_tweets"]))
     log("in-window photos", len(out["in_window_photos"]))

@@ -12928,5 +12928,37 @@
     "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP06/OP06-033_EN.webp",
     "source": "https://onepiece.limitlesstcg.com/cards/OP06-033",
     "tcgplayer_id": 539782
+  },
+  "OP15-030": {
+    "id": "OP15-030",
+    "name": "Hyouzou",
+    "category": "Character",
+    "color": "Green",
+    "life": null,
+    "cost": "5",
+    "power": "6000",
+    "counter": "+2000",
+    "attribute": "Slash",
+    "types": "Merfolk/Fish-Man Island",
+    "effect": "",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP15/OP15-030_EN.webp",
+    "source": "https://onepiece.limitlesstcg.com/cards/OP15-030",
+    "tcgplayer_id": 685372
+  },
+  "OP14-120": {
+    "id": "OP14-120",
+    "name": "Crocodile",
+    "category": "Character",
+    "color": "Black",
+    "life": null,
+    "cost": "8",
+    "power": "10000",
+    "counter": null,
+    "attribute": "Special",
+    "types": "The Seven Warlords of the Sea/Baroque Works",
+    "effect": "[On Play] Up to 1 of your opponent's Characters with a cost of 9 or less cannot attack until the end of your opponent's next End Phase. Then, if your opponent has a Character with a cost of 0 or with a cost of 8 or more, draw 1 card.\n[On K.O.] You may trash 1 card from your hand: Play this Character card from your trash.",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP14/OP14-120_EN.webp",
+    "source": "https://onepiece.limitlesstcg.com/cards/OP14-120",
+    "tcgplayer_id": 668640
   }
 }

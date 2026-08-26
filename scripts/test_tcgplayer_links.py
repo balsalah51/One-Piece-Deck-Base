@@ -53,5 +53,72 @@ class TcgplayerLinksTest(unittest.TestCase):
         self.assertEqual(cards, [(1, "OP08-058"), (4, "OP11-070"), (4, "ST34-003")])
 
 
+class TcgplayerPlacementTest(unittest.TestCase):
+    def setUp(self):
+        spec = __import__("importlib.util").util.spec_from_file_location(
+            "upgrade", Path("/workspace/scripts/upgrade-public-pages.py")
+        )
+        self.up = __import__("importlib.util").util.module_from_spec(spec)
+        spec.loader.exec_module(self.up)
+
+    def test_skips_homepage(self):
+        html = (
+            '<main class="single home" role="main">'
+            '<section class="text-deck"></section>'
+            '<section class="picture-summary"></section>'
+            "</main></body>"
+        )
+        out = self.up.ensure_tcgplayer_scripts(html)
+        self.assertNotIn("tcgplayer.js", out)
+
+    def test_skips_recent_strip_page(self):
+        html = '<section id="recent"></section><section class="text-deck"></section></body>'
+        out = self.up.ensure_tcgplayer_scripts(html)
+        self.assertNotIn("tcgplayer.js", out)
+
+    def test_skips_leader_hub(self):
+        html = (
+            '<li class="list-row"></li>'
+            '<section class="text-deck"></section>'
+            "</body>"
+        )
+        out = self.up.ensure_tcgplayer_scripts(html)
+        self.assertNotIn("tcgplayer.js", out)
+
+    def test_adds_to_individual_decklist(self):
+        html = (
+            '<section class="text-deck"></section>'
+            '<section class="picture-summary"></section>'
+            "</body>"
+        )
+        out = self.up.ensure_tcgplayer_scripts(html)
+        self.assertIn("/js/tcgplayer.js?v=tcg-quiet2", out)
+        self.assertEqual(out.count("tcgplayer.js"), 1)
+
+    def test_strips_stale_scripts_from_hub(self):
+        html = (
+            '<li class="list-row"></li>\n'
+            '  <script src="/js/tcgplayer-config.js?v=tcg-buy"></script>\n'
+            '  <script src="/js/tcgplayer-ids.js?v=tcg-buy"></script>\n'
+            '  <script src="/js/tcgplayer.js?v=tcg-buy"></script>\n'
+            "</body>"
+        )
+        out = self.up.ensure_tcgplayer_scripts(html)
+        self.assertNotIn("tcgplayer.js", out)
+        self.assertNotIn("tcgplayer-config.js", out)
+
+    def test_js_stays_off_home_and_off_text_lines(self):
+        src = Path("/workspace/js/tcgplayer.js").read_text()
+        self.assertIn("main.home", src)
+        self.assertIn("picture-summary", src)
+        self.assertIn("Buy this list on TCGplayer", src)
+        self.assertNotIn("addHubButtons", src)
+        self.assertNotIn('.text-line', src.split("function addCardButtons")[1].split("function ready")[0])
+
+
+if __name__ == "__main__":
+    unittest.main()
+
+
 if __name__ == "__main__":
     unittest.main()
