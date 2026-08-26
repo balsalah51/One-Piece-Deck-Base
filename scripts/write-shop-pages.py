@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path("/workspace")
 DISCORD = "https://discord.gg/adZ2WUQ3D"
-CSS = "/css/site.css?v=amazon-shop"
+CSS = "/css/site.css?v=shop-photos"
 SITE = "https://onepiecedeckbase.com"
 
 # Keep amzn.to URLs — they carry the Associates tag (opdb07-20).
@@ -21,22 +21,19 @@ SLEEVES = [
         "name": "Dragon Shield Matte Jet",
         "blurb": "100 standard-size sleeves (63×88 mm). Black matte finish. Fits a 50-card OPTCG deck plus extras.",
         "url": "https://amzn.to/4qFzNrw",
-        "mock": "Jet",
-        "mock_class": "jet",
+        "img": "/img/shop/sleeve-jet.jpg",
     },
     {
         "name": "Dragon Shield Dual Matte Red / Gold",
         "blurb": "100 standard-size Dual Matte sleeves. Red face, gold back (ART15065).",
         "url": "https://amzn.to/46s2YVu",
-        "mock": "Red/Gold",
-        "mock_class": "dual-rg",
+        "img": "/img/shop/sleeve-red-gold.jpg",
     },
     {
         "name": "Dragon Shield Dual Matte Soul",
         "blurb": "100 standard-size Dual Matte sleeves. Metallic purple Dual Soul (ART15062).",
         "url": "https://amzn.to/4wMuTKw",
-        "mock": "Soul",
-        "mock_class": "soul",
+        "img": "/img/shop/sleeve-soul.jpg",
     },
 ]
 
@@ -45,22 +42,19 @@ DICE = [
         "name": "Power counter dice (+1000 / −1000)",
         "blurb": "32-piece set of +1000 to +6000 and −1000 to −6000 counters. Built for OPTCG power tracking.",
         "url": "https://amzn.to/46pbKUi",
-        "mock": "+1000",
-        "mock_class": "power",
+        "img": "/img/shop/dice-power.jpg",
     },
     {
         "name": "Official One Piece Premium Dice Set",
         "blurb": "Licensed dice in a collectible Monkey D. Luffy tin. Official Eiichiro Oda / Shueisha merchandise.",
         "url": "https://amzn.to/4xEOaiF",
-        "mock": "Luffy",
-        "mock_class": "luffy",
+        "img": "/img/shop/dice-luffy.jpg",
     },
     {
         "name": "Yiotfandoll 16 mm D6 (blue / black)",
         "blurb": "10 acrylic 16 mm six-siders. A cheap table set for life, DON!!, or kitchen-table counters.",
         "url": "https://amzn.to/4gQtpdA",
-        "mock": "D6",
-        "mock_class": "acrylic",
+        "img": "/img/shop/dice-acrylic.jpg",
     },
 ]
 
@@ -85,10 +79,11 @@ def product_card(item: dict) -> str:
     name = html.escape(item["name"])
     blurb = html.escape(item["blurb"])
     url = html.escape(item["url"], quote=True)
-    mock = html.escape(item["mock"])
-    klass = html.escape(item["mock_class"], quote=True)
+    img = html.escape(item["img"], quote=True)
     return f"""          <article class="shop-card">
-            <div class="shop-mock {klass}">{mock}</div>
+            <a class="shop-photo-link" href="{url}" target="_blank" rel="sponsored noopener noreferrer">
+              <img class="shop-photo" src="{img}" alt="{name}" />
+            </a>
             <div style="font-weight:800">{name}</div>
             <p class="shop-note">{blurb}</p>
             <a class="shop-buy" href="{url}" target="_blank" rel="sponsored noopener noreferrer">View on Amazon</a>

@@ -22,7 +22,7 @@ aspec.loader.exec_module(ana)
 
 ROOT = gen.ROOT
 LINE_RE = ana.LINE_RE
-CSS_NEW = "/css/site.css?v=amazon-shop"
+CSS_NEW = "/css/site.css?v=shop-photos"
 JS_NEW = "/js/site.js?v=amazon-shop"
 TCG_SCRIPTS = (
     '  <script src="/js/tcgplayer-config.js?v=tcg-buy"></script>\n'
@@ -332,6 +332,16 @@ def render_home_body() -> str:
             <span class="home-big-title">Leaders</span>
             <span class="home-big-note">Every leader picture on this site</span>
           </a>
+          <a class="home-big home-big-shop" href="/shop/">
+            <span class="home-big-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 8h12l-1 12H7L6 8Z"/>
+                <path d="M9 8V7a3 3 0 0 1 6 0v1"/>
+              </svg>
+            </span>
+            <span class="home-big-title">Shop</span>
+            <span class="home-big-note">Sleeves and dice for the table</span>
+          </a>
           <a class="home-big home-big-discord" href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">
             <span class="home-big-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -342,26 +352,6 @@ def render_home_body() -> str:
             <span class="home-big-note">Talk lists, flair, and the crew</span>
           </a>
         </nav>
-
-        <section class="card home-shop" aria-label="Shop">
-          <div class="section-title">
-            <h3>Shop</h3>
-            <a href="/shop/">Sleeves and dice →</a>
-          </div>
-          <div class="shop-grid">
-            <a class="shop-card" href="/shop/sleeves.html">
-              <div class="shop-mock sleeves">63×88</div>
-              <div style="font-weight:800">Sleeves</div>
-              <div class="muted">Dragon Shield matte packs in standard OPTCG size.</div>
-            </a>
-            <a class="shop-card" href="/shop/dice.html">
-              <div class="shop-mock dice">D6</div>
-              <div style="font-weight:800">Dice</div>
-              <div class="muted">Power counters, the official Luffy tin, and table D6s.</div>
-            </a>
-          </div>
-          <p class="amazon-disclosure-line">As an Amazon Associate I earn from qualifying purchases.</p>
-        </section>
 
         <section class="home-leaders-flow" id="leaders">
           <div class="home-leaders-intro">
