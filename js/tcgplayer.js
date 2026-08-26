@@ -93,7 +93,7 @@
     document.querySelectorAll(".text-deck > p.muted").forEach(function (p) {
       if (p.dataset.tcgNote) return;
       p.dataset.tcgNote = "1";
-      p.appendChild(document.createTextNode(" Buy list opens TCGplayer Mass Entry. Individual Buy links open that printing when TCGplayer has it."));
+      p.appendChild(document.createTextNode(" Buy list opens TCGplayer Mass Entry. Individual Buy links open that printing when TCGplayer has it. TCGplayer links are affiliate links."));
     });
   }
 
@@ -122,6 +122,12 @@
       var wrap = entry.querySelector("div") || entry;
       wrap.appendChild(buyLink(cardUrl(cid), "Buy on TCGplayer", "buy-tcg-inline"));
     });
+  }
+
+  function ready() {
+    addListButtons();
+    addHubButtons();
+    addCardButtons();
   }
 
   function boot() {

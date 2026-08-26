@@ -37,6 +37,17 @@ class TcgplayerLinksTest(unittest.TestCase):
         q = urllib.parse.parse_qs(urllib.parse.urlparse(wrapped).query)
         self.assertEqual(q["u"], [dest])
 
+    def test_live_partner_link_wraps_every_destination(self):
+        from tcgplayer_links import load_config
+
+        partner = load_config()["partnerLink"]
+        self.assertEqual(partner, "https://partner.tcgplayer.com/c/7670706/1780961/21018")
+        dest = "https://www.tcgplayer.com/massentry?productline=One%20Piece%20Card%20Game&c=1%20OP17-079"
+        wrapped = affiliate_url(dest)
+        self.assertTrue(wrapped.startswith(partner + "?"))
+        q = urllib.parse.parse_qs(urllib.parse.urlparse(wrapped).query)
+        self.assertEqual(q["u"], [dest])
+
     def test_parse_sim_text(self):
         cards = parse_sim_text("1xOP08-058 4xOP11-070 4×ST34-003")
         self.assertEqual(cards, [(1, "OP08-058"), (4, "OP11-070"), (4, "ST34-003")])
