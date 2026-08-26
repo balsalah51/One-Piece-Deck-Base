@@ -22,29 +22,57 @@ aspec.loader.exec_module(ana)
 
 ROOT = gen.ROOT
 LINE_RE = ana.LINE_RE
-CSS_NEW = "/css/site.css?v=tcg-buy"
-JS_NEW = "/js/site.js?v=tcg-buy"
+CSS_NEW = "/css/site.css?v=amazon-shop"
+JS_NEW = "/js/site.js?v=amazon-shop"
 TCG_SCRIPTS = (
     '  <script src="/js/tcgplayer-config.js?v=tcg-buy"></script>\n'
     '  <script src="/js/tcgplayer-ids.js?v=tcg-buy"></script>\n'
     '  <script src="/js/tcgplayer.js?v=tcg-buy"></script>\n'
 )
+NAV_LEADERS_SHOP = (
+    '        <a href="/decklists/op17.html">Leaders</a>\n'
+    '        <a href="/format.html">Format</a>\n'
+    '        <a href="/shop/">Shop</a>\n'
+    '        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>'
+)
+NAV_LEADERS_SHOP_CURRENT = (
+    '        <a href="/decklists/op17.html" aria-current="page">Leaders</a>\n'
+    '        <a href="/format.html">Format</a>\n'
+    '        <a href="/shop/">Shop</a>\n'
+    '        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>'
+)
 NAV_OLD_PATTERNS = [
     (
         '        <a href="/decklists/op17.html">OP17</a>\n        <a href="/#community">Community</a>',
-        '        <a href="/decklists/op17.html">Leaders</a>\n        <a href="/format.html">Format</a>\n        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>',
+        NAV_LEADERS_SHOP,
     ),
     (
         '        <a href="/decklists/op17.html">Leaders</a>\n        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>',
+        NAV_LEADERS_SHOP,
+    ),
+    (
         '        <a href="/decklists/op17.html">Leaders</a>\n        <a href="/format.html">Format</a>\n        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>',
+        NAV_LEADERS_SHOP,
     ),
     (
         '        <a href="/decklists/op17.html" aria-current="page">OP17</a>\n        <a href="/#community">Community</a>',
-        '        <a href="/decklists/op17.html" aria-current="page">Leaders</a>\n        <a href="/format.html">Format</a>\n        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>',
+        NAV_LEADERS_SHOP_CURRENT,
     ),
     (
         '        <a href="/decklists/op17.html" aria-current="page">Leaders</a>\n        <a href="/#community">Community</a>',
+        NAV_LEADERS_SHOP_CURRENT,
+    ),
+    (
         '        <a href="/decklists/op17.html" aria-current="page">Leaders</a>\n        <a href="/format.html">Format</a>\n        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>',
+        NAV_LEADERS_SHOP_CURRENT,
+    ),
+    (
+        '        <a href="/format.html">Format</a>\n        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>',
+        '        <a href="/format.html">Format</a>\n        <a href="/shop/">Shop</a>\n        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>',
+    ),
+    (
+        '        <a href="/format.html" aria-current="page">Format</a>\n        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>',
+        '        <a href="/format.html" aria-current="page">Format</a>\n        <a href="/shop/">Shop</a>\n        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>',
     ),
 ]
 
@@ -314,6 +342,26 @@ def render_home_body() -> str:
             <span class="home-big-note">Talk lists, flair, and the crew</span>
           </a>
         </nav>
+
+        <section class="card home-shop" aria-label="Shop">
+          <div class="section-title">
+            <h3>Shop</h3>
+            <a href="/shop/">Sleeves and dice →</a>
+          </div>
+          <p class="amazon-disclosure-line">As an Amazon Associate I earn from qualifying purchases. Shop pages use Amazon affiliate links.</p>
+          <div class="shop-grid">
+            <a class="shop-card" href="/shop/sleeves.html">
+              <div class="shop-mock sleeves">63×88</div>
+              <div style="font-weight:800">Sleeves</div>
+              <div class="muted">Dragon Shield matte packs in standard OPTCG size.</div>
+            </a>
+            <a class="shop-card" href="/shop/dice.html">
+              <div class="shop-mock dice">D6</div>
+              <div style="font-weight:800">Dice</div>
+              <div class="muted">Power counters, the official Luffy tin, and table D6s.</div>
+            </a>
+          </div>
+        </section>
 
         <section class="home-leaders-flow" id="leaders">
           <div class="home-leaders-intro">

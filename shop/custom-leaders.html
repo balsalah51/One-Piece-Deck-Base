@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="robots" content="noindex, nofollow" />
   <title>Custom leaders | One Piece Deck Base shop</title>
-  <meta name="description" content="Design a fan-made One Piece TCG leader and order a print, sleeves, or playmat." />
-  <link rel="stylesheet" href="/css/site.css?v=list-fit2" />
+  <meta name="description" content="Custom OPTCG leader prints. Not currently in the public shop." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="/css/site.css?v=amazon-shop" />
 </head>
 <body>
   <div class="wrap">
@@ -15,123 +15,33 @@
         <div class="logo">OP</div>
         <div>
           <h1>One Piece Deck Base</h1>
-          <div class="subtitle">Decklists, community, and custom gear</div>
+          <div class="subtitle">OPTCG decklists</div>
         </div>
       </a>
       <nav aria-label="Primary">
-        <a href="/#decklists">Decklists</a>
-        <a href="/decklists/op17.html">OP17</a>
+        <a href="/#recent">Recent lists</a>
+        <a href="/decklists/op17.html">Leaders</a>
+        <a href="/format.html">Format</a>
         <a href="/shop/" aria-current="page">Shop</a>
-        <a href="/#community">Community</a>
+        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
       </nav>
     </header>
     <main class="single">
       <div class="card hero">
-        <div class="crumb"><a href="/">Home</a> / <a href="/shop/">Shop</a> / Custom leaders</div>
+        <div class="crumb"><a href="/">Home</a> / Shop / Custom leaders</div>
         <h2>Custom leaders</h2>
-        <p>Fan-made leader cards for kitchen-table games, display, playmats, and sleeve backs. They are <strong>not</strong> official Bandai cards and are <strong>not</strong> legal in official constructed events. Design one here, then send the spec on Discord to order a print ($18), art sleeves ($16), or a playmat with this portrait ($45).</p>
-        <div class="custom-wrap">
-          <div>
-            <article class="custom-card" id="preview" style="background:linear-gradient(180deg,#b71c1c,#7a1212)">
-              <div class="life"><span id="p-life">5</span> Life · <span id="p-attr">Strike</span></div>
-              <div class="cname" id="p-name">Custom Leader</div>
-              <div class="types" id="p-types">Straw Hat Crew</div>
-              <div class="effect" id="p-effect">[Activate: Main] [Once Per Turn] Design your own effect. Keep it readable — this is the text that prints.</div>
-              <div class="power"><span id="p-power">5000</span></div>
-            </article>
-          </div>
-          <form class="custom-form" id="designer">
-            <label for="name">Leader name</label>
-            <input id="name" name="name" maxlength="42" value="Custom Leader" />
-            <label for="color">Color</label>
-            <select id="color" name="color">
-              <option value="#b71c1c">Red</option>
-              <option value="#2e7d32">Green</option>
-              <option value="#1565c0">Blue</option>
-              <option value="#6a1b9a">Purple</option>
-              <option value="#212121">Black</option>
-              <option value="#c9a227">Yellow</option>
-            </select>
-            <label for="life">Life</label>
-            <select id="life" name="life">
-              <option>4</option>
-              <option selected>5</option>
-            </select>
-            <label for="power">Power</label>
-            <input id="power" name="power" value="5000" />
-            <label for="attr">Attribute</label>
-            <select id="attr" name="attr">
-              <option>Strike</option>
-              <option>Slash</option>
-              <option>Ranged</option>
-              <option>Special</option>
-              <option>Wisdom</option>
-            </select>
-            <label for="types">Types</label>
-            <input id="types" name="types" value="Straw Hat Crew" />
-            <label for="effect">Effect text</label>
-            <textarea id="effect" name="effect">[Activate: Main] [Once Per Turn] Design your own effect. Keep it readable — this is the text that prints.</textarea>
-            <label for="product">What to print</label>
-            <select id="product" name="product">
-              <option value="leader-print">Leader print — $18</option>
-              <option value="sleeves">Art sleeves (60) — $16</option>
-              <option value="playmat">Playmat with this leader — $45</option>
-              <option value="bundle">Print + sleeves + mat — $70</option>
-            </select>
-            <button class="discord" type="button" id="copy" style="margin-top:14px;border:0;width:100%;cursor:pointer">Copy order text for Discord</button>
-            <p class="muted" id="copied" style="display:none;margin-top:8px">Copied. Paste it in Discord to place the order.</p>
-            <pre class="order-box" id="order"></pre>
-          </form>
-        </div>
-        <p class="muted" style="margin-top:18px">Not affiliated with Bandai or Shueisha. Custom leaders are original fan designs for personal use and display.</p>
-        <script>
-          const colors = {
-            '#b71c1c': 'linear-gradient(180deg,#b71c1c,#7a1212)',
-            '#2e7d32': 'linear-gradient(180deg,#2e7d32,#1b5e20)',
-            '#1565c0': 'linear-gradient(180deg,#1565c0,#0d47a1)',
-            '#6a1b9a': 'linear-gradient(180deg,#6a1b9a,#4a148c)',
-            '#212121': 'linear-gradient(180deg,#424242,#212121)',
-            '#c9a227': 'linear-gradient(180deg,#c9a227,#8d6e12)'
-          };
-          function val(id) { return document.getElementById(id).value.trim(); }
-          function sync() {
-            document.getElementById('p-name').textContent = val('name') || 'Custom Leader';
-            document.getElementById('p-life').textContent = val('life');
-            document.getElementById('p-attr').textContent = val('attr');
-            document.getElementById('p-types').textContent = val('types') || '—';
-            document.getElementById('p-effect').textContent = val('effect') || ' ';
-            document.getElementById('p-power').textContent = val('power') || '5000';
-            document.getElementById('preview').style.background = colors[val('color')] || colors['#b71c1c'];
-            const lines = [
-              'CUSTOM LEADER ORDER — One Piece Deck Base',
-              'Name: ' + (val('name') || 'Custom Leader'),
-              'Color: ' + document.getElementById('color').selectedOptions[0].text,
-              'Life: ' + val('life'),
-              'Power: ' + (val('power') || '5000'),
-              'Attribute: ' + val('attr'),
-              'Types: ' + (val('types') || '—'),
-              'Effect: ' + (val('effect') || '—'),
-              'Product: ' + document.getElementById('product').selectedOptions[0].text,
-              'Ship to: (add city / country)'
-            ];
-            document.getElementById('order').textContent = lines.join('\n');
-          }
-          document.getElementById('designer').addEventListener('input', sync);
-          document.getElementById('copy').addEventListener('click', function() {
-            sync();
-            navigator.clipboard.writeText(document.getElementById('order').textContent).then(function() {
-              document.getElementById('copied').style.display = 'block';
-            });
-          });
-          sync();
-        </script>
+        <p>This category is not on the public shop. Custom leader prints are paused.</p>
+        <p class="muted">The live shop is <a href="/shop/sleeves.html">sleeves</a> and <a href="/shop/dice.html">dice</a> on Amazon.</p>
+        <a class="discord" href="https://discord.gg/adZ2WUQ3D" style="margin-top:18px">Ask on Discord</a>
       </div>
     </main>
     <footer>
-      © <span id="year"></span> One Piece Deck Base — Fan merch, not affiliated with Bandai or Shueisha.
-      <a href="/shop/">Shop</a> · <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
+      © <span id="year"></span> One Piece Deck Base — Fan site, not affiliated with Bandai, Shueisha, or Amazon.
+      As an Amazon Associate I earn from qualifying purchases.
+      <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a> · <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
     </footer>
   </div>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="/js/site.js?v=amazon-shop"></script>
 </body>
 </html>

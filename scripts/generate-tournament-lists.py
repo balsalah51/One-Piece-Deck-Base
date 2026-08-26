@@ -872,6 +872,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
         <a href="/#decklists"{deck_cur}>Decklists</a>
         <a href="/decklists/op17.html"{op17_cur}>Leaders</a>
         <a href="/format.html">Format</a>
+        <a href="/shop/">Shop</a>
         <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
       </nav>
     </header>
@@ -883,7 +884,7 @@ def page_chrome(title: str, description: str, color: str, nav_op17: bool, body: 
     </main>
     <footer>
       © <span id="year"></span> One Piece Deck Base — Built with community in mind.
-      <a href="/privacy.html">Privacy</a>
+      <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a>
     </footer>
   </div>
   <script>

@@ -44,8 +44,33 @@ main.single{grid-template-columns:1fr}
 .home-leaders .list{gap:8px}
 .home-leaders .item{padding:10px 12px}
 .home-shop{margin-top:22px}
+.home-shop .section-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0}
+.home-shop .section-title h3{margin:0;font-size:20px}
 .home-shop .section-title a{color:var(--accent);font-weight:700;text-decoration:none;font-size:13px}
 .home-shop .shop-mock{height:72px}
+.home-shop .shop-grid{margin-top:12px}
+.amazon-disclosure{
+  margin-top:16px;padding:14px 16px;border-radius:10px;
+  background:#fff8e1;border:1px solid rgba(183,140,11,.35);
+  color:#3e3208;font-size:14px;line-height:1.55
+}
+.amazon-disclosure p{margin:0 0 8px;color:#3e3208}
+.amazon-disclosure p:last-child{margin-bottom:0}
+.amazon-disclosure a{color:#3e3208;font-weight:800}
+.amazon-disclosure-line{margin:12px 0 0;font-size:13px;color:var(--muted);font-weight:600;line-height:1.45}
+.shop-buy{
+  display:inline-block;margin-top:2px;padding:10px 14px;border-radius:10px;
+  background:var(--accent);color:#fff;font-weight:800;text-decoration:none;text-align:center
+}
+.shop-buy:hover{filter:brightness(1.06)}
+.shop-card .shop-buy{width:100%;box-sizing:border-box}
+.shop-note{margin:0;font-size:13px;color:var(--muted);line-height:1.45}
+.shop-mock.jet{background:linear-gradient(135deg,#111,#555);color:#fff}
+.shop-mock.dual-rg{background:linear-gradient(135deg,#b71c1c,#c9a227);color:#fff}
+.shop-mock.soul{background:linear-gradient(135deg,#4a148c,#ce93d8);color:#fff}
+.shop-mock.power{background:linear-gradient(135deg,#111,#b71c1c);color:#fff}
+.shop-mock.luffy{background:linear-gradient(135deg,#c62828,#ffcc80);color:#111}
+.shop-mock.acrylic{background:linear-gradient(135deg,#0d47a1,#212121);color:#fff}
 .section-title a{color:var(--accent);font-weight:700;text-decoration:none;font-size:13px}
 .home-cards{grid-template-columns:repeat(4,1fr);margin-top:18px}
 .leader-cards.home-cards{grid-template-columns:repeat(4,1fr)}
@@ -464,7 +489,7 @@ a.shop-card:hover{border-color:rgba(183,28,28,0.28);box-shadow:var(--shadow)}
 .policy ul{margin:10px 0 0;padding-left:22px}
 .policy li{margin:6px 0}
 .policy a{color:var(--accent);font-weight:700;text-decoration:none}
-.policy a:hover{text-decoration:underline}
+.policy code{font-size:.92em;background:rgba(183,28,28,0.08);padding:1px 5px;border-radius:4px}
 @media (max-width:880px){
   .custom-wrap{grid-template-columns:1fr}
 }

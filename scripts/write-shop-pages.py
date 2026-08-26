@@ -1,26 +1,127 @@
 #!/usr/bin/env python3
-"""Write unpublished shop pages (kept on disk, not linked from the public site)."""
+"""Write shop pages.
 
+Live Amazon sleeves and dice are public and indexed. Playmats and custom
+leaders stay unpublished (noindex, not linked from the public shop).
+"""
+
+from __future__ import annotations
+
+import html
 from pathlib import Path
 
 ROOT = Path("/workspace")
 DISCORD = "https://discord.gg/adZ2WUQ3D"
+CSS = "/css/site.css?v=amazon-shop"
+SITE = "https://onepiecedeckbase.com"
+
+# Keep amzn.to URLs — they carry the Associates tag (opdb07-20).
+SLEEVES = [
+    {
+        "name": "Dragon Shield Matte Jet",
+        "blurb": "100 standard-size sleeves (63×88 mm). Black matte finish. Fits a 50-card OPTCG deck plus extras.",
+        "url": "https://amzn.to/4qFzNrw",
+        "mock": "Jet",
+        "mock_class": "jet",
+    },
+    {
+        "name": "Dragon Shield Dual Matte Red / Gold",
+        "blurb": "100 standard-size Dual Matte sleeves. Red face, gold back (ART15065).",
+        "url": "https://amzn.to/46s2YVu",
+        "mock": "Red/Gold",
+        "mock_class": "dual-rg",
+    },
+    {
+        "name": "Dragon Shield Dual Matte Soul",
+        "blurb": "100 standard-size Dual Matte sleeves. Metallic purple Dual Soul (ART15062).",
+        "url": "https://amzn.to/4wMuTKw",
+        "mock": "Soul",
+        "mock_class": "soul",
+    },
+]
+
+DICE = [
+    {
+        "name": "Power counter dice (+1000 / −1000)",
+        "blurb": "32-piece set of +1000 to +6000 and −1000 to −6000 counters. Built for OPTCG power tracking.",
+        "url": "https://amzn.to/46pbKUi",
+        "mock": "+1000",
+        "mock_class": "power",
+    },
+    {
+        "name": "Official One Piece Premium Dice Set",
+        "blurb": "Licensed dice in a collectible Monkey D. Luffy tin. Official Eiichiro Oda / Shueisha merchandise.",
+        "url": "https://amzn.to/4xEOaiF",
+        "mock": "Luffy",
+        "mock_class": "luffy",
+    },
+    {
+        "name": "Yiotfandoll 16 mm D6 (blue / black)",
+        "blurb": "10 acrylic 16 mm six-siders. A cheap table set for life, DON!!, or kitchen-table counters.",
+        "url": "https://amzn.to/4gQtpdA",
+        "mock": "D6",
+        "mock_class": "acrylic",
+    },
+]
+
+DISCLOSURE = """        <aside class="amazon-disclosure" role="note">
+          <p><strong>Amazon Associates disclosure.</strong> One Piece Deck Base is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com and affiliated sites.</p>
+          <p><strong>As an Amazon Associate I earn from qualifying purchases.</strong> Every “View on Amazon” button is an affiliate link. If you buy through it, Amazon pays this site a commission. It does not change the price you pay. Prices, stock, and shipping are set by Amazon, not by us.</p>
+          <p>This site is a fan site and is not affiliated with Amazon, Bandai, or Shueisha. <a href="/privacy.html">Privacy Policy</a></p>
+        </aside>"""
+
+SHORT_DISCLOSURE = (
+    "        <p class=\"amazon-disclosure-line\">As an Amazon Associate I earn from qualifying purchases. "
+    "Amazon links are affiliate links.</p>"
+)
 
 
-def chrome(title: str, desc: str, current: str, body: str) -> str:
-    def nav(href: str, label: str, key: str) -> str:
+def nav_html(current: str) -> str:
+    def item(href: str, label: str, key: str) -> str:
         cur = ' aria-current="page"' if key == current else ""
-        return f'        <a href="{href}"{cur}>{label}</a>'
+        extra = ' target="_blank" rel="noopener"' if href.startswith("http") else ""
+        return f'        <a href="{href}"{cur}{extra}>{label}</a>'
 
+    return "\n".join(
+        [
+            item("/#recent", "Recent lists", "recent"),
+            item("/decklists/op17.html", "Leaders", "leaders"),
+            item("/format.html", "Format", "format"),
+            item("/shop/", "Shop", "shop"),
+            item(DISCORD, "Discord", "discord"),
+        ]
+    )
+
+
+def product_card(item: dict) -> str:
+    name = html.escape(item["name"])
+    blurb = html.escape(item["blurb"])
+    url = html.escape(item["url"], quote=True)
+    mock = html.escape(item["mock"])
+    klass = html.escape(item["mock_class"], quote=True)
+    return f"""          <article class="shop-card">
+            <div class="shop-mock {klass}">{mock}</div>
+            <div style="font-weight:800">{name}</div>
+            <p class="shop-note">{blurb}</p>
+            <a class="shop-buy" href="{url}" target="_blank" rel="sponsored noopener noreferrer">View on Amazon</a>
+          </article>"""
+
+
+def product_grid(items: list[dict]) -> str:
+    return '        <div class="shop-grid">\n' + "\n".join(product_card(p) for p in items) + "\n        </div>"
+
+
+def chrome(title: str, desc: str, canonical: str, body: str, *, indexable: bool) -> str:
+    robots = "" if indexable else '  <meta name="robots" content="noindex, nofollow" />\n'
+    canon = f'  <link rel="canonical" href="{html.escape(canonical, quote=True)}" />\n' if indexable else ""
     return f"""<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>{title}</title>
-  <meta name="description" content="{desc}" />
-  <meta name="robots" content="noindex, nofollow" />
-  <link rel="stylesheet" href="/css/site.css" />
+  <title>{html.escape(title)}</title>
+  <meta name="description" content="{html.escape(desc)}" />
+{robots}{canon}  <link rel="stylesheet" href="{CSS}" />
 </head>
 <body>
   <div class="wrap">
@@ -29,14 +130,11 @@ def chrome(title: str, desc: str, current: str, body: str) -> str:
         <div class="logo">OP</div>
         <div>
           <h1>One Piece Deck Base</h1>
-          <div class="subtitle">Decklists, community, and custom gear</div>
+          <div class="subtitle">OPTCG decklists</div>
         </div>
       </a>
       <nav aria-label="Primary">
-{nav("/#decklists", "Decklists", "decklists")}
-{nav("/decklists/op17.html", "OP17", "op17")}
-{nav("/shop/", "Shop", "shop")}
-{nav("/#community", "Community", "community")}
+{nav_html("shop")}
       </nav>
     </header>
     <main class="single">
@@ -45,237 +143,132 @@ def chrome(title: str, desc: str, current: str, body: str) -> str:
       </div>
     </main>
     <footer>
-      © <span id="year"></span> One Piece Deck Base — Fan merch, not affiliated with Bandai or Shueisha.
-      <a href="/shop/">Shop</a> · <a href="{DISCORD}" target="_blank" rel="noopener">Discord</a>
+      © <span id="year"></span> One Piece Deck Base — Fan site, not affiliated with Bandai, Shueisha, or Amazon.
+      As an Amazon Associate I earn from qualifying purchases.
+      <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a> · <a href="{DISCORD}" target="_blank" rel="noopener">Discord</a>
     </footer>
   </div>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="/js/site.js?v=amazon-shop"></script>
 </body>
 </html>
 """
 
 
-def write(rel: str, title: str, desc: str, current: str, body: str) -> None:
+def write(rel: str, title: str, desc: str, canonical: str, body: str, *, indexable: bool) -> None:
     path = ROOT / rel
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(chrome(title, desc, current, body))
-    print("wrote", rel)
+    path.write_text(chrome(title, desc, canonical, body, indexable=indexable))
+    print("wrote", rel, "indexable" if indexable else "unpublished")
 
 
 index_body = f"""        <div class="crumb"><a href="/">Home</a> / Shop</div>
         <h2>Shop</h2>
-        <p>Playmats, dice, sleeves, and custom leaders. Order on Discord. Fan merch — not official Bandai product.</p>
-        <div class="shop-grid">
-          <a class="shop-card" href="/shop/playmats.html">
-            <div class="shop-mock">Playmat</div>
-            <div style="font-weight:800">Playmats</div>
-            <div class="muted">24&quot; × 14&quot; cloth mats. Crew, emperor, and custom-leader art.</div>
-            <div class="price">from $35</div>
-          </a>
-          <a class="shop-card" href="/shop/dice.html">
-            <div class="shop-mock dice">D6</div>
-            <div style="font-weight:800">DON!! / life dice</div>
-            <div class="muted">Life counters and DON!! trackers in red, black, or gold.</div>
-            <div class="price">from $12</div>
-          </a>
-          <a class="shop-card" href="/shop/sleeves.html">
-            <div class="shop-mock sleeves">63×88</div>
-            <div style="font-weight:800">Sleeves</div>
-            <div class="muted">Standard OPTCG size. Solid colors plus art backs.</div>
-            <div class="price">from $8</div>
-          </a>
-          <a class="shop-card" href="/shop/custom-leaders.html">
-            <div class="shop-mock leader">Leader</div>
-            <div style="font-weight:800">Custom leaders</div>
-            <div class="muted">Design a fan leader, preview it, then order a print or playmat.</div>
-            <div class="price">from $18</div>
-          </a>
+        <p>Sleeves and dice for the table. These are Amazon product links, not a store we stock ourselves.</p>
+{DISCLOSURE}
+        <div class="section-title" style="margin-top:22px">
+          <h3>Sleeves</h3>
+          <a href="/shop/sleeves.html">All sleeves →</a>
         </div>
-        <p class="muted" style="margin-top:18px">To order: open Discord, paste the product name, color, quantity, and shipping city. <a href="{DISCORD}">discord.gg/adZ2WUQ3D</a></p>"""
-
-playmats_body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="/shop/">Shop</a> / Playmats</div>
-        <h2>Playmats</h2>
-        <p>Stitched-edge cloth mats sized for a One Piece TCG board. Art is fan-made. Say which leader or crew you want on Discord.</p>
-        <div class="shop-grid">
-          <div class="shop-card">
-            <div class="shop-mock">Straw Hat</div>
-            <div style="font-weight:800">Straw Hat crew mat</div>
-            <div class="muted">Black / red. Life track on the left, DON!! row on the right.</div>
-            <div class="price">$35</div>
-          </div>
-          <div class="shop-card">
-            <div class="shop-mock" style="background:linear-gradient(135deg,#1565c0,#90caf9);color:#fff">Rocks</div>
-            <div style="font-weight:800">Rocks Pirates mat</div>
-            <div class="muted">Blue God Valley layout. Room for a 50-card deck and trash.</div>
-            <div class="price">$38</div>
-          </div>
-          <div class="shop-card">
-            <div class="shop-mock" style="background:linear-gradient(135deg,#6a1b9a,#ce93d8);color:#fff">Beasts</div>
-            <div style="font-weight:800">Animal Kingdom mat</div>
-            <div class="muted">Purple Kaido field. Optional custom-leader portrait upgrade.</div>
-            <div class="price">$38</div>
-          </div>
-          <div class="shop-card">
-            <div class="shop-mock leader">Yours</div>
-            <div style="font-weight:800">Custom leader mat</div>
-            <div class="muted">Print the leader you design on the custom-leader page as the mat art.</div>
-            <div class="price">$45</div>
-          </div>
+        <p class="muted">Standard 63×88 mm Dragon Shield packs. Enough for a 50-card OPTCG list.</p>
+{product_grid(SLEEVES)}
+{SHORT_DISCLOSURE}
+        <div class="section-title" style="margin-top:28px">
+          <h3>Dice</h3>
+          <a href="/shop/dice.html">All dice →</a>
         </div>
-        <a class="discord" href="{DISCORD}" style="margin-top:18px">Order playmats on Discord</a>"""
-
-dice_body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="/shop/">Shop</a> / Dice</div>
-        <h2>DON!! and life dice</h2>
-        <p>Opaque D6 sets for life and DON!!. Not official Bandai DON!! cards — use them as counters at kitchen-table games, or check your locals if custom dice are allowed.</p>
-        <div class="shop-grid">
-          <div class="shop-card">
-            <div class="shop-mock dice">Life</div>
-            <div style="font-weight:800">Life counter pair</div>
-            <div class="muted">Two D6, pips 1–5 plus a blank. Red or black.</div>
-            <div class="price">$12</div>
-          </div>
-          <div class="shop-card">
-            <div class="shop-mock dice">DON</div>
-            <div style="font-weight:800">DON!! tracker set</div>
-            <div class="muted">Ten small cubes to mark attached DON!! without extra cards.</div>
-            <div class="price">$14</div>
-          </div>
-          <div class="shop-card">
-            <div class="shop-mock" style="background:#c9a227;color:#222">Gold</div>
-            <div style="font-weight:800">Emperor gold set</div>
-            <div class="muted">Life pair plus DON!! cubes in gold resin.</div>
-            <div class="price">$22</div>
-          </div>
-        </div>
-        <a class="discord" href="{DISCORD}" style="margin-top:18px">Order dice on Discord</a>"""
+        <p class="muted">Power counters, the official Luffy tin, and a cheap acrylic D6 set.</p>
+{product_grid(DICE)}
+{SHORT_DISCLOSURE}"""
 
 sleeves_body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="/shop/">Shop</a> / Sleeves</div>
         <h2>Sleeves</h2>
-        <p>Standard 63×88 mm. Solid colors ship first. Art backs are printed in small batches — ask on Discord before you assume a character is in stock.</p>
-        <div class="shop-grid">
-          <div class="shop-card">
-            <div class="shop-mock sleeves">Red</div>
-            <div style="font-weight:800">Solid pack (60)</div>
-            <div class="muted">Red, green, blue, purple, black, or yellow. Enough for a 50-card deck plus leader.</div>
-            <div class="price">$8</div>
-          </div>
-          <div class="shop-card">
-            <div class="shop-mock" style="background:#222;color:#fff">Matte</div>
-            <div style="font-weight:800">Matte inner + outer</div>
-            <div class="muted">Double sleeve kit. Inners clear, outers your color.</div>
-            <div class="price">$14</div>
-          </div>
-          <div class="shop-card">
-            <div class="shop-mock leader">Art</div>
-            <div style="font-weight:800">Art back (60)</div>
-            <div class="muted">Fan art of a leader you pick, or the custom leader you design.</div>
-            <div class="price">$16</div>
-          </div>
-        </div>
-        <a class="discord" href="{DISCORD}" style="margin-top:18px">Order sleeves on Discord</a>"""
+        <p>Dragon Shield standard-size packs (63×88 mm). Open Amazon for live price and stock.</p>
+{DISCLOSURE}
+{product_grid(SLEEVES)}
+{SHORT_DISCLOSURE}"""
 
-custom_body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="/shop/">Shop</a> / Custom leaders</div>
+dice_body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="/shop/">Shop</a> / Dice</div>
+        <h2>Dice</h2>
+        <p>Power counters and table dice. Check your locals if custom dice are allowed in official events. Open Amazon for live price and stock.</p>
+{DISCLOSURE}
+{product_grid(DICE)}
+{SHORT_DISCLOSURE}"""
+
+playmats_body = f"""        <div class="crumb"><a href="/">Home</a> / Shop / Playmats</div>
+        <h2>Playmats</h2>
+        <p>This category is not on the public shop. Fan-made mats are ordered on Discord when they come back.</p>
+        <p class="muted">The live shop is <a href="/shop/sleeves.html">sleeves</a> and <a href="/shop/dice.html">dice</a> on Amazon.</p>
+        <a class="discord" href="{DISCORD}" style="margin-top:18px">Ask on Discord</a>"""
+
+custom_body = f"""        <div class="crumb"><a href="/">Home</a> / Shop / Custom leaders</div>
         <h2>Custom leaders</h2>
-        <p>Fan-made leader cards for kitchen-table games, display, playmats, and sleeve backs. They are <strong>not</strong> official Bandai cards and are <strong>not</strong> legal in official constructed events. Design one here, then send the spec on Discord to order a print ($18), art sleeves ($16), or a playmat with this portrait ($45).</p>
-        <div class="custom-wrap">
-          <div>
-            <article class="custom-card" id="preview" style="background:linear-gradient(180deg,#b71c1c,#7a1212)">
-              <div class="life"><span id="p-life">5</span> Life · <span id="p-attr">Strike</span></div>
-              <div class="cname" id="p-name">Custom Leader</div>
-              <div class="types" id="p-types">Straw Hat Crew</div>
-              <div class="effect" id="p-effect">[Activate: Main] [Once Per Turn] Design your own effect. Keep it readable — this is the text that prints.</div>
-              <div class="power"><span id="p-power">5000</span></div>
-            </article>
-          </div>
-          <form class="custom-form" id="designer">
-            <label for="name">Leader name</label>
-            <input id="name" name="name" maxlength="42" value="Custom Leader" />
-            <label for="color">Color</label>
-            <select id="color" name="color">
-              <option value="#b71c1c">Red</option>
-              <option value="#2e7d32">Green</option>
-              <option value="#1565c0">Blue</option>
-              <option value="#6a1b9a">Purple</option>
-              <option value="#212121">Black</option>
-              <option value="#c9a227">Yellow</option>
-            </select>
-            <label for="life">Life</label>
-            <select id="life" name="life">
-              <option>4</option>
-              <option selected>5</option>
-            </select>
-            <label for="power">Power</label>
-            <input id="power" name="power" value="5000" />
-            <label for="attr">Attribute</label>
-            <select id="attr" name="attr">
-              <option>Strike</option>
-              <option>Slash</option>
-              <option>Ranged</option>
-              <option>Special</option>
-              <option>Wisdom</option>
-            </select>
-            <label for="types">Types</label>
-            <input id="types" name="types" value="Straw Hat Crew" />
-            <label for="effect">Effect text</label>
-            <textarea id="effect" name="effect">[Activate: Main] [Once Per Turn] Design your own effect. Keep it readable — this is the text that prints.</textarea>
-            <label for="product">What to print</label>
-            <select id="product" name="product">
-              <option value="leader-print">Leader print — $18</option>
-              <option value="sleeves">Art sleeves (60) — $16</option>
-              <option value="playmat">Playmat with this leader — $45</option>
-              <option value="bundle">Print + sleeves + mat — $70</option>
-            </select>
-            <button class="discord" type="button" id="copy" style="margin-top:14px;border:0;width:100%;cursor:pointer">Copy order text for Discord</button>
-            <p class="muted" id="copied" style="display:none;margin-top:8px">Copied. Paste it in Discord to place the order.</p>
-            <pre class="order-box" id="order"></pre>
-          </form>
-        </div>
-        <p class="muted" style="margin-top:18px">Not affiliated with Bandai or Shueisha. Custom leaders are original fan designs for personal use and display.</p>
-        <script>
-          const colors = {{
-            '#b71c1c': 'linear-gradient(180deg,#b71c1c,#7a1212)',
-            '#2e7d32': 'linear-gradient(180deg,#2e7d32,#1b5e20)',
-            '#1565c0': 'linear-gradient(180deg,#1565c0,#0d47a1)',
-            '#6a1b9a': 'linear-gradient(180deg,#6a1b9a,#4a148c)',
-            '#212121': 'linear-gradient(180deg,#424242,#212121)',
-            '#c9a227': 'linear-gradient(180deg,#c9a227,#8d6e12)'
-          }};
-          function val(id) {{ return document.getElementById(id).value.trim(); }}
-          function sync() {{
-            document.getElementById('p-name').textContent = val('name') || 'Custom Leader';
-            document.getElementById('p-life').textContent = val('life');
-            document.getElementById('p-attr').textContent = val('attr');
-            document.getElementById('p-types').textContent = val('types') || '—';
-            document.getElementById('p-effect').textContent = val('effect') || ' ';
-            document.getElementById('p-power').textContent = val('power') || '5000';
-            document.getElementById('preview').style.background = colors[val('color')] || colors['#b71c1c'];
-            const lines = [
-              'CUSTOM LEADER ORDER — One Piece Deck Base',
-              'Name: ' + (val('name') || 'Custom Leader'),
-              'Color: ' + document.getElementById('color').selectedOptions[0].text,
-              'Life: ' + val('life'),
-              'Power: ' + (val('power') || '5000'),
-              'Attribute: ' + val('attr'),
-              'Types: ' + (val('types') || '—'),
-              'Effect: ' + (val('effect') || '—'),
-              'Product: ' + document.getElementById('product').selectedOptions[0].text,
-              'Ship to: (add city / country)'
-            ];
-            document.getElementById('order').textContent = lines.join('\\n');
-          }}
-          document.getElementById('designer').addEventListener('input', sync);
-          document.getElementById('copy').addEventListener('click', function() {{
-            sync();
-            navigator.clipboard.writeText(document.getElementById('order').textContent).then(function() {{
-              document.getElementById('copied').style.display = 'block';
-            }});
-          }});
-          sync();
-        </script>"""
+        <p>This category is not on the public shop. Custom leader prints are paused.</p>
+        <p class="muted">The live shop is <a href="/shop/sleeves.html">sleeves</a> and <a href="/shop/dice.html">dice</a> on Amazon.</p>
+        <a class="discord" href="{DISCORD}" style="margin-top:18px">Ask on Discord</a>"""
 
-write("shop/index.html", "Shop | One Piece Deck Base", "Playmats, dice, sleeves, and custom OPTCG leaders.", "shop", index_body)
-write("shop/playmats.html", "Playmats | One Piece Deck Base shop", "Fan-made One Piece TCG playmats.", "shop", playmats_body)
-write("shop/dice.html", "Dice | One Piece Deck Base shop", "DON!! and life dice for One Piece TCG.", "shop", dice_body)
-write("shop/sleeves.html", "Sleeves | One Piece Deck Base shop", "OPTCG-size sleeves and art backs.", "shop", sleeves_body)
-write("shop/custom-leaders.html", "Custom leaders | One Piece Deck Base shop", "Design a fan-made One Piece TCG leader and order a print, sleeves, or playmat.", "shop", custom_body)
-print("shop pages ready")
+
+def ensure_sitemap() -> None:
+    path = ROOT / "sitemap.xml"
+    text = path.read_text()
+    added = 0
+    for url in (
+        f"{SITE}/shop/",
+        f"{SITE}/shop/sleeves.html",
+        f"{SITE}/shop/dice.html",
+    ):
+        if url not in text:
+            text = text.replace("</urlset>", f"  <url><loc>{url}</loc></url>\n</urlset>", 1)
+            added += 1
+    if added:
+        path.write_text(text)
+    print("sitemap shop urls", "added" if added else "present")
+
+
+def main() -> None:
+    write(
+        "shop/index.html",
+        "Shop | Sleeves and dice | One Piece Deck Base",
+        "OPTCG sleeves and dice via Amazon. As an Amazon Associate I earn from qualifying purchases.",
+        f"{SITE}/shop/",
+        index_body,
+        indexable=True,
+    )
+    write(
+        "shop/sleeves.html",
+        "Dragon Shield sleeves | One Piece Deck Base shop",
+        "Standard 63×88 mm Dragon Shield sleeves for OPTCG. Amazon Associates links.",
+        f"{SITE}/shop/sleeves.html",
+        sleeves_body,
+        indexable=True,
+    )
+    write(
+        "shop/dice.html",
+        "OPTCG dice | One Piece Deck Base shop",
+        "Power counter dice and One Piece dice via Amazon. Amazon Associates links.",
+        f"{SITE}/shop/dice.html",
+        dice_body,
+        indexable=True,
+    )
+    write(
+        "shop/playmats.html",
+        "Playmats | One Piece Deck Base shop",
+        "Fan-made One Piece TCG playmats. Not currently in the public shop.",
+        f"{SITE}/shop/playmats.html",
+        playmats_body,
+        indexable=False,
+    )
+    write(
+        "shop/custom-leaders.html",
+        "Custom leaders | One Piece Deck Base shop",
+        "Custom OPTCG leader prints. Not currently in the public shop.",
+        f"{SITE}/shop/custom-leaders.html",
+        custom_body,
+        indexable=False,
+    )
+    ensure_sitemap()
+    print("shop pages ready")
+
+
+if __name__ == "__main__":
+    main()
