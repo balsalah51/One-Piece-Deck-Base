@@ -859,9 +859,9 @@ def page_chrome(
     tcg_scripts = ""
     if include_tcgplayer:
         tcg_scripts = (
-            '  <script src="/js/tcgplayer-config.js?v=tcg-quiet"></script>\n'
-            '  <script src="/js/tcgplayer-ids.js?v=tcg-quiet"></script>\n'
-            '  <script src="/js/tcgplayer.js?v=tcg-quiet"></script>\n'
+            '  <script src="/js/tcgplayer-config.js?v=tcg-quiet2"></script>\n'
+            '  <script src="/js/tcgplayer-ids.js?v=tcg-quiet2"></script>\n'
+            '  <script src="/js/tcgplayer.js?v=tcg-quiet2"></script>\n'
         )
     return f"""<!doctype html>
 <html lang="en">
@@ -870,7 +870,7 @@ def page_chrome(
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
-  <link rel="stylesheet" href="/css/site.css?v=tcg-quiet" />
+  <link rel="stylesheet" href="/css/site.css?v=tcg-quiet2" />
 </head>
 <body class="{html.escape(color)}">
   <div class="wrap">

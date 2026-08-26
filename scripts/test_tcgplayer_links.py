@@ -92,7 +92,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer.js?v=tcg-quiet", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-quiet2", out)
         self.assertEqual(out.count("tcgplayer.js"), 1)
 
     def test_strips_stale_scripts_from_hub(self):

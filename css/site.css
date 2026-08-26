@@ -325,17 +325,17 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
   background:#fff;color:var(--accent);font:inherit;font-size:12px;font-weight:800;cursor:pointer;white-space:normal
 }
 .copy-sim:hover{border-color:var(--accent)}
-.buy-tcg{
-  margin-left:0;padding:4px 9px;border-radius:8px;border:1px solid rgba(0,0,0,0.16);
-  background:#fff;color:var(--muted);font:inherit;font-size:11px;font-weight:700;
+a.buy-tcg,.section-title a.buy-tcg{
+  margin-left:auto;padding:4px 9px;border-radius:8px;border:1px solid rgba(0,0,0,0.18);
+  background:#fff;color:var(--muted);font:inherit;font-size:11px;font-weight:600;
   text-decoration:none;white-space:normal;text-align:center
 }
-.buy-tcg:hover{border-color:rgba(0,0,0,0.28);color:var(--text)}
-.buy-tcg-inline{
+a.buy-tcg:hover,.section-title a.buy-tcg:hover{border-color:rgba(0,0,0,0.32);color:var(--text);filter:none}
+a.buy-tcg-inline{
   display:inline-block;margin-top:6px;font-size:11px;font-weight:600;color:var(--muted);
   text-decoration:none
 }
-.buy-tcg-inline:hover{text-decoration:underline;color:var(--text)}
+a.buy-tcg-inline:hover{text-decoration:underline;color:var(--text)}
 .tcg-note{font-size:12px;margin:6px 0 0}
 .list-row{display:flex;align-items:stretch;gap:8px;min-width:0;width:100%;max-width:100%}
 .list-row > .item{flex:1;min-width:0;max-width:100%}
