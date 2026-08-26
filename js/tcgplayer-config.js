@@ -1,13 +1,6 @@
-/* TCGplayer affiliate config
- *
- * Preferred: paste the Impact API link into /data/tcgplayer.json
- *   { "partnerLink": "https://partner.tcgplayer.com/c/..../..../...." }
- * Find it in Impact: My Brands → TCGplayer → Assets → "api link".
- *
- * This file is a fallback if the JSON fetch fails. Leave partnerLink blank
- * until then. Buy buttons still open TCGplayer; they just will not credit
- * the affiliate program yet.
+/* TCGplayer affiliate config. data/tcgplayer.json is loaded at runtime;
+ * this file is the fallback if that fetch fails.
  */
 window.OPDB_TCGPLAYER = {
-  partnerLink: ""
+  partnerLink: "https://partner.tcgplayer.com/c/7670706/1780961/21018"
 };
