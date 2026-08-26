@@ -273,6 +273,10 @@ def scrape_x(found: list[dict], seen: set[str]) -> None:
             continue
         url = item.get("source") or item.get("url") or "https://x.com/"
         handle = item.get("handle") or "x"
+        day = (item.get("date") or "")[:10]
+        if day and day < "2026-08-25":
+            log("skip old x list", handle, day)
+            continue
         record(
             found,
             {
@@ -285,6 +289,7 @@ def scrape_x(found: list[dict], seen: set[str]) -> None:
                 "slug": slug_for("x", handle, TARGET_IDS[lid] + raw[-12:]),
                 "raw": " ".join(f"{n}x{cid}" for cid, n in counts.items()),
                 "cards": sum(n for cid, n in counts.items() if cid != lid),
+                "date": day,
             },
             seen,
         )
