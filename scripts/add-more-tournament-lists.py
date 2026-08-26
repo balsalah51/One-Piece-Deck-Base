@@ -130,8 +130,10 @@ def community_entries(leader: dict) -> list[dict]:
                 "subtitle": item.get("subtitle") or "",
                 "kind": item.get("kind"),
                 "slug": slug,
+                "date": item.get("date") or "",
             }
         )
+    out.sort(key=gen.date_sort_key, reverse=True)
     return out
 
 

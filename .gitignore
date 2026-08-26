@@ -2,6 +2,7 @@
 __pycache__/
 *.pyc
 .env
+data/x-media/
 discord-bot/.env
 discord-bot/.venv/
 discord-bot/state.json

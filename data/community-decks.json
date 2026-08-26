@@ -91,6 +91,15 @@
       "source_url": "https://www.youtube.com/watch?v=7aCHDV0zuoI",
       "kind": "web",
       "date": "2026-08-10"
+    },
+    {
+      "slug": "x-chinoize-101-corentin33-rocks",
+      "href": "/decklists/op17/rocks-d-xebec/x-chinoize-101-corentin33-rocks.html",
+      "title": "ChinoizeCup #101 4th — Corentin33 Rocks",
+      "subtitle": "List from the public X photo post @Chinoize_ · 2026-08-25 · IDs verified on Limitless",
+      "source_url": "https://x.com/Chinoize_/status/2092357744921612794",
+      "kind": "x",
+      "date": "2026-08-25"
     }
   ],
   "OP17-058": [
@@ -223,6 +232,24 @@
       "source_url": "https://www.youtube.com/watch?v=xyTp2cBJpMM",
       "kind": "web",
       "date": "2026-08-03"
+    },
+    {
+      "slug": "x-chinoize-101-mage-mihawk",
+      "href": "/decklists/mihawk/x-chinoize-101-mage-mihawk.html",
+      "title": "ChinoizeCup #101 1st — MaGe Mihawk",
+      "subtitle": "List from the public X photo post @Chinoize_ · 2026-08-25 · IDs verified on Limitless",
+      "source_url": "https://x.com/Chinoize_/status/2092357744921612794",
+      "kind": "x",
+      "date": "2026-08-25"
+    },
+    {
+      "slug": "x-chinoize-101-dearcan-mihawk",
+      "href": "/decklists/mihawk/x-chinoize-101-dearcan-mihawk.html",
+      "title": "ChinoizeCup #101 3rd — Dearcan Mihawk",
+      "subtitle": "List from the public X photo post @Chinoize_ · 2026-08-25 · IDs verified on Limitless",
+      "source_url": "https://x.com/Chinoize_/status/2092357744921612794",
+      "kind": "x",
+      "date": "2026-08-25"
     }
   ],
   "OP16-001": [
@@ -293,6 +320,17 @@
       "source_url": "https://www.reddit.com/r/OnePieceTCG/s/wjyx7BRKbb",
       "kind": "web",
       "date": "2026-08-24"
+    }
+  ],
+  "OP15-058": [
+    {
+      "slug": "x-chinoize-101-wortaxx-enel",
+      "href": "/decklists/enel/x-chinoize-101-wortaxx-enel.html",
+      "title": "ChinoizeCup #101 2nd — Wortaxx Enel",
+      "subtitle": "List from the public X photo post @Chinoize_ · 2026-08-25 · IDs verified on Limitless",
+      "source_url": "https://x.com/Chinoize_/status/2092357744921612794",
+      "kind": "x",
+      "date": "2026-08-25"
     }
   ]
 }

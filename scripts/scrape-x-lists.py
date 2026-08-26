@@ -2,7 +2,8 @@
 """Fetch public X posts for complete OPTCG 50-card ID lists.
 
 Uses only public proxies (Jina reader, FxTwitter, DuckDuckGo HTML). Does not
-log in, does not read DMs, and does not invent lists from screenshots.
+log in, does not read DMs, and does not invent lists. Readable deck-builder
+photos on in-window tweets are downloaded so a later pass can transcribe them.
 """
 
 from __future__ import annotations
@@ -14,6 +15,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path("/workspace")
@@ -23,6 +25,10 @@ STATUS_RE = re.compile(
     r"(?:x\.com|twitter\.com|nitter\.[^/\s]+)/([A-Za-z0-9_]+)/status/(\d+)",
     re.I,
 )
+TWITTER_EPOCH_MS = 1288834974657
+# Inclusive UTC window: today and yesterday for this scrape (26 Aug 2026).
+DATE_START = "2026-08-25"
+DATE_END = "2026-08-26"
 LEADERS = {
     "OP17-001",
     "OP17-020",
@@ -64,12 +70,24 @@ HANDLES = [
     "ONEPIECE_tcg_EN",
     "Silvers_D_Foxy",
     "LimitlessTCG",
+    "OPtopdecks",
+    "OPTCGAlert",
+    "The_Egman",
+    "Yonxlj",
+    "KuroKumaTCG",
+    "Chinoize_",
+    "sormiltcg",
+    "EgmanEvents",
 ]
 HANDLE_SET = {h.lower() for h in HANDLES}
 
-# Tweet IDs already visible on public profile scrapes (plus a few replies).
+# Known public tweet IDs (FxTwitter can fetch these even when timelines 403).
 SEED_TWEETS = {
+    "2090634341244432826": "OPtopdecks",
+    "2090450093782532258": "OPTCGAlert",
     "2090197490913902734": "Silvers_D_Foxy",
+    "2089838271522320522": "The_Egman",
+    "2089835508901810310": "Chinoize_",
     "2089448508684189741": "MarinefordTCG",
     "2088771006592663815": "MarinefordTCG",
     "2089597170316144997": "cardkaizoku",
@@ -77,39 +95,53 @@ SEED_TWEETS = {
     "2088505853402108192": "cardkaizoku",
     "2088365415928127503": "cardkaizoku",
     "2086926321696076196": "cardkaizoku",
+    "2086756739634909242": "Yonxlj",
+    "2086495197781770492": "Yonxlj",
+    "2084950563146330449": "Yonxlj",
+    "2084578215536816418": "KuroKumaTCG",
+    "2088502410603815064": "ALA9250",
+    "2088039197521408457": "EgmanEvents",
+    "2089403698724184399": "NBAPR",
+    "2076068504843735235": "sormiltcg",
 }
 
 SEARCHES = [
+    f'site:x.com "4xOP17" since:{DATE_START}',
+    f'site:x.com "1xOP17-001" since:{DATE_START}',
+    f'site:x.com "1xOP17-039" since:{DATE_START}',
+    f'site:x.com "1xOP17-079" since:{DATE_START}',
+    f'site:x.com "1xOP11-040" since:{DATE_START}',
+    f'site:x.com "1xOP08-058" since:{DATE_START}',
+    f'site:x.com "1xOP16-001" since:{DATE_START}',
+    f"site:x.com OP17 decklist since:{DATE_START}",
+    f"site:x.com OPTCG decklist since:{DATE_START}",
+    f"site:x.com ChinoizeCup since:{DATE_START}",
+    f"site:x.com The_Egman decklist since:{DATE_START}",
+    f"site:x.com Yonxlj deck-list since:{DATE_START}",
+    f"site:x.com MarinefordTCG since:{DATE_START}",
+    f"site:x.com CardKaizoku since:{DATE_START}",
     'site:x.com "4xOP17"',
     'site:twitter.com "4xOP17-040"',
-    'site:x.com "1xOP17-001" decklist',
-    'site:x.com "1xOP17-020" decklist',
-    'site:x.com "1xOP17-039" decklist',
-    'site:x.com "1xOP17-058" decklist',
-    'site:x.com "1xOP17-079" decklist',
-    'site:x.com "1xOP17-099" decklist',
-    'site:x.com "1xOP16-001"',
-    "site:x.com MarinefordTCG OP17 decklist",
-    "site:x.com StrawHatPecan OP17 list",
-    "site:x.com CardKaizoku Ace OP16-001",
-    'site:x.com "1xOP14-060" decklist',
-    'site:x.com "1xOP16-041" Buggy',
-    'site:x.com "1xOP16-060" Sengoku',
-    'site:x.com "1xOP15-002" Lucy',
-    'site:x.com "1xOP16-080" Blackbeard',
-    "site:x.com Doffy OP14-060 decklist",
-    "site:x.com OP17 decklist since:2026-08-20",
-    "site:twitter.com OP17 decklist since:2026-08-20",
-    'site:x.com "1xOP11-040" decklist',
-    "site:x.com UP Luffy OP11-040 decklist",
-    'site:x.com "1xOP08-058" decklist',
-    "site:x.com Charlotte Pudding OP08-058 decklist",
-    "site:x.com Blue Purple Luffy OP17 list",
+    "site:x.com ChinoizeCup #101 Winner",
+    "site:x.com ChinoizeCup #100 Winner",
+    "site:x.com ワンピカード デッキ since:2026-08-25",
 ]
 
 
 def log(*args) -> None:
     print(*args, flush=True)
+
+
+def snowflake_to_date(sid: str) -> str:
+    try:
+        ms = (int(sid) >> 22) + TWITTER_EPOCH_MS
+        return datetime.fromtimestamp(ms / 1000, tz=timezone.utc).strftime("%Y-%m-%d")
+    except (TypeError, ValueError):
+        return ""
+
+
+def in_window(day: str) -> bool:
+    return bool(day) and DATE_START <= day[:10] <= DATE_END
 
 
 def fetch(url: str, timeout: int = 10) -> tuple[int, str]:
@@ -128,6 +160,18 @@ def fetch(url: str, timeout: int = 10) -> tuple[int, str]:
         return exc.code, body
     except Exception as exc:  # noqa: BLE001
         return 0, f"{type(exc).__name__}: {exc}"
+
+
+def fetch_bytes(url: str, timeout: int = 12) -> tuple[int, bytes]:
+    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "*/*"})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            return resp.status, resp.read()
+    except urllib.error.HTTPError as exc:
+        body = exc.read() if exc.fp else b""
+        return exc.code, body
+    except Exception:  # noqa: BLE001
+        return 0, b""
 
 
 def card_hits(text: str) -> list[tuple[int, str]]:
@@ -191,13 +235,48 @@ def tweet_blob(data: dict) -> str:
     return "\n".join(str(p) for p in parts)
 
 
+def photo_urls(tweet: dict) -> list[str]:
+    media = tweet.get("media") or {}
+    urls: list[str] = []
+    if not isinstance(media, dict):
+        return urls
+    for photo in media.get("photos") or []:
+        if isinstance(photo, dict) and photo.get("url"):
+            urls.append(photo["url"])
+    return urls
+
+
+def created_day(tweet: dict, sid: str) -> str:
+    created = tweet.get("created_at") or tweet.get("date") or tweet.get("created_timestamp") or ""
+    created_s = str(created)
+    if re.match(r"\d{4}-\d{2}-\d{2}", created_s):
+        return created_s[:10]
+    if created_s.isdigit() and len(created_s) >= 10:
+        try:
+            return datetime.fromtimestamp(int(created_s[:10]), tz=timezone.utc).strftime("%Y-%m-%d")
+        except (OSError, ValueError, OverflowError):
+            pass
+    parsed = re.search(r"(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2}).+(\d{4})", created_s)
+    if parsed:
+        try:
+            dt = datetime.strptime(f"{parsed.group(1)} {parsed.group(2)} {parsed.group(3)}", "%b %d %Y")
+            return dt.strftime("%Y-%m-%d")
+        except ValueError:
+            pass
+    return snowflake_to_date(sid)
+
+
 def main() -> None:
     out: dict = {
+        "window": {"start": DATE_START, "end": DATE_END, "tz": "UTC"},
         "profiles": [],
         "searches": [],
         "tweets": [],
+        "in_window_tweets": [],
+        "in_window_photos": [],
         "complete_lists": [],
         "partial_id_hits": [],
+        "photo_only_outside_window": [],
         "notes": [],
     }
     status_ids = dict(SEED_TWEETS)
@@ -245,13 +324,13 @@ def main() -> None:
         out["searches"].append(row)
         log("search", status, len(ids), "ids", len(hits), "lines", q[:48])
         for h, sid in ids:
-            if h.lower() in HANDLE_SET:
-                status_ids.setdefault(sid, h)
+            status_ids.setdefault(sid, h)
         out["complete_lists"].extend({"source": q, **item} for item in lists)
         if hits:
             out["partial_id_hits"].append({"source": q, "hits": hits[:12]})
 
     log("unique tweet ids", len(status_ids))
+    media_dir = ROOT / "data/x-media"
     for sid, handle in status_ids.items():
         url = f"https://api.fxtwitter.com/{handle}/status/{sid}"
         status, body = fetch(url, timeout=12)
@@ -264,56 +343,104 @@ def main() -> None:
         hits = card_hits(blob)
         lists = complete_lists(hits)
         tweet = (data.get("tweet") or {}) if isinstance(data, dict) else {}
-        created = (
-            (tweet.get("created_at") or tweet.get("date") or tweet.get("created_timestamp") or "")
-        )
-        created_s = str(created)
-        too_old = False
-        if created_s:
-            # 2026-08-20, 2026-08-20T..., or a unix timestamp.
-            if created_s[:10] < "2026-08-20" and not created_s.isdigit():
-                too_old = True
-            elif created_s.isdigit() and int(created_s) < 1787184000:
-                too_old = True
+        day = created_day(tweet, sid)
+        photos = photo_urls(tweet)
         row = {
             "handle": handle,
             "id": sid,
             "url": f"https://x.com/{handle}/status/{sid}",
             "http": status,
             "text": (tweet.get("text") or "")[:400],
-            "created": created_s[:24],
+            "created": day,
+            "in_window": in_window(day),
             "card_lines": len(hits),
             "complete_lists": len(lists),
+            "photos": photos,
         }
-        log("tweet", status, handle, sid, "lines", len(hits), (tweet.get("text") or "")[:72].replace("\n", " "))
+        log(
+            "tweet",
+            status,
+            handle,
+            sid,
+            day,
+            "window" if row["in_window"] else "old",
+            "lines",
+            len(hits),
+            "pics",
+            len(photos),
+            (tweet.get("text") or "")[:72].replace("\n", " "),
+        )
         text_l = (tweet.get("text") or "").lower()
-        if handle.lower() not in HANDLE_SET and not hits:
+        if handle.lower() not in HANDLE_SET and not hits and not photos:
             continue
-        if handle.lower() == "silvers_d_foxy" and "op17" not in text_l and "one piece" not in text_l and "optcg" not in text_l:
+        if (
+            handle.lower() == "silvers_d_foxy"
+            and "op17" not in text_l
+            and "one piece" not in text_l
+            and "optcg" not in text_l
+        ):
             continue
         out["tweets"].append(row)
-        if too_old:
-            log("skip old tweet", handle, sid, created_s[:10])
-        else:
-            out["complete_lists"].extend({"source": row["url"], "handle": handle, **item} for item in lists)
+        if row["in_window"]:
+            out["in_window_tweets"].append(row)
+            for i, purl in enumerate(photos):
+                st2, blob_b = fetch_bytes(purl)
+                saved = ""
+                if st2 == 200 and blob_b:
+                    media_dir.mkdir(parents=True, exist_ok=True)
+                    dest = media_dir / f"{handle}-{sid}-{i}.jpg"
+                    dest.write_bytes(blob_b)
+                    saved = str(dest)
+                out["in_window_photos"].append(
+                    {
+                        "handle": handle,
+                        "id": sid,
+                        "url": row["url"],
+                        "created": day,
+                        "photo": purl,
+                        "saved": saved,
+                        "bytes": len(blob_b) if blob_b else 0,
+                    }
+                )
+            out["complete_lists"].extend(
+                {"source": row["url"], "handle": handle, "date": day, **item} for item in lists
+            )
+        elif photos and ("deck" in text_l or "list" in text_l or hits):
+            out["photo_only_outside_window"].append(
+                {
+                    "handle": handle,
+                    "id": sid,
+                    "url": row["url"],
+                    "created": day,
+                    "photos": len(photos),
+                    "text": (tweet.get("text") or "")[:180],
+                }
+            )
         if hits and not lists:
-            out["partial_id_hits"].append({"source": row["url"], "hits": hits})
+            out["partial_id_hits"].append({"source": row["url"], "hits": hits, "created": day})
         time.sleep(0.15)
 
     if not out["complete_lists"]:
         out["notes"].append(
-            "Public X proxies (Jina reader, FxTwitter, DuckDuckGo site:x.com) returned "
-            "no complete 50-card NxSET-NNN lists for tracked leaders. Recent creator tweets "
-            "were memes, meta charts, product ads, and single-card photos. "
-            "CardKaizoku's Ace/meta posts are win-rate graphics (staple names + matchups), "
-            "not pasteable lists. Artress Lucy tweets attach playmat photos of OP04-002 Lucy, "
-            "which is not a hub leader and has no readable NxSET-NNN lines. "
-            "Creator 50-card lists on this site still come from YouTube descriptions, "
-            "with X profile links."
+            f"No complete 50-card NxSET-NNN lists on public X posts dated {DATE_START}–{DATE_END} UTC. "
+            "Jina reader is blocked on x.com (403 AbuseAlleviationError). FxTwitter returns individual "
+            "tweets when an ID is known, but not user timelines. DuckDuckGo site:x.com often 202s or "
+            "returns older tweets that ignore since:. Nitter/xcancel/syndication/RSSHub did not yield "
+            "timelines. List photos that *are* public (The_Egman 2089838271522320522 on 2026-08-18, "
+            "Yonxlj Ace 2086756739634909242 on 2026-08-10, KuroKumaTCG Rocks 2084578215536816418 on "
+            "2026-08-04) are outside the two-day window and were not hosted."
+        )
+    if not out["in_window_tweets"]:
+        out["notes"].append(
+            "Zero in-window tweet IDs were discovered. ChinoizeCup #101 (Limitless, 2026-08-25) and "
+            "#100 (2026-08-24) almost certainly have winner posts on @Chinoize_, but those status IDs "
+            "are not in public search indexes from this environment."
         )
 
     path = ROOT / "data/x-search-log.json"
     path.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n")
+    log("in-window tweets", len(out["in_window_tweets"]))
+    log("in-window photos", len(out["in_window_photos"]))
     log("complete X lists found", len(out["complete_lists"]))
     log("wrote", path)
 
