@@ -12960,5 +12960,21 @@
     "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP14/OP14-120_EN.webp",
     "source": "https://onepiece.limitlesstcg.com/cards/OP14-120",
     "tcgplayer_id": 668640
+  },
+  "OP06-040": {
+    "id": "OP06-040",
+    "name": "Shark Arrows",
+    "category": "Event",
+    "color": "Green",
+    "life": null,
+    "cost": "2",
+    "power": null,
+    "counter": null,
+    "attribute": null,
+    "types": "Fish-Man/New Fish-Man Pirates",
+    "effect": "[Main] K.O. up to 2 of your opponent's rested Characters with a cost of 3 or less. [Trigger] Activate this card's [Main] effect.",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP06/OP06-040_EN.webp",
+    "source": "https://onepiece.limitlesstcg.com/cards/OP06-040",
+    "tcgplayer_id": 541607
   }
 }
