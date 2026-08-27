@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path("/workspace")
 DISCORD = "https://discord.gg/adZ2WUQ3D"
-CSS = "/css/site.css?v=shop-more"
+CSS = "/css/site.css?v=seo-links"
 SITE = "https://onepiecedeckbase.com"
 
 # Keep amzn.to URLs — they carry the Associates tag (opdb07-20).
@@ -145,6 +145,7 @@ def nav_html(current: str) -> str:
             item("/#recent", "Recent lists", "recent"),
             item("/decklists/op17.html", "Leaders", "leaders"),
             item("/format.html", "Format", "format"),
+            item("/guides/", "Guides", "guides"),
             item("/shop/", "Shop", "shop"),
             item(DISCORD, "Discord", "discord"),
         ]
@@ -217,7 +218,7 @@ def chrome(title: str, desc: str, canonical: str, body: str, *, indexable: bool,
     </main>
     <footer>
       © <span id="year"></span> One Piece Deck Base — Fan site, not affiliated with Bandai or Shueisha.
-{amazon_line}      <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a> · <a href="{DISCORD}" target="_blank" rel="noopener">Discord</a>
+{amazon_line}      <a href="/guides/">Guides</a> · <a href="/decklists/op17.html">Leaders</a> · <a href="/format.html">Format</a> · <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a> · <a href="{DISCORD}" target="_blank" rel="noopener">Discord</a>
     </footer>
   </div>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>

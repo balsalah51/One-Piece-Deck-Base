@@ -53,7 +53,7 @@ def chrome(title: str, description: str, body: str) -> str:
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
   <link rel="canonical" href="{html.escape(SITE)}" />
-  <link rel="stylesheet" href="/css/site.css?v=tcg-pills" />
+  <link rel="stylesheet" href="/css/site.css?v=seo-links" />
 </head>
 <body>
   <div class="wrap">
@@ -66,9 +66,10 @@ def chrome(title: str, description: str, body: str) -> str:
         </div>
       </a>
       <nav aria-label="Primary">
-        <a href="/#decklists">Decklists</a>
+        <a href="/#recent">Recent lists</a>
         <a href="/decklists/op17.html">Leaders</a>
         <a href="/format.html">Format</a>
+        <a href="/guides/">Guides</a>
         <a href="/shop/">Shop</a>
         <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
       </nav>
@@ -80,7 +81,7 @@ def chrome(title: str, description: str, body: str) -> str:
     </main>
     <footer>
       © <span id="year"></span> One Piece Deck Base — Fan site for the Bandai ONE PIECE CARD GAME (OPTCG). Not affiliated with Bandai.
-      <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a>
+      <a href="/guides/">Guides</a> · <a href="/decklists/op17.html">Leaders</a> · <a href="/format.html">Format</a> · <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a>
     </footer>
   </div>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
