@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import importlib.util
 
-SINCE = "2026-08-25"
+SINCE = "2026-08-26"
 UP_LUFFY = "OP11-040"
 
 

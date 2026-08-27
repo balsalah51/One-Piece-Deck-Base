@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Write shop pages.
 
-Live Amazon sleeves and dice are public and indexed. Playmats and custom
-leaders stay unpublished (noindex, not linked from the public shop).
+Live Amazon sleeves, dice, playmats, deck boxes, and table extras are public
+and indexed. Custom leaders stay unpublished (noindex, not linked).
 """
 
 from __future__ import annotations
@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path("/workspace")
 DISCORD = "https://discord.gg/adZ2WUQ3D"
-CSS = "/css/site.css?v=shop-photos"
+CSS = "/css/site.css?v=shop-more"
 SITE = "https://onepiecedeckbase.com"
 
 # Keep amzn.to URLs — they carry the Associates tag (opdb07-20).
@@ -34,6 +34,30 @@ SLEEVES = [
         "blurb": "100 standard-size Dual Matte sleeves. Metallic purple Dual Soul (ART15062).",
         "url": "https://amzn.to/4wMuTKw",
         "img": "/img/shop/sleeve-soul.jpg",
+    },
+    {
+        "name": "Dragon Shield Matte Midnight Blue",
+        "blurb": "100 standard-size matte sleeves. Midnight Blue finish. Fits a 50-card OPTCG deck plus extras.",
+        "url": "https://amzn.to/4hSoJoD",
+        "img": "/img/shop/sleeve-midnight.jpg",
+    },
+    {
+        "name": "Dragon Shield Dual Matte Cobalt / Silver",
+        "blurb": "100 standard-size Dual Matte sleeves. Cobalt face, silver back.",
+        "url": "https://amzn.to/4wNVOFR",
+        "img": "/img/shop/sleeve-cobalt-silver.jpg",
+    },
+    {
+        "name": "Dragon Shield Matte Amethyst",
+        "blurb": "100 standard-size matte sleeves. Amethyst purple finish.",
+        "url": "https://amzn.to/3SSyuZM",
+        "img": "/img/shop/sleeve-amethyst.jpg",
+    },
+    {
+        "name": "Hard plastic toploaders (3×4, 200-pack)",
+        "blurb": "Rigid 3×4 in. holders for singles, trades, and binder extras. Not for in-game play.",
+        "url": "https://amzn.to/4ixZmZn",
+        "img": "/img/shop/sleeve-toploaders.jpg",
     },
 ]
 
@@ -57,6 +81,58 @@ DICE = [
         "img": "/img/shop/dice-acrylic.jpg",
     },
 ]
+
+PLAYMATS = [
+    {
+        "name": "Custom TCG playmat with bag",
+        "blurb": "Personalized playmat with play-zone options and a non-slip surface. Ships with a mat bag.",
+        "url": "https://amzn.to/4hWBnD9",
+        "img": "/img/shop/playmat-custom.jpg",
+    },
+    {
+        "name": "One Piece skeleton playmat set",
+        "blurb": "14×24 in. One Piece TCG playmat with two skull dice and a storage bag.",
+        "url": "https://amzn.to/4ypjUbx",
+        "img": "/img/shop/playmat-skeleton.jpg",
+    },
+]
+
+DECK_BOXES = [
+    {
+        "name": "Wanted poster deck box",
+        "blurb": "Wanted-poster themed box with commander display. Holds about 120 singles or 100 double-sleeved cards.",
+        "url": "https://amzn.to/4xuKTlW",
+        "img": "/img/shop/deckbox-wanted.jpg",
+    },
+    {
+        "name": "4-pack magnetic deck boxes",
+        "blurb": "Four magnetic boxes. Each holds 100+ double-sleeved cards — enough for several OPTCG lists.",
+        "url": "https://amzn.to/3SSyyJ0",
+        "img": "/img/shop/deckbox-4pack.jpg",
+    },
+    {
+        "name": "MAKHISTORY Commander deck box",
+        "blurb": "Magnetic deck case with dice tray, 35pt holder, and two dividers. Fits 100+ double-sleeved cards.",
+        "url": "https://amzn.to/4gVNBuw",
+        "img": "/img/shop/deckbox-makhistory.jpg",
+    },
+    {
+        "name": "UAONO Commander deck box",
+        "blurb": "Magnetic commander box. Fits 100 double-sleeved cards and a toploader.",
+        "url": "https://amzn.to/4zVuIzE",
+        "img": "/img/shop/deckbox-uaono.jpg",
+    },
+]
+
+EXTRAS = [
+    {
+        "name": "Koonie USB desk fan",
+        "blurb": "Small quiet USB fan for long events. Strong airflow, adjustable, folds for the bag.",
+        "url": "https://amzn.to/4cc2lD5",
+        "img": "/img/shop/extra-desk-fan.jpg",
+    },
+]
+
 
 def nav_html(current: str) -> str:
     def item(href: str, label: str, key: str) -> str:
@@ -92,6 +168,15 @@ def product_card(item: dict) -> str:
 
 def product_grid(items: list[dict]) -> str:
     return '        <div class="shop-grid">\n' + "\n".join(product_card(p) for p in items) + "\n        </div>"
+
+
+def section(title: str, href: str, note: str, items: list[dict]) -> str:
+    return f"""        <div class="section-title" style="margin-top:28px">
+          <h3>{html.escape(title)}</h3>
+          <a href="{html.escape(href, quote=True)}">All {html.escape(title.lower())} →</a>
+        </div>
+        <p class="muted">{html.escape(note)}</p>
+{product_grid(items)}"""
 
 
 def chrome(title: str, desc: str, canonical: str, body: str, *, indexable: bool, amazon: bool) -> str:
@@ -151,24 +236,17 @@ def write(rel: str, title: str, desc: str, canonical: str, body: str, *, indexab
 
 index_body = f"""        <div class="crumb"><a href="/">Home</a> / Shop</div>
         <h2>Shop</h2>
-        <p>Sleeves and dice for the table.</p>
-        <div class="section-title" style="margin-top:22px">
-          <h3>Sleeves</h3>
-          <a href="/shop/sleeves.html">All sleeves →</a>
-        </div>
-        <p class="muted">Standard 63×88 mm Dragon Shield packs. Enough for a 50-card OPTCG list.</p>
-{product_grid(SLEEVES)}
-        <div class="section-title" style="margin-top:28px">
-          <h3>Dice</h3>
-          <a href="/shop/dice.html">All dice →</a>
-        </div>
-        <p class="muted">Power counters, the official Luffy tin, and a cheap acrylic D6 set.</p>
-{product_grid(DICE)}
+        <p>Sleeves, dice, playmats, deck boxes, and a table extra. Open Amazon for live price and stock.</p>
+{section("Sleeves", "/shop/sleeves.html", "Standard 63×88 mm Dragon Shield packs plus hard toploaders for singles.", SLEEVES)}
+{section("Dice", "/shop/dice.html", "Power counters, the official Luffy tin, and a cheap acrylic D6 set.", DICE)}
+{section("Playmats", "/shop/playmats.html", "A custom mat with bag and a One Piece skeleton playmat set.", PLAYMATS)}
+{section("Deck boxes", "/shop/deck-boxes.html", "Magnetic boxes for sleeved OPTCG lists, including a wanted-poster case.", DECK_BOXES)}
+{section("Table extras", "/shop/extras.html", "Small gear for long events.", EXTRAS)}
         <p class="amazon-disclosure-line">As an Amazon Associate I earn from qualifying purchases.</p>"""
 
 sleeves_body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="/shop/">Shop</a> / Sleeves</div>
         <h2>Sleeves</h2>
-        <p>Dragon Shield standard-size packs (63×88 mm). Open Amazon for live price and stock.</p>
+        <p>Dragon Shield standard-size packs (63×88 mm) and hard toploaders for singles. Open Amazon for live price and stock.</p>
 {product_grid(SLEEVES)}
         <p class="amazon-disclosure-line">As an Amazon Associate I earn from qualifying purchases.</p>"""
 
@@ -178,16 +256,28 @@ dice_body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="/shop
 {product_grid(DICE)}
         <p class="amazon-disclosure-line">As an Amazon Associate I earn from qualifying purchases.</p>"""
 
-playmats_body = f"""        <div class="crumb"><a href="/">Home</a> / Shop / Playmats</div>
+playmats_body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="/shop/">Shop</a> / Playmats</div>
         <h2>Playmats</h2>
-        <p>This category is not on the public shop. Fan-made mats are ordered on Discord when they come back.</p>
-        <p class="muted">The live shop is <a href="/shop/sleeves.html">sleeves</a> and <a href="/shop/dice.html">dice</a> on Amazon.</p>
-        <a class="discord" href="{DISCORD}" style="margin-top:18px">Ask on Discord</a>"""
+        <p>Playmats for OPTCG and other TCGs. Open Amazon for live price and stock.</p>
+{product_grid(PLAYMATS)}
+        <p class="amazon-disclosure-line">As an Amazon Associate I earn from qualifying purchases.</p>"""
+
+deck_boxes_body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="/shop/">Shop</a> / Deck boxes</div>
+        <h2>Deck boxes</h2>
+        <p>Magnetic cases for sleeved OPTCG lists. Open Amazon for live price and stock.</p>
+{product_grid(DECK_BOXES)}
+        <p class="amazon-disclosure-line">As an Amazon Associate I earn from qualifying purchases.</p>"""
+
+extras_body = f"""        <div class="crumb"><a href="/">Home</a> / <a href="/shop/">Shop</a> / Table extras</div>
+        <h2>Table extras</h2>
+        <p>Small gear for long events. Open Amazon for live price and stock.</p>
+{product_grid(EXTRAS)}
+        <p class="amazon-disclosure-line">As an Amazon Associate I earn from qualifying purchases.</p>"""
 
 custom_body = f"""        <div class="crumb"><a href="/">Home</a> / Shop / Custom leaders</div>
         <h2>Custom leaders</h2>
         <p>This category is not on the public shop. Custom leader prints are paused.</p>
-        <p class="muted">The live shop is <a href="/shop/sleeves.html">sleeves</a> and <a href="/shop/dice.html">dice</a> on Amazon.</p>
+        <p class="muted">The live shop is <a href="/shop/">sleeves, dice, playmats, and deck boxes</a> on Amazon.</p>
         <a class="discord" href="{DISCORD}" style="margin-top:18px">Ask on Discord</a>"""
 
 
@@ -199,6 +289,9 @@ def ensure_sitemap() -> None:
         f"{SITE}/shop/",
         f"{SITE}/shop/sleeves.html",
         f"{SITE}/shop/dice.html",
+        f"{SITE}/shop/playmats.html",
+        f"{SITE}/shop/deck-boxes.html",
+        f"{SITE}/shop/extras.html",
     ):
         if url not in text:
             text = text.replace("</urlset>", f"  <url><loc>{url}</loc></url>\n</urlset>", 1)
@@ -211,8 +304,8 @@ def ensure_sitemap() -> None:
 def main() -> None:
     write(
         "shop/index.html",
-        "Shop | Sleeves and dice | One Piece Deck Base",
-        "OPTCG sleeves and dice via Amazon.",
+        "Shop | Sleeves, dice, playmats, deck boxes | One Piece Deck Base",
+        "OPTCG sleeves, dice, playmats, and deck boxes via Amazon.",
         f"{SITE}/shop/",
         index_body,
         indexable=True,
@@ -221,7 +314,7 @@ def main() -> None:
     write(
         "shop/sleeves.html",
         "Dragon Shield sleeves | One Piece Deck Base shop",
-        "Standard 63×88 mm Dragon Shield sleeves for OPTCG.",
+        "Standard 63×88 mm Dragon Shield sleeves and toploaders for OPTCG.",
         f"{SITE}/shop/sleeves.html",
         sleeves_body,
         indexable=True,
@@ -238,11 +331,30 @@ def main() -> None:
     )
     write(
         "shop/playmats.html",
-        "Playmats | One Piece Deck Base shop",
-        "Fan-made One Piece TCG playmats. Not currently in the public shop.",
+        "OPTCG playmats | One Piece Deck Base shop",
+        "One Piece TCG playmats via Amazon.",
         f"{SITE}/shop/playmats.html",
         playmats_body,
-        indexable=False,
+        indexable=True,
+        amazon=True,
+    )
+    write(
+        "shop/deck-boxes.html",
+        "OPTCG deck boxes | One Piece Deck Base shop",
+        "Magnetic deck boxes for sleeved One Piece TCG lists via Amazon.",
+        f"{SITE}/shop/deck-boxes.html",
+        deck_boxes_body,
+        indexable=True,
+        amazon=True,
+    )
+    write(
+        "shop/extras.html",
+        "Table extras | One Piece Deck Base shop",
+        "Small table gear for OPTCG events via Amazon.",
+        f"{SITE}/shop/extras.html",
+        extras_body,
+        indexable=True,
+        amazon=True,
     )
     write(
         "shop/custom-leaders.html",
