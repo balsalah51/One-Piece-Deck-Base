@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /shop/playmats.html
 Disallow: /shop/custom-leaders.html
 Sitemap: https://onepiecedeckbase.com/sitemap.xml

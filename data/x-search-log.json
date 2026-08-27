@@ -1,7 +1,7 @@
 {
   "window": {
-    "start": "2026-08-25",
-    "end": "2026-08-26",
+    "start": "2026-08-26",
+    "end": "2026-08-27",
     "tz": "UTC"
   },
   "profiles": [
@@ -198,103 +198,103 @@
   ],
   "searches": [
     {
-      "query": "site:x.com \"4xOP17\" since:2026-08-25",
+      "query": "site:x.com \"4xOP17\" since:2026-08-26",
       "status": 202,
-      "chars": 14278,
+      "chars": 14290,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0
     },
     {
-      "query": "site:x.com \"1xOP17-001\" since:2026-08-25",
+      "query": "site:x.com \"1xOP17-001\" since:2026-08-26",
       "status": 202,
-      "chars": 14286,
+      "chars": 14280,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
     },
     {
-      "query": "site:x.com \"1xOP17-039\" since:2026-08-25",
+      "query": "site:x.com \"1xOP17-039\" since:2026-08-26",
       "status": 202,
-      "chars": 14286,
+      "chars": 14273,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
     },
     {
-      "query": "site:x.com \"1xOP17-079\" since:2026-08-25",
+      "query": "site:x.com \"1xOP17-079\" since:2026-08-26",
       "status": 202,
-      "chars": 14268,
+      "chars": 14298,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
     },
     {
-      "query": "site:x.com \"1xOP11-040\" since:2026-08-25",
+      "query": "site:x.com \"1xOP11-040\" since:2026-08-26",
       "status": 202,
-      "chars": 14286,
+      "chars": 14274,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
     },
     {
-      "query": "site:x.com \"1xOP08-058\" since:2026-08-25",
+      "query": "site:x.com \"1xOP08-058\" since:2026-08-26",
       "status": 202,
-      "chars": 14279,
+      "chars": 14292,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
     },
     {
-      "query": "site:x.com \"1xOP16-001\" since:2026-08-25",
+      "query": "site:x.com \"1xOP16-001\" since:2026-08-26",
       "status": 202,
-      "chars": 14279,
+      "chars": 14280,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
     },
     {
-      "query": "site:x.com OP17 decklist since:2026-08-25",
+      "query": "site:x.com OP17 decklist since:2026-08-26",
       "status": 202,
-      "chars": 14262,
+      "chars": 14256,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0
     },
     {
-      "query": "site:x.com OPTCG decklist since:2026-08-25",
+      "query": "site:x.com OPTCG decklist since:2026-08-26",
       "status": 202,
-      "chars": 14258,
+      "chars": 14270,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0
     },
     {
-      "query": "site:x.com ChinoizeCup since:2026-08-25",
+      "query": "site:x.com ChinoizeCup since:2026-08-26",
       "status": 202,
-      "chars": 14246,
+      "chars": 14252,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0
     },
     {
-      "query": "site:x.com The_Egman decklist since:2026-08-25",
+      "query": "site:x.com The_Egman decklist since:2026-08-26",
       "status": 202,
-      "chars": 14266,
+      "chars": 14272,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0
     },
     {
-      "query": "site:x.com Yonxlj deck-list since:2026-08-25",
+      "query": "site:x.com Yonxlj deck-list since:2026-08-26",
       "status": 202,
-      "chars": 14262,
+      "chars": 14273,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0
     },
     {
-      "query": "site:x.com MarinefordTCG since:2026-08-25",
+      "query": "site:x.com MarinefordTCG since:2026-08-26",
       "status": 202,
       "chars": 14274,
       "tweet_ids": [],
@@ -302,9 +302,9 @@
       "complete_lists": 0
     },
     {
-      "query": "site:x.com CardKaizoku since:2026-08-25",
+      "query": "site:x.com CardKaizoku since:2026-08-26",
       "status": 202,
-      "chars": 14263,
+      "chars": 14269,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0
@@ -312,7 +312,7 @@
     {
       "query": "site:x.com \"4xOP17\"",
       "status": 202,
-      "chars": 14226,
+      "chars": 14237,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0
@@ -320,7 +320,7 @@
     {
       "query": "site:twitter.com \"4xOP17-040\"",
       "status": 202,
-      "chars": 14264,
+      "chars": 14251,
       "tweet_ids": [],
       "card_lines": 2,
       "complete_lists": 0
@@ -342,9 +342,9 @@
       "complete_lists": 0
     },
     {
-      "query": "site:x.com ワンピカード デッキ since:2026-08-25",
+      "query": "site:x.com ワンピカード デッキ since:2026-08-26",
       "status": 202,
-      "chars": 14250,
+      "chars": 14262,
       "tweet_ids": [],
       "card_lines": 0,
       "complete_lists": 0
@@ -647,7 +647,7 @@
   "complete_lists": [],
   "partial_id_hits": [
     {
-      "source": "site:x.com \"1xOP17-001\" since:2026-08-25",
+      "source": "site:x.com \"1xOP17-001\" since:2026-08-26",
       "hits": [
         [
           1,
@@ -660,7 +660,7 @@
       ]
     },
     {
-      "source": "site:x.com \"1xOP17-039\" since:2026-08-25",
+      "source": "site:x.com \"1xOP17-039\" since:2026-08-26",
       "hits": [
         [
           1,
@@ -673,7 +673,7 @@
       ]
     },
     {
-      "source": "site:x.com \"1xOP17-079\" since:2026-08-25",
+      "source": "site:x.com \"1xOP17-079\" since:2026-08-26",
       "hits": [
         [
           1,
@@ -686,7 +686,7 @@
       ]
     },
     {
-      "source": "site:x.com \"1xOP11-040\" since:2026-08-25",
+      "source": "site:x.com \"1xOP11-040\" since:2026-08-26",
       "hits": [
         [
           1,
@@ -699,7 +699,7 @@
       ]
     },
     {
-      "source": "site:x.com \"1xOP08-058\" since:2026-08-25",
+      "source": "site:x.com \"1xOP08-058\" since:2026-08-26",
       "hits": [
         [
           1,
@@ -712,7 +712,7 @@
       ]
     },
     {
-      "source": "site:x.com \"1xOP16-001\" since:2026-08-25",
+      "source": "site:x.com \"1xOP16-001\" since:2026-08-26",
       "hits": [
         [
           1,
@@ -939,9 +939,8 @@
     }
   ],
   "notes": [
-    "No complete 50-card NxSET-NNN lists on public X posts dated 2026-08-25–2026-08-26 UTC. Jina reader is blocked on x.com (403 AbuseAlleviationError). FxTwitter returns individual tweets when an ID is known, but not user timelines. DuckDuckGo site:x.com often 202s or returns older tweets that ignore since:. Nitter/xcancel/syndication/RSSHub did not yield timelines. List photos that *are* public (The_Egman 2089838271522320522 on 2026-08-18, Yonxlj Ace 2086756739634909242 on 2026-08-10, KuroKumaTCG Rocks 2084578215536816418 on 2026-08-04) are outside the two-day window and were not hosted.",
-    "Zero in-window tweet IDs were discovered. ChinoizeCup #101 (Limitless, 2026-08-25) and #100 (2026-08-24) almost certainly have winner posts on @Chinoize_, but those status IDs are not in public search indexes from this environment.",
-    "Limitless Play on 2026-08-26 UTC had no OPTCG tournaments published yet. Hosted 44 complete lists dated 2026-08-25 from ChinoizeCup #101 and Liga Phoenix MANA 33°. The four @Chinoize_ photo lists from 2092357744921612794 remain hosted."
+    "No complete 50-card NxSET-NNN lists on public X posts dated 2026-08-26–2026-08-27 UTC. Jina reader is blocked on x.com (403 AbuseAlleviationError). FxTwitter returns individual tweets when an ID is known, but not user timelines. DuckDuckGo site:x.com often 202s or returns older tweets that ignore since:. Nitter/xcancel/syndication/RSSHub did not yield timelines. List photos that *are* public (The_Egman 2089838271522320522 on 2026-08-18, Yonxlj Ace 2086756739634909242 on 2026-08-10, KuroKumaTCG Rocks 2084578215536816418 on 2026-08-04) are outside the two-day window and were not hosted.",
+    "Zero in-window tweet IDs were discovered. ChinoizeCup #101 (Limitless, 2026-08-25) and #100 (2026-08-24) almost certainly have winner posts on @Chinoize_, but those status IDs are not in public search indexes from this environment."
   ],
   "hosted": [
     {

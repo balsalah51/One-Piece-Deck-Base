@@ -349,7 +349,7 @@ def render_home_body() -> str:
               </svg>
             </span>
             <span class="home-big-title">Shop</span>
-            <span class="home-big-note">Sleeves and dice for the table</span>
+            <span class="home-big-note">Sleeves, dice, playmats, and deck boxes</span>
           </a>
           <a class="home-big home-big-discord" href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">
             <span class="home-big-icon" aria-hidden="true">

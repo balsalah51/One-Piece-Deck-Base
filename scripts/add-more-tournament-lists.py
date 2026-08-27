@@ -326,7 +326,7 @@ def fetch_more(
 
 def rewrite_sitemap() -> None:
     skip = {".git", "scripts", "node_modules", "discord-bot"}
-    skip_files = {"shop/playmats.html", "shop/custom-leaders.html"}
+    skip_files = {"shop/custom-leaders.html"}
     urls = []
     for p in sorted(ROOT.rglob("*.html")):
         if any(part in p.parts for part in skip):

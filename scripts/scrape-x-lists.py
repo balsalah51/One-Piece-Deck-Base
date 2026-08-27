@@ -26,9 +26,9 @@ STATUS_RE = re.compile(
     re.I,
 )
 TWITTER_EPOCH_MS = 1288834974657
-# Inclusive UTC window: today and yesterday for this scrape (26 Aug 2026).
-DATE_START = "2026-08-25"
-DATE_END = "2026-08-26"
+# Inclusive UTC window: yesterday and today for this scrape (26–27 Aug 2026).
+DATE_START = "2026-08-26"
+DATE_END = "2026-08-27"
 LEADERS = {
     "OP17-001",
     "OP17-020",
@@ -124,7 +124,7 @@ SEARCHES = [
     'site:twitter.com "4xOP17-040"',
     "site:x.com ChinoizeCup #101 Winner",
     "site:x.com ChinoizeCup #100 Winner",
-    "site:x.com ワンピカード デッキ since:2026-08-25",
+    "site:x.com ワンピカード デッキ since:2026-08-26",
 ]
 
 

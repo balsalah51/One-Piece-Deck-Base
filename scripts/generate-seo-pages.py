@@ -769,7 +769,7 @@ def existing_html_urls() -> list[str]:
         if any(part in p.parts for part in (".git", "scripts", "node_modules")):
             continue
         rel_check = p.relative_to(ROOT).as_posix()
-        if rel_check in ("shop/playmats.html", "shop/custom-leaders.html"):
+        if rel_check in ("shop/custom-leaders.html",):
             continue
         rel = p.relative_to(ROOT).as_posix()
         if rel.endswith("index.html"):
@@ -818,7 +818,7 @@ def main() -> None:
     )
 
     (ROOT / "robots.txt").write_text(
-        "User-agent: *\nAllow: /\nDisallow: /shop/playmats.html\nDisallow: /shop/custom-leaders.html\nSitemap: https://onepiecedeckbase.com/sitemap.xml\n"
+        "User-agent: *\nAllow: /\nDisallow: /shop/custom-leaders.html\nSitemap: https://onepiecedeckbase.com/sitemap.xml\n"
     )
 
     all_urls = existing_html_urls()
