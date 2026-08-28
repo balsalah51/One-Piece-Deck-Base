@@ -69,6 +69,9 @@ def main() -> None:
     print("=== TCGplayer buy scripts ===")
     buy = load("tcgbuy", "/workspace/scripts/add-tcgplayer-buy.py")
     buy.main()
+    print("=== SEO internal links / on-page ===")
+    seofix = load("seofix", "/workspace/scripts/enhance-seo.py")
+    seofix.main()
     print("ingest done")
 
 

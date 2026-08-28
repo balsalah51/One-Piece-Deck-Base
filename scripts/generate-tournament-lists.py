@@ -854,7 +854,6 @@ def page_chrome(
     body: str,
     include_tcgplayer: bool = True,
 ) -> str:
-    deck_cur = "" if nav_op17 else ' aria-current="page"'
     op17_cur = ' aria-current="page"' if nav_op17 else ""
     tcg_scripts = ""
     if include_tcgplayer:
@@ -870,7 +869,7 @@ def page_chrome(
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
-  <link rel="stylesheet" href="/css/site.css?v=tcg-pills" />
+  <link rel="stylesheet" href="/css/site.css?v=seo-links" />
 </head>
 <body class="{html.escape(color)}">
   <div class="wrap">
@@ -883,9 +882,10 @@ def page_chrome(
         </div>
       </a>
       <nav aria-label="Primary">
-        <a href="/#decklists"{deck_cur}>Decklists</a>
+        <a href="/#recent">Recent lists</a>
         <a href="/decklists/op17.html"{op17_cur}>Leaders</a>
         <a href="/format.html">Format</a>
+        <a href="/guides/">Guides</a>
         <a href="/shop/">Shop</a>
         <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
       </nav>
@@ -898,7 +898,7 @@ def page_chrome(
     </main>
     <footer>
       © <span id="year"></span> One Piece Deck Base — Built with community in mind.
-      <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a>
+      <a href="/guides/">Guides</a> · <a href="/decklists/op17.html">Leaders</a> · <a href="/format.html">Format</a> · <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a>
     </footer>
   </div>
   <script>

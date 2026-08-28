@@ -22,7 +22,7 @@ aspec.loader.exec_module(ana)
 
 ROOT = gen.ROOT
 LINE_RE = ana.LINE_RE
-CSS_NEW = "/css/site.css?v=tcg-pills"
+CSS_NEW = "/css/site.css?v=seo-links"
 JS_NEW = "/js/site.js?v=amazon-shop"
 TCG_VER = "tcg-pills"
 TCG_SCRIPTS = (
@@ -36,12 +36,14 @@ TCG_SCRIPT_RE = re.compile(
 NAV_LEADERS_SHOP = (
     '        <a href="/decklists/op17.html">Leaders</a>\n'
     '        <a href="/format.html">Format</a>\n'
+    '        <a href="/guides/">Guides</a>\n'
     '        <a href="/shop/">Shop</a>\n'
     '        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>'
 )
 NAV_LEADERS_SHOP_CURRENT = (
     '        <a href="/decklists/op17.html" aria-current="page">Leaders</a>\n'
     '        <a href="/format.html">Format</a>\n'
+    '        <a href="/guides/">Guides</a>\n'
     '        <a href="/shop/">Shop</a>\n'
     '        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>'
 )
@@ -59,6 +61,10 @@ NAV_OLD_PATTERNS = [
         NAV_LEADERS_SHOP,
     ),
     (
+        '        <a href="/decklists/op17.html">Leaders</a>\n        <a href="/format.html">Format</a>\n        <a href="/shop/">Shop</a>\n        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>',
+        NAV_LEADERS_SHOP,
+    ),
+    (
         '        <a href="/decklists/op17.html" aria-current="page">OP17</a>\n        <a href="/#community">Community</a>',
         NAV_LEADERS_SHOP_CURRENT,
     ),
@@ -67,16 +73,20 @@ NAV_OLD_PATTERNS = [
         NAV_LEADERS_SHOP_CURRENT,
     ),
     (
-        '        <a href="/decklists/op17.html" aria-current="page">Leaders</a>\n        <a href="/format.html">Format</a>\n        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>',
+        '        <a href="/decklists/op17.html" aria-current="page">Leaders</a>\n        <a href="/format.html">Format</a>\n        <a href="/shop/">Shop</a>\n        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>',
         NAV_LEADERS_SHOP_CURRENT,
     ),
     (
         '        <a href="/format.html">Format</a>\n        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>',
-        '        <a href="/format.html">Format</a>\n        <a href="/shop/">Shop</a>\n        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>',
+        '        <a href="/format.html">Format</a>\n        <a href="/guides/">Guides</a>\n        <a href="/shop/">Shop</a>\n        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>',
     ),
     (
         '        <a href="/format.html" aria-current="page">Format</a>\n        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>',
+        '        <a href="/format.html" aria-current="page">Format</a>\n        <a href="/guides/">Guides</a>\n        <a href="/shop/">Shop</a>\n        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>',
+    ),
+    (
         '        <a href="/format.html" aria-current="page">Format</a>\n        <a href="/shop/">Shop</a>\n        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>',
+        '        <a href="/format.html" aria-current="page">Format</a>\n        <a href="/guides/">Guides</a>\n        <a href="/shop/">Shop</a>\n        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>',
     ),
 ]
 
@@ -311,7 +321,7 @@ def render_home_body() -> str:
     rocks = gen.card_image_url("OP17-039")
     return f"""        <!-- HOME_BODY -->
         <section class="home-splash" aria-label="One Piece Deck Base">
-          <img class="home-splash-bg" src="/img/opdb-hero.jpg" alt="OPDB" />
+          <img class="home-splash-bg" src="/img/opdb-hero.jpg" alt="One Piece Deck Base, an OPTCG decklist site" />
           <a class="home-splash-luffy" href="/decklists/op17/rocks-d-xebec.html">
             <img src="{rocks}" alt="Rocks D. Xebec" />
           </a>
@@ -368,7 +378,7 @@ def render_home_body() -> str:
             <div class="home-leaders-intro-row">
               <div>
                 <h3>Leaders</h3>
-                <p>Pick a picture. Each page has lists for that leader.</p>
+                <p>Pick a picture. Each page has lists for that leader. Character names live in the <a href="/guides/">guides</a>.</p>
               </div>
               <a href="/decklists/op17.html">All leader pages →</a>
             </div>
