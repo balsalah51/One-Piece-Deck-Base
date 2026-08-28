@@ -481,6 +481,16 @@ def patch_nav_footer(text: str) -> str:
             '        <a href="/search.html">Search</a>\n        <a href="https://discord.gg/adZ2WUQ3D"',
             1,
         )
+    text = text.replace('<div class="logo">OP</div>', seo.BRAND_LOGO_HTML)
+    if '<img class="logo"' not in text:
+        text = re.sub(
+            r'<div class="logo">[^<]*</div>',
+            seo.BRAND_LOGO_HTML,
+            text,
+            count=1,
+        )
+    else:
+        text = re.sub(r'<img class="logo"[^>]*>', seo.BRAND_LOGO_HTML, text, count=1)
     text = re.sub(r'href="/css/site\.css(?:\?[^"]*)?"', f'href="/css/site.css?v={seo.CSS_VER}"', text)
     text = re.sub(r'src="/js/site\.js(?:\?[^"]*)?"', f'src="/js/site.js?v={seo.JS_VER}"', text)
     text = text.replace(
@@ -741,52 +751,43 @@ def rewrite_sitemap(by_href: dict) -> None:
 
 
 def write_logos() -> None:
-    svg = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="One Piece Deck Base">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#b71c1c"/>
-      <stop offset="100%" stop-color="#7a1212"/>
-    </linearGradient>
-  </defs>
-  <rect width="512" height="512" rx="96" fill="url(#g)"/>
-  <text x="256" y="342" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="210" font-weight="700" fill="#ffffff">OP</text>
-</svg>
-"""
-    (ROOT / "img/opdb-logo.svg").write_text(svg)
+    hero_path = ROOT / "img/opdb-hero.jpg"
     needed = [
+        ROOT / "img/opdb-avatar.png",
         ROOT / "img/opdb-logo-48.png",
         ROOT / "img/opdb-logo-192.png",
         ROOT / "img/opdb-logo-512.png",
         ROOT / "favicon.ico",
     ]
     try:
-        from PIL import Image, ImageDraw, ImageFont
+        from PIL import Image, ImageFilter
     except ImportError:
         if all(p.exists() for p in needed):
-            log("logos kept, pillow missing")
+            log("avatar kept, pillow missing")
             return
         raise
 
-    font_path = "/usr/share/fonts/truetype/macos/Inter-Bold.ttf"
+    hero = Image.open(hero_path).convert("RGB")
+    left, right = 20, 970
+    crop = hero.crop((left, 0, right, hero.size[1]))
+    fill = crop.getpixel((30, 12))
+    side = crop.size[0]
+    square = Image.new("RGB", (side, side), fill)
+    square.paste(crop, (0, (side - crop.size[1]) // 2))
 
-    def make(size: int) -> Image.Image:
-        img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
-        draw = ImageDraw.Draw(img)
-        radius = max(8, int(size * 0.18))
-        draw.rounded_rectangle([0, 0, size - 1, size - 1], radius=radius, fill="#b71c1c")
-        font = ImageFont.truetype(font_path, int(size * 0.42))
-        box = draw.textbbox((0, 0), "OP", font=font)
-        tw, th = box[2] - box[0], box[3] - box[1]
-        x = (size - tw) / 2 - box[0]
-        y = (size - th) / 2 - box[1] - size * 0.02
-        draw.text((x, y), "OP", font=font, fill="#ffffff")
-        return img
+    def sized(px: int) -> Image.Image:
+        out = square.resize((px, px), Image.Resampling.LANCZOS)
+        if px <= 192:
+            out = out.filter(ImageFilter.UnsharpMask(radius=1.2, percent=140, threshold=2))
+        return out
 
-    make(48).save(ROOT / "img/opdb-logo-48.png")
-    make(192).save(ROOT / "img/opdb-logo-192.png")
-    make(512).save(ROOT / "img/opdb-logo-512.png")
-    make(48).save(ROOT / "favicon.ico", format="ICO", sizes=[(48, 48), (32, 32), (16, 16)])
-    log("logos written")
+    avatar = sized(512)
+    avatar.save(ROOT / "img/opdb-avatar.png", optimize=True)
+    avatar.save(ROOT / "img/opdb-logo-512.png", optimize=True)
+    sized(192).save(ROOT / "img/opdb-logo-192.png", optimize=True)
+    sized(48).save(ROOT / "img/opdb-logo-48.png", optimize=True)
+    sized(48).save(ROOT / "favicon.ico", format="ICO", sizes=[(48, 48), (32, 32), (16, 16)])
+    log("avatar written")
 
 
 def write_discovery_files() -> None:
@@ -802,8 +803,9 @@ def write_discovery_files() -> None:
                 "background_color": "#f7f5f3",
                 "theme_color": "#b71c1c",
                 "icons": [
+                    {"src": "/img/opdb-logo-48.png", "sizes": "48x48", "type": "image/png"},
                     {"src": "/img/opdb-logo-192.png", "sizes": "192x192", "type": "image/png"},
-                    {"src": "/img/opdb-logo-512.png", "sizes": "512x512", "type": "image/png"},
+                    {"src": "/img/opdb-avatar.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
                 ],
             },
             indent=2,
@@ -962,7 +964,7 @@ def write_search_page(index: dict) -> None:
   <div class="wrap">
     <header>
       <a class="brand" href="/">
-        <div class="logo">OP</div>
+        <img class="logo" src="/img/opdb-avatar.png" width="56" height="56" alt="One Piece Deck Base" />
         <div>
           <h1>One Piece Deck Base</h1>
           <div class="subtitle">OPTCG decklists</div>

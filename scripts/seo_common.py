@@ -11,12 +11,16 @@ from pathlib import Path
 ROOT = Path("/workspace")
 SITE = "https://onepiecedeckbase.com"
 DEFAULT_OG = f"{SITE}/img/opdb-hero.jpg"
+AVATAR = f"{SITE}/img/opdb-avatar.png"
 LOGO_SVG = f"{SITE}/img/opdb-logo.svg"
 LOGO_48 = f"{SITE}/img/opdb-logo-48.png"
 LOGO_192 = f"{SITE}/img/opdb-logo-192.png"
 LOGO_512 = f"{SITE}/img/opdb-logo-512.png"
-CSS_VER = "gsearch"
+CSS_VER = "avatar"
 JS_VER = "gsearch"
+BRAND_LOGO_HTML = (
+    '<img class="logo" src="/img/opdb-avatar.png" width="56" height="56" alt="One Piece Deck Base" />'
+)
 
 ROBOTS_TXT = """User-agent: *
 Allow: /
@@ -174,8 +178,8 @@ def google_head_tags(url: str, *, indexable: bool = True) -> str:
         f'  <meta name="robots" content="{robots}" />\n'
         f'  <meta name="googlebot" content="{robots}" />\n'
         f'  <meta name="theme-color" content="#b71c1c" />\n'
-        f'  <link rel="icon" href="{html.escape(LOGO_SVG, quote=True)}" type="image/svg+xml" />\n'
         f'  <link rel="icon" href="{html.escape(LOGO_48, quote=True)}" type="image/png" sizes="48x48" />\n'
+        f'  <link rel="icon" href="{html.escape(AVATAR, quote=True)}" type="image/png" sizes="512x512" />\n'
         f'  <link rel="apple-touch-icon" href="{html.escape(LOGO_192, quote=True)}" />\n'
         f'  <link rel="manifest" href="/site.webmanifest" />\n'
         f'  <link rel="search" type="application/opensearchdescription+xml" title="One Piece Deck Base" href="/opensearch.xml" />\n'
@@ -193,10 +197,11 @@ def organization_node() -> dict:
         "url": SITE + "/",
         "logo": {
             "@type": "ImageObject",
-            "url": LOGO_512,
+            "url": AVATAR,
             "width": 512,
             "height": 512,
         },
+        "image": AVATAR,
         "sameAs": ["https://discord.gg/adZ2WUQ3D"],
     }
 
@@ -250,7 +255,7 @@ def article_jsonld(
         "publisher": {
             "@type": "Organization",
             "name": "One Piece Deck Base",
-            "logo": {"@type": "ImageObject", "url": LOGO_512},
+            "logo": {"@type": "ImageObject", "url": AVATAR},
         },
     }
     if date:

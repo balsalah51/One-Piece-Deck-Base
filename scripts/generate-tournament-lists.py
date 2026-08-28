@@ -875,7 +875,7 @@ def page_chrome(
   <div class="wrap">
     <header>
       <a class="brand" href="/">
-        <div class="logo">OP</div>
+        <img class="logo" src="/img/opdb-avatar.png" width="56" height="56" alt="One Piece Deck Base" />
         <div>
           <h1>One Piece Deck Base</h1>
           <div class="subtitle">OPTCG decklists</div>

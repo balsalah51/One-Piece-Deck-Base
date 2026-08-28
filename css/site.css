@@ -17,9 +17,10 @@ html,body{height:100%;margin:0;background:var(--bg);color:var(--text);-webkit-fo
 .wrap{max-width:var(--maxw);width:100%;margin:36px auto;padding:28px;min-width:0}
 header{display:flex;align-items:center;justify-content:space-between;gap:18px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
-.logo{
-  width:56px;height:56px;border-radius:10px;background:linear-gradient(180deg,var(--accent),#7a1212);
-  display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px;box-shadow:var(--shadow)
+.logo, img.logo{
+  width:56px;height:56px;border-radius:50%;
+  object-fit:cover;display:block;flex-shrink:0;
+  background:#9b1111;box-shadow:var(--shadow)
 }
 h1{margin:0;font-size:20px;letter-spacing:-0.01em}
 .subtitle{color:var(--muted);font-size:13px;margin-top:4px}
@@ -423,7 +424,7 @@ a.buy-tcg-inline:hover,.card-entry a.buy-tcg-inline:hover{text-decoration:underl
   .card{padding:12px}
   .hero{padding:14px 12px}
   .item{padding:10px}
-  .logo{width:44px;height:44px;font-size:16px}
+  .logo{width:44px;height:44px}
   h1{font-size:17px}
 }
 @media (min-width:1100px){
