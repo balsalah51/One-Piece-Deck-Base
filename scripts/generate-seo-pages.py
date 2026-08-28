@@ -71,6 +71,7 @@ def chrome(title: str, description: str, body: str) -> str:
         <a href="/format.html">Format</a>
         <a href="/guides/">Guides</a>
         <a href="/shop/">Shop</a>
+        <a href="/search.html">Search</a>
         <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
       </nav>
     </header>
@@ -81,7 +82,7 @@ def chrome(title: str, description: str, body: str) -> str:
     </main>
     <footer>
       © <span id="year"></span> One Piece Deck Base — Fan site for the Bandai ONE PIECE CARD GAME (OPTCG). Not affiliated with Bandai.
-      <a href="/guides/">Guides</a> · <a href="/decklists/op17.html">Leaders</a> · <a href="/format.html">Format</a> · <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a>
+      <a href="/guides/">Guides</a> · <a href="/decklists/op17.html">Leaders</a> · <a href="/format.html">Format</a> · <a href="/search.html">Search</a> · <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a>
     </footer>
   </div>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
@@ -819,16 +820,10 @@ def main() -> None:
     )
 
     (ROOT / "robots.txt").write_text(
-        "User-agent: *\nAllow: /\nDisallow: /shop/custom-leaders.html\nSitemap: https://onepiecedeckbase.com/sitemap.xml\n"
+        "User-agent: *\nAllow: /\nDisallow: /shop/custom-leaders.html\nDisallow: /ballkeep/\nDisallow: /scripts/\nDisallow: /data/\nDisallow: /discord-bot/\nDisallow: /.github/\n\nUser-agent: Googlebot\nAllow: /\nDisallow: /shop/custom-leaders.html\nDisallow: /ballkeep/\nDisallow: /scripts/\nDisallow: /data/\nDisallow: /discord-bot/\nDisallow: /.github/\n\nSitemap: https://onepiecedeckbase.com/sitemap.xml\n"
     )
 
-    all_urls = existing_html_urls()
-    sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-    for url in all_urls:
-        sitemap.append(f"  <url><loc>{html.escape(url)}</loc></url>")
-    sitemap.append("</urlset>\n")
-    (ROOT / "sitemap.xml").write_text("\n".join(sitemap))
-    print("topics", len(TOPICS), "characters", len(CHARACTERS), "sitemap", len(all_urls))
+    print("topics", len(TOPICS), "characters", len(CHARACTERS), "pages", len(existing_html_urls()))
 
 
 if __name__ == "__main__":

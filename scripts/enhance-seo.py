@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Patch public HTML for crawlable internal links and basic on-page SEO.
+"""Patch public HTML for Google Search crawl, sitelinks search, and on-page SEO.
 
 Does not wipe decklist pages. Safe to re-run.
 """
@@ -34,12 +34,28 @@ BY_DIR = {L["dir"]: L for L in LEADERS}
 
 TITLE_RE = re.compile(r"<title>(.*?)</title>", re.S)
 DESC_RE = re.compile(r'<meta name="description" content="([^"]*)"', re.I)
-CANON_RE = re.compile(r'<link rel="canonical" href="[^"]*"\s*/?>\s*', re.I)
-OG_RE = re.compile(r'\n?  <meta (?:property="og:|name="twitter:)[^>]*>\s*', re.I)
-JSONLD_RE = re.compile(r'\n?  <script type="application/ld\+json">.*?</script>\s*', re.S)
+CANON_RE = re.compile(r'\s*<link rel="canonical" href="[^"]*"\s*/?>', re.I)
+OG_RE = re.compile(
+    r'\s*<meta\s+(?:property="(?:og|article):[^"]*"|name="twitter:[^"]*")[^>]*/?>',
+    re.I,
+)
+JSONLD_RE = re.compile(r'\s*<script type="application/ld\+json">.*?</script>', re.S | re.I)
+ROBOTS_META_RE = re.compile(r'\s*<meta name="(?:robots|googlebot)" content="[^"]*"\s*/?>', re.I)
+ICON_RE = re.compile(
+    r'\s*<link rel="(?:icon|shortcut icon|apple-touch-icon|manifest|search|alternate)"[^>]*/?>',
+    re.I,
+)
+THEME_RE = re.compile(r'\s*<meta name="theme-color" content="[^"]*"\s*/?>', re.I)
 IMG_RE = re.compile(r"<img\b([^>]*)>", re.I)
 SKIP_PARTS = {".git", "scripts", "node_modules", "discord-bot", "ballkeep"}
 SKIP_FILES = {"shop/custom-leaders.html"}
+CORE_RELS = {
+    "index.html",
+    "format.html",
+    "privacy.html",
+    "search.html",
+    "decklists/op17.html",
+}
 
 
 def log(*args) -> None:
@@ -316,20 +332,111 @@ def page_title_desc(text: str, rel: str) -> tuple[str, str]:
     return title, desc
 
 
-def ensure_head(text: str, rel: str, title: str, desc: str) -> str:
+def list_item_pairs(text: str, limit: int = 20) -> list[tuple[str, str]]:
+    out = []
+    for m in re.finditer(
+        r'<a class="item" href="([^"]+)">\s*<div>\s*<div style="font-weight:700">([^<]+)</div>',
+        text,
+    ):
+        out.append((html.unescape(m.group(2).strip()), m.group(1)))
+        if len(out) >= limit:
+            break
+    if out:
+        return out
+    for m in re.finditer(r'<a class="leader-card-link" href="([^"]+)">\s*<img[^>]*alt="([^"]+)"', text):
+        out.append((html.unescape(m.group(2).replace(" leader card", "").strip()), m.group(1)))
+        if len(out) >= limit:
+            break
+    return out
+
+
+def extra_jsonld(rel: str, title: str, desc: str, url: str, image: str, text: str, by_href: dict) -> str:
+    chunks = []
+    if rel == "index.html":
+        chunks.append(seo.jsonld_script(seo.website_jsonld()))
+        items = list_item_pairs(text, 24)
+        if items:
+            chunks.append(seo.jsonld_script(seo.collection_jsonld(title=title, desc=desc, url=url, items=items)))
+        return "".join(chunks)
+    if rel == "format.html":
+        chunks.append(seo.jsonld_script(seo.faq_jsonld(seo.FORMAT_FAQ)))
+        return "".join(chunks)
+    if rel == "search.html":
+        chunks.append(
+            seo.jsonld_script(
+                {
+                    "@context": "https://schema.org",
+                    "@type": "SearchResultsPage",
+                    "name": title,
+                    "url": url,
+                    "isPartOf": {"@id": SITE + "/#website"},
+                }
+            )
+        )
+        return "".join(chunks)
+    leader = leader_for_path(rel)
+    if leader and rel == leader["page"]:
+        items = list_item_pairs(text)
+        chunks.append(
+            seo.jsonld_script(seo.collection_jsonld(title=title, desc=desc, url=url, items=items or [(leader["name"], "/" + leader["page"])]))
+        )
+        return "".join(chunks)
+    if leader and rel.startswith(leader["dir"] + "/"):
+        rec = by_href.get(rel) or by_href.get("/" + rel)
+        date_s = (rec.get("date") if rec else None) or None
+        author = rec.get("player") if rec else None
+        chunks.append(
+            seo.jsonld_script(
+                seo.article_jsonld(
+                    title=title,
+                    desc=desc,
+                    url=url,
+                    image=image,
+                    date=date_s,
+                    author=author,
+                    about=leader["name"],
+                )
+            )
+        )
+        return "".join(chunks)
+    if rel in ("decklists/op17.html", "guides/index.html", "guides/characters/index.html") or rel.startswith("shop/"):
+        items = list_item_pairs(text)
+        if items:
+            chunks.append(seo.jsonld_script(seo.collection_jsonld(title=title, desc=desc, url=url, items=items)))
+        return "".join(chunks)
+    return ""
+
+
+def ensure_head(text: str, rel: str, title: str, desc: str, by_href: dict) -> str:
     url = seo.canonical_url(rel)
     image = seo.og_image_for(rel, LEADERS)
     crumbs = seo.parse_crumbs(text)
     if crumbs[-1][1] == "":
         crumbs[-1] = (crumbs[-1][0], url.replace(SITE, "") or "/")
+    indexable = "noindex" not in (ROBOTS_META_RE.search(text).group(0).lower() if ROBOTS_META_RE.search(text) else "")
+    rec = by_href.get(rel) or by_href.get("/" + rel)
+    date_s = (rec.get("date") if rec else "") or ""
+    date_meta = ""
+    if date_s:
+        date_meta = (
+            f'  <meta property="article:published_time" content="{html.escape(date_s)}" />\n'
+            f'  <meta property="article:modified_time" content="{html.escape(date_s)}" />\n'
+        )
     extras = (
         f'  <link rel="canonical" href="{html.escape(url, quote=True)}" />\n'
+        + seo.google_head_tags(url, indexable=indexable)
         + seo.social_tags(title, desc, url, image)
+        + date_meta
         + seo.breadcrumb_jsonld(crumbs)
+        + extra_jsonld(rel, title, desc, url, image, text, by_href)
     )
     text = CANON_RE.sub("", text)
     text = OG_RE.sub("", text)
     text = JSONLD_RE.sub("", text)
+    text = ROBOTS_META_RE.sub("", text)
+    text = ICON_RE.sub("", text)
+    text = THEME_RE.sub("", text)
+    text = re.sub(r'(<link rel="stylesheet"[^>]*>)(?=<)', r"\1\n", text)
     if TITLE_RE.search(text):
         text = TITLE_RE.sub(f"<title>{html.escape(title)}</title>", text, count=1)
     else:
@@ -353,7 +460,8 @@ def patch_nav_footer(text: str) -> str:
         '<a href="/#recent">Recent lists</a>',
         text,
     )
-    if 'href="/guides/"' not in text.split("<nav", 1)[-1].split("</nav>", 1)[0] if "<nav" in text else "":
+    nav = text.split("<nav", 1)[-1].split("</nav>", 1)[0] if "<nav" in text else ""
+    if 'href="/guides/"' not in nav:
         text = text.replace(
             '        <a href="/format.html">Format</a>\n        <a href="/shop/">Shop</a>',
             '        <a href="/format.html">Format</a>\n        <a href="/guides/">Guides</a>\n        <a href="/shop/">Shop</a>',
@@ -366,13 +474,37 @@ def patch_nav_footer(text: str) -> str:
             '        <a href="/format.html">Format</a>\n        <a href="/shop/" aria-current="page">Shop</a>',
             '        <a href="/format.html">Format</a>\n        <a href="/guides/">Guides</a>\n        <a href="/shop/" aria-current="page">Shop</a>',
         )
-    text = re.sub(r'href="/css/site\.css(?:\?[^"]*)?"', f'href="/css/site.css?v={seo.CSS_VER}"', text)
-    if 'href="/guides/">Guides</a>' not in text.split("<footer", 1)[-1] if "<footer" in text else "":
+    nav = text.split("<nav", 1)[-1].split("</nav>", 1)[0] if "<nav" in text else ""
+    if 'href="/search.html"' not in nav:
         text = text.replace(
-            '      <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a>',
-            seo.FOOTER_LINKS,
+            '        <a href="https://discord.gg/adZ2WUQ3D"',
+            '        <a href="/search.html">Search</a>\n        <a href="https://discord.gg/adZ2WUQ3D"',
+            1,
         )
-        if 'href="/guides/">Guides</a>' not in (text.split("<footer", 1)[-1] if "<footer" in text else ""):
+    text = re.sub(r'href="/css/site\.css(?:\?[^"]*)?"', f'href="/css/site.css?v={seo.CSS_VER}"', text)
+    text = re.sub(r'src="/js/site\.js(?:\?[^"]*)?"', f'src="/js/site.js?v={seo.JS_VER}"', text)
+    text = text.replace(
+        '<a href="/search.html">Search</a> · <a href="/shop/">Shop</a> · <a href="/search.html">Search</a>',
+        '<a href="/search.html">Search</a> · <a href="/shop/">Shop</a>',
+    )
+    footer = text.split("<footer", 1)[-1] if "<footer" in text else ""
+    if 'href="/search.html">Search</a>' not in footer:
+        text = re.sub(
+            r'(<a href="/format\.html">Format</a> · )(?!<a href="/search\.html">)',
+            r'\1<a href="/search.html">Search</a> · ',
+            text,
+            count=1,
+        )
+        footer = text.split("<footer", 1)[-1] if "<footer" in text else ""
+        if 'href="/search.html">Search</a>' not in footer:
+            text = re.sub(
+                r'(<a href="/shop/">Shop</a> · )(?!<a href="/search\.html">)(<a href="/privacy\.html">Privacy</a>)',
+                r'\1<a href="/search.html">Search</a> · \2',
+                text,
+                count=1,
+            )
+        footer = text.split("<footer", 1)[-1] if "<footer" in text else ""
+        if 'href="/search.html">Search</a>' not in footer and 'href="/guides/">Guides</a>' not in footer:
             text = re.sub(
                 r"(<footer>\s*)",
                 r"\1" + seo.FOOTER_LINKS + "\n",
@@ -398,22 +530,37 @@ def ensure_img_alt(text: str) -> str:
     return IMG_RE.sub(repl, text)
 
 
-def homepage_org_jsonld() -> str:
-    payload = {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "One Piece Deck Base",
-        "url": SITE + "/",
-        "description": "OPTCG decklists for the Bandai ONE PIECE CARD GAME.",
-    }
-    return (
-        '  <script type="application/ld+json">'
-        + json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
-        + "</script>\n"
-    )
+def homepage_search_html() -> str:
+    return """        <form class="site-search home-search" method="get" action="/search.html" role="search">
+          <label class="site-search-label" for="home-q">Search OPTCG decklists</label>
+          <div class="site-search-row">
+            <input id="home-q" type="search" name="q" placeholder="Leader, player, character, or event" aria-label="Search OPTCG decklists" />
+            <button type="submit">Search</button>
+          </div>
+        </form>
+"""
 
 
-def patch_file(path: Path, index: dict) -> tuple[bool, str]:
+def format_faq_html() -> str:
+    items = []
+    for q, a in seo.FORMAT_FAQ:
+        items.append(
+            f"""          <details>
+            <summary>{html.escape(q)}</summary>
+            <p>{html.escape(a)}</p>
+          </details>"""
+        )
+    return f"""        <section class="faq" id="faq">
+          <div class="section-title">
+            <h3>OPTCG format FAQ</h3>
+            <div class="muted">Standard rules in short answers</div>
+          </div>
+{chr(10).join(items)}
+        </section>
+"""
+
+
+def patch_file(path: Path, index: dict, by_href: dict) -> tuple[bool, str]:
     rel = path.relative_to(ROOT).as_posix()
     orig = path.read_text()
     text = orig
@@ -427,6 +574,21 @@ def patch_file(path: Path, index: dict) -> tuple[bool, str]:
                 '<p>Pick a picture. Each page has lists for that leader. Character names live in the <a href="/guides/">guides</a>.</p>',
                 1,
             )
+        if 'class="site-search home-search"' not in text:
+            text = text.replace(
+                '        </nav>\n\n        <section class="home-leaders-flow"',
+                "        </nav>\n\n" + homepage_search_html() + '\n        <section class="home-leaders-flow"',
+                1,
+            )
+        def splash_repl(m: re.Match) -> str:
+            if "fetchpriority=" in m.group(0):
+                return m.group(0)
+            return m.group(1) + ' width="1400" height="636" fetchpriority="high" decoding="async">'
+
+        text = re.sub(r'(<img class="home-splash-bg"[^>]*?)(?:\s*/?>)', splash_repl, text, count=1)
+
+    if rel == "format.html" and 'class="faq"' not in text:
+        text = text.replace("        <!-- RELATED_LINKS -->", format_faq_html() + "        <!-- RELATED_LINKS -->", 1)
 
     block = ""
     if leader and rel.startswith(leader["dir"] + "/") and rel != leader["page"]:
@@ -447,6 +609,7 @@ def patch_file(path: Path, index: dict) -> tuple[bool, str]:
             seo.list_row("/format.html", "Format and banlist", "Standard constructed rules"),
             seo.list_row("/guides/", "One Piece TCG guides", "Topics and character names"),
             seo.list_row("/shop/", "Shop", "Sleeves, dice, playmats, deck boxes"),
+            seo.list_row("/search.html", "Search decklists", "Find a leader, player, or event"),
         ]
         block = seo.related_section("Related pages", "Around the site", rows)
     elif rel == "format.html":
@@ -454,6 +617,7 @@ def patch_file(path: Path, index: dict) -> tuple[bool, str]:
             seo.list_row("/decklists/op17.html", "All leader pages", "Constructed OPTCG hubs"),
             seo.list_row("/guides/constructed.html", "Constructed guide", "What 50-card OPTCG means"),
             seo.list_row("/guides/", "More guides", "Topics and character pages"),
+            seo.list_row("/search.html", "Search decklists", "Leader, player, or event"),
         ]
         block = seo.related_section("Related pages", "Lists and guides", rows)
 
@@ -463,9 +627,7 @@ def patch_file(path: Path, index: dict) -> tuple[bool, str]:
     text = patch_nav_footer(text)
     text = ensure_img_alt(text)
     title, desc = page_title_desc(text, rel)
-    text = ensure_head(text, rel, title, desc)
-    if rel == "index.html" and "WebSite" not in text:
-        text = text.replace("</head>", homepage_org_jsonld() + "</head>", 1)
+    text = ensure_head(text, rel, title, desc, by_href)
 
     if text != orig:
         path.write_text(text)
@@ -473,27 +635,371 @@ def patch_file(path: Path, index: dict) -> tuple[bool, str]:
     return False, "ok"
 
 
-def rewrite_sitemap() -> None:
-    skip = SKIP_PARTS
-    urls = []
-    today = date.today().isoformat()
-    for p in sorted(public_html()):
-        rel = p.relative_to(ROOT).as_posix()
-        url = seo.canonical_url(rel)
-        urls.append(url)
+def href_lookup(index: dict) -> dict:
+    out = {}
+    for lid, rows in index.items():
+        leader = BY_ID.get(lid)
+        for row in rows:
+            href = row.get("href") or (f"/{leader['dir']}/{row['slug']}.html" if leader and row.get("slug") else "")
+            if not href:
+                continue
+            rec = dict(row)
+            rec["_leader"] = leader
+            out[href.lstrip("/")] = rec
+            out[href] = rec
+    return out
+
+
+def lastmod_for(rel: str, by_href: dict, newest_by_leader: dict) -> str:
+    rec = by_href.get(rel) or by_href.get("/" + rel)
+    if rec and rec.get("date"):
+        return str(rec["date"])[:10]
+    leader = leader_for_path(rel)
+    if leader and rel == leader["page"] and newest_by_leader.get(leader["id"]):
+        return newest_by_leader[leader["id"]]
+    if rel == "index.html" and newest_by_leader:
+        return max(newest_by_leader.values())
+    return date.today().isoformat()
+
+
+def urlset_xml(entries: list[tuple[str, str]]) -> str:
     lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
     ]
-    for url in urls:
-        lines.append(f"  <url><loc>{html.escape(url)}</loc><lastmod>{today}</lastmod></url>")
+    for loc, lastmod in entries:
+        lines.append(
+            f"  <url><loc>{html.escape(loc)}</loc><lastmod>{html.escape(lastmod)}</lastmod></url>"
+        )
     lines.append("</urlset>\n")
-    (ROOT / "sitemap.xml").write_text("\n".join(lines))
-    log("sitemap", len(urls), "lastmod", today)
+    return "\n".join(lines)
+
+
+def is_core(rel: str) -> bool:
+    if rel in CORE_RELS:
+        return True
+    if rel.startswith("guides/") or rel.startswith("shop/"):
+        return True
+    if rel in BY_PAGE:
+        return True
+    return False
+
+
+def rewrite_sitemap(by_href: dict) -> None:
+    newest_by_leader = {}
+    for rec in by_href.values():
+        lid = (rec.get("_leader") or {}).get("id")
+        d = (rec.get("date") or "")[:10]
+        if lid and d:
+            newest_by_leader[lid] = max(d, newest_by_leader.get(lid, ""))
+    core = []
+    lists = []
+    images = []
+    today = date.today().isoformat()
+    for p in sorted(public_html()):
+        rel = p.relative_to(ROOT).as_posix()
+        loc = seo.canonical_url(rel)
+        lastmod = lastmod_for(rel, by_href, newest_by_leader)
+        row = (loc, lastmod)
+        if is_core(rel):
+            core.append(row)
+        else:
+            lists.append(row)
+        image = seo.og_image_for(rel, LEADERS)
+        if rel == "index.html" or rel in BY_PAGE or rel.startswith("shop/"):
+            title = TITLE_RE.search(p.read_text()[:1200])
+            label = html.unescape(title.group(1).strip()) if title else Path(rel).stem
+            images.append((loc, image, label, lastmod))
+
+    (ROOT / "sitemap-core.xml").write_text(urlset_xml(core))
+    (ROOT / "sitemap-lists.xml").write_text(urlset_xml(lists))
+    img_lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">',
+    ]
+    for loc, image, label, lastmod in images:
+        img_lines.append("  <url>")
+        img_lines.append(f"    <loc>{html.escape(loc)}</loc>")
+        img_lines.append(f"    <lastmod>{html.escape(lastmod)}</lastmod>")
+        img_lines.append("    <image:image>")
+        img_lines.append(f"      <image:loc>{html.escape(image)}</image:loc>")
+        img_lines.append(f"      <image:title>{html.escape(label)}</image:title>")
+        img_lines.append("    </image:image>")
+        img_lines.append("  </url>")
+    img_lines.append("</urlset>\n")
+    (ROOT / "sitemap-images.xml").write_text("\n".join(img_lines))
+    index_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap><loc>{SITE}/sitemap-core.xml</loc><lastmod>{today}</lastmod></sitemap>
+  <sitemap><loc>{SITE}/sitemap-lists.xml</loc><lastmod>{today}</lastmod></sitemap>
+  <sitemap><loc>{SITE}/sitemap-images.xml</loc><lastmod>{today}</lastmod></sitemap>
+</sitemapindex>
+"""
+    (ROOT / "sitemap.xml").write_text(index_xml)
+    (ROOT / "robots.txt").write_text(seo.ROBOTS_TXT)
+    log("sitemap core", len(core), "lists", len(lists), "images", len(images))
+
+
+def write_logos() -> None:
+    svg = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="One Piece Deck Base">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b71c1c"/>
+      <stop offset="100%" stop-color="#7a1212"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#g)"/>
+  <text x="256" y="342" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="210" font-weight="700" fill="#ffffff">OP</text>
+</svg>
+"""
+    (ROOT / "img/opdb-logo.svg").write_text(svg)
+    needed = [
+        ROOT / "img/opdb-logo-48.png",
+        ROOT / "img/opdb-logo-192.png",
+        ROOT / "img/opdb-logo-512.png",
+        ROOT / "favicon.ico",
+    ]
+    try:
+        from PIL import Image, ImageDraw, ImageFont
+    except ImportError:
+        if all(p.exists() for p in needed):
+            log("logos kept, pillow missing")
+            return
+        raise
+
+    font_path = "/usr/share/fonts/truetype/macos/Inter-Bold.ttf"
+
+    def make(size: int) -> Image.Image:
+        img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+        draw = ImageDraw.Draw(img)
+        radius = max(8, int(size * 0.18))
+        draw.rounded_rectangle([0, 0, size - 1, size - 1], radius=radius, fill="#b71c1c")
+        font = ImageFont.truetype(font_path, int(size * 0.42))
+        box = draw.textbbox((0, 0), "OP", font=font)
+        tw, th = box[2] - box[0], box[3] - box[1]
+        x = (size - tw) / 2 - box[0]
+        y = (size - th) / 2 - box[1] - size * 0.02
+        draw.text((x, y), "OP", font=font, fill="#ffffff")
+        return img
+
+    make(48).save(ROOT / "img/opdb-logo-48.png")
+    make(192).save(ROOT / "img/opdb-logo-192.png")
+    make(512).save(ROOT / "img/opdb-logo-512.png")
+    make(48).save(ROOT / "favicon.ico", format="ICO", sizes=[(48, 48), (32, 32), (16, 16)])
+    log("logos written")
+
+
+def write_discovery_files() -> None:
+    (ROOT / "site.webmanifest").write_text(
+        json.dumps(
+            {
+                "name": "One Piece Deck Base",
+                "short_name": "OPDB",
+                "description": "OPTCG decklists for the Bandai ONE PIECE CARD GAME.",
+                "start_url": "/",
+                "scope": "/",
+                "display": "browser",
+                "background_color": "#f7f5f3",
+                "theme_color": "#b71c1c",
+                "icons": [
+                    {"src": "/img/opdb-logo-192.png", "sizes": "192x192", "type": "image/png"},
+                    {"src": "/img/opdb-logo-512.png", "sizes": "512x512", "type": "image/png"},
+                ],
+            },
+            indent=2,
+        )
+        + "\n"
+    )
+    (ROOT / "opensearch.xml").write_text(
+        f"""<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>OPDB</ShortName>
+  <LongName>One Piece Deck Base</LongName>
+  <Description>Search OPTCG decklists on One Piece Deck Base</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Image width="48" height="48" type="image/png">{seo.LOGO_48}</Image>
+  <Url type="text/html" method="get" template="{SITE}/search.html?q={{searchTerms}}"/>
+</OpenSearchDescription>
+"""
+    )
+
+
+def search_catalog(index: dict) -> tuple[list[dict], list[dict]]:
+    pages = []
+    for L in LEADERS:
+        pages.append(
+            {
+                "kind": "leader",
+                "title": L["name"],
+                "note": f"{L['id']} constructed hub",
+                "href": "/" + L["page"],
+                "q": f"{L['name']} {L['id']} {L['key']} decklist optcg",
+            }
+        )
+    pages.append({"kind": "page", "title": "Format and banlist", "note": "Standard OPTCG rules", "href": "/format.html", "q": "format banlist rotation pudding"})
+    pages.append({"kind": "page", "title": "All leader pages", "note": "Every constructed hub", "href": "/decklists/op17.html", "q": "leaders op17 decklists"})
+    pages.append({"kind": "page", "title": "Guides", "note": "Topics and characters", "href": "/guides/", "q": "guides one piece tcg optcg"})
+    pages.append({"kind": "page", "title": "Shop", "note": "Sleeves, dice, playmats, deck boxes", "href": "/shop/", "q": "shop sleeves dice playmat deck box"})
+    for href, label in seo.SHOP_PAGES:
+        if href == "/shop/":
+            continue
+        pages.append({"kind": "shop", "title": label, "note": "Amazon shop", "href": href, "q": f"{label} shop amazon optcg"})
+    for topic in seopages.TOPICS:
+        pages.append(
+            {
+                "kind": "guide",
+                "title": topic["h2"],
+                "note": "Topic guide",
+                "href": f"/guides/{topic['slug']}.html",
+                "q": f"{topic['h2']} {topic['desc']}",
+            }
+        )
+    for name, slug, blurb, _related in seopages.CHARACTERS:
+        pages.append(
+            {
+                "kind": "character",
+                "title": name,
+                "note": "Character guide",
+                "href": f"/guides/characters/{slug}.html",
+                "q": f"{name} {blurb}",
+            }
+        )
+    lists = []
+    for lid, rows in index.items():
+        leader = BY_ID.get(lid)
+        lname = leader["name"] if leader else lid
+        for row in rows:
+            href = row.get("href") or (f"/{leader['dir']}/{row['slug']}.html" if leader and row.get("slug") else "")
+            if not href:
+                continue
+            player = row.get("player") or "List"
+            event = row.get("tournament") or ""
+            date_s = row.get("date") or ""
+            lists.append(
+                {
+                    "title": f"{player} — {lname}",
+                    "note": " · ".join(x for x in (event, date_s) if x),
+                    "href": href,
+                    "q": f"{player} {lname} {event} {lid}",
+                    "date": date_s,
+                }
+            )
+    lists.sort(key=lambda r: r.get("date") or "", reverse=True)
+    return pages, lists
+
+
+def write_search_page(index: dict) -> None:
+    pages, lists = search_catalog(index)
+    groups = [
+        ("Leaders", [p for p in pages if p["kind"] == "leader"]),
+        ("Pages", [p for p in pages if p["kind"] in ("page", "shop")]),
+        ("Guides", [p for p in pages if p["kind"] == "guide"]),
+        ("Characters", [p for p in pages if p["kind"] == "character"]),
+        ("Recent lists", lists[:60]),
+    ]
+    sections = []
+    for heading, rows in groups:
+        items = []
+        for row in rows:
+            items.append(
+                f"""            <li data-q="{html.escape(row.get('q') or row['title'], quote=True)}">
+              <a class="item" href="{html.escape(row['href'], quote=True)}">
+                <div>
+                  <div style="font-weight:700">{html.escape(row['title'])}</div>
+                  <div class="muted" style="font-size:13px">{html.escape(row.get('note') or '')}</div>
+                </div>
+                <div class="link">Open →</div>
+              </a>
+            </li>"""
+            )
+        sections.append(
+            f"""        <section class="search-group" data-search-group>
+          <div class="section-title">
+            <h3>{html.escape(heading)}</h3>
+            <div class="muted">{len(rows)}</div>
+          </div>
+          <ul class="list">
+{chr(10).join(items)}
+          </ul>
+        </section>"""
+        )
+    compact = [
+        {"t": r["title"], "n": r.get("note") or "", "h": r["href"], "q": r["q"]}
+        for r in lists
+    ]
+    blob = json.dumps(compact, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c")
+    body = f"""        <div class="crumb"><a href="/">Home</a> / Search</div>
+        <h2>Search OPTCG decklists</h2>
+        <p>Find a leader, player, character, or event. Google sitelinks search and the site header both land here.</p>
+        <form class="site-search" method="get" action="/search.html" role="search">
+          <label class="site-search-label" for="q">Search</label>
+          <div class="site-search-row">
+            <input id="q" type="search" name="q" placeholder="Rocks, Mihawk, ChinoizeCup, player name" aria-label="Search OPTCG decklists" />
+            <button type="submit">Search</button>
+          </div>
+        </form>
+        <p class="muted" id="search-status" hidden></p>
+        <section class="search-group" data-search-extra hidden>
+          <div class="section-title">
+            <h3>Matching lists</h3>
+            <div class="muted" data-extra-count></div>
+          </div>
+          <ul class="list" data-extra-results></ul>
+        </section>
+{chr(10).join(sections)}
+        <script type="application/json" id="search-lists">{blob}</script>
+"""
+    page = f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Search OPTCG decklists | One Piece Deck Base</title>
+  <meta name="description" content="Search One Piece TCG decklists, leaders, characters, and events on One Piece Deck Base." />
+  <link rel="stylesheet" href="/css/site.css?v={seo.CSS_VER}" />
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/">
+        <div class="logo">OP</div>
+        <div>
+          <h1>One Piece Deck Base</h1>
+          <div class="subtitle">OPTCG decklists</div>
+        </div>
+      </a>
+      <nav aria-label="Primary">
+        <a href="/#recent">Recent lists</a>
+        <a href="/decklists/op17.html">Leaders</a>
+        <a href="/format.html">Format</a>
+        <a href="/guides/">Guides</a>
+        <a href="/shop/">Shop</a>
+        <a href="/search.html" aria-current="page">Search</a>
+        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
+      </nav>
+    </header>
+    <main class="single">
+      <div class="card hero">
+{body}
+      </div>
+    </main>
+    <footer>
+      © <span id="year"></span> One Piece Deck Base — Fan site for the Bandai ONE PIECE CARD GAME (OPTCG). Not affiliated with Bandai.
+{seo.FOOTER_LINKS}
+    </footer>
+  </div>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="/js/site.js?v={seo.JS_VER}"></script>
+</body>
+</html>
+"""
+    (ROOT / "search.html").write_text(page)
+    log("search page", len(pages), "catalog", len(lists), "lists")
 
 
 def audit(paths: list[Path]) -> None:
     missing_title = missing_desc = missing_canon = missing_alt = weak_title = 0
+    missing_robots = missing_icon = 0
     for p in paths:
         text = p.read_text()
         tm = TITLE_RE.search(text)
@@ -506,6 +1012,10 @@ def audit(paths: list[Path]) -> None:
             missing_desc += 1
         if not CANON_RE.search(text):
             missing_canon += 1
+        if not ROBOTS_META_RE.search(text):
+            missing_robots += 1
+        if 'rel="icon"' not in text:
+            missing_icon += 1
         for m in IMG_RE.finditer(text):
             attrs = m.group(1)
             if not re.search(r"\balt\s*=", attrs, re.I) or re.search(r'\balt=""', attrs):
@@ -522,6 +1032,10 @@ def audit(paths: list[Path]) -> None:
         missing_desc,
         "no canonical",
         missing_canon,
+        "no robots",
+        missing_robots,
+        "no icon",
+        missing_icon,
         "img missing alt",
         missing_alt,
     )
@@ -529,18 +1043,22 @@ def audit(paths: list[Path]) -> None:
 
 def main() -> None:
     index = load_index()
+    by_href = href_lookup(index)
+    write_logos()
+    write_discovery_files()
+    write_search_page(index)
     paths = public_html()
     log("scan", len(paths), "html pages")
     audit(paths)
     changed = 0
     for p in paths:
-        ok, _why = patch_file(p, index)
+        ok, _why = patch_file(p, index, by_href)
         if ok:
             changed += 1
     log("patched", changed)
-    rewrite_sitemap()
+    rewrite_sitemap(by_href)
     audit(public_html())
-    log("seo enhance done")
+    log("google search seo done")
 
 
 if __name__ == "__main__":

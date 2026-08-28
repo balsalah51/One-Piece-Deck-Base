@@ -11,7 +11,33 @@ from pathlib import Path
 ROOT = Path("/workspace")
 SITE = "https://onepiecedeckbase.com"
 DEFAULT_OG = f"{SITE}/img/opdb-hero.jpg"
-CSS_VER = "seo-links"
+LOGO_SVG = f"{SITE}/img/opdb-logo.svg"
+LOGO_48 = f"{SITE}/img/opdb-logo-48.png"
+LOGO_192 = f"{SITE}/img/opdb-logo-192.png"
+LOGO_512 = f"{SITE}/img/opdb-logo-512.png"
+CSS_VER = "gsearch"
+JS_VER = "gsearch"
+
+ROBOTS_TXT = """User-agent: *
+Allow: /
+Disallow: /shop/custom-leaders.html
+Disallow: /ballkeep/
+Disallow: /scripts/
+Disallow: /data/
+Disallow: /discord-bot/
+Disallow: /.github/
+
+User-agent: Googlebot
+Allow: /
+Disallow: /shop/custom-leaders.html
+Disallow: /ballkeep/
+Disallow: /scripts/
+Disallow: /data/
+Disallow: /discord-bot/
+Disallow: /.github/
+
+Sitemap: https://onepiecedeckbase.com/sitemap.xml
+"""
 
 # Leader id -> nearby constructed pages (same color family, same set, or same character).
 RELATED_LEADERS: dict[str, list[str]] = {
@@ -114,18 +140,172 @@ def social_tags(title: str, desc: str, url: str, image: str) -> str:
     d = html.escape(desc[:300])
     u = html.escape(url, quote=True)
     img = html.escape(image, quote=True)
+    alt = html.escape(title[:120])
     return (
         f'  <meta property="og:site_name" content="One Piece Deck Base" />\n'
+        f'  <meta property="og:locale" content="en_US" />\n'
         f'  <meta property="og:type" content="website" />\n'
         f'  <meta property="og:title" content="{t}" />\n'
         f'  <meta property="og:description" content="{d}" />\n'
         f'  <meta property="og:url" content="{u}" />\n'
         f'  <meta property="og:image" content="{img}" />\n'
+        f'  <meta property="og:image:alt" content="{alt}" />\n'
         f'  <meta name="twitter:card" content="summary_large_image" />\n'
         f'  <meta name="twitter:title" content="{t}" />\n'
         f'  <meta name="twitter:description" content="{d}" />\n'
         f'  <meta name="twitter:image" content="{img}" />\n'
+        f'  <meta name="twitter:image:alt" content="{alt}" />\n'
     )
+
+
+def jsonld_script(payload: dict) -> str:
+    blob = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+    return f'  <script type="application/ld+json">{blob}</script>\n'
+
+
+def google_head_tags(url: str, *, indexable: bool = True) -> str:
+    robots = (
+        "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        if indexable
+        else "noindex, nofollow"
+    )
+    u = html.escape(url, quote=True)
+    return (
+        f'  <meta name="robots" content="{robots}" />\n'
+        f'  <meta name="googlebot" content="{robots}" />\n'
+        f'  <meta name="theme-color" content="#b71c1c" />\n'
+        f'  <link rel="icon" href="{html.escape(LOGO_SVG, quote=True)}" type="image/svg+xml" />\n'
+        f'  <link rel="icon" href="{html.escape(LOGO_48, quote=True)}" type="image/png" sizes="48x48" />\n'
+        f'  <link rel="apple-touch-icon" href="{html.escape(LOGO_192, quote=True)}" />\n'
+        f'  <link rel="manifest" href="/site.webmanifest" />\n'
+        f'  <link rel="search" type="application/opensearchdescription+xml" title="One Piece Deck Base" href="/opensearch.xml" />\n'
+        f'  <link rel="alternate" hreflang="en" href="{u}" />\n'
+        f'  <link rel="alternate" hreflang="x-default" href="{u}" />\n'
+    )
+
+
+def organization_node() -> dict:
+    return {
+        "@type": "Organization",
+        "@id": SITE + "/#organization",
+        "name": "One Piece Deck Base",
+        "alternateName": ["OPDB", "One Piece TCG Deck Base"],
+        "url": SITE + "/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": LOGO_512,
+            "width": 512,
+            "height": 512,
+        },
+        "sameAs": ["https://discord.gg/adZ2WUQ3D"],
+    }
+
+
+def website_jsonld() -> dict:
+    return {
+        "@context": "https://schema.org",
+        "@graph": [
+            organization_node(),
+            {
+                "@type": "WebSite",
+                "@id": SITE + "/#website",
+                "name": "One Piece Deck Base",
+                "alternateName": ["OPDB", "One Piece TCG Decklists"],
+                "url": SITE + "/",
+                "description": "OPTCG decklists for the Bandai ONE PIECE CARD GAME.",
+                "inLanguage": "en",
+                "publisher": {"@id": SITE + "/#organization"},
+                "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": {
+                        "@type": "EntryPoint",
+                        "urlTemplate": SITE + "/search.html?q={search_term_string}",
+                    },
+                    "query-input": "required name=search_term_string",
+                },
+            },
+        ],
+    }
+
+
+def article_jsonld(
+    *,
+    title: str,
+    desc: str,
+    url: str,
+    image: str,
+    date: str | None,
+    author: str | None,
+    about: str | None,
+) -> dict:
+    payload = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": title[:110],
+        "description": desc[:300],
+        "mainEntityOfPage": url,
+        "image": image,
+        "inLanguage": "en",
+        "isAccessibleForFree": True,
+        "publisher": {
+            "@type": "Organization",
+            "name": "One Piece Deck Base",
+            "logo": {"@type": "ImageObject", "url": LOGO_512},
+        },
+    }
+    if date:
+        payload["datePublished"] = date
+        payload["dateModified"] = date
+    if author:
+        payload["author"] = {"@type": "Person", "name": author}
+    else:
+        payload["author"] = {"@type": "Organization", "name": "One Piece Deck Base"}
+    if about:
+        payload["about"] = {"@type": "Thing", "name": about}
+    return payload
+
+
+def collection_jsonld(*, title: str, desc: str, url: str, items: list[tuple[str, str]]) -> dict:
+    elements = []
+    for i, (name, href) in enumerate(items[:20], start=1):
+        item_url = href if href.startswith("http") else SITE + (href if href.startswith("/") else "/" + href)
+        elements.append(
+            {
+                "@type": "ListItem",
+                "position": i,
+                "name": name,
+                "url": item_url,
+            }
+        )
+    return {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": title,
+        "description": desc[:300],
+        "url": url,
+        "inLanguage": "en",
+        "isPartOf": {"@id": SITE + "/#website"},
+        "mainEntity": {
+            "@type": "ItemList",
+            "itemListElement": elements,
+            "numberOfItems": len(elements),
+        },
+    }
+
+
+def faq_jsonld(pairs: list[tuple[str, str]]) -> dict:
+    return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": q,
+                "acceptedAnswer": {"@type": "Answer", "text": a},
+            }
+            for q, a in pairs
+        ],
+    }
 
 
 def breadcrumb_jsonld(crumbs: list[tuple[str, str]]) -> str:
@@ -232,6 +412,30 @@ FOOTER_LINKS = (
     '      <a href="/guides/">Guides</a> · '
     '<a href="/decklists/op17.html">Leaders</a> · '
     '<a href="/format.html">Format</a> · '
+    '<a href="/search.html">Search</a> · '
     '<a href="/shop/">Shop</a> · '
     '<a href="/privacy.html">Privacy</a>'
 )
+
+FORMAT_FAQ = [
+    (
+        "What format are One Piece Deck Base lists?",
+        "Lists on One Piece Deck Base are 50-card Standard constructed OPTCG decks plus a leader for the Bandai ONE PIECE CARD GAME.",
+    ),
+    (
+        "What card is banned in OPTCG constructed?",
+        "Blue Charlotte Pudding OP06-047 is banned in constructed, including parallels, effective 1 April 2026. Other Pudding prints stay legal.",
+    ),
+    (
+        "When does OP17 English release?",
+        "OP17 English is dated 28 August 2026. English events before that date still use the OP16 Standard pool. OP17 lists on this site come from Japan, Germany, and online cups.",
+    ),
+    (
+        "Did Block 1 rotate out of Standard?",
+        "Yes. Standard no longer uses Block 1 (OP-01 Romance Dawn through OP-04 Kingdoms of Intrigue) as of 1 April 2026. Manga rares stay legal as Block X.",
+    ),
+    (
+        "Where do the decklists come from?",
+        "Tournament tables come from Limitless Play events. Community rows are public YouTube, web, and social lists with a full 50-card ID list.",
+    ),
+]

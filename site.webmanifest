@@ -1,0 +1,22 @@
+{
+  "name": "One Piece Deck Base",
+  "short_name": "OPDB",
+  "description": "OPTCG decklists for the Bandai ONE PIECE CARD GAME.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#f7f5f3",
+  "theme_color": "#b71c1c",
+  "icons": [
+    {
+      "src": "/img/opdb-logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/opdb-logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

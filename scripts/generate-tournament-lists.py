@@ -887,6 +887,7 @@ def page_chrome(
         <a href="/format.html">Format</a>
         <a href="/guides/">Guides</a>
         <a href="/shop/">Shop</a>
+        <a href="/search.html">Search</a>
         <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
       </nav>
     </header>
@@ -898,7 +899,7 @@ def page_chrome(
     </main>
     <footer>
       © <span id="year"></span> One Piece Deck Base — Built with community in mind.
-      <a href="/guides/">Guides</a> · <a href="/decklists/op17.html">Leaders</a> · <a href="/format.html">Format</a> · <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a>
+      <a href="/guides/">Guides</a> · <a href="/decklists/op17.html">Leaders</a> · <a href="/format.html">Format</a> · <a href="/search.html">Search</a> · <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a>
     </footer>
   </div>
   <script>

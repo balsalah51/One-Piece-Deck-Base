@@ -147,6 +147,7 @@ def nav_html(current: str) -> str:
             item("/format.html", "Format", "format"),
             item("/guides/", "Guides", "guides"),
             item("/shop/", "Shop", "shop"),
+            item("/search.html", "Search", "search"),
             item(DISCORD, "Discord", "discord"),
         ]
     )
@@ -218,7 +219,7 @@ def chrome(title: str, desc: str, canonical: str, body: str, *, indexable: bool,
     </main>
     <footer>
       © <span id="year"></span> One Piece Deck Base — Fan site, not affiliated with Bandai or Shueisha.
-{amazon_line}      <a href="/guides/">Guides</a> · <a href="/decklists/op17.html">Leaders</a> · <a href="/format.html">Format</a> · <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a> · <a href="{DISCORD}" target="_blank" rel="noopener">Discord</a>
+{amazon_line}      <a href="/guides/">Guides</a> · <a href="/decklists/op17.html">Leaders</a> · <a href="/format.html">Format</a> · <a href="/search.html">Search</a> · <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a> · <a href="{DISCORD}" target="_blank" rel="noopener">Discord</a>
     </footer>
   </div>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
