@@ -91,6 +91,16 @@
       "date": "2026-08-25",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a85a15c5a30714095574481/standings"
+    },
+    {
+      "slug": "7th-zuramp17-rumble-league-6-op17-free",
+      "href": "/decklists/op17/shanks/7th-zuramp17-rumble-league-6-op17-free.html",
+      "player": "Zuramp17",
+      "tournament": "Rumble league #6|OP17 | FREE",
+      "placing": 7,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86a68678baaa6d1c224215/standings"
     }
   ],
   "OP17-039": [
@@ -973,6 +983,36 @@
       "date": "2026-08-26",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a85a27278baaa6d1c2237c8/standings"
+    },
+    {
+      "slug": "2nd-thomas287-ger-dressrosa-tournament-op17",
+      "href": "/decklists/op17/rocks-d-xebec/2nd-thomas287-ger-dressrosa-tournament-op17.html",
+      "player": "Thomas287",
+      "tournament": "[GER] Dressrosa Tournament-OP17",
+      "placing": 2,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86f0435a30714095575150/standings"
+    },
+    {
+      "slug": "4th-woodmann95-ger-dressrosa-tournament-op17",
+      "href": "/decklists/op17/rocks-d-xebec/4th-woodmann95-ger-dressrosa-tournament-op17.html",
+      "player": "woodmann95",
+      "tournament": "[GER] Dressrosa Tournament-OP17",
+      "placing": 4,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86f0435a30714095575150/standings"
+    },
+    {
+      "slug": "5th-mrupperhand-ger-dressrosa-tournament-op17",
+      "href": "/decklists/op17/rocks-d-xebec/5th-mrupperhand-ger-dressrosa-tournament-op17.html",
+      "player": "MrUpperhand",
+      "tournament": "[GER] Dressrosa Tournament-OP17",
+      "placing": 5,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86f0435a30714095575150/standings"
     }
   ],
   "OP17-058": [
@@ -1555,6 +1595,36 @@
       "date": "2026-08-26",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a85a27278baaa6d1c2237c8/standings"
+    },
+    {
+      "slug": "6th-raiolo-rumble-league-6-op17-free",
+      "href": "/decklists/op17/kaido/6th-raiolo-rumble-league-6-op17-free.html",
+      "player": "Raiolo",
+      "tournament": "Rumble league #6|OP17 | FREE",
+      "placing": 6,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86a68678baaa6d1c224215/standings"
+    },
+    {
+      "slug": "8th-left-d-chat-ger-dressrosa-tournament-op17",
+      "href": "/decklists/op17/kaido/8th-left-d-chat-ger-dressrosa-tournament-op17.html",
+      "player": "Left_D_Chat",
+      "tournament": "[GER] Dressrosa Tournament-OP17",
+      "placing": 8,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86f0435a30714095575150/standings"
+    },
+    {
+      "slug": "12th-robin151-ger-dressrosa-tournament-op17",
+      "href": "/decklists/op17/kaido/12th-robin151-ger-dressrosa-tournament-op17.html",
+      "player": "Robin151",
+      "tournament": "[GER] Dressrosa Tournament-OP17",
+      "placing": 12,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86f0435a30714095575150/standings"
     }
   ],
   "OP17-079": [
@@ -1797,6 +1867,46 @@
       "date": "2026-08-26",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a85a27278baaa6d1c2237c8/standings"
+    },
+    {
+      "slug": "4th-fiddlestonks-rumble-league-6-op17-free",
+      "href": "/decklists/op17/monkey-d-luffy/4th-fiddlestonks-rumble-league-6-op17-free.html",
+      "player": "FiddleStonks",
+      "tournament": "Rumble league #6|OP17 | FREE",
+      "placing": 4,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86a68678baaa6d1c224215/standings"
+    },
+    {
+      "slug": "10th-sungodnika1996-ger-dressrosa-tournament-op17",
+      "href": "/decklists/op17/monkey-d-luffy/10th-sungodnika1996-ger-dressrosa-tournament-op17.html",
+      "player": "SunGodNika1996",
+      "tournament": "[GER] Dressrosa Tournament-OP17",
+      "placing": 10,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86f0435a30714095575150/standings"
+    },
+    {
+      "slug": "13th-itzfalco-rumble-league-6-op17-free",
+      "href": "/decklists/op17/monkey-d-luffy/13th-itzfalco-rumble-league-6-op17-free.html",
+      "player": "itzfalco",
+      "tournament": "Rumble league #6|OP17 | FREE",
+      "placing": 13,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86a68678baaa6d1c224215/standings"
+    },
+    {
+      "slug": "0-4-basstscho-ger-dressrosa-tournament-op17",
+      "href": "/decklists/op17/monkey-d-luffy/0-4-basstscho-ger-dressrosa-tournament-op17.html",
+      "player": "Basstscho",
+      "tournament": "[GER] Dressrosa Tournament-OP17",
+      "placing": null,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86f0435a30714095575150/standings"
     }
   ],
   "OP17-099": [
@@ -3871,6 +3981,16 @@
       "date": "2026-08-25",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a8e16d97a62de813013f299/standings"
+    },
+    {
+      "slug": "12th-pecopecochoppa-rumble-league-6-op17-free",
+      "href": "/decklists/rg-luffy/12th-pecopecochoppa-rumble-league-6-op17-free.html",
+      "player": "PecoPecoChoppa",
+      "tournament": "Rumble league #6|OP17 | FREE",
+      "placing": 12,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86a68678baaa6d1c224215/standings"
     }
   ],
   "OP11-041": [
@@ -7815,6 +7935,86 @@
       "date": "2026-08-26",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a85a27278baaa6d1c2237c8/standings"
+    },
+    {
+      "slug": "1st-kiwitt-rumble-league-6-op17-free",
+      "href": "/decklists/mihawk/1st-kiwitt-rumble-league-6-op17-free.html",
+      "player": "Kiwitt",
+      "tournament": "Rumble league #6|OP17 | FREE",
+      "placing": 1,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86a68678baaa6d1c224215/standings"
+    },
+    {
+      "slug": "1st-lykoi763-ger-dressrosa-tournament-op17",
+      "href": "/decklists/mihawk/1st-lykoi763-ger-dressrosa-tournament-op17.html",
+      "player": "Lykoi763",
+      "tournament": "[GER] Dressrosa Tournament-OP17",
+      "placing": 1,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86f0435a30714095575150/standings"
+    },
+    {
+      "slug": "3rd-william-marchetto-rumble-league-6-op17-free",
+      "href": "/decklists/mihawk/3rd-william-marchetto-rumble-league-6-op17-free.html",
+      "player": "William Marchetto",
+      "tournament": "Rumble league #6|OP17 | FREE",
+      "placing": 3,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86a68678baaa6d1c224215/standings"
+    },
+    {
+      "slug": "10th-cristian87-rumble-league-6-op17-free",
+      "href": "/decklists/mihawk/10th-cristian87-rumble-league-6-op17-free.html",
+      "player": "Cristian87",
+      "tournament": "Rumble league #6|OP17 | FREE",
+      "placing": 10,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86a68678baaa6d1c224215/standings"
+    },
+    {
+      "slug": "11th-kampsi-ger-dressrosa-tournament-op17",
+      "href": "/decklists/mihawk/11th-kampsi-ger-dressrosa-tournament-op17.html",
+      "player": "Kampsi",
+      "tournament": "[GER] Dressrosa Tournament-OP17",
+      "placing": 11,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86f0435a30714095575150/standings"
+    },
+    {
+      "slug": "15th-davehunterhs-rumble-league-6-op17-free",
+      "href": "/decklists/mihawk/15th-davehunterhs-rumble-league-6-op17-free.html",
+      "player": "DavehunterHS",
+      "tournament": "Rumble league #6|OP17 | FREE",
+      "placing": 15,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86a68678baaa6d1c224215/standings"
+    },
+    {
+      "slug": "17th-vimax19-rumble-league-6-op17-free",
+      "href": "/decklists/mihawk/17th-vimax19-rumble-league-6-op17-free.html",
+      "player": "ViMax19",
+      "tournament": "Rumble league #6|OP17 | FREE",
+      "placing": 17,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86a68678baaa6d1c224215/standings"
+    },
+    {
+      "slug": "1-2-cloudgamingg-ger-dressrosa-tournament-op17",
+      "href": "/decklists/mihawk/1-2-cloudgamingg-ger-dressrosa-tournament-op17.html",
+      "player": "Cloudgamingg",
+      "tournament": "[GER] Dressrosa Tournament-OP17",
+      "placing": null,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86f0435a30714095575150/standings"
     }
   ],
   "OP16-001": [
@@ -8897,6 +9097,16 @@
       "date": "2026-08-26",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a85a27278baaa6d1c2237c8/standings"
+    },
+    {
+      "slug": "7th-mikeay-ger-dressrosa-tournament-op17",
+      "href": "/decklists/portgas-d-ace/7th-mikeay-ger-dressrosa-tournament-op17.html",
+      "player": "Mikeay",
+      "tournament": "[GER] Dressrosa Tournament-OP17",
+      "placing": 7,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86f0435a30714095575150/standings"
     }
   ],
   "OP15-058": [
@@ -10749,6 +10959,16 @@
       "date": "2026-08-26",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a85a27278baaa6d1c2237c8/standings"
+    },
+    {
+      "slug": "2nd-kevinpaillex-rumble-league-6-op17-free",
+      "href": "/decklists/enel/2nd-kevinpaillex-rumble-league-6-op17-free.html",
+      "player": "KevinPaillex",
+      "tournament": "Rumble league #6|OP17 | FREE",
+      "placing": 2,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86a68678baaa6d1c224215/standings"
     }
   ],
   "OP11-062": [
@@ -12121,6 +12341,16 @@
       "date": "2026-08-26",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a85a27278baaa6d1c2237c8/standings"
+    },
+    {
+      "slug": "14th-freeangel-rumble-league-6-op17-free",
+      "href": "/decklists/charlotte-katakuri/14th-freeangel-rumble-league-6-op17-free.html",
+      "player": "FreeAngel",
+      "tournament": "Rumble league #6|OP17 | FREE",
+      "placing": 14,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86a68678baaa6d1c224215/standings"
     }
   ],
   "OP13-079": [
@@ -15929,6 +16159,16 @@
       "date": "2026-08-25",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a8e16d97a62de813013f299/standings"
+    },
+    {
+      "slug": "0-1-kondoriano98-ger-dressrosa-tournament-op17",
+      "href": "/decklists/blackbeard/0-1-kondoriano98-ger-dressrosa-tournament-op17.html",
+      "player": "Kondoriano98",
+      "tournament": "[GER] Dressrosa Tournament-OP17",
+      "placing": null,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86f0435a30714095575150/standings"
     }
   ],
   "OP12-061": [
@@ -17573,6 +17813,16 @@
       "date": "2026-08-25",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a8e16d97a62de813013f299/standings"
+    },
+    {
+      "slug": "9th-squalo8-rumble-league-6-op17-free",
+      "href": "/decklists/lucy/9th-squalo8-rumble-league-6-op17-free.html",
+      "player": "Squalo8",
+      "tournament": "Rumble league #6|OP17 | FREE",
+      "placing": 9,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86a68678baaa6d1c224215/standings"
     }
   ],
   "OP16-079": [
@@ -21265,6 +21515,16 @@
       "date": "2026-08-26",
       "kind": "tournament",
       "source_url": "https://play.limitlesstcg.com/tournament/6a85a27278baaa6d1c2237c8/standings"
+    },
+    {
+      "slug": "13th-kenan-h-ger-dressrosa-tournament-op17",
+      "href": "/decklists/up-luffy/13th-kenan-h-ger-dressrosa-tournament-op17.html",
+      "player": "Kenan H",
+      "tournament": "[GER] Dressrosa Tournament-OP17",
+      "placing": 13,
+      "date": "2026-08-27",
+      "kind": "tournament",
+      "source_url": "https://play.limitlesstcg.com/tournament/6a86f0435a30714095575150/standings"
     }
   ]
 }
