@@ -23,6 +23,15 @@
       "source_url": "https://www.youtube.com/watch?v=ALrTnX2pAdU",
       "kind": "youtube",
       "date": "2026-07-29"
+    },
+    {
+      "slug": "opdeck-edward-newgate-op17-east-cardshop-aug26-peter",
+      "href": "/decklists/op17/edward-newgate/opdeck-edward-newgate-op17-east-cardshop-aug26-peter.html",
+      "title": "Edward.Newgate (Format OP17) FS",
+      "subtitle": "Cardshop · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/edward-newgate-op17-east-cardshop-aug26-peter/",
+      "kind": "web",
+      "date": "2026-08-26"
     }
   ],
   "OP17-020": [
@@ -49,6 +58,24 @@
       "source_url": "https://www.youtube.com/watch?v=CrLQZiTBCM4",
       "kind": "youtube",
       "date": "2026-08-09"
+    },
+    {
+      "slug": "opdeck-shanks-op17-east-pao-aug22-hori",
+      "href": "/decklists/op17/shanks/opdeck-shanks-op17-east-pao-aug22-hori.html",
+      "title": "Shanks (Format OP17) Standard Battle Winner",
+      "subtitle": "PAO · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/shanks-op17-east-pao-aug22-hori/",
+      "kind": "web",
+      "date": "2026-08-22"
+    },
+    {
+      "slug": "opdeck-shanks-op17-east-amenity-aug22-kobayashi",
+      "href": "/decklists/op17/shanks/opdeck-shanks-op17-east-amenity-aug22-kobayashi.html",
+      "title": "Shanks (Format OP17) Standard Battle Winner",
+      "subtitle": "Amenity · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/shanks-op17-east-amenity-aug22-kobayashi/",
+      "kind": "web",
+      "date": "2026-08-22"
     }
   ],
   "OP17-039": [
@@ -109,6 +136,78 @@
       "source_url": "https://www.mercardop.jp/article-detail/82",
       "kind": "web",
       "date": "2026-08-20"
+    },
+    {
+      "slug": "opdeck-rocks-op17-east-cardshop-aug26-wjw4y",
+      "href": "/decklists/op17/rocks-d-xebec/opdeck-rocks-op17-east-cardshop-aug26-wjw4y.html",
+      "title": "Rocks.D.Xebec (Format OP17) SB Winner",
+      "subtitle": "Cardshop · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/rocks-op17-east-cardshop-aug26-wjw4y/",
+      "kind": "web",
+      "date": "2026-08-26"
+    },
+    {
+      "slug": "opdeck-rocks-op17-east-binks-aug25-hide",
+      "href": "/decklists/op17/rocks-d-xebec/opdeck-rocks-op17-east-binks-aug25-hide.html",
+      "title": "Rocks.D.Xebec (Format OP17) SB Winner",
+      "subtitle": "BINKS · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/rocks-op17-east-binks-aug25-hide/",
+      "kind": "web",
+      "date": "2026-08-25"
+    },
+    {
+      "slug": "opdeck-rocks-op17-east-kuma-aug25-matthew",
+      "href": "/decklists/op17/rocks-d-xebec/opdeck-rocks-op17-east-kuma-aug25-matthew.html",
+      "title": "Rocks.D.Xebec (Format OP17) SB Winner",
+      "subtitle": "Kuma · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/rocks-op17-east-kuma-aug25-matthew/",
+      "kind": "web",
+      "date": "2026-08-25"
+    },
+    {
+      "slug": "opdeck-rocks-op17-east-torecaplaza35-17-aug23-dei",
+      "href": "/decklists/op17/rocks-d-xebec/opdeck-rocks-op17-east-torecaplaza35-17-aug23-dei.html",
+      "title": "Rocks.D.Xebec (Format OP17) SB Winner",
+      "subtitle": "torecaplaza35(17) · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/rocks-op17-east-torecaplaza35-17-aug23-dei/",
+      "kind": "web",
+      "date": "2026-08-23"
+    },
+    {
+      "slug": "opdeck-rocks-op17-east-ck-mizonokuchi-aug22-nakamura",
+      "href": "/decklists/op17/rocks-d-xebec/opdeck-rocks-op17-east-ck-mizonokuchi-aug22-nakamura.html",
+      "title": "Rocks D Xebec (Format OP17) Standard Battle Winner",
+      "subtitle": "CK_mizonokuchi · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/rocks-op17-east-ck-mizonokuchi-aug22-nakamura/",
+      "kind": "web",
+      "date": "2026-08-22"
+    },
+    {
+      "slug": "opdeck-rocks-op17-east-asu-cs-aug22-ap",
+      "href": "/decklists/op17/rocks-d-xebec/opdeck-rocks-op17-east-asu-cs-aug22-ap.html",
+      "title": "Rocks D Xebec (Format OP17) Shop Event Winner",
+      "subtitle": "Asu Cs · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/rocks-op17-east-asu-cs-aug22-ap/",
+      "kind": "web",
+      "date": "2026-08-22"
+    },
+    {
+      "slug": "opdeck-rocks-op17-east-shumaicup-aug22-ike",
+      "href": "/decklists/op17/rocks-d-xebec/opdeck-rocks-op17-east-shumaicup-aug22-ike.html",
+      "title": "Rocks D Xebec (Format OP17) 3vs3 T4",
+      "subtitle": "ShumaiCup · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/rocks-op17-east-shumaicup-aug22-ike/",
+      "kind": "web",
+      "date": "2026-08-22"
+    },
+    {
+      "slug": "opdeck-rocks-op17-east-cardshop-aug22-nabetaka",
+      "href": "/decklists/op17/rocks-d-xebec/opdeck-rocks-op17-east-cardshop-aug22-nabetaka.html",
+      "title": "Rocks D Xebec (Format OP17) Shop Event Winner",
+      "subtitle": "Cardshop · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/rocks-op17-east-cardshop-aug22-nabetaka/",
+      "kind": "web",
+      "date": "2026-08-22"
     }
   ],
   "OP17-058": [
@@ -143,6 +242,51 @@
       "source_url": "https://www.youtube.com/watch?v=kKBHITaidrY",
       "kind": "youtube",
       "date": "2026-08-06"
+    },
+    {
+      "slug": "opdeck-kaido-op17-east-cardshop-aug25-opcgmirokuama",
+      "href": "/decklists/op17/kaido/opdeck-kaido-op17-east-cardshop-aug25-opcgmirokuama.html",
+      "title": "Kaido (Format OP17) SB Winner",
+      "subtitle": "Cardshop · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/kaido-op17-east-cardshop-aug25-opcgmirokuama/",
+      "kind": "web",
+      "date": "2026-08-25"
+    },
+    {
+      "slug": "opdeck-kaido-op17-east-cardshop-aug22-akaisuzak",
+      "href": "/decklists/op17/kaido/opdeck-kaido-op17-east-cardshop-aug22-akaisuzak.html",
+      "title": "Kaido (Format OP17) Standard Battle Winner",
+      "subtitle": "Cardshop · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/kaido-op17-east-cardshop-aug22-akaisuzak/",
+      "kind": "web",
+      "date": "2026-08-22"
+    },
+    {
+      "slug": "opdeck-kaido-op17-east-shumaicup-aug22-itamaru",
+      "href": "/decklists/op17/kaido/opdeck-kaido-op17-east-shumaicup-aug22-itamaru.html",
+      "title": "Kaido (Format OP17) 3vs3",
+      "subtitle": "ShumaiCup · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/kaido-op17-east-shumaicup-aug22-itamaru/",
+      "kind": "web",
+      "date": "2026-08-22"
+    },
+    {
+      "slug": "opdeck-kaido-op17-east-fukuou-cs-aug22-salmon",
+      "href": "/decklists/op17/kaido/opdeck-kaido-op17-east-fukuou-cs-aug22-salmon.html",
+      "title": "Kaido (Format OP17) Shop Event 2nd Place",
+      "subtitle": "Fukuou CS · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/kaido-op17-east-fukuou-cs-aug22-salmon/",
+      "kind": "web",
+      "date": "2026-08-22"
+    },
+    {
+      "slug": "opdeck-kaido-op17-west-ebz-mccomb-aug26-kdmilla",
+      "href": "/decklists/op17/kaido/opdeck-kaido-op17-west-ebz-mccomb-aug26-kdmilla.html",
+      "title": "Kaido (Format OP17) Shop Event Winner",
+      "subtitle": "EBZ McComb · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-west/kaido-op17-west-ebz-mccomb-aug26-kdmilla/",
+      "kind": "web",
+      "date": "2026-08-26"
     }
   ],
   "OP17-079": [
@@ -169,6 +313,15 @@
       "source_url": "https://www.youtube.com/watch?v=yF5NQsfwZWY",
       "kind": "youtube",
       "date": "2026-07-26"
+    },
+    {
+      "slug": "opdeck-luffy-op17-east-girafull-aug22-torepiii",
+      "href": "/decklists/op17/monkey-d-luffy/opdeck-luffy-op17-east-girafull-aug22-torepiii.html",
+      "title": "Luffy (Format OP17) Shop Event Winner",
+      "subtitle": "Girafull · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/luffy-op17-east-girafull-aug22-torepiii/",
+      "kind": "web",
+      "date": "2026-08-22"
     }
   ],
   "OP17-099": [
@@ -259,6 +412,96 @@
       "source_url": "https://x.com/Chinoize_/status/2092357744921612794",
       "kind": "x",
       "date": "2026-08-25"
+    },
+    {
+      "slug": "opdeck-g-mihawk-op17-east-binks-aug25-kesu",
+      "href": "/decklists/mihawk/opdeck-g-mihawk-op17-east-binks-aug25-kesu.html",
+      "title": "G Mihawk (Format OP17) SB Winner",
+      "subtitle": "BINKS · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/g-mihawk-op17-east-binks-aug25-kesu/",
+      "kind": "web",
+      "date": "2026-08-25"
+    },
+    {
+      "slug": "opdeck-g-mihawk-op17-east-zokurekocup-aug25-naosan",
+      "href": "/decklists/mihawk/opdeck-g-mihawk-op17-east-zokurekocup-aug25-naosan.html",
+      "title": "G Mihawk (Format OP17) Shop Event Winner",
+      "subtitle": "ZokurekoCup · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/g-mihawk-op17-east-zokurekocup-aug25-naosan/",
+      "kind": "web",
+      "date": "2026-08-25"
+    },
+    {
+      "slug": "opdeck-g-mihawk-op17-east-cardshop-aug24-sayaka-a",
+      "href": "/decklists/mihawk/opdeck-g-mihawk-op17-east-cardshop-aug24-sayaka-a.html",
+      "title": "G Mihawk (Format OP17) SB Winner",
+      "subtitle": "Cardshop · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/g-mihawk-op17-east-cardshop-aug24-sayaka-a/",
+      "kind": "web",
+      "date": "2026-08-24"
+    },
+    {
+      "slug": "opdeck-g-mihawk-op17-east-onehappy-aug23-aosha",
+      "href": "/decklists/mihawk/opdeck-g-mihawk-op17-east-onehappy-aug23-aosha.html",
+      "title": "G Mihawk (Format OP17) Shop Event 3rd Place",
+      "subtitle": "OneHappy · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/g-mihawk-op17-east-onehappy-aug23-aosha/",
+      "kind": "web",
+      "date": "2026-08-23"
+    },
+    {
+      "slug": "opdeck-g-mihawk-op17-east-sakecup-96-aug23-kikuyan",
+      "href": "/decklists/mihawk/opdeck-g-mihawk-op17-east-sakecup-96-aug23-kikuyan.html",
+      "title": "G Mihawk (Format OP17) 3vs3 Winner",
+      "subtitle": "SakeCup(96) · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/g-mihawk-op17-east-sakecup-96-aug23-kikuyan/",
+      "kind": "web",
+      "date": "2026-08-23"
+    },
+    {
+      "slug": "opdeck-g-mihawk-op17-east-sakecup-96-aug23-zakki",
+      "href": "/decklists/mihawk/opdeck-g-mihawk-op17-east-sakecup-96-aug23-zakki.html",
+      "title": "G Mihawk (Format OP17) 3vs3",
+      "subtitle": "SakeCup(96) · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/g-mihawk-op17-east-sakecup-96-aug23-zakki/",
+      "kind": "web",
+      "date": "2026-08-23"
+    },
+    {
+      "slug": "opdeck-g-mihawk-op17-east-shumaicup-aug22-pesu",
+      "href": "/decklists/mihawk/opdeck-g-mihawk-op17-east-shumaicup-aug22-pesu.html",
+      "title": "G Mihawk (Format OP17) 3vs3 Winner",
+      "subtitle": "ShumaiCup · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/g-mihawk-op17-east-shumaicup-aug22-pesu/",
+      "kind": "web",
+      "date": "2026-08-22"
+    },
+    {
+      "slug": "opdeck-g-mihawk-op17-east-fukuou-cs-aug22-g2",
+      "href": "/decklists/mihawk/opdeck-g-mihawk-op17-east-fukuou-cs-aug22-g2.html",
+      "title": "G Mihawk (Format OP17) Shop Event T4",
+      "subtitle": "Fukuou CS · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/g-mihawk-op17-east-fukuou-cs-aug22-g2/",
+      "kind": "web",
+      "date": "2026-08-22"
+    },
+    {
+      "slug": "opdeck-g-mihawk-op17-east-fukuou-cs-aug22-nezu",
+      "href": "/decklists/mihawk/opdeck-g-mihawk-op17-east-fukuou-cs-aug22-nezu.html",
+      "title": "G Mihawk (Format OP17) Shop Event T4",
+      "subtitle": "Fukuou CS · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/g-mihawk-op17-east-fukuou-cs-aug22-nezu/",
+      "kind": "web",
+      "date": "2026-08-22"
+    },
+    {
+      "slug": "opdeck-g-mihawk-op17-east-cardshop-aug22-sheep-not",
+      "href": "/decklists/mihawk/opdeck-g-mihawk-op17-east-cardshop-aug22-sheep-not.html",
+      "title": "G Mihawk (Format OP17) Shop Event Winner",
+      "subtitle": "Cardshop · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/g-mihawk-op17-east-cardshop-aug22-sheep-not/",
+      "kind": "web",
+      "date": "2026-08-22"
     }
   ],
   "OP16-001": [
@@ -268,6 +511,69 @@
       "title": "Infinite Counters — Mabi",
       "source_url": "https://mabitcg.com/one-piece-tcg-portgas-d-ace-op16-infinite-counters-op16-mabi/",
       "kind": "web"
+    },
+    {
+      "slug": "opdeck-ace-op17-east-iwaya-aug27-sugicchi",
+      "href": "/decklists/portgas-d-ace/opdeck-ace-op17-east-iwaya-aug27-sugicchi.html",
+      "title": "Ace (Format OP17) SB Winner",
+      "subtitle": "Iwaya · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/ace-op17-east-iwaya-aug27-sugicchi/",
+      "kind": "web",
+      "date": "2026-08-27"
+    },
+    {
+      "slug": "opdeck-ace-op17-east-box-raid-aug27-noa",
+      "href": "/decklists/portgas-d-ace/opdeck-ace-op17-east-box-raid-aug27-noa.html",
+      "title": "Ace (Format OP17) Shop Event",
+      "subtitle": "Box Raid · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/ace-op17-east-box-raid-aug27-noa/",
+      "kind": "web",
+      "date": "2026-08-27"
+    },
+    {
+      "slug": "opdeck-ace-op17-east-torecanomori-aug25-hekate",
+      "href": "/decklists/portgas-d-ace/opdeck-ace-op17-east-torecanomori-aug25-hekate.html",
+      "title": "Red Ace (Format OP17) SB Winner",
+      "subtitle": "TorecanoMori · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/ace-op17-east-torecanomori-aug25-hekate/",
+      "kind": "web",
+      "date": "2026-08-25"
+    },
+    {
+      "slug": "opdeck-ace-op17-east-fangcardgame-aug23-na",
+      "href": "/decklists/portgas-d-ace/opdeck-ace-op17-east-fangcardgame-aug23-na.html",
+      "title": "Ace (Format OP17) 3vs3 Winner",
+      "subtitle": "FangCardGame · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/ace-op17-east-fangcardgame-aug23-na/",
+      "kind": "web",
+      "date": "2026-08-23"
+    },
+    {
+      "slug": "opdeck-ace-op17-east-asu-cs-aug22-bralo",
+      "href": "/decklists/portgas-d-ace/opdeck-ace-op17-east-asu-cs-aug22-bralo.html",
+      "title": "Ace (Format OP17) Shop Event 2nd Place",
+      "subtitle": "Asu Cs · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/ace-op17-east-asu-cs-aug22-bralo/",
+      "kind": "web",
+      "date": "2026-08-22"
+    },
+    {
+      "slug": "opdeck-ace-op17-east-iwaya-aug22-sugicchi",
+      "href": "/decklists/portgas-d-ace/opdeck-ace-op17-east-iwaya-aug22-sugicchi.html",
+      "title": "Ace (Format OP17) Standard Battle Winner",
+      "subtitle": "Iwaya · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/ace-op17-east-iwaya-aug22-sugicchi/",
+      "kind": "web",
+      "date": "2026-08-22"
+    },
+    {
+      "slug": "opdeck-ace-op17-east-sekinokocup-aug22-poregon",
+      "href": "/decklists/portgas-d-ace/opdeck-ace-op17-east-sekinokocup-aug22-poregon.html",
+      "title": "Ace (Format OP17) 5vs5",
+      "subtitle": "SekinokoCup · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/ace-op17-east-sekinokocup-aug22-poregon/",
+      "kind": "web",
+      "date": "2026-08-22"
     }
   ],
   "OP13-079": [
@@ -338,6 +644,33 @@
       "source_url": "https://www.reddit.com/r/OnePieceTCG/comments/1vp5syc/op17_pudding_decklist_in_comments/",
       "kind": "reddit",
       "date": "2026-08-15"
+    },
+    {
+      "slug": "opdeck-pudding-op17-east-overseas-aug25-yakitori",
+      "href": "/decklists/charlotte-pudding/opdeck-pudding-op17-east-overseas-aug25-yakitori.html",
+      "title": "Charlotte Pudding (Format OP17) SB Winner",
+      "subtitle": "Overseas · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/pudding-op17-east-overseas-aug25-yakitori/",
+      "kind": "web",
+      "date": "2026-08-25"
+    },
+    {
+      "slug": "opdeck-pudding-op17-east-binks-aug23-yakitori",
+      "href": "/decklists/charlotte-pudding/opdeck-pudding-op17-east-binks-aug23-yakitori.html",
+      "title": "Pudding (Format OP17) Standard Battle Winner",
+      "subtitle": "BINKS · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/pudding-op17-east-binks-aug23-yakitori/",
+      "kind": "web",
+      "date": "2026-08-23"
+    },
+    {
+      "slug": "opdeck-pudding-op17-east-fukuou-cs-aug22-hikaru",
+      "href": "/decklists/charlotte-pudding/opdeck-pudding-op17-east-fukuou-cs-aug22-hikaru.html",
+      "title": "Pudding (Format OP17) Shop Event Winner",
+      "subtitle": "Fukuou CS · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/pudding-op17-east-fukuou-cs-aug22-hikaru/",
+      "kind": "web",
+      "date": "2026-08-22"
     }
   ],
   "OP15-058": [
@@ -360,6 +693,180 @@
       "source_url": "https://www.reddit.com/r/OnePieceTCG/comments/1w0xvqg/could_this_work_in_locals/",
       "kind": "reddit",
       "date": "2026-08-28"
+    }
+  ],
+  "OP14-041": [
+    {
+      "slug": "opdeck-boa-op17-east-akanagicup-aug27-mug-nxn",
+      "href": "/decklists/boa-hancock/opdeck-boa-op17-east-akanagicup-aug27-mug-nxn.html",
+      "title": "Boa (Format OP17) Shop Event",
+      "subtitle": "AkanagiCup · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/boa-op17-east-akanagicup-aug27-mug-nxn/",
+      "kind": "web",
+      "date": "2026-08-27"
+    },
+    {
+      "slug": "opdeck-boa-op17-east-shumaicup-aug24-torasu",
+      "href": "/decklists/boa-hancock/opdeck-boa-op17-east-shumaicup-aug24-torasu.html",
+      "title": "Boa (Format OP17) Shop Event Winner",
+      "subtitle": "ShumaiCup · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/boa-op17-east-shumaicup-aug24-torasu/",
+      "kind": "web",
+      "date": "2026-08-24"
+    },
+    {
+      "slug": "opdeck-boa-op17-east-cardshop-aug23-buku",
+      "href": "/decklists/boa-hancock/opdeck-boa-op17-east-cardshop-aug23-buku.html",
+      "title": "Boa (Format OP17) Shop Event Winner",
+      "subtitle": "Cardshop · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/boa-op17-east-cardshop-aug23-buku/",
+      "kind": "web",
+      "date": "2026-08-23"
+    },
+    {
+      "slug": "opdeck-boa-op17-east-shumaicup-aug22-na",
+      "href": "/decklists/boa-hancock/opdeck-boa-op17-east-shumaicup-aug22-na.html",
+      "title": "Boa (Format OP17) 3vs3 Winner",
+      "subtitle": "ShumaiCup · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/boa-op17-east-shumaicup-aug22-na/",
+      "kind": "web",
+      "date": "2026-08-22"
+    }
+  ],
+  "ST13-001": [
+    {
+      "slug": "opdeck-sabo-op17-east-binks-aug27-waritchi",
+      "href": "/decklists/st13-sabo/opdeck-sabo-op17-east-binks-aug27-waritchi.html",
+      "title": "Sabo (Format OP17) SB Winner",
+      "subtitle": "BINKS · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/sabo-op17-east-binks-aug27-waritchi/",
+      "kind": "web",
+      "date": "2026-08-27"
+    }
+  ],
+  "OP09-062": [
+    {
+      "slug": "opdeck-robin-op17-east-cardshop-aug25-kurage",
+      "href": "/decklists/nico-robin/opdeck-robin-op17-east-cardshop-aug25-kurage.html",
+      "title": "Nico Robin (Format OP17) SB Winner",
+      "subtitle": "Cardshop · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/robin-op17-east-cardshop-aug25-kurage/",
+      "kind": "web",
+      "date": "2026-08-25"
+    },
+    {
+      "slug": "opdeck-robin-op17-east-bakkasucs-aug25-takakattyaru",
+      "href": "/decklists/nico-robin/opdeck-robin-op17-east-bakkasucs-aug25-takakattyaru.html",
+      "title": "Nico Robin (Format OP17) Shop Event Winner",
+      "subtitle": "BakkasuCS · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/robin-op17-east-bakkasucs-aug25-takakattyaru/",
+      "kind": "web",
+      "date": "2026-08-25"
+    },
+    {
+      "slug": "opdeck-robin-op17-east-takuroocup-32-aug23-kuku",
+      "href": "/decklists/nico-robin/opdeck-robin-op17-east-takuroocup-32-aug23-kuku.html",
+      "title": "Nico Robin (Format OP17) Shop Event Winner",
+      "subtitle": "TakurooCup(32) · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/robin-op17-east-takuroocup-32-aug23-kuku/",
+      "kind": "web",
+      "date": "2026-08-23"
+    },
+    {
+      "slug": "opdeck-robin-op17-east-itoko-cs-aug23-shishi",
+      "href": "/decklists/nico-robin/opdeck-robin-op17-east-itoko-cs-aug23-shishi.html",
+      "title": "Nico Robin (Format OP17) Shop Event Winner",
+      "subtitle": "Itoko CS · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/robin-op17-east-itoko-cs-aug23-shishi/",
+      "kind": "web",
+      "date": "2026-08-23"
+    },
+    {
+      "slug": "opdeck-robin-op17-east-front-card-28-aug23-powerdzettan",
+      "href": "/decklists/nico-robin/opdeck-robin-op17-east-front-card-28-aug23-powerdzettan.html",
+      "title": "Nico Robin (Format OP17) Shop Event 2nd Place",
+      "subtitle": "front_card(28) · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/robin-op17-east-front-card-28-aug23-powerdzettan/",
+      "kind": "web",
+      "date": "2026-08-23"
+    },
+    {
+      "slug": "opdeck-robin-op17-east-torechan-aug23-kaz",
+      "href": "/decklists/nico-robin/opdeck-robin-op17-east-torechan-aug23-kaz.html",
+      "title": "Nico Robin (Format OP17) Standard Battle Winner",
+      "subtitle": "Torechan · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/robin-op17-east-torechan-aug23-kaz/",
+      "kind": "web",
+      "date": "2026-08-23"
+    },
+    {
+      "slug": "opdeck-robin-op17-east-sakecup-aug23-hirameki",
+      "href": "/decklists/nico-robin/opdeck-robin-op17-east-sakecup-aug23-hirameki.html",
+      "title": "Nico Robin (Format OP17) 3vs3 Winner",
+      "subtitle": "SakeCup · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/robin-op17-east-sakecup-aug23-hirameki/",
+      "kind": "web",
+      "date": "2026-08-23"
+    },
+    {
+      "slug": "opdeck-robin-op17-east-seagull-aug22-himahima",
+      "href": "/decklists/nico-robin/opdeck-robin-op17-east-seagull-aug22-himahima.html",
+      "title": "Nico Robin (Format OP17) Standard Battle Winner",
+      "subtitle": "Seagull · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/robin-op17-east-seagull-aug22-himahima/",
+      "kind": "web",
+      "date": "2026-08-22"
+    }
+  ],
+  "ST30-001": [
+    {
+      "slug": "opdeck-luffy-ace-op17-east-cardshop-aug25-gacaha2",
+      "href": "/decklists/luffy-ace/opdeck-luffy-ace-op17-east-cardshop-aug25-gacaha2.html",
+      "title": "Luffy & Ace (Format OP17) SB Winner",
+      "subtitle": "Cardshop · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/luffy-ace-op17-east-cardshop-aug25-gacaha2/",
+      "kind": "web",
+      "date": "2026-08-25"
+    }
+  ],
+  "OP09-061": [
+    {
+      "slug": "opdeck-pb-luffy-op17-east-cardshop-aug23-syuraia",
+      "href": "/decklists/op09-luffy/opdeck-pb-luffy-op17-east-cardshop-aug23-syuraia.html",
+      "title": "PB Luffy (Format OP17) SB Winner",
+      "subtitle": "Cardshop · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/pb-luffy-op17-east-cardshop-aug23-syuraia/",
+      "kind": "web",
+      "date": "2026-08-23"
+    }
+  ],
+  "OP13-004": [
+    {
+      "slug": "opdeck-sabo-op17-east-shumaicup-aug22-ocham0n",
+      "href": "/decklists/sabo/opdeck-sabo-op17-east-shumaicup-aug22-ocham0n.html",
+      "title": "Sabo (Format OP17) 3vs3 Winner",
+      "subtitle": "ShumaiCup · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/sabo-op17-east-shumaicup-aug22-ocham0n/",
+      "kind": "web",
+      "date": "2026-08-22"
+    },
+    {
+      "slug": "opdeck-sabo-op17-east-cardshop-aug22-enieslobby-tcg",
+      "href": "/decklists/sabo/opdeck-sabo-op17-east-cardshop-aug22-enieslobby-tcg.html",
+      "title": "Sabo (Format OP17) Standard Battle Winner",
+      "subtitle": "Cardshop · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/sabo-op17-east-cardshop-aug22-enieslobby-tcg/",
+      "kind": "web",
+      "date": "2026-08-22"
+    },
+    {
+      "slug": "opdeck-sabo-op17-east-overseas-aug22-hori",
+      "href": "/decklists/sabo/opdeck-sabo-op17-east-overseas-aug22-hori.html",
+      "title": "Sabo (Format OP17) Shop Event Winner",
+      "subtitle": "Overseas · public list from OPDeckGuide",
+      "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/sabo-op17-east-overseas-aug22-hori/",
+      "kind": "web",
+      "date": "2026-08-22"
     }
   ]
 }

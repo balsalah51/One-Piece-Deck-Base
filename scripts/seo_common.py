@@ -100,6 +100,7 @@ RELATED_LEADERS: dict[str, list[str]] = {
     "EB02-010": ["OP17-020", "OP13-001", "OP17-079"],
     "OP14-040": ["OP17-039", "OP16-041", "OP12-041"],
     "OP12-041": ["OP14-040", "OP11-040", "OP17-079"],
+    "ST30-001": ["OP16-001", "OP13-002", "OP17-001"],
 }
 
 LEADER_GUIDE: dict[str, str] = {

@@ -66,6 +66,7 @@ LEADERS = [
     ("EB02 Luffy", "/decklists/eb02-luffy.html", "EB02 Green/Purple Monkey D. Luffy"),
     ("Jinbe", "/decklists/jinbe.html", "OP14 Blue Jinbe"),
     ("Sanji", "/decklists/sanji.html", "OP12 Blue/Purple Sanji"),
+    ("Luffy & Ace", "/decklists/luffy-ace.html", "ST30 Red/Green Luffy & Ace"),
 ]
 
 

@@ -254,6 +254,10 @@ TAKES = {
         "Blue/Purple OP12 Sanji is the Germa / Straw Hat leader. "
         "OP17 Rocks and Elbaph cards show up in current-format lists."
     ),
+    "ST30-001": (
+        "ST30 Luffy & Ace is red/green Whitebeard rush. "
+        "Hosted lists keep the starter Ace package and splash OP17 Shanks and Newgate cards."
+    ),
 }
 
 POPUP_JS = r"""

@@ -624,6 +624,18 @@ LEADERS = [
         "pool_heading": "Card pictures",
         "pool_note": "English names and art from Limitless",
     },
+    {
+        "id": "ST30-001",
+        "key": "luffy-ace",
+        "page": "decklists/luffy-ace.html",
+        "dir": "decklists/luffy-ace",
+        "name": "Luffy & Ace",
+        "color": "color-red-green",
+        "crumb": ("/decklists/op17.html", "OP17 decklists"),
+        "nav_op17": False,
+        "pool_heading": "Card pictures",
+        "pool_note": "English names and art from Limitless",
+    },
 ]
 
 
