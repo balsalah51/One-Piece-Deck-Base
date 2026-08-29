@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import importlib.util
 
-SINCE = "2026-08-27"
+SINCE = "2026-08-28"
 UP_LUFFY = "OP11-040"
 
 
@@ -53,6 +53,10 @@ def main() -> None:
 
     print("=== X / YouTube / OnePieceDB / weird sources ===")
     commsrc.main()
+
+    print("=== Reddit / X photo transcripts ===")
+    photos = load("photos", "/workspace/scripts/transcribe-deck-images.py")
+    photos.main()
 
     index = more.load_index()
     more.rebuild_hubs(index)

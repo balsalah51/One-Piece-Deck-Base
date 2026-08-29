@@ -100,6 +100,15 @@
       "source_url": "https://x.com/Chinoize_/status/2092357744921612794",
       "kind": "x",
       "date": "2026-08-25"
+    },
+    {
+      "slug": "web-mercardop-blue-rocks-aug20",
+      "href": "/decklists/op17/rocks-d-xebec/web-mercardop-blue-rocks-aug20.html",
+      "title": "Blue Rocks 50-card guide — Mercard OP",
+      "subtitle": "Public Japanese 50-card ID list · 2026-08-20",
+      "source_url": "https://www.mercardop.jp/article-detail/82",
+      "kind": "web",
+      "date": "2026-08-20"
     }
   ],
   "OP17-058": [
@@ -320,6 +329,15 @@
       "source_url": "https://www.reddit.com/r/OnePieceTCG/s/wjyx7BRKbb",
       "kind": "web",
       "date": "2026-08-24"
+    },
+    {
+      "slug": "reddit-pudding-1vp5syc",
+      "href": "/decklists/charlotte-pudding/reddit-pudding-1vp5syc.html",
+      "title": "OP17 Pudding — r/OnePieceTCG photo + comment",
+      "subtitle": "List read from the public Reddit deck photo and matching comment IDs · 2026-08-15",
+      "source_url": "https://www.reddit.com/r/OnePieceTCG/comments/1vp5syc/op17_pudding_decklist_in_comments/",
+      "kind": "reddit",
+      "date": "2026-08-15"
     }
   ],
   "OP15-058": [
@@ -331,6 +349,17 @@
       "source_url": "https://x.com/Chinoize_/status/2092357744921612794",
       "kind": "x",
       "date": "2026-08-25"
+    }
+  ],
+  "OP16-060": [
+    {
+      "slug": "reddit-sengoku-1w0xvqg",
+      "href": "/decklists/sengoku/reddit-sengoku-1w0xvqg.html",
+      "title": "Sengoku locals test — r/OnePieceTCG",
+      "subtitle": "List read from the public CardKaizoku screenshot · 2026-08-28",
+      "source_url": "https://www.reddit.com/r/OnePieceTCG/comments/1w0xvqg/could_this_work_in_locals/",
+      "kind": "reddit",
+      "date": "2026-08-28"
     }
   ]
 }
