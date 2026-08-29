@@ -40,6 +40,11 @@ Disallow: /data/
 Disallow: /discord-bot/
 Disallow: /.github/
 
+User-agent: Googlebot-Image
+Allow: /favicon.ico
+Allow: /img/
+Allow: /
+
 Sitemap: https://onepiecedeckbase.com/sitemap.xml
 """
 
@@ -178,9 +183,8 @@ def google_head_tags(url: str, *, indexable: bool = True) -> str:
         f'  <meta name="robots" content="{robots}" />\n'
         f'  <meta name="googlebot" content="{robots}" />\n'
         f'  <meta name="theme-color" content="#b71c1c" />\n'
-        f'  <link rel="icon" href="{html.escape(LOGO_48, quote=True)}" type="image/png" sizes="48x48" />\n'
-        f'  <link rel="icon" href="{html.escape(AVATAR, quote=True)}" type="image/png" sizes="512x512" />\n'
-        f'  <link rel="apple-touch-icon" href="{html.escape(LOGO_192, quote=True)}" />\n'
+        f'  <link rel="icon" href="{html.escape(LOGO_192, quote=True)}" type="image/png" sizes="192x192" />\n'
+        f'  <link rel="apple-touch-icon" href="{html.escape(LOGO_192, quote=True)}" sizes="192x192" />\n'
         f'  <link rel="manifest" href="/site.webmanifest" />\n'
         f'  <link rel="search" type="application/opensearchdescription+xml" title="One Piece Deck Base" href="/opensearch.xml" />\n'
         f'  <link rel="alternate" hreflang="en" href="{u}" />\n'

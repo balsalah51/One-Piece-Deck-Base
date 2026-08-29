@@ -16,4 +16,9 @@ Disallow: /data/
 Disallow: /discord-bot/
 Disallow: /.github/
 
+User-agent: Googlebot-Image
+Allow: /favicon.ico
+Allow: /img/
+Allow: /
+
 Sitemap: https://onepiecedeckbase.com/sitemap.xml

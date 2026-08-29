@@ -207,6 +207,14 @@
       <image:loc>https://onepiecedeckbase.com/img/opdb-hero.jpg</image:loc>
       <image:title>One Piece TCG Decklists (OPTCG) | One Piece Deck Base</image:title>
     </image:image>
+    <image:image>
+      <image:loc>https://onepiecedeckbase.com/img/opdb-avatar.png</image:loc>
+      <image:title>One Piece Deck Base profile picture</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://onepiecedeckbase.com/img/opdb-logo-192.png</image:loc>
+      <image:title>One Piece Deck Base favicon</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://onepiecedeckbase.com/shop/deck-boxes.html</loc>

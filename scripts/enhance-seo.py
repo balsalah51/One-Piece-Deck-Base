@@ -704,7 +704,7 @@ def rewrite_sitemap(by_href: dict) -> None:
             newest_by_leader[lid] = max(d, newest_by_leader.get(lid, ""))
     core = []
     lists = []
-    images = []
+    images: list[tuple[str, str, list[tuple[str, str]]]] = []
     today = date.today().isoformat()
     for p in sorted(public_html()):
         rel = p.relative_to(ROOT).as_posix()
@@ -719,7 +719,11 @@ def rewrite_sitemap(by_href: dict) -> None:
         if rel == "index.html" or rel in BY_PAGE or rel.startswith("shop/"):
             title = TITLE_RE.search(p.read_text()[:1200])
             label = html.unescape(title.group(1).strip()) if title else Path(rel).stem
-            images.append((loc, image, label, lastmod))
+            extras = [(image, label)]
+            if rel == "index.html":
+                extras.append((seo.AVATAR, "One Piece Deck Base profile picture"))
+                extras.append((seo.LOGO_192, "One Piece Deck Base favicon"))
+            images.append((loc, lastmod, extras))
 
     (ROOT / "sitemap-core.xml").write_text(urlset_xml(core))
     (ROOT / "sitemap-lists.xml").write_text(urlset_xml(lists))
@@ -727,14 +731,15 @@ def rewrite_sitemap(by_href: dict) -> None:
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">',
     ]
-    for loc, image, label, lastmod in images:
+    for loc, lastmod, extras in images:
         img_lines.append("  <url>")
         img_lines.append(f"    <loc>{html.escape(loc)}</loc>")
         img_lines.append(f"    <lastmod>{html.escape(lastmod)}</lastmod>")
-        img_lines.append("    <image:image>")
-        img_lines.append(f"      <image:loc>{html.escape(image)}</image:loc>")
-        img_lines.append(f"      <image:title>{html.escape(label)}</image:title>")
-        img_lines.append("    </image:image>")
+        for image, label in extras:
+            img_lines.append("    <image:image>")
+            img_lines.append(f"      <image:loc>{html.escape(image)}</image:loc>")
+            img_lines.append(f"      <image:title>{html.escape(label)}</image:title>")
+            img_lines.append("    </image:image>")
         img_lines.append("  </url>")
     img_lines.append("</urlset>\n")
     (ROOT / "sitemap-images.xml").write_text("\n".join(img_lines))
