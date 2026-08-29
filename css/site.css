@@ -313,6 +313,12 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
 .color-purple-yellow{--tile:#6a1b9a}
 .color-red-black{--tile:#b71c1c}
 .color-blue-purple{--tile:#1565c0}
+.color-red-purple{--tile:#b71c1c}
+.color-purple-black{--tile:#6a1b9a}
+.color-red-yellow{--tile:#b71c1c}
+.color-blue-black{--tile:#1565c0}
+.color-green-yellow{--tile:#2e7d32}
+.color-green-purple{--tile:#2e7d32}
 .swatch.dual-red-green{background:linear-gradient(90deg,#b71c1c 50%,#2e7d32 50%)}
 .swatch.dual-blue-yellow{background:linear-gradient(90deg,#1565c0 50%,#c9a227 50%)}
 .swatch.dual-red-blue{background:linear-gradient(90deg,#b71c1c 50%,#1565c0 50%)}

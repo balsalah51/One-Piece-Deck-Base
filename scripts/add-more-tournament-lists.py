@@ -235,6 +235,7 @@ def pick_fresh(
     index: dict,
     extra_limit: int = EXTRA_LIMIT,
     per_event: int = PER_EVENT,
+    require_op17: bool = False,
 ) -> list[dict]:
     have = existing_stems(leader)
     known = known_results(leader, index)
@@ -252,6 +253,8 @@ def pick_fresh(
         if gen.count_cards(dl) < gen.MIN_CARDS:
             continue
         if gen.deck_has_banned(dl):
+            continue
+        if require_op17 and not gen.deck_has_op17(dl):
             continue
         player = (entry.get("player") or "").strip().lower()
         tid = entry.get("tournament_id") or ""
@@ -280,6 +283,7 @@ def fetch_more(
     extra_limit: int | None = None,
     per_event: int | None = None,
     since: str | None = None,
+    require_op17: bool = False,
 ) -> dict:
     target_ids = only_ids or {L["id"] for L in gen.LEADERS}
     leaders = [L for L in gen.LEADERS if L["id"] in target_ids]
@@ -303,6 +307,7 @@ def fetch_more(
             index,
             extra_limit=limit,
             per_event=event_cap,
+            require_op17=require_op17,
         )
         planned[lid] = fresh
         for entry in fresh:

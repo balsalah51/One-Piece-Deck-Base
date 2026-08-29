@@ -154,6 +154,106 @@ TAKES = {
         "When attacking, turn 2 Life face-up to rest a DON!! from the DON!! deck. "
         "The hosted list is a 50-card r/OnePieceTCG screenshot: 1-cost Pudding and Brulee, 2-cost Katakuri, Miss Doublefinger, Cracker, 6-cost and 8-cost Katakuri, 7-cost Pudding, yellow searcher Pudding, OP17 yellow Pudding, OP17 Katakuri, Sweet 3 Generals, Perospero, and 10-cost Linlin."
     ),
+    "OP13-004": (
+        "Red/Black OP13 Sabo is Revolutionary Army midrange, not ST13 Sabo. "
+        "Current-format lists splash OP17 Elbaph Straw Hats and Loki to turn the Sabo engine on."
+    ),
+    "OP09-062": (
+        "Purple/Yellow OP09 Nico Robin is the Ohara / archaeology leader — not a character in Nami. "
+        "OP17 yellow Big Mom cards are the current splash that keeps her posting."
+    ),
+    "OP14-080": (
+        "Black/Yellow OP14 Gecko Moria is Thriller Bark recursion, not Nami's Moria package. "
+        "Hosted lists keep the Thriller Bark core and splash OP17 Pudding."
+    ),
+    "OP14-041": (
+        "Blue/Yellow OP14 Boa Hancock is Amazon Lily control. "
+        "OP17 yellow Pudding and Linlin are the current-format splash."
+    ),
+    "OP12-081": (
+        "Black/Yellow OP12 Koala is Revolutionary Army, not Sabo's only partner. "
+        "Current lists splash OP17 Elbaph search and Loki."
+    ),
+    "OP09-001": (
+        "Red OP09 Shanks is the older Red Hair leader — not green OP17 Shanks. "
+        "Hosted lists keep the Red Hair pile and splash an OP17 Newgate body."
+    ),
+    "OP05-098": (
+        "Yellow OP05 Enel is the 4-life yellow Enel — not purple OP15 Enel. "
+        "Current lists splash OP17 yellow Big Mom cards."
+    ),
+    "ST10-002": (
+        "ST10 Luffy is red/purple 3-life Straw Hat Luffy. "
+        "OP17 Kaido-package cards are the current splash."
+    ),
+    "OP09-061": (
+        "OP09 Luffy is purple/black Film Red Luffy — not OP17 Elbaph Luffy. "
+        "Current lists mix OP17 Kaido and Elbaph cards."
+    ),
+    "ST13-003": (
+        "ST13 Luffy is black/yellow Three Brothers Luffy. "
+        "Hosted lists splash OP17 Luffy as a finisher."
+    ),
+    "OP12-040": (
+        "Blue OP12 Kuzan is the Admiral ice leader. "
+        "OP17 Rocks Pirates cards are the current splash."
+    ),
+    "OP05-002": (
+        "Red/Yellow Belo Betty is Revolutionary Army go-wide. "
+        "OP17 yellow Big Mom cards show up in current-format lists."
+    ),
+    "EB04-001": (
+        "EB04 Jewelry Bonney is red/yellow Supernova Bonney. "
+        "OP17 yellow Pudding and Linlin are the current splash."
+    ),
+    "OP10-099": (
+        "Yellow OP10 Eustass Kid is the Kid Pirates leader. "
+        "Current lists splash a full OP17 yellow Big Mom package."
+    ),
+    "OP07-059": (
+        "Purple OP07 Foxy is the Foxy Pirates stall leader. "
+        "The hosted OP17-format list splashes OP17 Kaido."
+    ),
+    "ST13-001": (
+        "ST13 Sabo is red/yellow Three Brothers Sabo — not red/black OP13 Sabo. "
+        "OP17 yellow Big Mom cards are the current splash."
+    ),
+    "OP05-041": (
+        "Blue/Black OP05 Sakazuki is the Admiral burn leader. "
+        "Current lists splash OP17 Rocks and Elbaph cards."
+    ),
+    "OP05-060": (
+        "OP05 Luffy is purple Gear 4 Luffy. "
+        "OP17 Kaido-package cards are the current splash."
+    ),
+    "OP07-079": (
+        "Black OP07 Rob Lucci is CP9 removal. "
+        "Hosted lists splash OP17 Elbaph search and Loki."
+    ),
+    "OP10-022": (
+        "Green/Yellow OP10 Trafalgar Law is the Heart Pirates leader. "
+        "The hosted OP17-format list splashes OP17 Shanks."
+    ),
+    "OP06-022": (
+        "OP06 Yamato is green/yellow Wano Yamato — not black OP16 Yamato. "
+        "The hosted list splashes OP17 Shanks."
+    ),
+    "ST14-001": (
+        "ST14 Luffy is black 3D2Y Luffy. "
+        "Current lists splash a wide OP17 Elbaph Straw Hat package."
+    ),
+    "EB02-010": (
+        "EB02 Luffy is green/purple Film Red Luffy. "
+        "The hosted OP17-format list splashes OP17 Yasopp."
+    ),
+    "OP14-040": (
+        "Blue OP14 Jinbe is the Sun Pirates leader. "
+        "OP17 Rocks Pirates cards are the current splash."
+    ),
+    "OP12-041": (
+        "Blue/Purple OP12 Sanji is the Germa / Straw Hat leader. "
+        "OP17 Rocks and Elbaph cards show up in current-format lists."
+    ),
 }
 
 POPUP_JS = r"""
@@ -468,7 +568,9 @@ def main() -> None:
         print(lid, "from", used, "of", len(raw_decks), "lists", "cards", total, "op17", op17_c)
         grouped, totals = grouped_from_picks(leader, picks, cache)
         text_deck = gen.render_text_deck(grouped, cache, ["Leader", "Characters", "Events", "Stages"], totals)
-        take = TAKES[lid]
+        take = TAKES.get(lid) or (
+            f"{leader['name']} ({lid}) lists on this site are hosted because they include OP17 cards."
+        )
         block = analysis_block(leader, len(raw_decks), take, text_deck, op17_n)
         page_path = ROOT / leader["page"]
         page = inject(page_path.read_text(), block)
