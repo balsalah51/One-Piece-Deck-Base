@@ -26,9 +26,9 @@ STATUS_RE = re.compile(
     re.I,
 )
 TWITTER_EPOCH_MS = 1288834974657
-# Inclusive UTC window: yesterday and today for this scrape (28–29 Aug 2026).
+# Inclusive UTC window for this scrape (28–30 Aug 2026).
 DATE_START = "2026-08-28"
-DATE_END = "2026-08-29"
+DATE_END = "2026-08-30"
 LEADERS = {
     "OP17-001",
     "OP17-020",
