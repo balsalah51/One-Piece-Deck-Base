@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import importlib.util
 
-SINCE = "2026-08-28"
+SINCE = "2026-08-28"  # recrape window: 28 Aug through today
 UP_LUFFY = "OP11-040"
 
 
@@ -50,6 +50,11 @@ def main() -> None:
         since=SINCE,
     )
     more.save_index(index)
+
+    print("=== TCG PORTAL shop results ===")
+    portal = load("portal", "/workspace/scripts/add-tcgportal-lists.py")
+    portal_found = portal.collect_lists(more.gen, commsrc)
+    commsrc.write_lists(portal_found)
 
     print("=== X / YouTube / OnePieceDB / weird sources ===")
     commsrc.main()

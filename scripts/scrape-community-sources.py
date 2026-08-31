@@ -275,6 +275,7 @@ def scrape_x(found: list[dict], seen: set[str]) -> None:
         handle = item.get("handle") or "x"
         day = (item.get("date") or "")[:10]
         if day and day < "2026-08-28":
+            # keep 8/28+ community lists; older X dumps stay archived only
             log("skip old x list", handle, day)
             continue
         record(
