@@ -1197,6 +1197,7 @@ def page_chrome(
         <a href="/#recent">Recent lists</a>
         <a href="/decklists/op17.html"{op17_cur}>Leaders</a>
         <a href="/format.html">Format</a>
+        <a href="https://en.onepiece-cardgame.com/events/" target="_blank" rel="noopener">Events</a>
         <a href="/guides/">Guides</a>
         <a href="/shop/">Shop</a>
         <a href="/search.html">Search</a>

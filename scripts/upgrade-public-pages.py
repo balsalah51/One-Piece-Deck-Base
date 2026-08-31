@@ -36,6 +36,7 @@ TCG_SCRIPT_RE = re.compile(
 NAV_LEADERS_SHOP = (
     '        <a href="/decklists/op17.html">Leaders</a>\n'
     '        <a href="/format.html">Format</a>\n'
+    '        <a href="https://en.onepiece-cardgame.com/events/" target="_blank" rel="noopener">Events</a>\n'
     '        <a href="/guides/">Guides</a>\n'
     '        <a href="/shop/">Shop</a>\n'
     '        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>'
@@ -43,6 +44,7 @@ NAV_LEADERS_SHOP = (
 NAV_LEADERS_SHOP_CURRENT = (
     '        <a href="/decklists/op17.html" aria-current="page">Leaders</a>\n'
     '        <a href="/format.html">Format</a>\n'
+    '        <a href="https://en.onepiece-cardgame.com/events/" target="_blank" rel="noopener">Events</a>\n'
     '        <a href="/guides/">Guides</a>\n'
     '        <a href="/shop/">Shop</a>\n'
     '        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>'
@@ -330,6 +332,15 @@ def render_home_body() -> str:
             <p>OPTCG decklists. Jump a section, or keep scrolling into the leaders.</p>
           </div>
         </section>
+
+        <a class="events-banner" id="events" href="https://en.onepiece-cardgame.com/events/" target="_blank" rel="noopener">
+          <div>
+            <div class="kicker">Official Bandai site</div>
+            <div class="title">ONE PIECE CARD GAME events</div>
+            <div class="muted" style="color:rgba(255,255,255,0.82);margin-top:4px">Championships, regionals, Treasure Cups, and store tournaments</div>
+          </div>
+          <div class="go">Official events →</div>
+        </a>
 
         <nav class="home-big3" aria-label="Main sections">
           <a class="home-big home-big-recent" href="#recent">

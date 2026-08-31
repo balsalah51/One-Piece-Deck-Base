@@ -145,6 +145,7 @@ def nav_html(current: str) -> str:
             item("/#recent", "Recent lists", "recent"),
             item("/decklists/op17.html", "Leaders", "leaders"),
             item("/format.html", "Format", "format"),
+            item("https://en.onepiece-cardgame.com/events/", "Events", "events"),
             item("/guides/", "Guides", "guides"),
             item("/shop/", "Shop", "shop"),
             item("/search.html", "Search", "search"),
