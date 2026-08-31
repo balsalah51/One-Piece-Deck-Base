@@ -475,6 +475,16 @@ def patch_nav_footer(text: str) -> str:
             '        <a href="/format.html">Format</a>\n        <a href="/guides/">Guides</a>\n        <a href="/shop/" aria-current="page">Shop</a>',
         )
     nav = text.split("<nav", 1)[-1].split("</nav>", 1)[0] if "<nav" in text else ""
+    if "onepiece-cardgame.com/events" not in nav:
+        text = text.replace(
+            '        <a href="/format.html">Format</a>\n        <a href="/guides/">Guides</a>',
+            '        <a href="/format.html">Format</a>\n        <a href="https://en.onepiece-cardgame.com/events/" target="_blank" rel="noopener">Events</a>\n        <a href="/guides/">Guides</a>',
+        )
+        text = text.replace(
+            '        <a href="/format.html" aria-current="page">Format</a>\n        <a href="/guides/">Guides</a>',
+            '        <a href="/format.html" aria-current="page">Format</a>\n        <a href="https://en.onepiece-cardgame.com/events/" target="_blank" rel="noopener">Events</a>\n        <a href="/guides/">Guides</a>',
+        )
+    nav = text.split("<nav", 1)[-1].split("</nav>", 1)[0] if "<nav" in text else ""
     if 'href="/search.html"' not in nav:
         text = text.replace(
             '        <a href="https://discord.gg/adZ2WUQ3D"',
@@ -979,6 +989,7 @@ def write_search_page(index: dict) -> None:
         <a href="/#recent">Recent lists</a>
         <a href="/decklists/op17.html">Leaders</a>
         <a href="/format.html">Format</a>
+        <a href="https://en.onepiece-cardgame.com/events/" target="_blank" rel="noopener">Events</a>
         <a href="/guides/">Guides</a>
         <a href="/shop/">Shop</a>
         <a href="/search.html" aria-current="page">Search</a>
