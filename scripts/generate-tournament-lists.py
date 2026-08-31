@@ -1182,6 +1182,7 @@ def page_chrome(
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
   <link rel="stylesheet" href="/css/site.css?v=seo-links" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1074015774205047" crossorigin="anonymous"></script>
 </head>
 <body class="{html.escape(color)}">
   <div class="wrap">

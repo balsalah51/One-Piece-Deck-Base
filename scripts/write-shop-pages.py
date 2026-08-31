@@ -198,6 +198,7 @@ def chrome(title: str, desc: str, canonical: str, body: str, *, indexable: bool,
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(desc)}" />
 {robots}{canon}  <link rel="stylesheet" href="{CSS}" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1074015774205047" crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="wrap">

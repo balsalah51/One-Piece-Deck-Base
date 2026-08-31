@@ -80,6 +80,7 @@ def chrome(title: str, description: str, body: str) -> str:
   <meta name="description" content="{html.escape(description)}" />
   <link rel="canonical" href="{html.escape(SITE)}" />
   <link rel="stylesheet" href="/css/site.css?v=seo-links" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1074015774205047" crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="wrap">

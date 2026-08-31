@@ -45,8 +45,17 @@ Allow: /favicon.ico
 Allow: /img/
 Allow: /
 
+User-agent: Mediapartners-Google
+Allow: /
+
 Sitemap: https://onepiecedeckbase.com/sitemap.xml
 """
+ADSENSE_CLIENT = "ca-pub-1074015774205047"
+ADSENSE_SCRIPT = (
+    f'  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_CLIENT}" '
+    'crossorigin="anonymous"></script>\n'
+)
+ADS_TXT = "google.com, pub-1074015774205047, DIRECT, f08c47fec0942fa0\n"
 
 # Leader id -> nearby constructed pages (same color family, same set, or same character).
 RELATED_LEADERS: dict[str, list[str]] = {
@@ -239,6 +248,7 @@ def google_head_tags(url: str, *, indexable: bool = True) -> str:
         f'  <link rel="search" type="application/opensearchdescription+xml" title="One Piece Deck Base" href="/opensearch.xml" />\n'
         f'  <link rel="alternate" hreflang="en" href="{u}" />\n'
         f'  <link rel="alternate" hreflang="x-default" href="{u}" />\n'
+        f"{ADSENSE_SCRIPT}"
     )
 
 
