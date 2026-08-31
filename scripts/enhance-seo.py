@@ -46,6 +46,10 @@ ICON_RE = re.compile(
     re.I,
 )
 THEME_RE = re.compile(r'\s*<meta name="theme-color" content="[^"]*"\s*/?>', re.I)
+ADSENSE_RE = re.compile(
+    r"\s*<script[^>]*adsbygoogle\.js[^>]*>\s*</script>",
+    re.I,
+)
 IMG_RE = re.compile(r"<img\b([^>]*)>", re.I)
 SKIP_PARTS = {".git", "scripts", "node_modules", "discord-bot", "ballkeep"}
 SKIP_FILES = {"shop/custom-leaders.html"}
@@ -436,6 +440,7 @@ def ensure_head(text: str, rel: str, title: str, desc: str, by_href: dict) -> st
     text = ROBOTS_META_RE.sub("", text)
     text = ICON_RE.sub("", text)
     text = THEME_RE.sub("", text)
+    text = ADSENSE_RE.sub("", text)
     text = re.sub(r'(<link rel="stylesheet"[^>]*>)(?=<)', r"\1\n", text)
     if TITLE_RE.search(text):
         text = TITLE_RE.sub(f"<title>{html.escape(title)}</title>", text, count=1)
@@ -752,6 +757,7 @@ def rewrite_sitemap(by_href: dict) -> None:
 """
     (ROOT / "sitemap.xml").write_text(index_xml)
     (ROOT / "robots.txt").write_text(seo.ROBOTS_TXT)
+    (ROOT / "ads.txt").write_text(seo.ADS_TXT)
     log("sitemap core", len(core), "lists", len(lists), "images", len(images))
 
 
@@ -817,6 +823,7 @@ def write_discovery_files() -> None:
         )
         + "\n"
     )
+    (ROOT / "ads.txt").write_text(seo.ADS_TXT)
     (ROOT / "opensearch.xml").write_text(
         f"""<?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
@@ -964,6 +971,7 @@ def write_search_page(index: dict) -> None:
   <title>Search OPTCG decklists | One Piece Deck Base</title>
   <meta name="description" content="Search One Piece TCG decklists, leaders, characters, and events on One Piece Deck Base." />
   <link rel="stylesheet" href="/css/site.css?v={seo.CSS_VER}" />
+{seo.ADSENSE_SCRIPT.rstrip()}
 </head>
 <body>
   <div class="wrap">
