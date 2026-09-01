@@ -1001,19 +1001,19 @@ def newgate_samples(op17: dict) -> list[dict]:
     samples = [
         (
             "sample-whitebeard-finishers",
-            "Sample starter — finishers",
-            "50-card OP17 Red Whitebeard package. Not a tournament list — no Limitless results found for OP17-001 yet.",
+            "Sample starter - finishers",
+            "50-card OP17 Red Whitebeard package. Not a tournament list - no Limitless results found for OP17-001 yet.",
             a,
         ),
         (
             "sample-whitebeard-search",
-            "Sample starter — search and events",
+            "Sample starter - search and events",
             "50-card OP17 Red Whitebeard package with events maxed. Not a tournament list.",
             b,
         ),
         (
             "sample-whitebeard-toolbox",
-            "Sample starter — toolbox",
+            "Sample starter - toolbox",
             "50-card OP17 Red Whitebeard package with more 2-ofs. Not a tournament list.",
             c,
         ),
@@ -1212,7 +1212,7 @@ def page_chrome(
       </div>
     </main>
     <footer>
-      © <span id="year"></span> One Piece Deck Base — Built with community in mind.
+      © <span id="year"></span> One Piece Deck Base - Built with community in mind.
       <a href="/guides/">Guides</a> · <a href="/decklists/op17.html">Leaders</a> · <a href="/format.html">Format</a> · <a href="/search.html">Search</a> · <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a>
     </footer>
   </div>
@@ -1273,11 +1273,15 @@ def page_chrome(
 """
 
 
+def plain_dash(text: str) -> str:
+    return (text or "").replace("\u2014", "-").replace("&mdash;", "-")
+
+
 def list_heading(entry: dict, leader_name: str) -> tuple[str, str]:
     if entry.get("title_override"):
         title = entry["title_override"]
         sub = entry.get("subtitle") or ""
-        return title, sub
+        return plain_dash(title), plain_dash(sub)
     player = display_name(entry.get("player") or "Unknown")
     event = entry.get("tournament_name") or "Limitless event"
     place = ordinal(entry.get("placing"))
@@ -1288,7 +1292,7 @@ def list_heading(entry: dict, leader_name: str) -> tuple[str, str]:
     sub = event
     if bits:
         sub = f"{event} · {' · '.join(bits)}"
-    return title, sub
+    return plain_dash(title), plain_dash(sub)
 
 
 def planned_slug(entry: dict) -> str:
@@ -1568,7 +1572,7 @@ def render_deck_page(leader: dict, entry: dict, cache: dict) -> str:
 {text_list}
 {picture}
         <p class="muted" style="margin-top:22px">{html.escape(kind_note)} Source: <a href="{html.escape(source)}">{html.escape(source)}</a>. Images hosted by Limitless. Not affiliated with Bandai.</p>"""
-    desc = f"{leader['name']} decklist — {subtitle}"[:160]
+    desc = f"{leader['name']} decklist - {subtitle}"[:160]
     return page_chrome(f"{title}", desc, leader["color"], leader["nav_op17"], body)
 
 
@@ -1608,7 +1612,7 @@ HUB_INTRO = {
         "SWORD characters can attack the turn they are played. A 7000-power-or-less Navy body can be saved from removal."
     ),
     "OP14-060": (
-        "Purple OP14 Donquixote Doflamingo is the Dressrosa retarget leader — not blue OP01-060 Doffy. "
+        "Purple OP14 Donquixote Doflamingo is the Dressrosa retarget leader - not blue OP01-060 Doffy. "
         "Once per opponent attack, DON!! −1 to send that attack at Doffy or a Donquixote Pirates character."
     ),
     "OP16-041": (
@@ -1620,12 +1624,12 @@ HUB_INTRO = {
         "Return 8 active DON!! to play up to 3 differently named Admirals from hand. Not Enel and not Katakuri."
     ),
     "OP11-040": (
-        "Blue/Purple OP11 Monkey D. Luffy — UP Luffy in community shorthand (U = blue, P = purple). "
+        "Blue/Purple OP11 Monkey D. Luffy - UP Luffy in community shorthand (U = blue, P = purple). "
         "Once you have 8 DON!!, look at 5 and add a Straw Hat. "
         "Not red/green OP13 Luffy, not green/blue OP16 Impel Down Luffy, and not black OP17 Elbaph Luffy."
     ),
     "OP08-058": (
-        "Purple/Yellow OP08 Charlotte Pudding is the Big Mom DON!! ramp leader — not yellow OP17 Linlin and not purple OP11 Katakuri. "
+        "Purple/Yellow OP08 Charlotte Pudding is the Big Mom DON!! ramp leader - not yellow OP17 Linlin and not purple OP11 Katakuri. "
         "When attacking, turn 2 Life cards face-up to add 1 DON!! from your DON!! deck and rest it."
     ),
 }
@@ -1679,7 +1683,7 @@ def render_hub_page(leader: dict, cache: dict) -> str:
         </section>
         <!-- /TOURNAMENT_DECKLISTS -->
 {render_pool_heading(leader)}"""
-    desc = f"{leader['name']} — {color} leader page and tournament lists."
+    desc = f"{leader['name']} - {color} leader page and tournament lists."
     return page_chrome(f"{leader['name']} decklist", desc[:160], leader["color"], leader["nav_op17"], body)
 
 
