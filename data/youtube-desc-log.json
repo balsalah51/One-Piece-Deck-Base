@@ -1,36 +1,50 @@
 {
   "found": [
     {
+      "leader": "OP17-039",
+      "kind": "youtube",
+      "player": "YouTube",
+      "title": "Rocks D Xebec YouTube list",
+      "subtitle": "YouTube deck profile from a public description · 2026-08-27",
+      "source_url": "https://www.youtube.com/watch?v=Iy8USsETmBk",
+      "slug": "yt-youtube-rocks-d-xebec-iy8ussetmbk",
+      "raw": "1xOP17-039 3xOP17-052 3xOP08-051 3xOP17-042 2xOP17-044 3xOP17-050 4xOP17-040 4xOP17-045 4xOP17-046 4xOP17-048 4xOP17-049 4xOP17-054 4xOP17-055 4xOP17-056 4xOP17-118",
+      "cards": 50,
+      "date": "2026-08-27"
+    },
+    {
+      "leader": "OP17-079",
+      "kind": "youtube",
+      "player": "YouTube",
+      "title": "Monkey D Luffy YouTube list",
+      "subtitle": "YouTube deck profile from a public description · 2026-08-28",
+      "source_url": "https://www.youtube.com/watch?v=x1bRKDLBD28",
+      "slug": "yt-youtube-monkey-d-luffy-x1brkdlbd28",
+      "raw": "1xOP17-079 2xOP17-084 4xOP17-086 4xOP17-094 3xOP05-081 4xOP17-080 4xOP17-081 3xOP17-082 3xOP17-087 3xOP17-091 4xOP15-088 4xOP17-119 3xOP15-092 4xOP17-093 2xOP07-096 3xOP17-098",
+      "cards": 50,
+      "date": "2026-08-28"
+    },
+    {
+      "leader": "ST30-001",
+      "kind": "youtube",
+      "player": "YouTube",
+      "title": "Luffy Ace YouTube list",
+      "subtitle": "YouTube deck profile from a public description · 2026-08-29",
+      "source_url": "https://www.youtube.com/watch?v=-8n9oqREEYE",
+      "slug": "yt-youtube-luffy-ace-8n9oqreeye",
+      "raw": "1xST30-001 3xEB04-002 4xOP01-016 4xOP12-015 4xST21-014 4xST31-001 4xEB02-017 3xST30-012 1xOP15-032 3xOP04-016 3xOP12-018 4xOP14-019 2xOP06-018 3xOP12-037 2xOP12-038 2xOP13-040 4xST31-005",
+      "cards": 50,
+      "date": "2026-08-29"
+    },
+    {
       "leader": "OP11-040",
       "kind": "youtube",
-      "player": "YouTube",
-      "title": "Up Luffy YouTube list",
-      "subtitle": "YouTube deck profile from a public description",
+      "player": "NightingaleTCG",
+      "title": "OP17 UP Luffy gets TWO new 9 costs - Nightingale",
+      "subtitle": "YouTube deck profile · also on X @BenSchumi7",
       "source_url": "https://www.youtube.com/watch?v=rlffBOdE4qs",
-      "slug": "yt-youtube-up-luffy-rlffbode4qs",
+      "slug": "yt-nightingale-up-luffy-rlffbode4qs",
       "raw": "1xOP11-040 4xOP13-043 3xOP16-056 3xOP17-046 4xOP11-054 4xOP06-119 4xOP05-067 4xOP17-074 4xST18-001 4xEB01-061 4xP-107 2xOP17-064 2xOP17-065 4xOP09-078 4xOP11-080",
-      "cards": 50
-    },
-    {
-      "leader": "OP17-099",
-      "kind": "youtube",
-      "player": "YouTube",
-      "title": "Charlotte Linlin YouTube list",
-      "subtitle": "YouTube deck profile from a public description",
-      "source_url": "https://www.youtube.com/watch?v=8tM5AofdVQ4",
-      "slug": "yt-youtube-charlotte-linlin-8tm5aofdvq4",
-      "raw": "1xOP17-099 4xOP17-113 4xOP17-104 4xOP17-107 3xOP17-108 4xOP17-109 4xOP17-102 4xOP17-106 4xOP17-103 4xOP17-114 4xOP17-100 4xOP17-110 4xOP17-112 2xOP17-115 1xOP17-116",
-      "cards": 50
-    },
-    {
-      "leader": "OP14-060",
-      "kind": "youtube",
-      "player": "YouTube",
-      "title": "Doffy YouTube list",
-      "subtitle": "YouTube deck profile from a public description",
-      "source_url": "https://www.youtube.com/watch?v=FyK1fQmzx-k",
-      "slug": "yt-youtube-doffy-fyk1fqmzx-k",
-      "raw": "1xOP14-060 2xOP10-065 4xOP14-067 2xOP10-062 4xOP10-076 4xOP17-074 2xST18-001 2xEB03-036 2xOP14-072 3xOP10-072 1xOP14-061 4xOP14-074 3xEB03-034 2xOP14-069 3xOP17-062 3xST34-004 3xOP13-076 2xOP15-078 4xOP07-076",
       "cards": 50
     },
     {

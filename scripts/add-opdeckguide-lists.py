@@ -27,7 +27,7 @@ META_RE = re.compile(
     r'<span class="meta-label"[^>]*>(.*?)</span>\s*<[^>]+>(.*?)</',
     re.S,
 )
-DATE_RE = re.compile(r"aug(\d{1,2})", re.I)
+DATE_RE = re.compile(r"(aug|sep)(\d{1,2})", re.I)
 TAG_RE = re.compile(r"<[^>]+>")
 NEW_IDS = {"ST30-001"}
 
@@ -97,7 +97,11 @@ def parse_page(path: str, comm, gen) -> dict | None:
     host = meta.get("Host") or meta.get("Location") or "OPDeckGuide"
     slug_tail = path.rstrip("/").split("/")[-1]
     month = DATE_RE.search(slug_tail)
-    date = f"2026-08-{int(month.group(1)):02d}" if month else "2026-08-22"
+    if month:
+        mon = "08" if month.group(1).lower() == "aug" else "09"
+        date = f"2026-{mon}-{int(month.group(2)):02d}"
+    else:
+        date = "2026-08-22"
     return {
         "leader": lid,
         "kind": "web",

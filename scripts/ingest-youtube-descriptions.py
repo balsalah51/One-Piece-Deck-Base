@@ -48,25 +48,74 @@ def unescape(s: str) -> str:
     return s.replace("\\u0026", "&").replace("\\/", "/").replace("\\n", "\n")
 
 
+CHANNELS = [
+    "@NightingaleTCG",
+    "@MarinefordTCG",
+    "@StrawHatPecan",
+    "@BlaisePlaysTCG",
+    "@JohnnyTCG",
+    "@ArtressTCG",
+    "@TheEgman",
+    "@CardKaizoku",
+    "@Chinoize",
+    "@CapiamoOP",
+]
+
+
 def video_ids() -> list[str]:
     ids = list(SEED_VIDEOS)
-    for q in (
+    queries = (
         "OP17+decklist",
+        "OP17+decklist&sp=CAI%253D",
+        "OPTCG+decklist&sp=CAI%253D",
+        "OP17+deck+profile+August+2026",
+        "OP17+decklist+August+27+2026",
+        "OP17+decklist+August+28+2026",
+        "OP17+decklist+August+29+2026",
+        "OP17+decklist+August+30+2026",
+        "OP17+decklist+August+31+2026",
+        "OP17+decklist+September+2026",
+        "OPTCG+decklist+August+2026",
         "UP+Luffy+OP11-040+decklist",
         "Charlotte+Pudding+OP08-058+decklist",
         "OP17+UP+Luffy",
         "NightingaleTCG+UP+Luffy",
+        "NightingaleTCG+OP17",
+        "MarinefordTCG+OP17+decklist",
+        "StrawHatPecan+OP17+decklist",
+        "BlaisePlays+OP17+decklist",
+        "Artress+OP17+decklist",
+        "JohnnyTCG+OP17+decklist",
         "OP17+Kaido+decklist",
         "OP17+Rocks+decklist",
         "OP17+Linlin+decklist",
         "OP17+Shanks+decklist",
         "OP17+Newgate+decklist",
-    ):
+        "OP17+Mihawk+decklist",
+        "OP17+Sabo+decklist",
+        "OP17+Ace+decklist",
+        "ST30+Luffy+Ace+decklist",
+        "ChinoizeCup+decklist",
+        "Utrecht+OP17+decklist",
+    )
+    for q in queries:
         html = fetch("https://www.youtube.com/results?search_query=" + q)
         for vid in YT_RE.findall(html):
             if vid not in ids:
                 ids.append(vid)
-        print("search", q, "ids", len(ids), flush=True)
+        print("search", q[:48], "ids", len(ids), flush=True)
+    for handle in CHANNELS:
+        url = f"https://www.youtube.com/{handle}/videos"
+        try:
+            html = fetch(url)
+        except Exception as exc:  # noqa: BLE001
+            print("channel fail", handle, exc, flush=True)
+            continue
+        before = len(ids)
+        for vid in YT_RE.findall(html):
+            if vid not in ids:
+                ids.append(vid)
+        print("channel", handle, "new", len(ids) - before, "ids", len(ids), flush=True)
     return ids
 
 
@@ -105,12 +154,51 @@ def title_of(html: str) -> str:
     return re.sub(r"\s+", " ", m.group(1)).replace(" - YouTube", "").strip()[:90]
 
 
+MONTHS = {
+    "jan": "01",
+    "feb": "02",
+    "mar": "03",
+    "apr": "04",
+    "may": "05",
+    "jun": "06",
+    "jul": "07",
+    "aug": "08",
+    "sep": "09",
+    "oct": "10",
+    "nov": "11",
+    "dec": "12",
+}
+
+
+def publish_day(html: str) -> str:
+    m = re.search(r'"publishDate"\s*:\s*"(20\d{2}-\d{2}-\d{2})', html)
+    if m:
+        return m.group(1)
+    m = re.search(r'"uploadDate"\s*:\s*"(20\d{2}-\d{2}-\d{2})', html)
+    if m:
+        return m.group(1)
+    m = re.search(
+        r'"dateText"\s*:\s*\{[^}]*"simpleText"\s*:\s*"(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2}),\s*(20\d{2})"',
+        html,
+        re.I,
+    )
+    if m:
+        return f"{m.group(3)}-{MONTHS[m.group(1)[:3].lower()]}-{int(m.group(2)):02d}"
+    m = re.search(
+        r"(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2}),\s*(20\d{2})",
+        html,
+    )
+    if m:
+        return f"{m.group(3)}-{MONTHS[m.group(1)[:3].lower()]}-{int(m.group(2)):02d}"
+    return ""
+
+
 def main() -> None:
     found: list[dict] = []
     seen: set[str] = set()
     ids = video_ids()
-    print("scanning", min(len(ids), 90), "videos", flush=True)
-    for vid in ids[:90]:
+    print("scanning", min(len(ids), 180), "videos", flush=True)
+    for vid in ids[:180]:
         url = f"https://www.youtube.com/watch?v={vid}"
         try:
             html = fetch(url)
@@ -118,25 +206,28 @@ def main() -> None:
             print("fail", vid, exc, flush=True)
             continue
         title = title_of(html)
+        day = publish_day(html)
         lists = lists_from_html(html)
-        print(vid, "lists", len(lists), title[:70], flush=True)
+        print(vid, "lists", len(lists), day or "-", title[:70], flush=True)
+        if day and day < "2026-08-27":
+            continue
         for lid, counts in lists:
             raw = " ".join(f"{n}x{cid}" for cid, n in counts.items())
-            commsrc.record(
-                found,
-                {
-                    "leader": lid,
-                    "kind": "youtube",
-                    "player": "YouTube",
-                    "title": title or f"{commsrc.TARGET_IDS[lid].replace('-', ' ').title()} YouTube list",
-                    "subtitle": "YouTube deck profile from a public description",
-                    "source_url": url,
-                    "slug": commsrc.slug_for("yt", "youtube", f"{commsrc.TARGET_IDS[lid]}-{vid}"),
-                    "raw": raw,
-                    "cards": sum(n for cid, n in counts.items() if cid != lid),
-                },
-                seen,
-            )
+            item = {
+                "leader": lid,
+                "kind": "youtube",
+                "player": "YouTube",
+                "title": title or f"{commsrc.TARGET_IDS[lid].replace('-', ' ').title()} YouTube list",
+                "subtitle": "YouTube deck profile from a public description",
+                "source_url": url,
+                "slug": commsrc.slug_for("yt", "youtube", f"{commsrc.TARGET_IDS[lid]}-{vid}"),
+                "raw": raw,
+                "cards": sum(n for cid, n in counts.items() if cid != lid),
+            }
+            if day:
+                item["date"] = day
+                item["subtitle"] = f"YouTube deck profile from a public description · {day}"
+            commsrc.record(found, item, seen)
     # Known description list that the block regex already should catch; keep as backup.
     backup = {
         "leader": "OP11-040",
