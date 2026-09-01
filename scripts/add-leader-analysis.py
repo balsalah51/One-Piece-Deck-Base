@@ -75,7 +75,7 @@ TAKES = {
         "Otama, Kikunojo, You Can Be My Samurai, Coffin Boat, and the rush event show up in most lists; Smoker, Zoro, and the ten-cost Mihawk are flex."
     ),
     "OP16-001": (
-        "Red OP16 Portgas D. Ace is Whitebeard rush — not the red/blue OP13 Ace. "
+        "Red OP16 Portgas D. Ace is Whitebeard rush - not the red/blue OP13 Ace. "
         "Lists lock 4 Monkey D. Luffy, 4 Edward Newgate, 4 Vista, and Moby Dick; Garp, Little Oars Jr., Curiel, Marco, and Thatch are close to required. "
         "The 10-cost Ace is usually a 3-of; Namule, Time for the Counterattack, Uta, and Izo are flex."
     ),
@@ -95,12 +95,12 @@ TAKES = {
         "Lists play Saturn, Warcury, Nusjuro, Mars, Ju Peter, the 10-cost Five Elders, Saint Shalria, and The Five Elders Are at Your Service. Saint Charlos, Sabo, Never Existed, and Ground Death are flex."
     ),
     "OP13-002": (
-        "OP13 Ace is red/blue Portgas D. Ace — 3 life, 6000 power — not the red OP16 Ace rush deck. "
+        "OP13 Ace is red/blue Portgas D. Ace - 3 life, 6000 power - not the red OP16 Ace rush deck. "
         "Trash a card to give −2000, then draw when you take damage or a 6000-power body dies. "
         "Core is Monkey D. Garp, Otama, Izo, Marco, Yamato, OP13 Edward Newgate, and I Am Whitebeard; Uta, Jozu, Atmos, and Roger finish."
     ),
     "OP16-022": (
-        "Green/Blue OP16 Monkey D. Luffy is Impel Down tempo — not red/green OP13 Luffy and not black OP17 Elbaph Luffy. "
+        "Green/Blue OP16 Monkey D. Luffy is Impel Down tempo - not red/green OP13 Luffy and not black OP17 Elbaph Luffy. "
         "If the only characters on your field are Impel Down, set up to 2 DON!! active. "
         "Averaged lists lock Prisoner of Impel Down, 1-cost Luffy, Buggy, Mr. 1, Mr. 2, Mr. 3, Hancock, Ivankov, and Let's Go!! To the Navy Headquarters; Crocodile and Gravity Blade are the next cuts."
     ),
@@ -115,7 +115,7 @@ TAKES = {
         "Averaged lists lock Rosinante & Law, the promo Laws, I Love You!!, and 1-cost Rosinante; ST10 Law, 8-cost Law, Borsalino, Mamaragan, Koby, and Marineford are the next tier."
     ),
     "OP15-002": (
-        "Red/Blue Lucy is Dressrosa Luffy in the colosseum disguise — not red/blue OP13 Ace. "
+        "Red/Blue Lucy is Dressrosa Luffy in the colosseum disguise - not red/blue OP13 Ace. "
         "Trash events or stages for power, then draw if you already fired a 3-cost or higher event. "
         "Averaged lists lock Viola, Rebecca, Barrier-Barrier Pistol, both Fire Fist events, Just Watch Me Ace, and the Memento event; Leo, Sabo, Roger, and Cavendish finish the 50."
     ),
@@ -130,27 +130,27 @@ TAKES = {
         "Averaged lists lock Kujyaku, Aramaki, Helmeppo, Ripper, and I'm Gonna Be a Navy Officer; Doll, both Koby bodies, Prince Grus, and Hibari are the next cuts."
     ),
     "OP14-060": (
-        "Purple OP14 Donquixote Doflamingo is the Dressrosa retarget leader — not blue OP01-060 Doffy and not purple Katakuri. "
+        "Purple OP14 Donquixote Doflamingo is the Dressrosa retarget leader - not blue OP01-060 Doffy and not purple Katakuri. "
         "Once per opponent attack, DON!! −1 to send that attack at Doffy or a Donquixote Pirates body. "
         "Averaged lists lock Sugar, Dellinger, 8-cost Doffy, Monet, Vergo, Baby 5, and 10-cost Doffy; Uso-Hachi, Slow-Slow Beam Sword, Divine Departure, and Trebol finish the 50."
     ),
     "OP16-041": (
-        "Blue OP16 Buggy is the Impel Down / Buggy Pirates leader — not a character in GB Luffy. "
+        "Blue OP16 Buggy is the Impel Down / Buggy Pirates leader - not a character in GB Luffy. "
         "When an Impel Down body leaves the field, DON!! ×1 plays a Prisoner of Impel Down from hand. "
         "Averaged lists lock Prisoner of Impel Down, Mr. 1, Mr. 2, Mr. 3, Buggy, and Crocodile; Slave Arrow and Miss Olive are the next cuts."
     ),
     "OP16-060": (
-        "Purple OP16 Sengoku is the Navy Admiral drop leader — not Enel and not Katakuri. "
+        "Purple OP16 Sengoku is the Navy Admiral drop leader - not Enel and not Katakuri. "
         "Return 8 active DON!! to play up to 3 differently named Admirals from hand. "
         "Averaged lists lock Koby, Sakazuki, Sengoku, Buddha Sengoku, Mamaragan, Borsalino, and Kuzan; Tsuru is a near 4-of."
     ),
     "OP11-040": (
-        "UP Luffy is blue/purple OP11-040 — U for blue, P for purple. "
+        "UP Luffy is blue/purple OP11-040 - U for blue, P for purple. "
         "Ramp to 8 DON!! with Zoro-Juurou, Bon Clay, and Gear Two, then Look 5 every turn for Sanji and Straw Hats. "
         "Averaged lists lock Otama, Uso-Hachi, Zoro-Juurou, Mr. 2, Nami, Sanji, promo Roger, Gear Two, and Gum-Gum Giant. OP17 cards are the current-format flex."
     ),
     "OP08-058": (
-        "Purple/Yellow OP08 Charlotte Pudding is the Big Mom DON!! ramp leader — not yellow OP17 Linlin and not purple OP11 Katakuri. "
+        "Purple/Yellow OP08 Charlotte Pudding is the Big Mom DON!! ramp leader - not yellow OP17 Linlin and not purple OP11 Katakuri. "
         "When attacking, turn 2 Life face-up to rest a DON!! from the DON!! deck. "
         "The hosted list is a 50-card r/OnePieceTCG screenshot: 1-cost Pudding and Brulee, 2-cost Katakuri, Miss Doublefinger, Cracker, 6-cost and 8-cost Katakuri, 7-cost Pudding, yellow searcher Pudding, OP17 yellow Pudding, OP17 Katakuri, Sweet 3 Generals, Perospero, and 10-cost Linlin."
     ),
@@ -159,7 +159,7 @@ TAKES = {
         "Current-format lists splash OP17 Elbaph Straw Hats and Loki to turn the Sabo engine on."
     ),
     "OP09-062": (
-        "Purple/Yellow OP09 Nico Robin is the Ohara / archaeology leader — not a character in Nami. "
+        "Purple/Yellow OP09 Nico Robin is the Ohara / archaeology leader - not a character in Nami. "
         "OP17 yellow Big Mom cards are the current splash that keeps her posting."
     ),
     "OP14-080": (
@@ -175,11 +175,11 @@ TAKES = {
         "Current lists splash OP17 Elbaph search and Loki."
     ),
     "OP09-001": (
-        "Red OP09 Shanks is the older Red Hair leader — not green OP17 Shanks. "
+        "Red OP09 Shanks is the older Red Hair leader - not green OP17 Shanks. "
         "Hosted lists keep the Red Hair pile and splash an OP17 Newgate body."
     ),
     "OP05-098": (
-        "Yellow OP05 Enel is the 4-life yellow Enel — not purple OP15 Enel. "
+        "Yellow OP05 Enel is the 4-life yellow Enel - not purple OP15 Enel. "
         "Current lists splash OP17 yellow Big Mom cards."
     ),
     "ST10-002": (
@@ -187,7 +187,7 @@ TAKES = {
         "OP17 Kaido-package cards are the current splash."
     ),
     "OP09-061": (
-        "OP09 Luffy is purple/black Film Red Luffy — not OP17 Elbaph Luffy. "
+        "OP09 Luffy is purple/black Film Red Luffy - not OP17 Elbaph Luffy. "
         "Current lists mix OP17 Kaido and Elbaph cards."
     ),
     "ST13-003": (
@@ -215,7 +215,7 @@ TAKES = {
         "The hosted OP17-format list splashes OP17 Kaido."
     ),
     "ST13-001": (
-        "ST13 Sabo is red/yellow Three Brothers Sabo — not red/black OP13 Sabo. "
+        "ST13 Sabo is red/yellow Three Brothers Sabo - not red/black OP13 Sabo. "
         "OP17 yellow Big Mom cards are the current splash."
     ),
     "OP05-041": (
@@ -235,7 +235,7 @@ TAKES = {
         "The hosted OP17-format list splashes OP17 Shanks."
     ),
     "OP06-022": (
-        "OP06 Yamato is green/yellow Wano Yamato — not black OP16 Yamato. "
+        "OP06 Yamato is green/yellow Wano Yamato - not black OP16 Yamato. "
         "The hosted list splashes OP17 Shanks."
     ),
     "ST14-001": (
