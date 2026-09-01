@@ -118,7 +118,7 @@ def event_siblings(index: dict, leader: dict, slug: str, limit: int = 5) -> list
         player = r.get("player") or "List"
         place = r.get("placing")
         place_s = f"{place}" if place is not None else "list"
-        out.append((href_for_entry(leader, r), f"{player} — {leader['name']}", f"{event} · {place_s}"))
+        out.append((href_for_entry(leader, r), f"{player} - {leader['name']}", f"{event} · {place_s}"))
         if len(out) >= limit:
             break
     return out
@@ -150,7 +150,7 @@ def other_leaders_same_event(index: dict, leader: dict, slug: str, limit: int = 
                 continue
             seen.add(lid)
             player = r.get("player") or L["name"]
-            out.append((href_for_entry(L, r), f"{player} — {L['name']}", f"Same event · {L['name']}"))
+            out.append((href_for_entry(L, r), f"{player} - {L['name']}", f"Same event · {L['name']}"))
             break
         if len(out) >= limit:
             break
@@ -901,7 +901,7 @@ def search_catalog(index: dict) -> tuple[list[dict], list[dict]]:
             date_s = row.get("date") or ""
             lists.append(
                 {
-                    "title": f"{player} — {lname}",
+                    "title": f"{player} - {lname}",
                     "note": " · ".join(x for x in (event, date_s) if x),
                     "href": href,
                     "q": f"{player} {lname} {event} {lid}",
@@ -1010,7 +1010,7 @@ def write_search_page(index: dict) -> None:
       </div>
     </main>
     <footer>
-      © <span id="year"></span> One Piece Deck Base — Fan site for the Bandai ONE PIECE CARD GAME (OPTCG). Not affiliated with Bandai.
+      © <span id="year"></span> One Piece Deck Base - Fan site for the Bandai ONE PIECE CARD GAME (OPTCG). Not affiliated with Bandai.
 {seo.FOOTER_LINKS}
     </footer>
   </div>

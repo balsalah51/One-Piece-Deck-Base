@@ -23,7 +23,7 @@ COMMUNITY = {
         {
             "slug": "yt-marineford-8k-forever",
             "player": "MarinefordTCG",
-            "title": "8K Forever — MarinefordTCG",
+            "title": "8K Forever - MarinefordTCG",
             "subtitle": "YouTube deck profile · also on X @MarinefordTCG",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=LQdWh4mzH1o",
@@ -33,7 +33,7 @@ COMMUNITY = {
         {
             "slug": "yt-nightingale-beefy-newgate",
             "player": "NightingaleTCG",
-            "title": "Newgate is a big beefy man — Nightingale",
+            "title": "Newgate is a big beefy man - Nightingale",
             "subtitle": "YouTube deck profile · also on X @BenSchumi7",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=SzOHHLZD-Vo",
@@ -43,7 +43,7 @@ COMMUNITY = {
         {
             "slug": "yt-marineford-better-than-ace",
             "player": "MarinefordTCG",
-            "title": "Better Than Ace? — MarinefordTCG",
+            "title": "Better Than Ace? - MarinefordTCG",
             "subtitle": "YouTube deck profile · also on X @MarinefordTCG",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=ALrTnX2pAdU",
@@ -55,7 +55,7 @@ COMMUNITY = {
         {
             "slug": "yt-strawhatpecan-freeze-board",
             "player": "StrawHatPecan",
-            "title": "Freeze Their Board — StrawHatPecan",
+            "title": "Freeze Their Board - StrawHatPecan",
             "subtitle": "YouTube deck profile · also on X @StrawHatPecan",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=GDV-9HANFyY",
@@ -66,7 +66,7 @@ COMMUNITY = {
             "slug": "yt-green-shanks-first-impressions",
             "player": "YouTube",
             "title": "Green Shanks first impressions",
-            "subtitle": "YouTube deck profile — Is OP17 Green Shanks overhyped?",
+            "subtitle": "YouTube deck profile - Is OP17 Green Shanks overhyped?",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=NSTlSg_hR3c",
             "raw": "1xOP17-020 4xOP12-034 4xST32-001 4xST32-005 4xOP17-028 4xOP17-029 4xPRB02-006 2xOP10-030 4xOP17-031 4xST32-002 2xOP13-031 4xST32-003 4xOP17-027 2xST16-004 4xOP17-022",
@@ -74,7 +74,7 @@ COMMUNITY = {
         {
             "slug": "yt-marineford-better-than-mihawk",
             "player": "MarinefordTCG",
-            "title": "Better Than Mihawk? — MarinefordTCG",
+            "title": "Better Than Mihawk? - MarinefordTCG",
             "subtitle": "YouTube deck profile · also on X @MarinefordTCG",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=CrLQZiTBCM4",
@@ -86,7 +86,7 @@ COMMUNITY = {
         {
             "slug": "yt-johnny-rocks-most-fun",
             "player": "JohnnyTCG",
-            "title": "Most fun leader — JohnnyTCG",
+            "title": "Most fun leader - JohnnyTCG",
             "subtitle": "YouTube deck list and gameplay",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=1-yzKh302CY",
@@ -135,7 +135,7 @@ COMMUNITY = {
         {
             "slug": "yt-johnny-kaido-hard-to-beat",
             "player": "JohnnyTCG",
-            "title": "Kaido is hard to beat — JohnnyTCG",
+            "title": "Kaido is hard to beat - JohnnyTCG",
             "subtitle": "YouTube deck list and gameplay",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=KViquBQIsx0",
@@ -153,7 +153,7 @@ COMMUNITY = {
         {
             "slug": "yt-new-best-purple-kaido",
             "player": "YouTube",
-            "title": "The new best purple deck — Kaido",
+            "title": "The new best purple deck - Kaido",
             "subtitle": "YouTube OP17 Kaido deck breakdown",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=suASpq6xDS8",
@@ -162,7 +162,7 @@ COMMUNITY = {
         {
             "slug": "yt-marineford-king-of-beasts",
             "player": "MarinefordTCG",
-            "title": "Don't sleep on the King of the Beasts — MarinefordTCG",
+            "title": "Don't sleep on the King of the Beasts - MarinefordTCG",
             "subtitle": "YouTube deck profile · also on X @MarinefordTCG",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=kKBHITaidrY",
@@ -175,7 +175,7 @@ COMMUNITY = {
             "slug": "yt-black-elbaf-luffy-profile",
             "player": "YouTube",
             "title": "Black Elbaf Luffy deck profile",
-            "subtitle": "YouTube profile and commentary — 10 hours ago",
+            "subtitle": "YouTube profile and commentary - 10 hours ago",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=_YAadqK5OaA",
             "raw": "1xOP17-079 4xOP05-081 4xOP17-080 4xOP17-081 4xOP17-082 4xOP17-083 3xOP17-087 3xOP17-090 4xOP17-095 4xEB01-048 2xOP17-089 3xOP15-088 4xOP17-119 3xOP17-093 2xOP17-098 2xST14-017",
@@ -183,7 +183,7 @@ COMMUNITY = {
         {
             "slug": "yt-strawhatpecan-infinite-blockers",
             "player": "StrawHatPecan",
-            "title": "Luffy has infinite blockers — StrawHatPecan",
+            "title": "Luffy has infinite blockers - StrawHatPecan",
             "subtitle": "YouTube deck profile · also on X @StrawHatPecan",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=4MyNT1IM0DE",
@@ -193,7 +193,7 @@ COMMUNITY = {
         {
             "slug": "yt-blaise-luffy-strong-already",
             "player": "BlaisePlaysTCG",
-            "title": "OP17 Luffy is strong already — BlaisePlaysTCG",
+            "title": "OP17 Luffy is strong already - BlaisePlaysTCG",
             "subtitle": "YouTube decklist + gameplay",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=yF5NQsfwZWY",
@@ -204,7 +204,7 @@ COMMUNITY = {
         {
             "slug": "yt-strawhatpecan-yellow-slop",
             "player": "StrawHatPecan",
-            "title": "Most slop yellow deck — StrawHatPecan",
+            "title": "Most slop yellow deck - StrawHatPecan",
             "subtitle": "YouTube Linlin deck profile · also on X @StrawHatPecan",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=8tM5AofdVQ4",
@@ -225,7 +225,7 @@ COMMUNITY = {
         {
             "slug": "yt-youtube-up-luffy-rlffbode4qs",
             "player": "NightingaleTCG",
-            "title": "OP17 UP Luffy gets TWO new 9 costs — Nightingale",
+            "title": "OP17 UP Luffy gets TWO new 9 costs - Nightingale",
             "subtitle": "YouTube deck profile · also on X @BenSchumi7",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=rlffBOdE4qs",
@@ -235,7 +235,7 @@ COMMUNITY = {
         {
             "slug": "yt-artress-up-luffy-m5jw91p5be",
             "player": "ArtressTCG",
-            "title": "Mr.3 Brings Back UP Luffy — Artress",
+            "title": "Mr.3 Brings Back UP Luffy - Artress",
             "subtitle": "YouTube + EgmanEvents deck builder",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=-M5JW91P5BE",
@@ -247,7 +247,7 @@ COMMUNITY = {
         {
             "slug": "yt-johnny-rg-luffy-meta-again",
             "player": "JohnnyTCG",
-            "title": "Did RG Luffy just become meta again? — JohnnyTCG",
+            "title": "Did RG Luffy just become meta again? - JohnnyTCG",
             "subtitle": "YouTube deck list and gameplay",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=XieqBf_xpns",
@@ -256,7 +256,7 @@ COMMUNITY = {
         {
             "slug": "web-egman-artress-rg-luffy",
             "player": "ArtressTCG",
-            "title": "They made RG Luffy even harder to beat — Artress",
+            "title": "They made RG Luffy even harder to beat - Artress",
             "subtitle": "YouTube + EgmanEvents deck builder · also on X @michaelartress",
             "kind": "web",
             "source_url": "https://www.youtube.com/watch?v=MhjCjFwn7SI",
@@ -268,7 +268,7 @@ COMMUNITY = {
         {
             "slug": "web-egman-artress-mihawk",
             "player": "ArtressTCG",
-            "title": "Green Mihawk won the starter deck lottery — Artress",
+            "title": "Green Mihawk won the starter deck lottery - Artress",
             "subtitle": "YouTube + EgmanEvents deck builder · also on X @michaelartress",
             "kind": "web",
             "source_url": "https://www.youtube.com/watch?v=xyTp2cBJpMM",
@@ -280,7 +280,7 @@ COMMUNITY = {
         {
             "slug": "yt-nami-op15-eb04-profile",
             "player": "YouTube",
-            "title": "Nami deck profile — OP15/EB04",
+            "title": "Nami deck profile - OP15/EB04",
             "subtitle": "YouTube standard-format Nami list",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=wvbMkjghVtU",
@@ -298,7 +298,7 @@ COMMUNITY = {
         {
             "slug": "yt-kebbieg-op16-nami-gameplay",
             "player": "KebbieG",
-            "title": "Nami OP16 gameplay — KebbieG",
+            "title": "Nami OP16 gameplay - KebbieG",
             "subtitle": "YouTube OP16 Nami list",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=fZAOabjuE64",
@@ -309,7 +309,7 @@ COMMUNITY = {
         {
             "slug": "web-mabi-op16-ace-infinite-counters",
             "player": "Mabi",
-            "title": "Infinite Counters — Mabi",
+            "title": "Infinite Counters - Mabi",
             "subtitle": "Public MabTCG OP16 red Ace list",
             "kind": "web",
             "source_url": "https://mabitcg.com/one-piece-tcg-portgas-d-ace-op16-infinite-counters-op16-mabi/",
@@ -320,7 +320,7 @@ COMMUNITY = {
         {
             "slug": "web-mabi-imu-five-elders",
             "player": "Mabi",
-            "title": "The Five Elders — Mabi",
+            "title": "The Five Elders - Mabi",
             "subtitle": "Public MabTCG black Imu list",
             "kind": "web",
             "source_url": "https://mabitcg.com/one-piece-tcg-imu-op13-the-five-elders-op13-mabi/",
@@ -331,7 +331,7 @@ COMMUNITY = {
         {
             "slug": "yt-tcg353-op13-ace-vs-enel",
             "player": "TCG353",
-            "title": "OP15 Ace vs Enel — TCG353",
+            "title": "OP15 Ace vs Enel - TCG353",
             "subtitle": "YouTube red/blue OP13 Ace tournament list",
             "kind": "youtube",
             "source_url": "https://www.youtube.com/watch?v=hbYhFPZRY5E",
@@ -342,7 +342,7 @@ COMMUNITY = {
         {
             "slug": "reddit-pudding-wjyx7brkbb",
             "player": "r/OnePieceTCG",
-            "title": "Purple/Yellow Pudding — r/OnePieceTCG",
+            "title": "Purple/Yellow Pudding - r/OnePieceTCG",
             "subtitle": "Community screenshot from r/OnePieceTCG · 2026-08-24",
             "kind": "web",
             "source_url": "https://www.reddit.com/r/OnePieceTCG/s/wjyx7BRKbb",
