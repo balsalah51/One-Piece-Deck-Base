@@ -26,9 +26,9 @@ STATUS_RE = re.compile(
     re.I,
 )
 TWITTER_EPOCH_MS = 1288834974657
-# Inclusive UTC window: yesterday and today for this scrape (28–29 Aug 2026).
-DATE_START = "2026-08-28"
-DATE_END = "2026-08-29"
+# Inclusive UTC window: 27 Aug through today.
+DATE_START = "2026-08-27"
+DATE_END = "2026-09-02"
 LEADERS = {
     "OP17-001",
     "OP17-020",
@@ -104,6 +104,10 @@ HANDLES = [
     "Chinoize_",
     "sormiltcg",
     "EgmanEvents",
+    "JohnnyTCG",
+    "CapiamoOP",
+    "LeeZ_1111",
+    "NBAPR",
 ]
 HANDLE_SET = {h.lower() for h in HANDLES}
 
@@ -146,11 +150,16 @@ SEARCHES = [
     f"site:x.com Yonxlj deck-list since:{DATE_START}",
     f"site:x.com MarinefordTCG since:{DATE_START}",
     f"site:x.com CardKaizoku since:{DATE_START}",
+    f"site:x.com ChinoizeCup #103 since:{DATE_START}",
+    f"site:x.com ChinoizeCup #102 since:{DATE_START}",
+    f"site:x.com NightingaleTCG decklist since:{DATE_START}",
+    f"site:x.com StrawHatPecan decklist since:{DATE_START}",
+    f"site:x.com BlaisePlays decklist since:{DATE_START}",
     'site:x.com "4xOP17"',
     'site:twitter.com "4xOP17-040"',
     "site:x.com ChinoizeCup #101 Winner",
     "site:x.com ChinoizeCup #100 Winner",
-    "site:x.com ワンピカード デッキ since:2026-08-28",
+    "site:x.com ワンピカード デッキ since:2026-08-27",
 ]
 
 
@@ -333,27 +342,64 @@ def main() -> None:
         if hits and not lists:
             out["partial_id_hits"].append({"source": url, "hits": hits[:40]})
 
+    extra_urls = []
     for q in SEARCHES:
-        url = "https://html.duckduckgo.com/html/?" + urllib.parse.urlencode({"q": q})
-        status, body = fetch(url, timeout=12)
+        extra_urls.append(
+            ("ddg", q, "https://html.duckduckgo.com/html/?" + urllib.parse.urlencode({"q": q}))
+        )
+    for q in SEARCHES[:6]:
+        extra_urls.append(
+            ("bing", q, "https://www.bing.com/search?" + urllib.parse.urlencode({"q": q}))
+        )
+        extra_urls.append(
+            (
+                "jina-google",
+                q,
+                "https://r.jina.ai/http://www.google.com/search?" + urllib.parse.urlencode({"q": q}),
+            )
+        )
+    for handle in ("Chinoize_", "MarinefordTCG", "NightingaleTCG", "The_Egman", "CardKaizoku"):
+        extra_urls.append(("fx-user", handle, f"https://api.fxtwitter.com/{handle}"))
+        extra_urls.append(("xcancel", handle, f"https://xcancel.com/{handle}"))
+    extra_urls.extend(
+        [
+            ("yt-desc", "Iy8USsETmBk", "https://www.youtube.com/watch?v=Iy8USsETmBk"),
+            ("yt-desc", "x1bRKDLBD28", "https://www.youtube.com/watch?v=x1bRKDLBD28"),
+            ("yt-desc", "-8n9oqREEYE", "https://www.youtube.com/watch?v=-8n9oqREEYE"),
+        ]
+    )
+
+    for kind, q, url in extra_urls:
+        status, body = fetch(url, timeout=14)
         ids = extract_status_ids(body)
+        # also catch bare status IDs next to handles in JSON/HTML
+        for sid in re.findall(r"/status(?:es)?/(\d{15,20})", body or ""):
+            handle_m = re.search(
+                rf"([A-Za-z0-9_]{{2,20}})/status(?:es)?/{sid}", body or "", re.I
+            )
+            ids.append((handle_m.group(1) if handle_m else "unknown", sid))
         hits = card_hits(body)
         lists = complete_lists(hits)
         row = {
+            "kind": kind,
             "query": q,
             "status": status,
             "chars": len(body),
-            "tweet_ids": [f"{h}/{s}" for h, s in ids],
+            "tweet_ids": [f"{h}/{s}" for h, s in ids][:20],
             "card_lines": len(hits),
             "complete_lists": len(lists),
         }
         out["searches"].append(row)
-        log("search", status, len(ids), "ids", len(hits), "lines", q[:48])
+        log("search", kind, status, len(ids), "ids", len(hits), "lines", str(q)[:40])
         for h, sid in ids:
-            status_ids.setdefault(sid, h)
+            if h and h.lower() != "unknown":
+                status_ids.setdefault(sid, h)
+            else:
+                status_ids.setdefault(sid, status_ids.get(sid, "unknown"))
         out["complete_lists"].extend({"source": q, **item} for item in lists)
         if hits:
-            out["partial_id_hits"].append({"source": q, "hits": hits[:12]})
+            out["partial_id_hits"].append({"source": f"{kind}:{q}", "hits": hits[:12]})
+        time.sleep(0.08)
 
     log("unique tweet ids", len(status_ids))
     media_dir = ROOT / "data/x-media"

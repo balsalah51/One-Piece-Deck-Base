@@ -1284,7 +1284,7 @@ def list_heading(entry: dict, leader_name: str) -> tuple[str, str]:
     rec = record_text(entry.get("record"))
     date = entry.get("date") or ""
     bits = [b for b in (place, rec, date) if b]
-    title = f"{player} — {leader_name}"
+    title = f"{player} - {leader_name}"
     sub = event
     if bits:
         sub = f"{event} · {' · '.join(bits)}"
