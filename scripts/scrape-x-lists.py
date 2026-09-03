@@ -28,7 +28,7 @@ STATUS_RE = re.compile(
 TWITTER_EPOCH_MS = 1288834974657
 # Inclusive UTC window: 27 Aug through today.
 DATE_START = "2026-08-27"
-DATE_END = "2026-09-02"
+DATE_END = "2026-09-03"
 LEADERS = {
     "OP17-001",
     "OP17-020",

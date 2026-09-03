@@ -19,7 +19,7 @@ from pathlib import Path
 ROOT = Path("/workspace")
 UA = "OnePieceDeckBase/1.0 (+https://onepiecedeckbase.com; public OPTCG list scrape)"
 SINCE = "2026-08-27"
-UNTIL = "2026-09-02"
+UNTIL = "2026-09-03"
 LINE_RE = re.compile(r"(?i)(\d+)\s*[x×]\s*((?:OP|ST|EB|PRB)\d{2}-\d{3}|P-\d{3})")
 
 
