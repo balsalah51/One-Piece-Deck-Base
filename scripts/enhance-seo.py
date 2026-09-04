@@ -254,6 +254,15 @@ def hub_related_html(leader: dict) -> str:
             )
         )
     rows.append(seo.list_row("/guides/", "One Piece TCG guides", "Topics and character pages"))
+    if leader.get("key") == "mihawk":
+        rows.insert(
+            1,
+            seo.list_row(
+                "/guides/op17-mihawk-matchups.html",
+                "Which decks beat OP17 Mihawk",
+                "Limitless pairings · Robin, Ace, Sabo",
+            ),
+        )
     rows.append(seo.list_row("/format.html", "Format and banlist", "Standard constructed rules"))
     rows.append(seo.list_row("/#recent", "Recent lists", "Newest 50-card results"))
     return seo.related_section("Related pages", "Other leaders and guides", rows)

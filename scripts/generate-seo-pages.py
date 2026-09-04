@@ -202,6 +202,13 @@ TOPICS = [
         "copy": "The early OP17 meta is still moving. Rocks, Kaido, Black Luffy, Linlin, Shanks, RG Luffy, Nami, Mihawk, OP16 Ace, Enel, and Katakuri all have recent Limitless lists here. Newgate is mostly YouTube lists until more events post standings.",
     },
     {
+        "slug": "op17-mihawk-matchups",
+        "title": "Which decks beat OP17 Mihawk | OPTCG matchups",
+        "h2": "OP17 Mihawk matchups",
+        "desc": "OP17 Mihawk matchups from Limitless pairings: Robin, Ace, and Sabo beat green Dracule Mihawk. Rocks does not.",
+        "copy": "Green Mihawk is the rest/control deck people call the OP17 problem. Limitless pairings in this window say Robin, Ace, and Sabo are the leaders that actually beat him; Rocks is a Mihawk-favored game.",
+    },
+    {
         "slug": "treasure-cup",
         "title": "Treasure Cup One Piece TCG | OPTCG lists",
         "h2": "Treasure Cup",
@@ -819,8 +826,14 @@ def main() -> None:
         raise SystemExit("duplicate topic slugs")
     topic_links = []
     urls = []
+    handwritten = {"op17-mihawk-matchups"}
+
     for topic in TOPICS:
         rel = f"guides/{topic['slug']}.html"
+        if topic["slug"] in handwritten and (ROOT / rel).exists():
+            topic_links.append((topic["h2"], "/" + rel))
+            urls.append(SITE + "/" + rel)
+            continue
         url = write_page(rel, topic["title"], topic["desc"], topic_body(topic))
         topic_links.append((topic["h2"], "/" + rel))
         urls.append(url)
