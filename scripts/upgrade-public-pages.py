@@ -22,8 +22,8 @@ aspec.loader.exec_module(ana)
 
 ROOT = gen.ROOT
 LINE_RE = ana.LINE_RE
-CSS_NEW = "/css/site.css?v=seo-links"
-JS_NEW = "/js/site.js?v=amazon-shop"
+CSS_NEW = "/css/site.css?v=utrecht-x"
+JS_NEW = "/js/site.js?v=utrecht-x"
 TCG_VER = "tcg-catalog"
 TCG_SCRIPTS = (
     f'  <script src="/js/tcgplayer-config.js?v={TCG_VER}"></script>\n'
