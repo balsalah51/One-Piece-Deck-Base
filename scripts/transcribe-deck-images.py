@@ -61,11 +61,11 @@ TRANSCRIPTS = [
     {
         "leader": "OP09-062",
         "kind": "web",
-        "player": "balsalah",
-        "title": "balsalah - Nico Robin",
+        "player": "Flame Flame Winner Utrecht",
+        "title": "Flame Flame Winner Utrecht - Nico Robin",
         "subtitle": "Submitted 50-card list · 2026-09-04",
-        "source_url": "https://onepiecedeckbase.com/decklists/nico-robin/submitted-balsalah-2026-09-04.html",
-        "slug": "submitted-balsalah-2026-09-04",
+        "source_url": "https://onepiecedeckbase.com/decklists/nico-robin/submitted-flame-flame-winner-utrecht-2026-09-04.html",
+        "slug": "submitted-flame-flame-winner-utrecht-2026-09-04",
         "date": "2026-09-04",
         "raw": (
             "1xOP09-062 4xOP17-112 3xOP16-119 3xOP17-110 4xOP17-114 4xOP17-106 "
@@ -73,7 +73,7 @@ TRANSCRIPTS = [
             "4xOP17-113 2xST34-003 4xOP09-078"
         ),
         "cards": 50,
-        "photo": "data/user-media/2026-09-04-nico-robin-balsalah.jpg",
+        "photo": "data/user-media/2026-09-04-nico-robin-flame-flame-winner-utrecht.jpg",
     },
 ]
 
