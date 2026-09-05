@@ -33,8 +33,8 @@
     <main class="single">
       <div class="card hero">
         <div class="crumb"><a href="/">Home</a> / Mass Entry list</div>
-        <h2>Paste this into TCGplayer Mass Entry</h2>
-        <p>TCGPlayer’s prefill URL has been dropping lists. Copy the box, open Mass Entry, set the product line to One Piece Card Game, and paste.</p>
+        <h2>TCGplayer Mass Entry list</h2>
+        <p>Open Mass Entry to load this list in the box. The link includes TCGPlayer product IDs so it should not come up empty.</p>
         <div class="mass-actions">
           <button type="button" class="copy-sim" id="copy-mass">Copy list</button>
           <a class="buy-tcg" id="open-mass" href="https://www.tcgplayer.com/massentry?productline=One%20Piece%20Card%20Game" target="_blank" rel="noopener nofollow sponsored">Open TCGplayer Mass Entry</a>
@@ -64,9 +64,9 @@
       var status = document.getElementById("mass-status");
       var open = document.getElementById("open-mass");
       box.value = text;
-      if (api.massBoxUrl) open.href = api.massBoxUrl();
+      if (api.massBoxUrl) open.href = api.massBoxUrl(cards);
       status.textContent = cards.length
-        ? "Copied when you click Open. Paste into the Mass Entry box (Ctrl+V)."
+        ? "Open TCGplayer Mass Entry to load this list."
         : "No list in this link. Open a deck page and use Buy list on TCGplayer.";
       document.getElementById("copy-mass").addEventListener("click", function () {
         if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -84,9 +84,9 @@
       box.select();
     };
   </script>
-  <script src="/js/tcgplayer-config.js?v=tcg-plain"></script>
-  <script src="/js/tcgplayer-ids.js?v=tcg-plain"></script>
-  <script src="/js/tcgplayer.js?v=tcg-plain"></script>
+  <script src="/js/tcgplayer-config.js?v=tcg-fill"></script>
+  <script src="/js/tcgplayer-ids.js?v=tcg-fill"></script>
+  <script src="/js/tcgplayer.js?v=tcg-fill"></script>
   <script src="/js/site.js?v=amazon-shop"></script>
 </body>
 </html>

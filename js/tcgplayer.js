@@ -1,11 +1,11 @@
 (function () {
   var FALLBACK_PARTNER = "https://partner.tcgplayer.com/c/7670706/1780961/21018";
   var CFG = window.OPDB_TCGPLAYER || {};
-  var IDS = window.OPDB_TCGPLAYER_IDS || {};
   // Mass Entry line format from TCGPlayer's own parser:
   //   qty name [SetCode] CardNumber   or   qty-productId
   // https://help.tcgplayer.com/hc/en-us/articles/360055768913
   var CARD_CACHE = null;
+  var IDS = Object.assign({}, window.OPDB_TCGPLAYER_IDS || {});
   var PRODUCT_LINE = "One Piece Card Game";
   var SEARCH_LINE = "one-piece-card-game";
   var REL = "noopener nofollow sponsored";
@@ -65,15 +65,24 @@
     return name;
   }
 
+  function productId(cid) {
+    cid = (cid || "").toUpperCase();
+    if (IDS[cid]) return IDS[cid];
+    var meta = CARD_CACHE && CARD_CACHE[cid] ? CARD_CACHE[cid] : null;
+    return meta && meta.tcgplayer_id ? meta.tcgplayer_id : 0;
+  }
+
   function cardUrl(cid) {
     cid = (cid || "").toUpperCase();
-    var pid = IDS[cid];
+    var pid = productId(cid);
     if (pid) return "https://www.tcgplayer.com/product/" + pid;
     return "https://www.tcgplayer.com/search/" + SEARCH_LINE + "/product?q=" +
       encodeURIComponent(cid) + "&productLineName=" + encodeURIComponent(SEARCH_LINE);
   }
 
   function massLine(qty, cid, given, flagged) {
+    var pid = productId(cid);
+    if (pid) return qty + "-" + pid;
     var name = catalogName(cid, given, flagged);
     var setCode = tcgSetCode(cid);
     if (name && setCode) return qty + " " + name + " [" + setCode + "] " + cid;
@@ -94,12 +103,17 @@
     return out;
   }
 
-  // Newline list for the Mass Entry textarea. Their URL `c=` + affiliate
-  // wrap has not been filling the box, so we copy this and open a short page.
+  // Newline list (helper page). URL `c=` uses the same lines joined by ||.
   function massText(cards) {
     return uniqueCards(cards).map(function (row) {
       return massLine(row[0], row[1], row[2], row[3]);
     }).join("\n");
+  }
+
+  function massQuery(cards) {
+    return uniqueCards(cards).map(function (row) {
+      return massLine(row[0], row[1], row[2], row[3]);
+    }).join("||");
   }
 
   function simText(cards) {
@@ -108,11 +122,15 @@
     }).join(" ");
   }
 
-  function massBoxUrl() {
-    return affiliate(
-      "https://www.tcgplayer.com/massentry?productline=" +
-      encodeURIComponent(PRODUCT_LINE)
-    );
+  function massDest(cards) {
+    var q = "productline=" + encodeURIComponent(PRODUCT_LINE);
+    var c = massQuery(cards || []);
+    if (c) q += "&c=" + encodeURIComponent(c);
+    return "https://www.tcgplayer.com/massentry?" + q;
+  }
+
+  function massBoxUrl(cards) {
+    return affiliate(massDest(cards || []));
   }
 
   function helperUrl(cards) {
@@ -141,17 +159,14 @@
   }
 
   function openMassEntry(cards, ev) {
-    var text = massText(cards);
-    // Copy on this page first (user gesture), then open the short Mass Entry
-    // URL. Prefilling `c=` through the affiliate redirect has been dropping
-    // the list, so the user pastes (Ctrl+V) into the box.
-    copyText(text);
-    var win = window.open(massBoxUrl(), "_blank", "noopener");
+    var url = massBoxUrl(cards);
+    copyText(massText(cards));
+    var win = window.open(url, "_blank", "noopener");
     if (win && ev) {
       ev.preventDefault();
       ev.stopPropagation();
     }
-    return text;
+    return url;
   }
 
   function parseSim(text) {
@@ -194,7 +209,7 @@
   }
 
   function listBuyLink(cards, label, className) {
-    var a = buyLink(helperUrl(cards), label, className);
+    var a = buyLink(massBoxUrl(cards), label, className);
     a.addEventListener("click", function (e) { openMassEntry(cards, e); });
     return a;
   }
@@ -216,7 +231,7 @@
     document.querySelectorAll(".text-deck > p.muted").forEach(function (p) {
       if (p.dataset.tcgNote) return;
       p.dataset.tcgNote = "1";
-      p.appendChild(document.createTextNode(" Buy list copies a Mass Entry list and opens TCGplayer. Paste it into the box (Ctrl+V). Individual Buy links open that printing when TCGplayer has it. TCGplayer links are affiliate links."));
+      p.appendChild(document.createTextNode(" Buy list opens TCGplayer Mass Entry with this list filled. Individual Buy links open that printing when TCGplayer has it. TCGplayer links are affiliate links."));
     });
   }
 
@@ -250,6 +265,7 @@
   window.OPDB_TCG = {
     parseSim: parseSim,
     massText: massText,
+    massQuery: massQuery,
     massBoxUrl: massBoxUrl,
     openMassEntry: openMassEntry,
     catalogName: catalogName,
@@ -275,7 +291,13 @@
       var cfg = results[0] || {};
       var cc = results[1];
       if (cfg && cfg.partnerLink) CFG.partnerLink = String(cfg.partnerLink);
-      if (cc) CARD_CACHE = cc;
+      if (cc) {
+        CARD_CACHE = cc;
+        Object.keys(cc).forEach(function (cid) {
+          var pid = cc[cid] && cc[cid].tcgplayer_id;
+          if (pid && !IDS[cid]) IDS[cid] = pid;
+        });
+      }
       ready();
     }).catch(function () { ready(); });
   }
