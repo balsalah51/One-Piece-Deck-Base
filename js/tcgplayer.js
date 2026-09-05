@@ -113,17 +113,32 @@
   }
 
   function copyText(text) {
-    if (!text) return Promise.resolve();
+    if (!text) return false;
+    try {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.cssText = "position:fixed;left:-9999px;top:0";
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, text.length);
+      var ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      if (ok) return true;
+    } catch (e) {}
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      return navigator.clipboard.writeText(text).catch(function () {});
+      navigator.clipboard.writeText(text).catch(function () {});
     }
-    return Promise.resolve();
+    return false;
   }
 
   function openMassEntry(cards, ev) {
     var text = massText(cards);
-    var win = window.open(massBoxUrl(), "_blank", "noopener");
+    // Copy on this page first (user gesture), then open the short Mass Entry
+    // URL. Prefilling `c=` through the affiliate redirect has been dropping
+    // the list, so the user pastes (Ctrl+V) into the box.
     copyText(text);
+    var win = window.open(massBoxUrl(), "_blank", "noopener");
     if (win && ev) {
       ev.preventDefault();
       ev.stopPropagation();

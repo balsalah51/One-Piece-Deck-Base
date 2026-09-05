@@ -180,6 +180,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
         self.assertIn("openMassEntry", src)
         self.assertIn("/shop/buy-list.html", src)
         self.assertIn("clipboard", src)
+        self.assertIn("execCommand", src)
         self.assertIn("tcgSetCode", src)
         helper = Path("/workspace/shop/buy-list.html").read_text()
         self.assertIn("noindex", helper)
