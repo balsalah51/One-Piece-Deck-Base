@@ -898,13 +898,15 @@ def search_catalog(index: dict) -> tuple[list[dict], list[dict]]:
             }
         )
     lists = []
+    seen_href = set()
     for lid, rows in index.items():
         leader = BY_ID.get(lid)
         lname = leader["name"] if leader else lid
         for row in rows:
             href = row.get("href") or (f"/{leader['dir']}/{row['slug']}.html" if leader and row.get("slug") else "")
-            if not href:
+            if not href or href in seen_href:
                 continue
+            seen_href.add(href)
             player = row.get("player") or "List"
             event = row.get("tournament") or ""
             date_s = row.get("date") or ""
@@ -917,6 +919,29 @@ def search_catalog(index: dict) -> tuple[list[dict], list[dict]]:
                     "date": date_s,
                 }
             )
+    comm_path = ROOT / "data/community-decks.json"
+    if comm_path.exists():
+        community = json.loads(comm_path.read_text())
+        for lid, rows in community.items():
+            leader = BY_ID.get(lid)
+            lname = leader["name"] if leader else lid
+            for row in rows:
+                href = row.get("href") or ""
+                if not href or href in seen_href:
+                    continue
+                seen_href.add(href)
+                title = row.get("title") or row.get("slug") or "List"
+                note = row.get("subtitle") or ""
+                date_s = row.get("date") or ""
+                lists.append(
+                    {
+                        "title": title,
+                        "note": note,
+                        "href": href,
+                        "q": f"{title} {lname} {note} {lid}",
+                        "date": date_s,
+                    }
+                )
     lists.sort(key=lambda r: r.get("date") or "", reverse=True)
     return pages, lists
 
