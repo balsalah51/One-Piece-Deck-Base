@@ -58,12 +58,24 @@ def card_url(cid: str, product_id: int | None = None) -> str:
     return f"https://www.tcgplayer.com/search/{SEARCH_LINE}/product?{q}"
 
 
-def mass_entry_url(cards: list[tuple[int, str]]) -> str:
+def mass_entry_url(cards: list[tuple]) -> str:
+    """Build a TCGplayer Mass Entry URL.
+
+    Each card is (qty, card_id) or (qty, card_id, name). Named lines use:
+      <qty> <name> [<SET>] <FULL-ID>
+    """
     parts = []
-    for qty, cid in cards:
+    for row in cards:
+        qty = int(row[0])
+        cid = str(row[1] or "").strip().upper()
+        name = str(row[2]).strip() if len(row) > 2 and row[2] else ""
         if qty <= 0 or not cid:
             continue
-        parts.append(f"{int(qty)} {cid}")
+        set_code = cid.split("-", 1)[0] if "-" in cid else cid
+        if name:
+            parts.append(f"{qty} {name} [{set_code}] {cid}")
+        else:
+            parts.append(f"{qty} {cid}")
     c = "||".join(parts)
     q = urllib.parse.urlencode({"productline": PRODUCT_LINE, "c": c})
     return f"https://www.tcgplayer.com/massentry?{q}"

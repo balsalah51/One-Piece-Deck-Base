@@ -2,8 +2,8 @@
   var FALLBACK_PARTNER = "https://partner.tcgplayer.com/c/7670706/1780961/21018";
   var CFG = window.OPDB_TCGPLAYER || {};
   var IDS = window.OPDB_TCGPLAYER_IDS || {};
-  // Used to translate internal IDs (OP17-079) into TCGplayer Mass Entry's
-  // expected tokens: "Card Name → Set Code → Card Number Within Set".
+  // Used to translate each list card into TCGplayer Mass Entry's
+  // expected line: "<qty> <name> [<SET>] <FULL-ID>".
   var CARD_CACHE = null;
   var PRODUCT_LINE = "One Piece Card Game";
   var SEARCH_LINE = "one-piece-card-game";
@@ -22,15 +22,21 @@
     return base + (base.indexOf("?") >= 0 ? "&" : "?") + "u=" + encodeURIComponent(dest);
   }
 
-  function normalizeCardName(name) {
+  function normalizeCacheName(name) {
     // card-cache.json uses dots for multi-part names (Monkey.D.Luffy).
-    // Mass Entry wants the actual card name string as displayed on TCGplayer.
+    // Mass Entry wants the printed name (Monkey D. Luffy).
     name = String(name || "");
     if (!name) return "";
     var s = name.replace(/\./g, " ");
-    // Ensure the standalone "D" becomes "D." (Portgas D. Ace, Monkey D. Luffy).
     s = s.replace(/\bD\b/g, "D.");
-    return s.trim();
+    return s.replace(/\s+/g, " ").trim();
+  }
+
+  function displayName(given, cid) {
+    var pageName = String(given || "").replace(/\s+/g, " ").trim();
+    if (pageName) return pageName;
+    var meta = CARD_CACHE && CARD_CACHE[cid] ? CARD_CACHE[cid] : null;
+    return meta && meta.name ? normalizeCacheName(meta.name) : "";
   }
 
   function cardUrl(cid) {
@@ -49,29 +55,13 @@
       var cid = (row[1] || "").toUpperCase();
       if (!qty || !cid || seen[cid]) return;
       seen[cid] = 1;
-      // TCGplayer Mass Entry expects:
-      // Quantity → Card Name → Set Code → Card Number Within Set
-      //
-      // We translate our internal ID (OP17-079) into:
-      //   "<qty> <card name> <set code> <collector number>"
-      var setCode = cid;
-      var cardNo = "";
-      var cidParts = cid.split("-");
-      if (cidParts.length >= 2) {
-        setCode = cidParts[0];
-        // Keep collector number formatting (leading zeros) as-is.
-        cardNo = cidParts[1];
-      }
-
-      var meta = CARD_CACHE && CARD_CACHE[cid] ? CARD_CACHE[cid] : null;
-      var name = meta && meta.name ? normalizeCardName(meta.name) : "";
-
-      if (name && setCode && cardNo) {
-        // Bracket the set code so TCGplayer can parse multi-word names.
-        // Format: Quantity → Card Name → [Set Code] → Card Number
-        parts.push(qty + " " + name + " [" + setCode + "] " + cardNo);
+      // TCGplayer Mass Entry format for whatever card is on the list:
+      //   <qty> <name> [<SET>] <FULL-ID>
+      var setCode = cid.indexOf("-") >= 0 ? cid.split("-")[0] : cid;
+      var name = displayName(row[2], cid);
+      if (name) {
+        parts.push(qty + " " + name + " [" + setCode + "] " + cid);
       } else {
-        // Fallback to original internal ID (least-bad behavior).
         parts.push(qty + " " + cid);
       }
     });
@@ -94,14 +84,18 @@
     return cards;
   }
 
-  function textList(root) {
-    return Array.prototype.map.call((root || document).querySelectorAll(".text-line"), function (line) {
-      var qty = ((line.querySelector(".qty") || {}).textContent || "").replace(/\s+/g, "");
-      var id = ((line.querySelector(".card-id") || {}).textContent || "").trim();
-      if (!qty || !id) return "";
-      if (qty.slice(-1) !== "x") qty += "x";
-      return qty + id;
-    }).filter(Boolean).join(" ");
+  function cardsFromTextDeck(root) {
+    var cards = [];
+    var seen = {};
+    Array.prototype.forEach.call((root || document).querySelectorAll(".text-line"), function (line) {
+      var qty = parseInt(((line.querySelector(".qty") || {}).textContent || "").replace(/\D/g, ""), 10);
+      var cid = cidFrom(line.querySelector(".card-id")) || cidFrom(line);
+      var name = ((line.querySelector(".card-title") || {}).textContent || "").trim();
+      if (!qty || !cid || seen[cid]) return;
+      seen[cid] = 1;
+      cards.push([qty, cid, name]);
+    });
+    return cards;
   }
 
   function buyLink(href, label, className) {
@@ -125,8 +119,7 @@
     document.querySelectorAll(".text-deck .section-title").forEach(function (title) {
       if (title.querySelector(".buy-tcg")) return;
       var root = title.closest(".text-deck");
-      var cards = parseSim(textList(root));
-      var href = massUrl(cards);
+      var href = massUrl(cardsFromTextDeck(root));
       if (!href) return;
       title.appendChild(buyLink(href, "Buy list on TCGplayer", "buy-tcg"));
     });
