@@ -6,7 +6,15 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from tcgplayer_links import affiliate_url, card_url, mass_entry_url, parse_sim_text
+from tcgplayer_links import (
+    affiliate_url,
+    card_url,
+    catalog_name,
+    mass_entry_line,
+    mass_entry_url,
+    parse_sim_text,
+    tcg_set_code,
+)
 
 
 class TcgplayerLinksTest(unittest.TestCase):
@@ -18,19 +26,22 @@ class TcgplayerLinksTest(unittest.TestCase):
         self.assertIn("OP17-079", url)
         self.assertIn("one-piece-card-game", url)
 
-    def test_mass_entry_uses_ids_and_qty(self):
+    def test_mass_entry_prefers_product_ids(self):
         url = mass_entry_url([(4, "OP17-079"), (1, "OP08-058")])
         parsed = urllib.parse.urlparse(url)
         self.assertEqual(parsed.path, "/massentry")
         q = urllib.parse.parse_qs(parsed.query)
         self.assertEqual(q["productline"], ["One Piece Card Game"])
-        self.assertEqual(q["c"], ["4 OP17-079||1 OP08-058"])
+        self.assertEqual(q["c"], ["4-707123||1-558088"])
 
     def test_mass_entry_uses_name_set_and_full_id(self):
-        url = mass_entry_url([
-            (4, "OP17-104", "Charlotte Cracker"),
-            (4, "OP17-107", "Charlotte Daifuku"),
-        ])
+        url = mass_entry_url(
+            [
+                (4, "OP17-104", "Charlotte Cracker"),
+                (4, "OP17-107", "Charlotte Daifuku"),
+            ],
+            product_ids={},
+        )
         q = urllib.parse.parse_qs(urllib.parse.urlparse(url).query)
         self.assertEqual(
             q["c"],
@@ -38,13 +49,42 @@ class TcgplayerLinksTest(unittest.TestCase):
         )
 
     def test_mass_entry_uses_each_cards_own_name_and_id(self):
-        url = mass_entry_url([
-            (1, "OP16-079", "Yamato"),
-            (4, "OP16-091", "Nami"),
-        ])
+        url = mass_entry_url(
+            [
+                (1, "OP16-079", "Yamato"),
+                (4, "OP16-091", "Nami"),
+            ],
+            product_ids={},
+        )
         q = urllib.parse.parse_qs(urllib.parse.urlparse(url).query)
         self.assertEqual(q["c"], ["1 Yamato [OP16] OP16-079||4 Nami [OP16] OP16-091"])
         self.assertNotIn("Charlotte", q["c"][0])
+
+    def test_tcg_set_codes_match_catalog(self):
+        self.assertEqual(tcg_set_code("OP17-104"), "OP17")
+        self.assertEqual(tcg_set_code("ST32-001"), "ST-32")
+        self.assertEqual(tcg_set_code("EB01-056"), "EB-01")
+        self.assertEqual(tcg_set_code("PRB01-001"), "PRB-01")
+        self.assertEqual(tcg_set_code("P-107"), "OP-PR")
+        self.assertEqual(tcg_set_code("OP15-118"), "OP15-EB04")
+        self.assertEqual(tcg_set_code("EB04-007"), "OP15-EB04")
+        self.assertEqual(tcg_set_code("EB03-012"), "EB-03-04")
+
+    def test_catalog_name_disambiguates_dotted_names_only(self):
+        self.assertEqual(catalog_name("Charlotte Cracker", "OP17-104"), "Charlotte Cracker")
+        self.assertEqual(catalog_name("Monkey.D.Luffy", "OP17-093"), "Monkey.D.Luffy (093)")
+        self.assertEqual(catalog_name("Kin'emon", "ST32-001"), "Kin'emon")
+
+    def test_mass_entry_line_product_id_and_named(self):
+        self.assertEqual(mass_entry_line(4, "OP17-104", product_id=708209), "4-708209")
+        self.assertEqual(
+            mass_entry_line(4, "ST32-001", "Kin'emon"),
+            "4 Kin'emon [ST-32] ST32-001",
+        )
+        self.assertEqual(
+            mass_entry_line(4, "OP17-093", "Monkey.D.Luffy"),
+            "4 Monkey.D.Luffy (093) [OP17] OP17-093",
+        )
 
     def test_affiliate_wraps_when_partner_blank(self):
         dest = "https://www.tcgplayer.com/product/1"
@@ -92,7 +132,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
     def test_adds_to_leader_hub(self):
         html = '<li class="list-row"></li></body>'
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer.js?v=tcg-massid", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-massv2", out)
 
     def test_adds_to_individual_decklist(self):
         html = (
@@ -101,7 +141,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer.js?v=tcg-massid", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-massv2", out)
         self.assertEqual(out.count("tcgplayer.js"), 1)
 
     def test_refreshes_stale_script_version(self):
@@ -113,7 +153,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("v=tcg-massid", out)
+        self.assertIn("v=tcg-massv2", out)
         self.assertNotIn("v=tcg-buy", out)
 
     def test_js_restores_pills_and_always_affiliates(self):
@@ -123,9 +163,9 @@ class TcgplayerPlacementTest(unittest.TestCase):
         self.assertIn("Buy on TCGplayer", src)
         self.assertIn("FALLBACK_PARTNER", src)
         self.assertIn("partner.tcgplayer.com/c/7670706/1780961/21018", src)
-        self.assertIn('"] " + cid', src)
-        self.assertIn("<qty> <name> [<SET>] <FULL-ID>", src)
-        self.assertNotIn("Charlotte Cracker", src)
+        self.assertIn('qty + "-" + pid', src)
+        self.assertIn("tcgSetCode", src)
+        self.assertIn("OP-PR", src)
         self.assertNotIn("cardNo", src)
 
     def test_hover_preview_uses_larger_fallback(self):

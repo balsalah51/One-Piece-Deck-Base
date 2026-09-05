@@ -58,12 +58,66 @@ def card_url(cid: str, product_id: int | None = None) -> str:
     return f"https://www.tcgplayer.com/search/{SEARCH_LINE}/product?{q}"
 
 
-def mass_entry_url(cards: list[tuple]) -> str:
+TCG_SET_OVERRIDES = {
+    "P": "OP-PR",
+    "OP15": "OP15-EB04",
+    "EB04": "OP15-EB04",
+    "EB03": "EB-03-04",
+}
+
+
+def tcg_set_code(cid: str) -> str:
+    """TCGPlayer Mass Entry set abbreviation for a Bandai card id."""
+    cid = (cid or "").strip().upper()
+    prefix = cid.split("-", 1)[0] if "-" in cid else cid
+    if prefix in TCG_SET_OVERRIDES:
+        return TCG_SET_OVERRIDES[prefix]
+    if re.fullmatch(r"OP\d+", prefix):
+        return prefix
+    m = re.fullmatch(r"([A-Z]+)(\d+)", prefix)
+    return f"{m.group(1)}-{m.group(2)}" if m else prefix
+
+
+def collector_number(cid: str) -> str:
+    cid = (cid or "").strip().upper()
+    return cid.split("-", 1)[1] if "-" in cid else cid
+
+
+def catalog_name(name: str, cid: str) -> str:
+    name = (name or "").strip()
+    if name and "." in name and "(" not in name:
+        return f"{name} ({collector_number(cid)})"
+    return name
+
+
+def mass_entry_line(qty: int, cid: str, name: str = "", product_id: int | None = None) -> str:
+    """One Mass Entry line for this card.
+
+    Prefers TCGPlayer's product-id form (`4-708209`) when we have an id.
+    Otherwise uses the documented text form:
+      Quantity → Card Name → [Set Code] → Card Number
+    e.g. 4 Charlotte Cracker [OP17] OP17-104
+    """
+    cid = (cid or "").strip().upper()
+    if product_id:
+        return f"{int(qty)}-{int(product_id)}"
+    name = catalog_name(name, cid)
+    set_code = tcg_set_code(cid)
+    if name and set_code:
+        return f"{int(qty)} {name} [{set_code}] {cid}"
+    if name:
+        return f"{int(qty)} {name}"
+    return f"{int(qty)} {cid}"
+
+
+def mass_entry_url(cards: list[tuple], product_ids: dict[str, int] | None = None) -> str:
     """Build a TCGplayer Mass Entry URL.
 
-    Each card is (qty, card_id) or (qty, card_id, name). Named lines use:
-      <qty> <name> [<SET>] <FULL-ID>
+    Each card is (qty, card_id) or (qty, card_id, name).
+    product_ids defaults to data/tcgplayer-ids.json. Pass {} to force text lines.
     """
+    if product_ids is None:
+        product_ids = load_ids()
     parts = []
     for row in cards:
         qty = int(row[0])
@@ -71,11 +125,8 @@ def mass_entry_url(cards: list[tuple]) -> str:
         name = str(row[2]).strip() if len(row) > 2 and row[2] else ""
         if qty <= 0 or not cid:
             continue
-        set_code = cid.split("-", 1)[0] if "-" in cid else cid
-        if name:
-            parts.append(f"{qty} {name} [{set_code}] {cid}")
-        else:
-            parts.append(f"{qty} {cid}")
+        pid = product_ids.get(cid)
+        parts.append(mass_entry_line(qty, cid, name, pid))
     c = "||".join(parts)
     q = urllib.parse.urlencode({"productline": PRODUCT_LINE, "c": c})
     return f"https://www.tcgplayer.com/massentry?{q}"

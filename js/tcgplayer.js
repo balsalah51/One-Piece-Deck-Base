@@ -2,8 +2,9 @@
   var FALLBACK_PARTNER = "https://partner.tcgplayer.com/c/7670706/1780961/21018";
   var CFG = window.OPDB_TCGPLAYER || {};
   var IDS = window.OPDB_TCGPLAYER_IDS || {};
-  // Used to translate each list card into TCGplayer Mass Entry's
-  // expected line: "<qty> <name> [<SET>] <FULL-ID>".
+  // Mass Entry line format from TCGPlayer's own parser:
+  //   qty name [SetCode] CardNumber   or   qty-productId
+  // https://help.tcgplayer.com/hc/en-us/articles/360055768913
   var CARD_CACHE = null;
   var PRODUCT_LINE = "One Piece Card Game";
   var SEARCH_LINE = "one-piece-card-game";
@@ -22,21 +23,38 @@
     return base + (base.indexOf("?") >= 0 ? "&" : "?") + "u=" + encodeURIComponent(dest);
   }
 
-  function normalizeCacheName(name) {
-    // card-cache.json uses dots for multi-part names (Monkey.D.Luffy).
-    // Mass Entry wants the printed name (Monkey D. Luffy).
-    name = String(name || "");
-    if (!name) return "";
-    var s = name.replace(/\./g, " ");
-    s = s.replace(/\bD\b/g, "D.");
-    return s.replace(/\s+/g, " ").trim();
+  function prefixOf(cid) {
+    return cid.indexOf("-") >= 0 ? cid.split("-")[0] : cid;
   }
 
-  function displayName(given, cid) {
-    var pageName = String(given || "").replace(/\s+/g, " ").trim();
-    if (pageName) return pageName;
+  function collectorOf(cid) {
+    return cid.indexOf("-") >= 0 ? cid.split("-").slice(1).join("-") : cid;
+  }
+
+  // TCGPlayer set abbreviations, from /v2/massentry/sets/68.
+  // OP boosters stay OP17; starters/extras hyphenate (ST-32, EB-01).
+  function tcgSetCode(cid) {
+    var set = prefixOf(cid);
+    if (set === "P") return "OP-PR";
+    if (set === "OP15" || set === "EB04") return "OP15-EB04";
+    if (set === "EB03") return "EB-03-04";
+    if (/^OP\d+$/.test(set)) return set;
+    var m = /^([A-Z]+)(\d+)$/.exec(set);
+    return m ? m[1] + "-" + m[2] : set;
+  }
+
+  function catalogName(cid, given) {
     var meta = CARD_CACHE && CARD_CACHE[cid] ? CARD_CACHE[cid] : null;
-    return meta && meta.name ? normalizeCacheName(meta.name) : "";
+    var name = meta && meta.name
+      ? String(meta.name).trim()
+      : String(given || "").replace(/\s+/g, " ").trim();
+    if (!name) return "";
+    // Reused names on TCGPlayer include a number suffix (Monkey.D.Luffy (093)).
+    // Unique names reject that suffix, so only add it for dotted names.
+    if (name.indexOf(".") >= 0 && name.indexOf("(") < 0) {
+      name += " (" + collectorOf(cid) + ")";
+    }
+    return name;
   }
 
   function cardUrl(cid) {
@@ -55,12 +73,17 @@
       var cid = (row[1] || "").toUpperCase();
       if (!qty || !cid || seen[cid]) return;
       seen[cid] = 1;
-      // TCGplayer Mass Entry format for whatever card is on the list:
-      //   <qty> <name> [<SET>] <FULL-ID>
-      var setCode = cid.indexOf("-") >= 0 ? cid.split("-")[0] : cid;
-      var name = displayName(row[2], cid);
-      if (name) {
+      var pid = IDS[cid];
+      if (pid) {
+        parts.push(qty + "-" + pid);
+        return;
+      }
+      var name = catalogName(cid, row[2]);
+      var setCode = tcgSetCode(cid);
+      if (name && setCode) {
         parts.push(qty + " " + name + " [" + setCode + "] " + cid);
+      } else if (name) {
+        parts.push(qty + " " + name);
       } else {
         parts.push(qty + " " + cid);
       }
