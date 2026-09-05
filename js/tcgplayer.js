@@ -2,8 +2,8 @@
   var FALLBACK_PARTNER = "https://partner.tcgplayer.com/c/7670706/1780961/21018";
   var CFG = window.OPDB_TCGPLAYER || {};
   var IDS = window.OPDB_TCGPLAYER_IDS || {};
-  // Used to translate internal IDs (OP17-079) into TCGplayer Mass Entry's
-  // expected line: "4 Charlotte Cracker [OP17] OP17-104".
+  // Used to translate each list card into TCGplayer Mass Entry's
+  // expected line: "<qty> <name> [<SET>] <FULL-ID>".
   var CARD_CACHE = null;
   var PRODUCT_LINE = "One Piece Card Game";
   var SEARCH_LINE = "one-piece-card-game";
@@ -55,8 +55,8 @@
       var cid = (row[1] || "").toUpperCase();
       if (!qty || !cid || seen[cid]) return;
       seen[cid] = 1;
-      // TCGplayer Mass Entry format (set then full ID again):
-      //   4 Charlotte Cracker [OP17] OP17-104
+      // TCGplayer Mass Entry format for whatever card is on the list:
+      //   <qty> <name> [<SET>] <FULL-ID>
       var setCode = cid.indexOf("-") >= 0 ? cid.split("-")[0] : cid;
       var name = displayName(row[2], cid);
       if (name) {

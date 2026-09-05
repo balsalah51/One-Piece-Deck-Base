@@ -62,7 +62,7 @@ def mass_entry_url(cards: list[tuple]) -> str:
     """Build a TCGplayer Mass Entry URL.
 
     Each card is (qty, card_id) or (qty, card_id, name). Named lines use:
-      4 Charlotte Cracker [OP17] OP17-104
+      <qty> <name> [<SET>] <FULL-ID>
     """
     parts = []
     for row in cards:

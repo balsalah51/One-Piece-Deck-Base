@@ -37,6 +37,15 @@ class TcgplayerLinksTest(unittest.TestCase):
             ["4 Charlotte Cracker [OP17] OP17-104||4 Charlotte Daifuku [OP17] OP17-107"],
         )
 
+    def test_mass_entry_uses_each_cards_own_name_and_id(self):
+        url = mass_entry_url([
+            (1, "OP16-079", "Yamato"),
+            (4, "OP16-091", "Nami"),
+        ])
+        q = urllib.parse.parse_qs(urllib.parse.urlparse(url).query)
+        self.assertEqual(q["c"], ["1 Yamato [OP16] OP16-079||4 Nami [OP16] OP16-091"])
+        self.assertNotIn("Charlotte", q["c"][0])
+
     def test_affiliate_wraps_when_partner_blank(self):
         dest = "https://www.tcgplayer.com/product/1"
         wrapped = affiliate_url(dest, "")
@@ -115,7 +124,8 @@ class TcgplayerPlacementTest(unittest.TestCase):
         self.assertIn("FALLBACK_PARTNER", src)
         self.assertIn("partner.tcgplayer.com/c/7670706/1780961/21018", src)
         self.assertIn('"] " + cid', src)
-        self.assertIn("4 Charlotte Cracker [OP17] OP17-104", src)
+        self.assertIn("<qty> <name> [<SET>] <FULL-ID>", src)
+        self.assertNotIn("Charlotte Cracker", src)
         self.assertNotIn("cardNo", src)
 
     def test_hover_preview_uses_larger_fallback(self):
