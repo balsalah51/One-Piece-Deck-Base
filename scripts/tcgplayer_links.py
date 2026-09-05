@@ -14,6 +14,7 @@ from pathlib import Path
 ROOT = Path("/workspace")
 CONFIG_PATH = ROOT / "data/tcgplayer.json"
 IDS_PATH = ROOT / "data/tcgplayer-ids.json"
+NAMES_PATH = ROOT / "data/tcgplayer-names.json"
 DEFAULT_PARTNER = "https://partner.tcgplayer.com/c/7670706/1780961/21018"
 PRODUCT_LINE = "One Piece Card Game"
 SEARCH_LINE = "one-piece-card-game"
@@ -85,6 +86,16 @@ def collector_number(cid: str) -> str:
 
 _CARD_CACHE: dict | None = None
 _SAME_SET_NAME_COUNTS: dict[tuple[str, str], int] | None = None
+_CATALOG_NAMES: dict[str, str] | None = None
+
+
+def load_catalog_names() -> dict[str, str]:
+    """Official TCGplayer product names keyed by Bandai card id."""
+    global _CATALOG_NAMES
+    if _CATALOG_NAMES is None:
+        raw = json.loads(NAMES_PATH.read_text()) if NAMES_PATH.exists() else {}
+        _CATALOG_NAMES = {str(cid).upper(): str(name) for cid, name in raw.items() if name}
+    return _CATALOG_NAMES
 
 
 def load_card_cache() -> dict:
@@ -123,12 +134,15 @@ def is_leader_card(cid: str, flagged: bool = False) -> bool:
 def catalog_name(name: str, cid: str, is_leader: bool = False) -> str:
     """TCGPlayer Mass Entry product name.
 
-    When two cards in the same set share a name, TCGPlayer lists them as
-    `Charlotte Linlin (112)` / `Nico Robin (062)` / `Streusen (113)`.
-    Unique-in-set names stay plain.
+    Prefer the official catalog name. TCGPlayer suffixes many unique-in-set
+    cards (`Sanji (065)`, `Jewelry Bonney (026)`) and uses other shapes
+    (`Boa Hancock - OP14-041`) that same-set collision counting misses.
     """
     del is_leader
     cid = (cid or "").strip().upper()
+    official = load_catalog_names().get(cid)
+    if official:
+        return official
     name = (name or "").strip()
     if not name:
         meta = load_card_cache().get(cid) or {}

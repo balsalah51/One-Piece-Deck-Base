@@ -82,7 +82,7 @@ class TcgplayerLinksTest(unittest.TestCase):
         self.assertEqual(tcg_set_code("EB04-007"), "OP15-EB04")
         self.assertEqual(tcg_set_code("EB03-012"), "EB-03-04")
 
-    def test_catalog_name_suffixes_same_set_collisions_only(self):
+    def test_catalog_name_uses_official_tcgplayer_names(self):
         self.assertEqual(catalog_name("Charlotte Cracker", "OP17-104"), "Charlotte Cracker")
         self.assertEqual(catalog_name("Charlotte Linlin", "OP17-112"), "Charlotte Linlin (112)")
         self.assertEqual(catalog_name("Nico Robin", "OP09-062"), "Nico Robin (062)")
@@ -90,6 +90,10 @@ class TcgplayerLinksTest(unittest.TestCase):
         self.assertEqual(catalog_name("Yamato", "OP17-074"), "Yamato")
         self.assertEqual(catalog_name("Charlotte Pudding", "OP17-109"), "Charlotte Pudding")
         self.assertEqual(catalog_name("Kin'emon", "ST32-001"), "Kin'emon")
+        self.assertEqual(catalog_name("Sanji", "OP09-065"), "Sanji (065)")
+        self.assertEqual(catalog_name("Jewelry Bonney", "OP07-026"), "Jewelry Bonney (026)")
+        self.assertEqual(catalog_name("Charlotte Katakuri", "ST34-001"), "Charlotte Katakuri (ST34-001)")
+        self.assertEqual(catalog_name("Boa Hancock", "OP14-041"), "Boa Hancock - OP14-041")
 
     def test_mass_entry_text_is_newline_official_format(self):
         text = mass_entry_text([
@@ -163,6 +167,12 @@ class TcgplayerPlacementTest(unittest.TestCase):
         self.up = __import__("importlib.util").util.module_from_spec(spec)
         spec.loader.exec_module(self.up)
 
+    def test_keeps_helper_mass_entry_page(self):
+        html = '<textarea id="mass-text"></textarea></body>'
+        out = self.up.ensure_tcgplayer_scripts(html)
+        self.assertIn("/js/tcgplayer-names.js?v=tcg-catalog", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-catalog", out)
+
     def test_skips_homepage_without_lists(self):
         html = '<main class="single home" role="main"><section id="recent"></section></main></body>'
         out = self.up.ensure_tcgplayer_scripts(html)
@@ -171,7 +181,8 @@ class TcgplayerPlacementTest(unittest.TestCase):
     def test_adds_to_leader_hub(self):
         html = '<li class="list-row"></li></body>'
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer.js?v=tcg-collide", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-catalog", out)
+        self.assertIn("/js/tcgplayer-names.js?v=tcg-catalog", out)
 
     def test_adds_to_individual_decklist(self):
         html = (
@@ -180,7 +191,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer.js?v=tcg-collide", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-catalog", out)
         self.assertEqual(out.count("tcgplayer.js"), 1)
 
     def test_refreshes_stale_script_version(self):
@@ -192,7 +203,8 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("v=tcg-collide", out)
+        self.assertIn("v=tcg-catalog", out)
+        self.assertIn("/js/tcgplayer-names.js?v=tcg-catalog", out)
         self.assertNotIn("v=tcg-buy", out)
 
     def test_js_restores_pills_and_always_affiliates(self):
@@ -206,7 +218,9 @@ class TcgplayerPlacementTest(unittest.TestCase):
         self.assertIn("massQuery", src)
         self.assertIn("&c=", src)
         self.assertIn("[\" + setCode + \"] \" + cid", src)
-        self.assertIn("Streusen (113)", src)
+        self.assertIn("OPDB_TCGPLAYER_NAMES", Path("/workspace/js/tcgplayer-names.js").read_text())
+        self.assertIn("NAMES[cid]", src)
+        self.assertIn("Sanji (065)", Path("/workspace/data/tcgplayer-names.json").read_text())
         self.assertIn("clipboard", src)
         self.assertIn("execCommand", src)
         self.assertIn("tcgSetCode", src)

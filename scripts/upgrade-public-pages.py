@@ -24,14 +24,15 @@ ROOT = gen.ROOT
 LINE_RE = ana.LINE_RE
 CSS_NEW = "/css/site.css?v=seo-links"
 JS_NEW = "/js/site.js?v=amazon-shop"
-TCG_VER = "tcg-collide"
+TCG_VER = "tcg-catalog"
 TCG_SCRIPTS = (
     f'  <script src="/js/tcgplayer-config.js?v={TCG_VER}"></script>\n'
     f'  <script src="/js/tcgplayer-ids.js?v={TCG_VER}"></script>\n'
+    f'  <script src="/js/tcgplayer-names.js?v={TCG_VER}"></script>\n'
     f'  <script src="/js/tcgplayer.js?v={TCG_VER}"></script>\n'
 )
 TCG_SCRIPT_RE = re.compile(
-    r'  <script src="/js/tcgplayer(?:-config|-ids)?\.js(?:\?[^"]*)?"></script>\n'
+    r'  <script src="/js/tcgplayer(?:-config|-ids|-names)?\.js(?:\?[^"]*)?"></script>\n'
 )
 NAV_LEADERS_SHOP = (
     '        <a href="/decklists/op17.html">Leaders</a>\n'
@@ -114,7 +115,15 @@ def strip_tcgplayer_scripts(text: str) -> str:
 
 def ensure_tcgplayer_scripts(text: str) -> str:
     text = strip_tcgplayer_scripts(text)
-    if not any(mark in text for mark in ('class="text-deck"', 'class="list-row"', 'class="card-entry"')):
+    if not any(
+        mark in text
+        for mark in (
+            'class="text-deck"',
+            'class="list-row"',
+            'class="card-entry"',
+            'id="mass-text"',
+        )
+    ):
         return text
     return text.replace("</body>", TCG_SCRIPTS + "</body>")
 
