@@ -26,6 +26,26 @@ class TcgplayerLinksTest(unittest.TestCase):
         self.assertEqual(q["productline"], ["One Piece Card Game"])
         self.assertEqual(q["c"], ["4 OP17-079||1 OP08-058"])
 
+    def test_mass_entry_uses_name_set_and_full_id(self):
+        url = mass_entry_url([
+            (4, "OP17-104", "Charlotte Cracker"),
+            (4, "OP17-107", "Charlotte Daifuku"),
+        ])
+        q = urllib.parse.parse_qs(urllib.parse.urlparse(url).query)
+        self.assertEqual(
+            q["c"],
+            ["4 Charlotte Cracker [OP17] OP17-104||4 Charlotte Daifuku [OP17] OP17-107"],
+        )
+
+    def test_mass_entry_uses_each_cards_own_name_and_id(self):
+        url = mass_entry_url([
+            (1, "OP16-079", "Yamato"),
+            (4, "OP16-091", "Nami"),
+        ])
+        q = urllib.parse.parse_qs(urllib.parse.urlparse(url).query)
+        self.assertEqual(q["c"], ["1 Yamato [OP16] OP16-079||4 Nami [OP16] OP16-091"])
+        self.assertNotIn("Charlotte", q["c"][0])
+
     def test_affiliate_wraps_when_partner_blank(self):
         dest = "https://www.tcgplayer.com/product/1"
         wrapped = affiliate_url(dest, "")
@@ -72,7 +92,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
     def test_adds_to_leader_hub(self):
         html = '<li class="list-row"></li></body>'
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer.js?v=tcg-pills", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-massid", out)
 
     def test_adds_to_individual_decklist(self):
         html = (
@@ -81,7 +101,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer.js?v=tcg-pills", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-massid", out)
         self.assertEqual(out.count("tcgplayer.js"), 1)
 
     def test_refreshes_stale_script_version(self):
@@ -93,7 +113,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("v=tcg-pills", out)
+        self.assertIn("v=tcg-massid", out)
         self.assertNotIn("v=tcg-buy", out)
 
     def test_js_restores_pills_and_always_affiliates(self):
@@ -103,6 +123,10 @@ class TcgplayerPlacementTest(unittest.TestCase):
         self.assertIn("Buy on TCGplayer", src)
         self.assertIn("FALLBACK_PARTNER", src)
         self.assertIn("partner.tcgplayer.com/c/7670706/1780961/21018", src)
+        self.assertIn('"] " + cid', src)
+        self.assertIn("<qty> <name> [<SET>] <FULL-ID>", src)
+        self.assertNotIn("Charlotte Cracker", src)
+        self.assertNotIn("cardNo", src)
 
     def test_hover_preview_uses_larger_fallback(self):
         chrome = Path("/workspace/scripts/generate-tournament-lists.py").read_text()
