@@ -2,7 +2,8 @@
   var FALLBACK_PARTNER = "https://partner.tcgplayer.com/c/7670706/1780961/21018";
   var CFG = window.OPDB_TCGPLAYER || {};
   // Mass Entry line format from TCGPlayer's own parser:
-  //   qty name [SetCode] CardNumber   or   qty-productId
+  //   qty name [SetCode] number-within-set
+  //   1 Lightning Bolt [SLD] 84
   // https://help.tcgplayer.com/hc/en-us/articles/360055768913
   var CARD_CACHE = null;
   var IDS = Object.assign({}, window.OPDB_TCGPLAYER_IDS || {});
@@ -54,14 +55,8 @@
     var name = meta && meta.name
       ? String(meta.name).trim()
       : String(given || "").replace(/\s+/g, " ").trim();
-    if (!name) return "";
-    // Leaders use the same qty name [SET] ID line as other cards.
-    // A collector suffix on the leader (Nico Robin (062)) made Mass Entry
-    // reject the whole paste. Only reused dotted character names get it.
-    if (isLeader(cid, flagged)) return name;
-    if (name.indexOf(".") >= 0 && name.indexOf("(") < 0) {
-      name += " (" + collectorOf(cid) + ")";
-    }
+    // Documented Mass Entry line is qty + name + [set] + number-within-set.
+    // Set + number pick the printing, so do not suffix the name.
     return name;
   }
 
@@ -81,12 +76,18 @@
   }
 
   function massLine(qty, cid, given, flagged) {
-    // TCGPlayer's site view parses qty name [SET] number — not qty-productId.
+    // TCGPlayer documented format:
+    //   Quantity → Card Name → [Set Code] → Card Number Within Set
+    //   1 Lightning Bolt [SLD] 84
     // https://help.tcgplayer.com/hc/en-us/articles/360055768913
     var name = catalogName(cid, given, flagged);
     var setCode = tcgSetCode(cid);
-    if (name && setCode) return qty + " " + name + " [" + setCode + "] " + cid;
+    var number = collectorOf(cid);
+    if (name && setCode && number) return qty + " " + name + " [" + setCode + "] " + number;
+    if (name && setCode) return qty + " " + name + " [" + setCode + "]";
     if (name) return qty + " " + name;
+    var pid = productId(cid);
+    if (pid) return qty + "-" + pid;
     return qty + " " + cid;
   }
 

@@ -102,16 +102,14 @@ def is_leader_card(cid: str, flagged: bool = False) -> bool:
 
 
 def catalog_name(name: str, cid: str, is_leader: bool = False) -> str:
-    name = (name or "").strip()
-    if not name:
-        return name
-    # Leaders stay qty name [SET] ID, same as unique characters.
-    # A collector suffix on the leader made Mass Entry reject the paste.
-    if is_leader_card(cid, is_leader):
-        return name
-    if "." in name and "(" not in name:
-        return f"{name} ({collector_number(cid)})"
-    return name
+    """Plain card name for Mass Entry.
+
+    TCGPlayer's documented line is quantity, name, [set], number-within-set
+    (1 Lightning Bolt [SLD] 84). Set + number already pick the printing, so
+    do not append a collector suffix to the name.
+    """
+    del cid, is_leader
+    return (name or "").strip()
 
 
 def mass_entry_line(
@@ -121,22 +119,24 @@ def mass_entry_line(
     product_id: int | None = None,
     is_leader: bool = False,
 ) -> str:
-    """One Mass Entry line for this card.
+    """One Mass Entry line in TCGPlayer's documented format.
 
-    Prefers TCGPlayer's product-id form (`4-708209`) when we have an id.
-    Otherwise uses the documented text form:
-      Quantity → Card Name → [Set Code] → Card Number
-    e.g. 4 Charlotte Cracker [OP17] OP17-104
+    Quantity → Card Name → [Set Code] → Card Number Within Set
+    e.g. 4 Charlotte Cracker [OP17] 104
+    https://help.tcgplayer.com/hc/en-us/articles/360055768913
     """
     cid = (cid or "").strip().upper()
-    if product_id:
-        return f"{int(qty)}-{int(product_id)}"
     name = catalog_name(name, cid, is_leader)
     set_code = tcg_set_code(cid)
+    number = collector_number(cid)
+    if name and set_code and number:
+        return f"{int(qty)} {name} [{set_code}] {number}"
     if name and set_code:
-        return f"{int(qty)} {name} [{set_code}] {cid}"
+        return f"{int(qty)} {name} [{set_code}]"
     if name:
         return f"{int(qty)} {name}"
+    if product_id:
+        return f"{int(qty)}-{int(product_id)}"
     return f"{int(qty)} {cid}"
 
 
@@ -164,6 +164,7 @@ def mass_entry_url(cards: list[tuple], product_ids: dict[str, int] | None = None
     """
     if product_ids is None:
         product_ids = load_ids()
+    cache = load_card_cache()
     parts = []
     for row in cards:
         qty = int(row[0])
@@ -171,7 +172,16 @@ def mass_entry_url(cards: list[tuple], product_ids: dict[str, int] | None = None
         name = str(row[2]).strip() if len(row) > 2 and row[2] else ""
         if qty <= 0 or not cid:
             continue
+        if not name:
+            meta = cache.get(cid) or {}
+            name = str(meta.get("name") or "").strip()
         pid = product_ids.get(cid)
+        if not pid:
+            meta = cache.get(cid) or {}
+            try:
+                pid = int(meta.get("tcgplayer_id") or 0) or None
+            except (TypeError, ValueError):
+                pid = None
         parts.append(mass_entry_line(qty, cid, name, pid))
     c = "||".join(parts)
     q = urllib.parse.urlencode({"productline": PRODUCT_LINE, "c": c})
