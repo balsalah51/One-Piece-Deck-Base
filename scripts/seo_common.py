@@ -16,8 +16,8 @@ LOGO_SVG = f"{SITE}/img/opdb-logo.svg"
 LOGO_48 = f"{SITE}/img/opdb-logo-48.png"
 LOGO_192 = f"{SITE}/img/opdb-logo-192.png"
 LOGO_512 = f"{SITE}/img/opdb-logo-512.png"
-CSS_VER = "avatar"
-JS_VER = "gsearch"
+CSS_VER = "utrecht-x"
+JS_VER = "utrecht-x"
 BRAND_LOGO_HTML = (
     '<img class="logo" src="/img/opdb-avatar.png" width="56" height="56" alt="One Piece Deck Base" />'
 )

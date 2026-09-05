@@ -75,6 +75,39 @@ TRANSCRIPTS = [
         "cards": 50,
         "photo": "data/user-media/2026-09-04-nico-robin-flame-flame-winner-utrecht.jpg",
     },
+    {
+        "leader": "OP15-058",
+        "kind": "x",
+        "player": "XIXO",
+        "title": "Flame-Flame Fruit Coliseum Utrecht finals - XIXO Enel",
+        "subtitle": "List read from the public BCG Fest Utrecht X deck graphic · 2026-09-04",
+        "source_url": "https://pbs.twimg.com/media/HRZv9QwW8AI08wF?format=jpg&name=orig",
+        "slug": "x-utrecht-coliseum-xixo-enel",
+        "date": "2026-09-04",
+        "raw": (
+            "1xOP15-058 3xOP07-064 4xOP10-067 3xST10-010 3xOP15-071 3xOP05-077 "
+            "1xOP09-077 4xOP15-061 2xOP15-066 4xOP12-071 4xOP15-067 3xOP15-074 "
+            "4xOP15-075 4xOP15-076 4xOP15-077 4xOP15-078"
+        ),
+        "cards": 50,
+        "photo": "data/x-media/HRZv9QwW8AI08wF.jpg",
+    },
+    {
+        "leader": "OP17-058",
+        "kind": "reddit",
+        "player": "TwerkMasterFlex",
+        "title": "Locals 1st - TwerkMasterFlex Kaido",
+        "subtitle": "List from the public r/OnePieceTCG post · 2026-09-05",
+        "source_url": "https://www.reddit.com/r/OnePieceTCG/comments/1w81q75/took_first_place_at_locals_with_kaido_heres_my/",
+        "slug": "reddit-kaido-locals-1w81q75",
+        "date": "2026-09-05",
+        "raw": (
+            "1xOP17-058 4xEB04-032 2xOP17-067 4xOP17-073 4xOP17-074 4xEB04-031 "
+            "2xEB04-030 4xOP17-061 2xOP17-065 2xOP17-069 4xOP17-062 2xOP17-063 "
+            "2xST34-004 4xOP15-078 2xOP17-076 4xOP07-077 4xOP07-076"
+        ),
+        "cards": 50,
+    },
 ]
 
 

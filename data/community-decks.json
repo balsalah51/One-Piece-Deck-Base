@@ -440,6 +440,15 @@
       "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/kaido-op17-east-binks-aug28-donoi/",
       "kind": "web",
       "date": "2026-08-28"
+    },
+    {
+      "slug": "reddit-kaido-locals-1w81q75",
+      "href": "/decklists/op17/kaido/reddit-kaido-locals-1w81q75.html",
+      "title": "Locals 1st - TwerkMasterFlex Kaido",
+      "subtitle": "List from the public r/OnePieceTCG post · 2026-09-05",
+      "source_url": "https://www.reddit.com/r/OnePieceTCG/comments/1w81q75/took_first_place_at_locals_with_kaido_heres_my/",
+      "kind": "reddit",
+      "date": "2026-09-05"
     }
   ],
   "OP17-079": [
@@ -1213,6 +1222,15 @@
       "source_url": "https://tcg-portal.jp/onepiece/tournament-results/cmtjquduc0033jp042y0hqvzk",
       "kind": "web",
       "date": "2026-09-01"
+    },
+    {
+      "slug": "x-utrecht-coliseum-xixo-enel",
+      "href": "/decklists/enel/x-utrecht-coliseum-xixo-enel.html",
+      "title": "Flame-Flame Fruit Coliseum Utrecht finals - XIXO Enel",
+      "subtitle": "List read from the public BCG Fest Utrecht X deck graphic · 2026-09-04",
+      "source_url": "https://pbs.twimg.com/media/HRZv9QwW8AI08wF?format=jpg&name=orig",
+      "kind": "x",
+      "date": "2026-09-04"
     }
   ],
   "OP16-060": [
@@ -1590,6 +1608,17 @@
       "source_url": "https://opdeckguide.com/tournaments-decklists/op17-east/luffy-op17-east-cardshop-aug30-kuru/",
       "kind": "web",
       "date": "2026-08-30"
+    }
+  ],
+  "OP14-080": [
+    {
+      "slug": "reddit-moria-pirate-party-1w6z9nf",
+      "href": "/decklists/gecko-moria/reddit-moria-pirate-party-1w6z9nf.html",
+      "title": "Pirate Party Moria - Million_X",
+      "subtitle": "Public CardKaizoku list from r/OnePieceTCG · 2026-09-04",
+      "source_url": "https://www.cardkaizoku.com/deckbuilder?view=deck&game=onepiece&deck=1xOP14-080%7C4xOP14-104%7C2xOP15-080%7C4xOP14-102%7C4xOP14-109%7C4xOP14-111%7C4xOP14-110%7C4xOP15-079%7C4xOP15-090%7C2xOP12-112%7C4xOP13-113%7C4xOP17-109%7C2xOP17-111%7C4xOP17-116%7C4xOP14-089",
+      "kind": "web",
+      "date": "2026-09-04"
     }
   ]
 }
