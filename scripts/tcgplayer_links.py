@@ -110,6 +110,21 @@ def mass_entry_line(qty: int, cid: str, name: str = "", product_id: int | None =
     return f"{int(qty)} {cid}"
 
 
+def mass_entry_text(cards: list[tuple]) -> str:
+    """Newline Mass Entry list for the paste box."""
+    parts = []
+    seen: set[str] = set()
+    for row in cards:
+        qty = int(row[0])
+        cid = str(row[1] or "").strip().upper()
+        name = str(row[2]).strip() if len(row) > 2 and row[2] else ""
+        if qty <= 0 or not cid or cid in seen:
+            continue
+        seen.add(cid)
+        parts.append(mass_entry_line(qty, cid, name))
+    return "\n".join(parts)
+
+
 def mass_entry_url(cards: list[tuple], product_ids: dict[str, int] | None = None) -> str:
     """Build a TCGplayer Mass Entry URL.
 

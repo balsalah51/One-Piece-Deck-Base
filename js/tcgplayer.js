@@ -65,32 +65,85 @@
       encodeURIComponent(cid) + "&productLineName=" + encodeURIComponent(SEARCH_LINE);
   }
 
-  function massUrl(cards) {
-    var parts = [];
+  function massLine(qty, cid, given) {
+    var name = catalogName(cid, given);
+    var setCode = tcgSetCode(cid);
+    if (name && setCode) return qty + " " + name + " [" + setCode + "] " + cid;
+    if (name) return qty + " " + name;
+    return qty + " " + cid;
+  }
+
+  function uniqueCards(cards) {
+    var out = [];
     var seen = {};
-    cards.forEach(function (row) {
+    (cards || []).forEach(function (row) {
       var qty = row[0];
       var cid = (row[1] || "").toUpperCase();
       if (!qty || !cid || seen[cid]) return;
       seen[cid] = 1;
-      var pid = IDS[cid];
-      if (pid) {
-        parts.push(qty + "-" + pid);
-        return;
-      }
-      var name = catalogName(cid, row[2]);
-      var setCode = tcgSetCode(cid);
-      if (name && setCode) {
-        parts.push(qty + " " + name + " [" + setCode + "] " + cid);
-      } else if (name) {
-        parts.push(qty + " " + name);
-      } else {
-        parts.push(qty + " " + cid);
-      }
+      out.push([qty, cid, row[2]]);
     });
-    if (!parts.length) return "";
-    return "https://www.tcgplayer.com/massentry?productline=" +
-      encodeURIComponent(PRODUCT_LINE) + "&c=" + encodeURIComponent(parts.join("||"));
+    return out;
+  }
+
+  // Newline list for the Mass Entry textarea. Their URL `c=` + affiliate
+  // wrap has not been filling the box, so we copy this and open a short page.
+  function massText(cards) {
+    return uniqueCards(cards).map(function (row) {
+      return massLine(row[0], row[1], row[2]);
+    }).join("\n");
+  }
+
+  function simText(cards) {
+    return uniqueCards(cards).map(function (row) {
+      return row[0] + "x" + row[1];
+    }).join(" ");
+  }
+
+  function massBoxUrl() {
+    return affiliate(
+      "https://www.tcgplayer.com/massentry?productline=" +
+      encodeURIComponent(PRODUCT_LINE)
+    );
+  }
+
+  function helperUrl(cards) {
+    var sim = simText(cards);
+    return sim ? "/shop/buy-list.html#" + encodeURIComponent(sim) : "/shop/buy-list.html";
+  }
+
+  function copyText(text) {
+    if (!text) return false;
+    try {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.cssText = "position:fixed;left:-9999px;top:0";
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, text.length);
+      var ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      if (ok) return true;
+    } catch (e) {}
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(function () {});
+    }
+    return false;
+  }
+
+  function openMassEntry(cards, ev) {
+    var text = massText(cards);
+    // Copy on this page first (user gesture), then open the short Mass Entry
+    // URL. Prefilling `c=` through the affiliate redirect has been dropping
+    // the list, so the user pastes (Ctrl+V) into the box.
+    copyText(text);
+    var win = window.open(massBoxUrl(), "_blank", "noopener");
+    if (win && ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+    }
+    return text;
   }
 
   function parseSim(text) {
@@ -124,11 +177,17 @@
   function buyLink(href, label, className) {
     var a = document.createElement("a");
     a.className = className;
-    a.href = affiliate(href);
+    a.href = href;
     a.target = "_blank";
     a.rel = REL;
     a.textContent = label;
     a.addEventListener("click", function (e) { e.stopPropagation(); });
+    return a;
+  }
+
+  function listBuyLink(cards, label, className) {
+    var a = buyLink(helperUrl(cards), label, className);
+    a.addEventListener("click", function (e) { openMassEntry(cards, e); });
     return a;
   }
 
@@ -142,14 +201,14 @@
     document.querySelectorAll(".text-deck .section-title").forEach(function (title) {
       if (title.querySelector(".buy-tcg")) return;
       var root = title.closest(".text-deck");
-      var href = massUrl(cardsFromTextDeck(root));
-      if (!href) return;
-      title.appendChild(buyLink(href, "Buy list on TCGplayer", "buy-tcg"));
+      var cards = cardsFromTextDeck(root);
+      if (!cards.length) return;
+      title.appendChild(listBuyLink(cards, "Buy list on TCGplayer", "buy-tcg"));
     });
     document.querySelectorAll(".text-deck > p.muted").forEach(function (p) {
       if (p.dataset.tcgNote) return;
       p.dataset.tcgNote = "1";
-      p.appendChild(document.createTextNode(" Buy list opens TCGplayer Mass Entry. Individual Buy links open that printing when TCGplayer has it. TCGplayer links are affiliate links."));
+      p.appendChild(document.createTextNode(" Buy list copies a Mass Entry list and opens TCGplayer. Paste it into the box (Ctrl+V). Individual Buy links open that printing when TCGplayer has it. TCGplayer links are affiliate links."));
     });
   }
 
@@ -158,9 +217,9 @@
       if (row.querySelector(".buy-tcg")) return;
       var btn = row.querySelector("[data-copy-sim]");
       var sim = btn ? btn.getAttribute("data-sim") : "";
-      var href = massUrl(parseSim(sim || ""));
-      if (!href) return;
-      row.appendChild(buyLink(href, "Buy on TCGplayer", "buy-tcg"));
+      var cards = parseSim(sim || "");
+      if (!cards.length) return;
+      row.appendChild(listBuyLink(cards, "Buy on TCGplayer", "buy-tcg"));
     });
   }
 
@@ -169,21 +228,31 @@
       if (line.querySelector(".buy-tcg-inline")) return;
       var cid = cidFrom(line.querySelector(".card-id")) || cidFrom(line);
       if (!cid) return;
-      line.appendChild(buyLink(cardUrl(cid), "Buy", "buy-tcg-inline"));
+      line.appendChild(buyLink(affiliate(cardUrl(cid)), "Buy", "buy-tcg-inline"));
     });
     document.querySelectorAll(".card-entry").forEach(function (entry) {
       if (entry.querySelector(".buy-tcg-inline")) return;
       var cid = cidFrom(entry.querySelector(".id")) || cidFrom(entry);
       if (!cid) return;
       var wrap = entry.querySelector("div") || entry;
-      wrap.appendChild(buyLink(cardUrl(cid), "Buy on TCGplayer", "buy-tcg-inline"));
+      wrap.appendChild(buyLink(affiliate(cardUrl(cid)), "Buy on TCGplayer", "buy-tcg-inline"));
     });
   }
+
+  window.OPDB_TCG = {
+    parseSim: parseSim,
+    massText: massText,
+    massBoxUrl: massBoxUrl,
+    openMassEntry: openMassEntry,
+    catalogName: catalogName,
+    tcgSetCode: tcgSetCode
+  };
 
   function ready() {
     addListButtons();
     addHubButtons();
     addCardButtons();
+    if (typeof window.OPDB_onTcgReady === "function") window.OPDB_onTcgReady();
   }
 
   function boot() {

@@ -11,6 +11,7 @@ from tcgplayer_links import (
     card_url,
     catalog_name,
     mass_entry_line,
+    mass_entry_text,
     mass_entry_url,
     parse_sim_text,
     tcg_set_code,
@@ -75,6 +76,19 @@ class TcgplayerLinksTest(unittest.TestCase):
         self.assertEqual(catalog_name("Monkey.D.Luffy", "OP17-093"), "Monkey.D.Luffy (093)")
         self.assertEqual(catalog_name("Kin'emon", "ST32-001"), "Kin'emon")
 
+    def test_mass_entry_text_is_newline_official_format(self):
+        text = mass_entry_text([
+            (4, "OP17-104", "Charlotte Cracker"),
+            (4, "OP17-093", "Monkey.D.Luffy"),
+            (4, "ST32-001", "Kin'emon"),
+        ])
+        self.assertEqual(
+            text,
+            "4 Charlotte Cracker [OP17] OP17-104\n"
+            "4 Monkey.D.Luffy (093) [OP17] OP17-093\n"
+            "4 Kin'emon [ST-32] ST32-001",
+        )
+
     def test_mass_entry_line_product_id_and_named(self):
         self.assertEqual(mass_entry_line(4, "OP17-104", product_id=708209), "4-708209")
         self.assertEqual(
@@ -132,7 +146,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
     def test_adds_to_leader_hub(self):
         html = '<li class="list-row"></li></body>'
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer.js?v=tcg-massv2", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-paste", out)
 
     def test_adds_to_individual_decklist(self):
         html = (
@@ -141,7 +155,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer.js?v=tcg-massv2", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-paste", out)
         self.assertEqual(out.count("tcgplayer.js"), 1)
 
     def test_refreshes_stale_script_version(self):
@@ -153,7 +167,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("v=tcg-massv2", out)
+        self.assertIn("v=tcg-paste", out)
         self.assertNotIn("v=tcg-buy", out)
 
     def test_js_restores_pills_and_always_affiliates(self):
@@ -163,10 +177,14 @@ class TcgplayerPlacementTest(unittest.TestCase):
         self.assertIn("Buy on TCGplayer", src)
         self.assertIn("FALLBACK_PARTNER", src)
         self.assertIn("partner.tcgplayer.com/c/7670706/1780961/21018", src)
-        self.assertIn('qty + "-" + pid', src)
+        self.assertIn("openMassEntry", src)
+        self.assertIn("/shop/buy-list.html", src)
+        self.assertIn("clipboard", src)
+        self.assertIn("execCommand", src)
         self.assertIn("tcgSetCode", src)
-        self.assertIn("OP-PR", src)
-        self.assertNotIn("cardNo", src)
+        helper = Path("/workspace/shop/buy-list.html").read_text()
+        self.assertIn("noindex", helper)
+        self.assertIn("Paste this into TCGplayer Mass Entry", helper)
 
     def test_hover_preview_uses_larger_fallback(self):
         chrome = Path("/workspace/scripts/generate-tournament-lists.py").read_text()

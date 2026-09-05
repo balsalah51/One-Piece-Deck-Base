@@ -52,7 +52,7 @@ ADSENSE_RE = re.compile(
 )
 IMG_RE = re.compile(r"<img\b([^>]*)>", re.I)
 SKIP_PARTS = {".git", "scripts", "node_modules", "discord-bot", "ballkeep"}
-SKIP_FILES = {"shop/custom-leaders.html"}
+SKIP_FILES = {"shop/custom-leaders.html", "shop/buy-list.html"}
 CORE_RELS = {
     "index.html",
     "format.html",
