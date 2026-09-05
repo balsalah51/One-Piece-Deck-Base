@@ -15520,5 +15520,37 @@
     "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP06/OP06-041_EN.webp",
     "source": "https://onepiece.limitlesstcg.com/cards/OP06-041",
     "tcgplayer_id": 541608
+  },
+  "OP15-079": {
+    "id": "OP15-079",
+    "name": "Absalom",
+    "category": "Character",
+    "color": "Black",
+    "life": null,
+    "cost": "4",
+    "power": "5000",
+    "counter": "+1000",
+    "attribute": "Ranged",
+    "types": "Thriller Bark Pirates",
+    "effect": "[On K.O.] Add up to 1 {Thriller Bark Pirates} type card from your trash to your hand. [Trigger] Activate this card's [On K.O.] effect.",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP15/OP15-079_EN.webp",
+    "source": "https://onepiece.limitlesstcg.com/cards/OP15-079",
+    "tcgplayer_id": 685431
+  },
+  "OP15-090": {
+    "id": "OP15-090",
+    "name": "Perona",
+    "category": "Character",
+    "color": "Black",
+    "life": null,
+    "cost": "1",
+    "power": "2000",
+    "counter": "+2000",
+    "attribute": "Special",
+    "types": "Thriller Bark Pirates",
+    "effect": "If your Character with 7000 base power or less would be removed from the field by your opponent's effect, you may trash 1 card from your hand instead.",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP15/OP15-090_EN.webp",
+    "source": "https://onepiece.limitlesstcg.com/cards/OP15-090",
+    "tcgplayer_id": 685443
   }
 }
