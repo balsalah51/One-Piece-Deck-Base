@@ -84,6 +84,7 @@ def collector_number(cid: str) -> str:
 
 
 _CARD_CACHE: dict | None = None
+_SAME_SET_NAME_COUNTS: dict[tuple[str, str], int] | None = None
 
 
 def load_card_cache() -> dict:
@@ -94,6 +95,24 @@ def load_card_cache() -> dict:
     return _CARD_CACHE
 
 
+def same_set_name_counts() -> dict[tuple[str, str], int]:
+    """How many cards share the same printed name inside one Bandai set."""
+    global _SAME_SET_NAME_COUNTS
+    if _SAME_SET_NAME_COUNTS is None:
+        counts: dict[tuple[str, str], int] = {}
+        for cid, meta in load_card_cache().items():
+            if not isinstance(meta, dict):
+                continue
+            name = str(meta.get("name") or "").strip().lower()
+            if not name:
+                continue
+            prefix = str(cid).split("-", 1)[0].upper()
+            key = (name, prefix)
+            counts[key] = counts.get(key, 0) + 1
+        _SAME_SET_NAME_COUNTS = counts
+    return _SAME_SET_NAME_COUNTS
+
+
 def is_leader_card(cid: str, flagged: bool = False) -> bool:
     if flagged:
         return True
@@ -102,14 +121,26 @@ def is_leader_card(cid: str, flagged: bool = False) -> bool:
 
 
 def catalog_name(name: str, cid: str, is_leader: bool = False) -> str:
-    """Plain card name for Mass Entry.
+    """TCGPlayer Mass Entry product name.
 
-    TCGPlayer's documented line is quantity, name, [set], number-within-set
-    (1 Lightning Bolt [SLD] 84). Set + number already pick the printing, so
-    do not append a collector suffix to the name.
+    When two cards in the same set share a name, TCGPlayer lists them as
+    `Charlotte Linlin (112)` / `Nico Robin (062)` / `Streusen (113)`.
+    Unique-in-set names stay plain.
     """
-    del cid, is_leader
-    return (name or "").strip()
+    del is_leader
+    cid = (cid or "").strip().upper()
+    name = (name or "").strip()
+    if not name:
+        meta = load_card_cache().get(cid) or {}
+        name = str(meta.get("name") or "").strip()
+    if not name:
+        return ""
+    if "(" in name:
+        return name
+    prefix = cid.split("-", 1)[0] if "-" in cid else cid
+    if same_set_name_counts().get((name.lower(), prefix), 0) > 1:
+        return f"{name} ({collector_number(cid)})"
+    return name
 
 
 def mass_entry_line(
@@ -121,18 +152,16 @@ def mass_entry_line(
 ) -> str:
     """One Mass Entry line in TCGPlayer's documented format.
 
-    Quantity → Card Name → [Set Code] → Card Number Within Set
-    e.g. 4 Charlotte Cracker [OP17] 104
+    Quantity → Card Name → [Set Code] → Card Number
+    Number is TCGPlayer's catalog number (OP17-112), not just 112.
+    Same-set name collisions get a collector suffix.
     https://help.tcgplayer.com/hc/en-us/articles/360055768913
     """
     cid = (cid or "").strip().upper()
     name = catalog_name(name, cid, is_leader)
     set_code = tcg_set_code(cid)
-    number = collector_number(cid)
-    if name and set_code and number:
-        return f"{int(qty)} {name} [{set_code}] {number}"
     if name and set_code:
-        return f"{int(qty)} {name} [{set_code}]"
+        return f"{int(qty)} {name} [{set_code}] {cid}"
     if name:
         return f"{int(qty)} {name}"
     if product_id:

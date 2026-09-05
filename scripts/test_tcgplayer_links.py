@@ -39,7 +39,10 @@ class TcgplayerLinksTest(unittest.TestCase):
         self.assertEqual(parsed.path, "/massentry")
         q = urllib.parse.parse_qs(parsed.query)
         self.assertEqual(q["productline"], ["One Piece Card Game"])
-        self.assertEqual(q["c"], ["4 Charlotte Cracker [OP17] 104||1 Nico Robin [OP09] 062"])
+        self.assertEqual(
+            q["c"],
+            ["4 Charlotte Cracker [OP17] OP17-104||1 Nico Robin (062) [OP09] OP09-062"],
+        )
 
     def test_mass_entry_uses_each_cards_own_name_and_number(self):
         url = mass_entry_url(
@@ -50,7 +53,7 @@ class TcgplayerLinksTest(unittest.TestCase):
             product_ids={},
         )
         q = urllib.parse.parse_qs(urllib.parse.urlparse(url).query)
-        self.assertEqual(q["c"], ["1 Yamato [OP16] 079||4 Nami [OP16] 091"])
+        self.assertEqual(q["c"], ["1 Yamato (079) [OP16] OP16-079||4 Nami [OP16] OP16-091"])
         self.assertNotIn("Charlotte", q["c"][0])
 
     def test_mass_entry_lines_match_tcgplayer_parser(self):
@@ -62,9 +65,10 @@ class TcgplayerLinksTest(unittest.TestCase):
         )
         for line in (
             "1 Lightning Bolt [SLD] 84",
-            "4 Charlotte Cracker [OP17] 104",
-            "1 Nico Robin [OP09] 062",
-            "4 Kin'emon [ST-32] 001",
+            "4 Charlotte Cracker [OP17] OP17-104",
+            "1 Nico Robin (062) [OP09] OP09-062",
+            "4 Streusen (113) [OP17] OP17-113",
+            "4 Kin'emon [ST-32] ST32-001",
         ):
             self.assertTrue(official.match(line), line)
 
@@ -78,40 +82,43 @@ class TcgplayerLinksTest(unittest.TestCase):
         self.assertEqual(tcg_set_code("EB04-007"), "OP15-EB04")
         self.assertEqual(tcg_set_code("EB03-012"), "EB-03-04")
 
-    def test_catalog_name_stays_plain(self):
+    def test_catalog_name_suffixes_same_set_collisions_only(self):
         self.assertEqual(catalog_name("Charlotte Cracker", "OP17-104"), "Charlotte Cracker")
-        self.assertEqual(catalog_name("Monkey.D.Luffy", "OP17-093"), "Monkey.D.Luffy")
+        self.assertEqual(catalog_name("Charlotte Linlin", "OP17-112"), "Charlotte Linlin (112)")
+        self.assertEqual(catalog_name("Nico Robin", "OP09-062"), "Nico Robin (062)")
+        self.assertEqual(catalog_name("Streusen", "OP17-113"), "Streusen (113)")
+        self.assertEqual(catalog_name("Yamato", "OP17-074"), "Yamato")
+        self.assertEqual(catalog_name("Charlotte Pudding", "OP17-109"), "Charlotte Pudding")
         self.assertEqual(catalog_name("Kin'emon", "ST32-001"), "Kin'emon")
-        self.assertEqual(catalog_name("Nico Robin", "OP09-062", is_leader=True), "Nico Robin")
 
     def test_mass_entry_text_is_newline_official_format(self):
         text = mass_entry_text([
             (1, "OP09-062", "Nico Robin", True),
+            (4, "OP17-112", "Charlotte Linlin"),
+            (4, "OP17-113", "Streusen"),
             (4, "OP17-104", "Charlotte Cracker"),
-            (4, "OP17-093", "Monkey.D.Luffy"),
-            (4, "ST32-001", "Kin'emon"),
         ])
         self.assertEqual(
             text,
-            "1 Nico Robin [OP09] 062\n"
-            "4 Charlotte Cracker [OP17] 104\n"
-            "4 Monkey.D.Luffy [OP17] 093\n"
-            "4 Kin'emon [ST-32] 001",
+            "1 Nico Robin (062) [OP09] OP09-062\n"
+            "4 Charlotte Linlin (112) [OP17] OP17-112\n"
+            "4 Streusen (113) [OP17] OP17-113\n"
+            "4 Charlotte Cracker [OP17] OP17-104",
         )
 
     def test_mass_entry_line_official_and_id_fallback(self):
         self.assertEqual(
             mass_entry_line(4, "OP17-104", "Charlotte Cracker", product_id=708209),
-            "4 Charlotte Cracker [OP17] 104",
+            "4 Charlotte Cracker [OP17] OP17-104",
         )
-        self.assertEqual(mass_entry_line(4, "OP17-104", product_id=708209), "4-708209")
+        self.assertEqual(mass_entry_line(4, "OP17-104", product_id=708209), "4 Charlotte Cracker [OP17] OP17-104")
         self.assertEqual(
             mass_entry_line(4, "ST32-001", "Kin'emon"),
-            "4 Kin'emon [ST-32] 001",
+            "4 Kin'emon [ST-32] ST32-001",
         )
         self.assertEqual(
             mass_entry_line(1, "OP09-062", "Nico Robin", is_leader=True),
-            "1 Nico Robin [OP09] 062",
+            "1 Nico Robin (062) [OP09] OP09-062",
         )
 
     def test_affiliate_wraps_when_partner_blank(self):
@@ -164,7 +171,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
     def test_adds_to_leader_hub(self):
         html = '<li class="list-row"></li></body>'
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer.js?v=tcg-qtyset", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-collide", out)
 
     def test_adds_to_individual_decklist(self):
         html = (
@@ -173,7 +180,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer.js?v=tcg-qtyset", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-collide", out)
         self.assertEqual(out.count("tcgplayer.js"), 1)
 
     def test_refreshes_stale_script_version(self):
@@ -185,7 +192,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("v=tcg-qtyset", out)
+        self.assertIn("v=tcg-collide", out)
         self.assertNotIn("v=tcg-buy", out)
 
     def test_js_restores_pills_and_always_affiliates(self):
@@ -198,8 +205,8 @@ class TcgplayerPlacementTest(unittest.TestCase):
         self.assertIn("openMassEntry", src)
         self.assertIn("massQuery", src)
         self.assertIn("&c=", src)
-        self.assertIn("[\" + setCode + \"] \" + number", src)
-        self.assertIn("Lightning Bolt", src)
+        self.assertIn("[\" + setCode + \"] \" + cid", src)
+        self.assertIn("Streusen (113)", src)
         self.assertIn("clipboard", src)
         self.assertIn("execCommand", src)
         self.assertIn("tcgSetCode", src)
