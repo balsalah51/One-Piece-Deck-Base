@@ -2,6 +2,9 @@
   var FALLBACK_PARTNER = "https://partner.tcgplayer.com/c/7670706/1780961/21018";
   var CFG = window.OPDB_TCGPLAYER || {};
   var IDS = window.OPDB_TCGPLAYER_IDS || {};
+  // Used to translate internal IDs (OP17-079) into TCGplayer Mass Entry's
+  // expected tokens: "Card Name → Set Code → Card Number Within Set".
+  var CARD_CACHE = null;
   var PRODUCT_LINE = "One Piece Card Game";
   var SEARCH_LINE = "one-piece-card-game";
   var REL = "noopener nofollow sponsored";
@@ -17,6 +20,17 @@
     if (dest.indexOf("partner.tcgplayer.com") >= 0) return dest;
     var base = partnerLink();
     return base + (base.indexOf("?") >= 0 ? "&" : "?") + "u=" + encodeURIComponent(dest);
+  }
+
+  function normalizeCardName(name) {
+    // card-cache.json uses dots for multi-part names (Monkey.D.Luffy).
+    // Mass Entry wants the actual card name string as displayed on TCGplayer.
+    name = String(name || "");
+    if (!name) return "";
+    var s = name.replace(/\./g, " ");
+    // Ensure the standalone "D" becomes "D." (Portgas D. Ace, Monkey D. Luffy).
+    s = s.replace(/\bD\b/g, "D.");
+    return s.trim();
   }
 
   function cardUrl(cid) {
@@ -35,7 +49,31 @@
       var cid = (row[1] || "").toUpperCase();
       if (!qty || !cid || seen[cid]) return;
       seen[cid] = 1;
-      parts.push(qty + " " + cid);
+      // TCGplayer Mass Entry expects:
+      // Quantity → Card Name → Set Code → Card Number Within Set
+      //
+      // We translate our internal ID (OP17-079) into:
+      //   "<qty> <card name> <set code> <collector number>"
+      var setCode = cid;
+      var cardNo = "";
+      var cidParts = cid.split("-");
+      if (cidParts.length >= 2) {
+        setCode = cidParts[0];
+        // Keep collector number formatting (leading zeros) as-is.
+        cardNo = cidParts[1];
+      }
+
+      var meta = CARD_CACHE && CARD_CACHE[cid] ? CARD_CACHE[cid] : null;
+      var name = meta && meta.name ? normalizeCardName(meta.name) : "";
+
+      if (name && setCode && cardNo) {
+        // Bracket the set code so TCGplayer can parse multi-word names.
+        // Format: Quantity → Card Name → [Set Code] → Card Number
+        parts.push(qty + " " + name + " [" + setCode + "] " + cardNo);
+      } else {
+        // Fallback to original internal ID (least-bad behavior).
+        parts.push(qty + " " + cid);
+      }
     });
     if (!parts.length) return "";
     return "https://www.tcgplayer.com/massentry?productline=" +
@@ -133,13 +171,20 @@
   }
 
   function boot() {
-    fetch("/data/tcgplayer.json", { cache: "no-store" })
-      .then(function (r) { return r.ok ? r.json() : {}; })
-      .then(function (cfg) {
-        if (cfg && cfg.partnerLink) CFG.partnerLink = String(cfg.partnerLink);
-      })
-      .catch(function () {})
-      .then(ready);
+    Promise.all([
+      fetch("/data/tcgplayer.json", { cache: "no-store" })
+        .then(function (r) { return r.ok ? r.json() : {}; })
+        .catch(function () { return {}; }),
+      fetch("/data/card-cache.json", { cache: "no-store" })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .catch(function () { return null; }),
+    ]).then(function (results) {
+      var cfg = results[0] || {};
+      var cc = results[1];
+      if (cfg && cfg.partnerLink) CFG.partnerLink = String(cfg.partnerLink);
+      if (cc) CARD_CACHE = cc;
+      ready();
+    }).catch(function () { ready(); });
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
