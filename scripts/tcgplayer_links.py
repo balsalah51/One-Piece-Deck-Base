@@ -83,14 +83,42 @@ def collector_number(cid: str) -> str:
     return cid.split("-", 1)[1] if "-" in cid else cid
 
 
-def catalog_name(name: str, cid: str) -> str:
+_CARD_CACHE: dict | None = None
+
+
+def load_card_cache() -> dict:
+    global _CARD_CACHE
+    if _CARD_CACHE is None:
+        path = ROOT / "data/card-cache.json"
+        _CARD_CACHE = json.loads(path.read_text()) if path.exists() else {}
+    return _CARD_CACHE
+
+
+def is_leader_card(cid: str, flagged: bool = False) -> bool:
+    if flagged:
+        return True
+    meta = load_card_cache().get((cid or "").strip().upper()) or {}
+    return str(meta.get("category") or "").lower() == "leader"
+
+
+def catalog_name(name: str, cid: str, is_leader: bool = False) -> str:
     name = (name or "").strip()
-    if name and "." in name and "(" not in name:
+    if not name:
+        return name
+    # Leaders on TCGPlayer use a collector suffix (Nico Robin (062)),
+    # same as reused dotted names (Monkey.D.Luffy (093)).
+    if "(" not in name and ("." in name or is_leader_card(cid, is_leader)):
         return f"{name} ({collector_number(cid)})"
     return name
 
 
-def mass_entry_line(qty: int, cid: str, name: str = "", product_id: int | None = None) -> str:
+def mass_entry_line(
+    qty: int,
+    cid: str,
+    name: str = "",
+    product_id: int | None = None,
+    is_leader: bool = False,
+) -> str:
     """One Mass Entry line for this card.
 
     Prefers TCGPlayer's product-id form (`4-708209`) when we have an id.
@@ -101,7 +129,7 @@ def mass_entry_line(qty: int, cid: str, name: str = "", product_id: int | None =
     cid = (cid or "").strip().upper()
     if product_id:
         return f"{int(qty)}-{int(product_id)}"
-    name = catalog_name(name, cid)
+    name = catalog_name(name, cid, is_leader)
     set_code = tcg_set_code(cid)
     if name and set_code:
         return f"{int(qty)} {name} [{set_code}] {cid}"
@@ -118,10 +146,11 @@ def mass_entry_text(cards: list[tuple]) -> str:
         qty = int(row[0])
         cid = str(row[1] or "").strip().upper()
         name = str(row[2]).strip() if len(row) > 2 and row[2] else ""
+        flagged = bool(row[3]) if len(row) > 3 else False
         if qty <= 0 or not cid or cid in seen:
             continue
         seen.add(cid)
-        parts.append(mass_entry_line(qty, cid, name))
+        parts.append(mass_entry_line(qty, cid, name, is_leader=flagged))
     return "\n".join(parts)
 
 
