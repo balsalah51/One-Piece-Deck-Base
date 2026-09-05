@@ -27,29 +27,21 @@ class TcgplayerLinksTest(unittest.TestCase):
         self.assertIn("OP17-079", url)
         self.assertIn("one-piece-card-game", url)
 
-    def test_mass_entry_prefers_product_ids(self):
-        url = mass_entry_url([(4, "OP17-079"), (1, "OP08-058")])
+    def test_mass_entry_uses_official_qty_name_set_number(self):
+        url = mass_entry_url(
+            [
+                (4, "OP17-104", "Charlotte Cracker"),
+                (1, "OP09-062", "Nico Robin"),
+            ],
+            product_ids={},
+        )
         parsed = urllib.parse.urlparse(url)
         self.assertEqual(parsed.path, "/massentry")
         q = urllib.parse.parse_qs(parsed.query)
         self.assertEqual(q["productline"], ["One Piece Card Game"])
-        self.assertEqual(q["c"], ["4-707123||1-558088"])
+        self.assertEqual(q["c"], ["4 Charlotte Cracker [OP17] 104||1 Nico Robin [OP09] 062"])
 
-    def test_mass_entry_uses_name_set_and_full_id(self):
-        url = mass_entry_url(
-            [
-                (4, "OP17-104", "Charlotte Cracker"),
-                (4, "OP17-107", "Charlotte Daifuku"),
-            ],
-            product_ids={},
-        )
-        q = urllib.parse.parse_qs(urllib.parse.urlparse(url).query)
-        self.assertEqual(
-            q["c"],
-            ["4 Charlotte Cracker [OP17] OP17-104||4 Charlotte Daifuku [OP17] OP17-107"],
-        )
-
-    def test_mass_entry_uses_each_cards_own_name_and_id(self):
+    def test_mass_entry_uses_each_cards_own_name_and_number(self):
         url = mass_entry_url(
             [
                 (1, "OP16-079", "Yamato"),
@@ -58,8 +50,23 @@ class TcgplayerLinksTest(unittest.TestCase):
             product_ids={},
         )
         q = urllib.parse.parse_qs(urllib.parse.urlparse(url).query)
-        self.assertEqual(q["c"], ["1 Yamato [OP16] OP16-079||4 Nami [OP16] OP16-091"])
+        self.assertEqual(q["c"], ["1 Yamato [OP16] 079||4 Nami [OP16] 091"])
         self.assertNotIn("Charlotte", q["c"][0])
+
+    def test_mass_entry_lines_match_tcgplayer_parser(self):
+        import re
+
+        official = re.compile(
+            r"^(?P<quantity>\d+)(\s+(?P<productName>\S.*)|-(?P<productId>\d+))"
+            r"\s+\[(?P<setCode>.+)\]\s+(?P<number>.+)$"
+        )
+        for line in (
+            "1 Lightning Bolt [SLD] 84",
+            "4 Charlotte Cracker [OP17] 104",
+            "1 Nico Robin [OP09] 062",
+            "4 Kin'emon [ST-32] 001",
+        ):
+            self.assertTrue(official.match(line), line)
 
     def test_tcg_set_codes_match_catalog(self):
         self.assertEqual(tcg_set_code("OP17-104"), "OP17")
@@ -71,16 +78,11 @@ class TcgplayerLinksTest(unittest.TestCase):
         self.assertEqual(tcg_set_code("EB04-007"), "OP15-EB04")
         self.assertEqual(tcg_set_code("EB03-012"), "EB-03-04")
 
-    def test_catalog_name_disambiguates_dotted_names_only(self):
+    def test_catalog_name_stays_plain(self):
         self.assertEqual(catalog_name("Charlotte Cracker", "OP17-104"), "Charlotte Cracker")
-        self.assertEqual(catalog_name("Monkey.D.Luffy", "OP17-093"), "Monkey.D.Luffy (093)")
+        self.assertEqual(catalog_name("Monkey.D.Luffy", "OP17-093"), "Monkey.D.Luffy")
         self.assertEqual(catalog_name("Kin'emon", "ST32-001"), "Kin'emon")
-
-    def test_catalog_name_keeps_leaders_in_the_same_form_as_other_cards(self):
         self.assertEqual(catalog_name("Nico Robin", "OP09-062", is_leader=True), "Nico Robin")
-        self.assertEqual(catalog_name("Nico Robin", "OP09-062"), "Nico Robin")
-        self.assertEqual(catalog_name("Edward.Newgate", "OP17-001", is_leader=True), "Edward.Newgate")
-        self.assertEqual(catalog_name("Nico Robin", "OP17-087"), "Nico Robin")
 
     def test_mass_entry_text_is_newline_official_format(self):
         text = mass_entry_text([
@@ -91,25 +93,25 @@ class TcgplayerLinksTest(unittest.TestCase):
         ])
         self.assertEqual(
             text,
-            "1 Nico Robin [OP09] OP09-062\n"
-            "4 Charlotte Cracker [OP17] OP17-104\n"
-            "4 Monkey.D.Luffy (093) [OP17] OP17-093\n"
-            "4 Kin'emon [ST-32] ST32-001",
+            "1 Nico Robin [OP09] 062\n"
+            "4 Charlotte Cracker [OP17] 104\n"
+            "4 Monkey.D.Luffy [OP17] 093\n"
+            "4 Kin'emon [ST-32] 001",
         )
 
-    def test_mass_entry_line_product_id_and_named(self):
+    def test_mass_entry_line_official_and_id_fallback(self):
+        self.assertEqual(
+            mass_entry_line(4, "OP17-104", "Charlotte Cracker", product_id=708209),
+            "4 Charlotte Cracker [OP17] 104",
+        )
         self.assertEqual(mass_entry_line(4, "OP17-104", product_id=708209), "4-708209")
         self.assertEqual(
             mass_entry_line(4, "ST32-001", "Kin'emon"),
-            "4 Kin'emon [ST-32] ST32-001",
-        )
-        self.assertEqual(
-            mass_entry_line(4, "OP17-093", "Monkey.D.Luffy"),
-            "4 Monkey.D.Luffy (093) [OP17] OP17-093",
+            "4 Kin'emon [ST-32] 001",
         )
         self.assertEqual(
             mass_entry_line(1, "OP09-062", "Nico Robin", is_leader=True),
-            "1 Nico Robin [OP09] OP09-062",
+            "1 Nico Robin [OP09] 062",
         )
 
     def test_affiliate_wraps_when_partner_blank(self):
@@ -131,11 +133,15 @@ class TcgplayerLinksTest(unittest.TestCase):
 
         partner = load_config()["partnerLink"]
         self.assertEqual(partner, "https://partner.tcgplayer.com/c/7670706/1780961/21018")
-        dest = "https://www.tcgplayer.com/massentry?productline=One%20Piece%20Card%20Game&c=1%20OP17-079"
+        dest = (
+            "https://www.tcgplayer.com/massentry?productline=One%20Piece%20Card%20Game"
+            "&c=1%20Nico%20Robin%20%5BOP09%5D%20062"
+        )
         wrapped = affiliate_url(dest)
         self.assertTrue(wrapped.startswith(partner + "?"))
         q = urllib.parse.parse_qs(urllib.parse.urlparse(wrapped).query)
         self.assertEqual(q["u"], [dest])
+        self.assertIn("partner.tcgplayer.com/c/7670706/1780961/21018", wrapped)
 
     def test_parse_sim_text(self):
         cards = parse_sim_text("1xOP08-058 4xOP11-070 4×ST34-003")
@@ -158,7 +164,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
     def test_adds_to_leader_hub(self):
         html = '<li class="list-row"></li></body>'
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer.js?v=tcg-names", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-qtyset", out)
 
     def test_adds_to_individual_decklist(self):
         html = (
@@ -167,7 +173,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer.js?v=tcg-names", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-qtyset", out)
         self.assertEqual(out.count("tcgplayer.js"), 1)
 
     def test_refreshes_stale_script_version(self):
@@ -179,7 +185,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("v=tcg-names", out)
+        self.assertIn("v=tcg-qtyset", out)
         self.assertNotIn("v=tcg-buy", out)
 
     def test_js_restores_pills_and_always_affiliates(self):
@@ -192,16 +198,16 @@ class TcgplayerPlacementTest(unittest.TestCase):
         self.assertIn("openMassEntry", src)
         self.assertIn("massQuery", src)
         self.assertIn("&c=", src)
-        self.assertIn("[\" + setCode + \"] \" + cid", src)
-        self.assertNotIn("qty + \"-\" + pid", src)
+        self.assertIn("[\" + setCode + \"] \" + number", src)
+        self.assertIn("Lightning Bolt", src)
         self.assertIn("clipboard", src)
         self.assertIn("execCommand", src)
         self.assertIn("tcgSetCode", src)
-        self.assertIn("Nico Robin (062)", src)
+        self.assertIn("affiliate", src)
         self.assertIn("text-deck-leader", src)
         helper = Path("/workspace/shop/buy-list.html").read_text()
         self.assertIn("noindex", helper)
-        self.assertIn("documented format", helper)
+        self.assertIn("Lightning Bolt", helper)
 
     def test_hover_preview_uses_larger_fallback(self):
         chrome = Path("/workspace/scripts/generate-tournament-lists.py").read_text()
