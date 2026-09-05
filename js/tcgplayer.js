@@ -81,8 +81,8 @@
   }
 
   function massLine(qty, cid, given, flagged) {
-    var pid = productId(cid);
-    if (pid) return qty + "-" + pid;
+    // TCGPlayer's site view parses qty name [SET] number — not qty-productId.
+    // https://help.tcgplayer.com/hc/en-us/articles/360055768913
     var name = catalogName(cid, given, flagged);
     var setCode = tcgSetCode(cid);
     if (name && setCode) return qty + " " + name + " [" + setCode + "] " + cid;
