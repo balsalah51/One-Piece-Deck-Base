@@ -1,6 +1,54 @@
 {
   "hosted": [
     {
+      "leader": "OP14-041",
+      "kind": "web",
+      "player": "S CARD OASIS 天美店",
+      "title": "青黄ハンコック フラッグシップバトル winner - S CARD OASIS 天美店",
+      "subtitle": "Public TCG PORTAL list · 2026-09-03",
+      "source_url": "https://tcg-portal.jp/onepiece/tournament-results/cmtmkp1md001rgm0auq0dtx5w",
+      "slug": "tcgportal-2026-09-03-s-card-oasis-0dtx5w",
+      "raw": "1xOP14-041 4xOP14-112 4xOP14-104 2xOP16-119 2xOP14-108 2xOP11-054 4xEB04-058 4xOP15-113 1xST17-004 4xOP16-113 4xOP14-114 4xOP17-109 2xOP06-106 4xOP14-105 4xOP14-107 1xOP07-057 4xOP14-118",
+      "cards": 50,
+      "date": "2026-09-03"
+    },
+    {
+      "leader": "OP09-062",
+      "kind": "web",
+      "player": "コーギーアール蕨店",
+      "title": "紫黄ロビン スタンダードバトル winner - コーギーアール蕨店",
+      "subtitle": "Public TCG PORTAL list · 2026-09-03",
+      "source_url": "https://tcg-portal.jp/onepiece/tournament-results/cmtmkiu8m001kgm0bw626wqyl",
+      "slug": "tcgportal-2026-09-03-26wqyl",
+      "raw": "1xOP09-062 4xOP17-112 4xOP17-114 4xOP17-106 4xOP17-102 4xOP17-109 3xOP05-073 3xOP17-110 4xOP17-074 4xEB04-058 4xOP17-107 4xOP17-113 4xST34-003 4xOP09-078",
+      "cards": 50,
+      "date": "2026-09-03"
+    },
+    {
+      "leader": "OP14-020",
+      "kind": "web",
+      "player": "MINT 吉祥寺店",
+      "title": "緑ミホーク チャンピオンシップ26-27 Season 2 店舗予選 winner - MINT 吉祥寺店",
+      "subtitle": "Public TCG PORTAL list · 2026-09-03",
+      "source_url": "https://tcg-portal.jp/onepiece/tournament-results/cmtmk9vcl001jgm0a80nkj311",
+      "slug": "tcgportal-2026-09-03-mint-nkj311",
+      "raw": "1xOP14-020 4xOP12-034 4xOP06-033 4xOP12-023 3xOP06-038 3xOP01-055 4xST32-001 4xST32-002 1xST32-003 2xOP14-033 2xOP08-036 2xOP14-039 4xOP07-022 4xOP17-031 4xOP13-031 4xOP17-022 1xOP13-040",
+      "cards": 50,
+      "date": "2026-09-03"
+    },
+    {
+      "leader": "OP14-041",
+      "kind": "web",
+      "player": "コーギーアール大宮駅前店",
+      "title": "青黄ハンコック チャンピオンシップ26-27 Season 2 店舗予選 winner - コーギーアール大宮駅前店",
+      "subtitle": "Public TCG PORTAL list · 2026-09-03",
+      "source_url": "https://tcg-portal.jp/onepiece/tournament-results/cmtmk3lql001jgm0aq75ocma2",
+      "slug": "tcgportal-2026-09-03-5ocma2",
+      "raw": "1xOP14-041 4xOP14-112 4xOP14-104 2xOP16-119 2xST17-004 4xOP17-109 1xOP08-050 1xOP17-046 1xOP06-058 1xOP14-108 3xOP11-054 3xOP06-115 4xOP14-114 4xOP15-113 2xOP16-113 2xOP06-106 4xEB04-058 4xOP14-107 4xOP14-105",
+      "cards": 50,
+      "date": "2026-09-03"
+    },
+    {
       "leader": "OP14-020",
       "kind": "web",
       "player": "トレカ X 藤沢湘南台店",
