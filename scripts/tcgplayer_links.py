@@ -105,9 +105,11 @@ def catalog_name(name: str, cid: str, is_leader: bool = False) -> str:
     name = (name or "").strip()
     if not name:
         return name
-    # Leaders on TCGPlayer use a collector suffix (Nico Robin (062)),
-    # same as reused dotted names (Monkey.D.Luffy (093)).
-    if "(" not in name and ("." in name or is_leader_card(cid, is_leader)):
+    # Leaders stay qty name [SET] ID, same as unique characters.
+    # A collector suffix on the leader made Mass Entry reject the paste.
+    if is_leader_card(cid, is_leader):
+        return name
+    if "." in name and "(" not in name:
         return f"{name} ({collector_number(cid)})"
     return name
 

@@ -58,7 +58,7 @@ class TcgplayerLinksTest(unittest.TestCase):
             product_ids={},
         )
         q = urllib.parse.parse_qs(urllib.parse.urlparse(url).query)
-        self.assertEqual(q["c"], ["1 Yamato (079) [OP16] OP16-079||4 Nami [OP16] OP16-091"])
+        self.assertEqual(q["c"], ["1 Yamato [OP16] OP16-079||4 Nami [OP16] OP16-091"])
         self.assertNotIn("Charlotte", q["c"][0])
 
     def test_tcg_set_codes_match_catalog(self):
@@ -76,10 +76,10 @@ class TcgplayerLinksTest(unittest.TestCase):
         self.assertEqual(catalog_name("Monkey.D.Luffy", "OP17-093"), "Monkey.D.Luffy (093)")
         self.assertEqual(catalog_name("Kin'emon", "ST32-001"), "Kin'emon")
 
-    def test_catalog_name_suffixes_leaders_like_other_reused_names(self):
-        self.assertEqual(catalog_name("Nico Robin", "OP09-062", is_leader=True), "Nico Robin (062)")
-        self.assertEqual(catalog_name("Nico Robin", "OP09-062"), "Nico Robin (062)")
-        self.assertEqual(catalog_name("Edward.Newgate", "OP17-001", is_leader=True), "Edward.Newgate (001)")
+    def test_catalog_name_keeps_leaders_in_the_same_form_as_other_cards(self):
+        self.assertEqual(catalog_name("Nico Robin", "OP09-062", is_leader=True), "Nico Robin")
+        self.assertEqual(catalog_name("Nico Robin", "OP09-062"), "Nico Robin")
+        self.assertEqual(catalog_name("Edward.Newgate", "OP17-001", is_leader=True), "Edward.Newgate")
         self.assertEqual(catalog_name("Nico Robin", "OP17-087"), "Nico Robin")
 
     def test_mass_entry_text_is_newline_official_format(self):
@@ -91,7 +91,7 @@ class TcgplayerLinksTest(unittest.TestCase):
         ])
         self.assertEqual(
             text,
-            "1 Nico Robin (062) [OP09] OP09-062\n"
+            "1 Nico Robin [OP09] OP09-062\n"
             "4 Charlotte Cracker [OP17] OP17-104\n"
             "4 Monkey.D.Luffy (093) [OP17] OP17-093\n"
             "4 Kin'emon [ST-32] ST32-001",
@@ -106,6 +106,10 @@ class TcgplayerLinksTest(unittest.TestCase):
         self.assertEqual(
             mass_entry_line(4, "OP17-093", "Monkey.D.Luffy"),
             "4 Monkey.D.Luffy (093) [OP17] OP17-093",
+        )
+        self.assertEqual(
+            mass_entry_line(1, "OP09-062", "Nico Robin", is_leader=True),
+            "1 Nico Robin [OP09] OP09-062",
         )
 
     def test_affiliate_wraps_when_partner_blank(self):
@@ -154,7 +158,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
     def test_adds_to_leader_hub(self):
         html = '<li class="list-row"></li></body>'
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer.js?v=tcg-leader", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-plain", out)
 
     def test_adds_to_individual_decklist(self):
         html = (
@@ -163,7 +167,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer.js?v=tcg-leader", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-plain", out)
         self.assertEqual(out.count("tcgplayer.js"), 1)
 
     def test_refreshes_stale_script_version(self):
@@ -175,7 +179,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("v=tcg-leader", out)
+        self.assertIn("v=tcg-plain", out)
         self.assertNotIn("v=tcg-buy", out)
 
     def test_js_restores_pills_and_always_affiliates(self):
@@ -191,6 +195,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
         self.assertIn("execCommand", src)
         self.assertIn("tcgSetCode", src)
         self.assertIn("Nico Robin (062)", src)
+        self.assertIn("reject the whole paste", src)
         self.assertIn("text-deck-leader", src)
         helper = Path("/workspace/shop/buy-list.html").read_text()
         self.assertIn("noindex", helper)
