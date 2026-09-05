@@ -1170,9 +1170,9 @@ def page_chrome(
     tcg_scripts = ""
     if include_tcgplayer:
         tcg_scripts = (
-            '  <script src="/js/tcgplayer-config.js?v=tcg-paste"></script>\n'
-            '  <script src="/js/tcgplayer-ids.js?v=tcg-paste"></script>\n'
-            '  <script src="/js/tcgplayer.js?v=tcg-paste"></script>\n'
+            '  <script src="/js/tcgplayer-config.js?v=tcg-leader"></script>\n'
+            '  <script src="/js/tcgplayer-ids.js?v=tcg-leader"></script>\n'
+            '  <script src="/js/tcgplayer.js?v=tcg-leader"></script>\n'
         )
     return f"""<!doctype html>
 <html lang="en">

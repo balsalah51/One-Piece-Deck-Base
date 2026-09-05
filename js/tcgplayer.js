@@ -43,15 +43,22 @@
     return m ? m[1] + "-" + m[2] : set;
   }
 
-  function catalogName(cid, given) {
+  function isLeader(cid, flagged) {
+    if (flagged) return true;
+    var meta = CARD_CACHE && CARD_CACHE[cid] ? CARD_CACHE[cid] : null;
+    return !!(meta && String(meta.category || "").toLowerCase() === "leader");
+  }
+
+  function catalogName(cid, given, flagged) {
     var meta = CARD_CACHE && CARD_CACHE[cid] ? CARD_CACHE[cid] : null;
     var name = meta && meta.name
       ? String(meta.name).trim()
       : String(given || "").replace(/\s+/g, " ").trim();
     if (!name) return "";
-    // Reused names on TCGPlayer include a number suffix (Monkey.D.Luffy (093)).
-    // Unique names reject that suffix, so only add it for dotted names.
-    if (name.indexOf(".") >= 0 && name.indexOf("(") < 0) {
+    // TCGPlayer catalog names for leaders use a collector suffix
+    // (Nico Robin (062)), same as reused dotted names (Monkey.D.Luffy (093)).
+    // Unique character names reject that suffix.
+    if (name.indexOf("(") < 0 && (name.indexOf(".") >= 0 || isLeader(cid, flagged))) {
       name += " (" + collectorOf(cid) + ")";
     }
     return name;
@@ -65,8 +72,8 @@
       encodeURIComponent(cid) + "&productLineName=" + encodeURIComponent(SEARCH_LINE);
   }
 
-  function massLine(qty, cid, given) {
-    var name = catalogName(cid, given);
+  function massLine(qty, cid, given, flagged) {
+    var name = catalogName(cid, given, flagged);
     var setCode = tcgSetCode(cid);
     if (name && setCode) return qty + " " + name + " [" + setCode + "] " + cid;
     if (name) return qty + " " + name;
@@ -81,7 +88,7 @@
       var cid = (row[1] || "").toUpperCase();
       if (!qty || !cid || seen[cid]) return;
       seen[cid] = 1;
-      out.push([qty, cid, row[2]]);
+      out.push([qty, cid, row[2], row[3]]);
     });
     return out;
   }
@@ -90,7 +97,7 @@
   // wrap has not been filling the box, so we copy this and open a short page.
   function massText(cards) {
     return uniqueCards(cards).map(function (row) {
-      return massLine(row[0], row[1], row[2]);
+      return massLine(row[0], row[1], row[2], row[3]);
     }).join("\n");
   }
 
@@ -169,7 +176,7 @@
       var name = ((line.querySelector(".card-title") || {}).textContent || "").trim();
       if (!qty || !cid || seen[cid]) return;
       seen[cid] = 1;
-      cards.push([qty, cid, name]);
+      cards.push([qty, cid, name, !!(line.closest && line.closest(".text-deck-leader"))]);
     });
     return cards;
   }
