@@ -8,6 +8,7 @@
   var CARD_CACHE = null;
   var SAME_SET_NAME = {};
   var IDS = Object.assign({}, window.OPDB_TCGPLAYER_IDS || {});
+  var NAMES = Object.assign({}, window.OPDB_TCGPLAYER_NAMES || {});
   var PRODUCT_LINE = "One Piece Card Game";
   var SEARCH_LINE = "one-piece-card-game";
   var REL = "noopener nofollow sponsored";
@@ -65,12 +66,14 @@
   }
 
   function catalogName(cid, given, flagged) {
+    cid = (cid || "").toUpperCase();
+    if (NAMES[cid]) return NAMES[cid];
     var meta = CARD_CACHE && CARD_CACHE[cid] ? CARD_CACHE[cid] : null;
     var name = meta && meta.name
       ? String(meta.name).trim()
       : String(given || "").replace(/\s+/g, " ").trim();
     if (!name) return "";
-    // Same-set reprints: TCGPlayer lists Charlotte Linlin (112), Nico Robin (062), Streusen (113).
+    // Fallback when the catalog map is missing: suffix same-set reprints.
     if (name.indexOf("(") < 0 && SAME_SET_NAME[name.toLowerCase() + "|" + prefixOf(cid)] > 1) {
       name += " (" + collectorOf(cid) + ")";
     }
@@ -95,8 +98,8 @@
   function massLine(qty, cid, given, flagged) {
     // TCGPlayer documented format:
     //   Quantity → Card Name → [Set Code] → Card Number
-    // Number is the catalog number (OP17-112). Same-set name collisions
-    // get a collector suffix so Linlin / Robin / Streusen resolve.
+    // Number is the catalog number (OP17-112). Official TCGPlayer names
+    // include collector suffixes and other catalog shapes.
     // https://help.tcgplayer.com/hc/en-us/articles/360055768913
     var name = catalogName(cid, given, flagged);
     var setCode = tcgSetCode(cid);
