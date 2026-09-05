@@ -55,10 +55,11 @@
       ? String(meta.name).trim()
       : String(given || "").replace(/\s+/g, " ").trim();
     if (!name) return "";
-    // TCGPlayer catalog names for leaders use a collector suffix
-    // (Nico Robin (062)), same as reused dotted names (Monkey.D.Luffy (093)).
-    // Unique character names reject that suffix.
-    if (name.indexOf("(") < 0 && (name.indexOf(".") >= 0 || isLeader(cid, flagged))) {
+    // Leaders use the same qty name [SET] ID line as other cards.
+    // A collector suffix on the leader (Nico Robin (062)) made Mass Entry
+    // reject the whole paste. Only reused dotted character names get it.
+    if (isLeader(cid, flagged)) return name;
+    if (name.indexOf(".") >= 0 && name.indexOf("(") < 0) {
       name += " (" + collectorOf(cid) + ")";
     }
     return name;
