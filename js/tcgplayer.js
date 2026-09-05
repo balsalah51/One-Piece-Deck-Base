@@ -6,6 +6,7 @@
   //   1 Lightning Bolt [SLD] 84
   // https://help.tcgplayer.com/hc/en-us/articles/360055768913
   var CARD_CACHE = null;
+  var SAME_SET_NAME = {};
   var IDS = Object.assign({}, window.OPDB_TCGPLAYER_IDS || {});
   var PRODUCT_LINE = "One Piece Card Game";
   var SEARCH_LINE = "one-piece-card-game";
@@ -50,13 +51,29 @@
     return !!(meta && String(meta.category || "").toLowerCase() === "leader");
   }
 
+  function indexSameSetNames(cache) {
+    var counts = {};
+    if (!cache) return {};
+    Object.keys(cache).forEach(function (cid) {
+      var meta = cache[cid] || {};
+      var name = String(meta.name || "").trim().toLowerCase();
+      if (!name) return;
+      var key = name + "|" + prefixOf(cid);
+      counts[key] = (counts[key] || 0) + 1;
+    });
+    return counts;
+  }
+
   function catalogName(cid, given, flagged) {
     var meta = CARD_CACHE && CARD_CACHE[cid] ? CARD_CACHE[cid] : null;
     var name = meta && meta.name
       ? String(meta.name).trim()
       : String(given || "").replace(/\s+/g, " ").trim();
-    // Documented Mass Entry line is qty + name + [set] + number-within-set.
-    // Set + number pick the printing, so do not suffix the name.
+    if (!name) return "";
+    // Same-set reprints: TCGPlayer lists Charlotte Linlin (112), Nico Robin (062), Streusen (113).
+    if (name.indexOf("(") < 0 && SAME_SET_NAME[name.toLowerCase() + "|" + prefixOf(cid)] > 1) {
+      name += " (" + collectorOf(cid) + ")";
+    }
     return name;
   }
 
@@ -77,14 +94,13 @@
 
   function massLine(qty, cid, given, flagged) {
     // TCGPlayer documented format:
-    //   Quantity → Card Name → [Set Code] → Card Number Within Set
-    //   1 Lightning Bolt [SLD] 84
+    //   Quantity → Card Name → [Set Code] → Card Number
+    // Number is the catalog number (OP17-112). Same-set name collisions
+    // get a collector suffix so Linlin / Robin / Streusen resolve.
     // https://help.tcgplayer.com/hc/en-us/articles/360055768913
     var name = catalogName(cid, given, flagged);
     var setCode = tcgSetCode(cid);
-    var number = collectorOf(cid);
-    if (name && setCode && number) return qty + " " + name + " [" + setCode + "] " + number;
-    if (name && setCode) return qty + " " + name + " [" + setCode + "]";
+    if (name && setCode) return qty + " " + name + " [" + setCode + "] " + cid;
     if (name) return qty + " " + name;
     var pid = productId(cid);
     if (pid) return qty + "-" + pid;
@@ -294,6 +310,7 @@
       if (cfg && cfg.partnerLink) CFG.partnerLink = String(cfg.partnerLink);
       if (cc) {
         CARD_CACHE = cc;
+        SAME_SET_NAME = indexSameSetNames(cc);
         Object.keys(cc).forEach(function (cid) {
           var pid = cc[cid] && cc[cid].tcgplayer_id;
           if (pid && !IDS[cid]) IDS[cid] = pid;
