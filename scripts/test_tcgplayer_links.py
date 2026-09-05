@@ -158,7 +158,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
     def test_adds_to_leader_hub(self):
         html = '<li class="list-row"></li></body>'
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer.js?v=tcg-plain", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-fill", out)
 
     def test_adds_to_individual_decklist(self):
         html = (
@@ -167,7 +167,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer.js?v=tcg-plain", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-fill", out)
         self.assertEqual(out.count("tcgplayer.js"), 1)
 
     def test_refreshes_stale_script_version(self):
@@ -179,7 +179,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("v=tcg-plain", out)
+        self.assertIn("v=tcg-fill", out)
         self.assertNotIn("v=tcg-buy", out)
 
     def test_js_restores_pills_and_always_affiliates(self):
@@ -190,16 +190,17 @@ class TcgplayerPlacementTest(unittest.TestCase):
         self.assertIn("FALLBACK_PARTNER", src)
         self.assertIn("partner.tcgplayer.com/c/7670706/1780961/21018", src)
         self.assertIn("openMassEntry", src)
-        self.assertIn("/shop/buy-list.html", src)
+        self.assertIn("massQuery", src)
+        self.assertIn("&c=", src)
+        self.assertIn("qty + \"-\" + pid", src)
         self.assertIn("clipboard", src)
         self.assertIn("execCommand", src)
         self.assertIn("tcgSetCode", src)
         self.assertIn("Nico Robin (062)", src)
-        self.assertIn("reject the whole paste", src)
         self.assertIn("text-deck-leader", src)
         helper = Path("/workspace/shop/buy-list.html").read_text()
         self.assertIn("noindex", helper)
-        self.assertIn("Paste this into TCGplayer Mass Entry", helper)
+        self.assertIn("TCGplayer Mass Entry list", helper)
 
     def test_hover_preview_uses_larger_fallback(self):
         chrome = Path("/workspace/scripts/generate-tournament-lists.py").read_text()
