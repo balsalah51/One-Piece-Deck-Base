@@ -17,7 +17,7 @@ from pathlib import Path
 
 ROOT = Path("/workspace")
 RECENT_FROM = "2026-08-20"
-CSS_VER = "tier-list"
+CSS_VER = "tier-home"
 TIER_PTS = {"S": 5.0, "A": 3.5, "B": 2.0, "C": 1.0, "D": 0.4}
 COLOR_NAMES = {
     "color-red": "Red",
@@ -45,8 +45,12 @@ SKIP_PARTS = {".git", "scripts", "node_modules", "discord-bot", "ballkeep"}
 SKIP_FILES = {"shop/custom-leaders.html", "shop/buy-list.html"}
 HOME_TIER_TILE = """          <a class="home-big home-big-tier" href="/tier-list.html">
             <span class="home-big-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-                <path d="M5 7h14M5 12h10M5 17h6"/>
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.1 13.85 5.2h-3.7L12 2.1Z"/>
+                <rect x="10.15" y="5.35" width="3.7" height="1.85" rx="0.4"/>
+                <path d="M9 20.6V8.9h6v11.7H9Z"/>
+                <path d="M3.6 20.6v-6.4H9v6.4H3.6Z" opacity=".88"/>
+                <path d="M15 20.6v-4.7h5.4v4.7H15Z" opacity=".72"/>
               </svg>
             </span>
             <span class="home-big-title">Tier List</span>
@@ -748,7 +752,7 @@ def page_html(board: str, table: str, sources_html: str, rows: list[dict], sourc
         <div class="crumb"><a href="/">Home</a> / Tier List</div>
         <h2>OP17 tier list</h2>
         <p>{html.escape(intro)}</p>
-        <p class="muted">Updated {date.today().isoformat()}. Leader pictures link to the 50-card lists on this site. Japan still posts more Enel and Robin than the West; the board splits the difference instead of copying one region.</p>
+        <p class="muted">Updated {date.today().isoformat()}. Leader pictures link to the 50-card lists on this site.</p>
         <div class="tier-board" aria-label="OP17 leader tier list">
 {board}
         </div>
@@ -762,10 +766,6 @@ def page_html(board: str, table: str, sources_html: str, rows: list[dict], sourc
           <details open>
             <summary>How is this aggregated?</summary>
             <p>Each public page casts a vote (S through D). Current OP17 reports weigh more than leftover OP16 tables. This site's recent wins and top eights are a vote of their own, not a replacement for the others.</p>
-          </details>
-          <details>
-            <summary>Why can Japan and Limitless disagree?</summary>
-            <p>Japanese store results still have a lot of Mihawk and Enel. Online Limitless cups in the West are heavier on Rocks, Sabo, Kaido, and Black Luffy. Both are real. The S row is the overlap.</p>
           </details>
           <details>
             <summary>Where are the lists?</summary>
