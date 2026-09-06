@@ -58,6 +58,7 @@ CORE_RELS = {
     "format.html",
     "privacy.html",
     "search.html",
+    "tier-list.html",
     "decklists/op17.html",
 }
 
@@ -236,6 +237,7 @@ def deck_related_html(rel: str, index: dict) -> str:
     for href, title, note in other_leaders_same_event(index, leader, slug):
         rows.append(seo.list_row(href, title, note))
     rows.extend(related_leader_rows(leader)[:3])
+    rows.append(seo.list_row("/tier-list.html", "OP17 tier list", "Aggregated S through D with leader pictures"))
     rows.append(seo.list_row("/format.html", "OPTCG format and banlist", "Standard rules, banned cards, rotation"))
     rows.append(seo.list_row("/shop/sleeves.html", "Sleeves for a 50-card list", "Shop · Dragon Shield packs"))
     return seo.related_section("Related pages", "More lists and guides", rows)
@@ -243,6 +245,7 @@ def deck_related_html(rel: str, index: dict) -> str:
 
 def hub_related_html(leader: dict) -> str:
     rows = related_leader_rows(leader)
+    rows.append(seo.list_row("/tier-list.html", "OP17 tier list", "Aggregated S through D with leader pictures"))
     rows.append(seo.list_row("/decklists/op17.html", "All leader pages", "Every constructed leader on this site"))
     guide = seo.LEADER_GUIDE.get(leader["key"])
     if guide:
@@ -273,6 +276,7 @@ def hub_related_html(leader: dict) -> str:
             ),
         )
     rows.append(seo.list_row("/format.html", "Format and banlist", "Standard constructed rules"))
+    rows.append(seo.list_row("/tier-list.html", "OP17 tier list", "Aggregated S through D with leader pictures"))
     rows.append(seo.list_row("/#recent", "Recent lists", "Newest 50-card results"))
     return seo.related_section("Related pages", "Other leaders and guides", rows)
 
@@ -674,6 +678,7 @@ def patch_file(path: Path, index: dict, by_href: dict) -> tuple[bool, str]:
         block = topic_related_extra(slug)
     elif rel == "decklists/op17.html":
         rows = [
+            seo.list_row("/tier-list.html", "OP17 tier list", "Aggregated S through D with leader pictures"),
             seo.list_row("/#recent", "Recent lists", "Newest 50-card results on the homepage"),
             seo.list_row("/format.html", "Format and banlist", "Standard constructed rules"),
             seo.list_row("/guides/", "One Piece TCG guides", "Topics and character names"),
@@ -904,6 +909,7 @@ def search_catalog(index: dict) -> tuple[list[dict], list[dict]]:
                 "q": f"{L['name']} {L['id']} {L['key']} decklist optcg",
             }
         )
+    pages.append({"kind": "page", "title": "OP17 tier list", "note": "Aggregated S-A-B-C-D with leader pictures", "href": "/tier-list.html", "q": "tier list meta op17 mihawk rocks sabo"})
     pages.append({"kind": "page", "title": "Format and banlist", "note": "Standard OPTCG rules", "href": "/format.html", "q": "format banlist rotation pudding"})
     pages.append({"kind": "page", "title": "All leader pages", "note": "Every constructed hub", "href": "/decklists/op17.html", "q": "leaders op17 decklists"})
     pages.append({"kind": "page", "title": "Guides", "note": "Topics and characters", "href": "/guides/", "q": "guides one piece tcg optcg"})
@@ -1062,16 +1068,7 @@ def write_search_page(index: dict) -> None:
           <div class="subtitle">OPTCG decklists</div>
         </div>
       </a>
-      <nav aria-label="Primary">
-        <a href="/#recent">Recent lists</a>
-        <a href="/decklists/op17.html">Leaders</a>
-        <a href="/format.html">Format</a>
-        <a href="https://en.onepiece-cardgame.com/events/" target="_blank" rel="noopener">Events</a>
-        <a href="/guides/">Guides</a>
-        <a href="/shop/">Shop</a>
-        <a href="/search.html" aria-current="page">Search</a>
-        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
-      </nav>
+{seo.primary_nav_html(current="search")}
     </header>
     <main class="single">
       <div class="card hero">

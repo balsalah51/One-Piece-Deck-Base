@@ -1196,6 +1196,7 @@ def page_chrome(
         </div>
       </a>
       <nav aria-label="Primary">
+        <a href="/tier-list.html">Tier List</a>
         <a href="/#recent">Recent lists</a>
         <a href="/decklists/op17.html"{op17_cur}>Leaders</a>
         <a href="/format.html">Format</a>
@@ -1214,7 +1215,7 @@ def page_chrome(
     </main>
     <footer>
       © <span id="year"></span> One Piece Deck Base - Built with community in mind.
-      <a href="/guides/">Guides</a> · <a href="/decklists/op17.html">Leaders</a> · <a href="/format.html">Format</a> · <a href="/search.html">Search</a> · <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a>
+      <a href="/tier-list.html">Tier List</a> · <a href="/guides/">Guides</a> · <a href="/decklists/op17.html">Leaders</a> · <a href="/format.html">Format</a> · <a href="/search.html">Search</a> · <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a>
     </footer>
   </div>
   <script>
