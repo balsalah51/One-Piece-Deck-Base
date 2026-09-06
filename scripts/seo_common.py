@@ -478,13 +478,37 @@ def parse_crumbs(text: str) -> list[tuple[str, str]]:
 
 
 FOOTER_LINKS = (
-    '      <a href="/guides/">Guides</a> · '
+    '      <a href="/tier-list.html">Tier List</a> · '
+    '<a href="/guides/">Guides</a> · '
     '<a href="/decklists/op17.html">Leaders</a> · '
     '<a href="/format.html">Format</a> · '
     '<a href="/search.html">Search</a> · '
     '<a href="/shop/">Shop</a> · '
     '<a href="/privacy.html">Privacy</a>'
 )
+
+
+def primary_nav_html(*, current: str | None = None, home: bool = False) -> str:
+    recent = "#recent" if home else "/#recent"
+    leaders = "#leaders" if home else "/decklists/op17.html"
+    items = [
+        ("/tier-list.html", "Tier List", "tier"),
+        (recent, "Recent lists", "recent"),
+        (leaders, "Leaders", "leaders"),
+        ("/format.html", "Format", "format"),
+        ("https://en.onepiece-cardgame.com/events/", "Events", "events"),
+        ("/guides/", "Guides", "guides"),
+        ("/shop/", "Shop", "shop"),
+        ("/search.html", "Search", "search"),
+        ("https://discord.gg/adZ2WUQ3D", "Discord", "discord"),
+    ]
+    lines = ['      <nav aria-label="Primary">']
+    for href, label, key in items:
+        cur = ' aria-current="page"' if key == current else ""
+        extra = ' target="_blank" rel="noopener"' if href.startswith("http") else ""
+        lines.append(f'        <a href="{href}"{cur}{extra}>{label}</a>')
+    lines.append("      </nav>")
+    return "\n".join(lines)
 
 FORMAT_FAQ = [
     (
