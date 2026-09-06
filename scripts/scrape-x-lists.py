@@ -26,9 +26,9 @@ STATUS_RE = re.compile(
     re.I,
 )
 TWITTER_EPOCH_MS = 1288834974657
-# Inclusive UTC window: 27 Aug through today.
-DATE_START = "2026-08-27"
-DATE_END = "2026-09-03"
+# Inclusive UTC window: 4 Sep through today.
+DATE_START = "2026-09-04"
+DATE_END = "2026-09-06"
 LEADERS = {
     "OP17-001",
     "OP17-020",
@@ -108,6 +108,9 @@ HANDLES = [
     "CapiamoOP",
     "LeeZ_1111",
     "NBAPR",
+    "BCGFest",
+    "BandaiTCG",
+    "BandaiCardGames",
 ]
 HANDLE_SET = {h.lower() for h in HANDLES}
 
@@ -159,7 +162,14 @@ SEARCHES = [
     'site:twitter.com "4xOP17-040"',
     "site:x.com ChinoizeCup #101 Winner",
     "site:x.com ChinoizeCup #100 Winner",
-    "site:x.com ワンピカード デッキ since:2026-08-27",
+    "site:x.com ワンピカード デッキ since:2026-09-04",
+    f"site:x.com Flame Flame decklist since:{DATE_START}",
+    f'site:x.com "Flame-Flame Fruit" Utrecht since:{DATE_START}',
+    f"site:x.com BCG Fest Utrecht decklist since:{DATE_START}",
+    f"site:x.com Flame Flame Winner Robin since:{DATE_START}",
+    f'site:x.com "4xOP17" since:{DATE_START}',
+    "site:x.com ワンピカード 優勝 デッキ since:2026-09-04",
+    "site:x.com 紫黄ロビン デッキ since:2026-09-04",
 ]
 
 
