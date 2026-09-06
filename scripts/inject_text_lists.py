@@ -121,7 +121,6 @@ def render_text_deck(groups: list[tuple[str, list[dict]]]) -> str:
             <h3>Text list</h3>
             <div class="muted">{total} cards</div>
           </div>
-          <p class="muted">Hover or tap a card name to see the picture.</p>
           <div class="text-deck-cols">
 {chr(10).join(cols)}
           </div>

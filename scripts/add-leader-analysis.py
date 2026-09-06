@@ -493,8 +493,7 @@ def analysis_block(leader: dict, n: int, take: str, text_deck: str, op17_n: int 
     else:
         extra = ""
     averaged = (
-        f'<p class="muted">Averaged from {n} lists on this page{extra}, then filled to 50 cards. '
-        "Hover or tap a name for the picture. Copy pastes the IDs for OP TCG SIM.</p>"
+        f'<p class="muted">Averaged from {n} lists on this page{extra}, then filled to 50 cards.</p>'
     )
     text_deck = text_deck.replace(
         '<p class="muted">Hover or tap a card name to see the picture. Copy pastes <code>NxSET-NNN</code> lines for OP TCG SIM import.</p>',
@@ -511,6 +510,12 @@ def analysis_block(leader: dict, n: int, take: str, text_deck: str, op17_n: int 
         averaged,
         1,
     )
+    if "Averaged from" not in text_deck:
+        text_deck = text_deck.replace(
+            '</div>\n          <div class="text-deck-cols">',
+            f'</div>\n          {averaged}\n          <div class="text-deck-cols">',
+            1,
+        )
     return f"""        <!-- LEADER_ANALYSIS -->
         <section class="leader-analysis" style="margin-top:22px">
           <div class="section-title">

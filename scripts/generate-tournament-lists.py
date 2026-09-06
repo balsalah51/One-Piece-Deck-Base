@@ -1170,10 +1170,10 @@ def page_chrome(
     tcg_scripts = ""
     if include_tcgplayer:
         tcg_scripts = (
-            '  <script src="/js/tcgplayer-config.js?v=tcg-catalog"></script>\n'
-            '  <script src="/js/tcgplayer-ids.js?v=tcg-catalog"></script>\n'
-            '  <script src="/js/tcgplayer-names.js?v=tcg-catalog"></script>\n'
-            '  <script src="/js/tcgplayer.js?v=tcg-catalog"></script>\n'
+            '  <script src="/js/tcgplayer-config.js?v=tcg-quiet"></script>\n'
+            '  <script src="/js/tcgplayer-ids.js?v=tcg-quiet"></script>\n'
+            '  <script src="/js/tcgplayer-names.js?v=tcg-quiet"></script>\n'
+            '  <script src="/js/tcgplayer.js?v=tcg-quiet"></script>\n'
         )
     return f"""<!doctype html>
 <html lang="en">
@@ -1493,7 +1493,6 @@ def render_text_deck(grouped: dict, cache: dict, order: list[str], totals: dict)
             <h3>Text list</h3>
             <button type="button" class="copy-sim" data-copy-sim>Copy to OP TCG SIM</button>
           </div>
-          <p class="muted">Hover or tap a card name to see the picture. Copy pastes <code>NxSET-NNN</code> lines for OP TCG SIM import.</p>
           <div class="text-deck-cols">
 {chr(10).join(cols)}
           </div>
