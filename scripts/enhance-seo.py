@@ -266,6 +266,15 @@ def hub_related_html(leader: dict) -> str:
                 "Limitless pairings · Robin, Ace, Sabo",
             ),
         )
+    if leader.get("key") == "nico-robin":
+        rows.insert(
+            1,
+            seo.list_row(
+                "/guides/nico-robin-strategy.html",
+                "Nico Robin strategy",
+                "OP17 curve, Big Mom splash, Mihawk matchup",
+            ),
+        )
     rows.append(seo.list_row("/format.html", "Format and banlist", "Standard constructed rules"))
     rows.append(seo.list_row("/tier-list.html", "OP17 tier list", "Aggregated S through D with leader pictures"))
     rows.append(seo.list_row("/#recent", "Recent lists", "Newest 50-card results"))
@@ -293,6 +302,32 @@ def character_related_extra(slug: str) -> str:
 
 def topic_related_extra(slug: str) -> str:
     rows = topic_siblings(slug)
+    if slug == "nico-robin-strategy":
+        rows.insert(
+            0,
+            seo.list_row(
+                "/decklists/nico-robin.html",
+                "Nico Robin decklists",
+                "OP09-062 hub · consensus list and every hosted 50",
+            ),
+        )
+        rows.insert(
+            1,
+            seo.list_row(
+                "/guides/op17-mihawk-matchups.html",
+                "Which decks beat OP17 Mihawk",
+                "Robin 58.8% in 80 pairings",
+            ),
+        )
+    if slug == "op17-mihawk-matchups":
+        rows.insert(
+            0,
+            seo.list_row(
+                "/guides/nico-robin-strategy.html",
+                "Nico Robin strategy",
+                "The volume hawk hunter in this sample",
+            ),
+        )
     rows.append(seo.list_row("/guides/characters/", "Character guides", "Names from the manga mapped to OPTCG lists"))
     rows.append(seo.list_row("/decklists/op17.html", "All leader pages", "Constructed OPTCG hubs"))
     return seo.related_section("More guides", "Same series of One Piece TCG pages", rows)

@@ -20,7 +20,7 @@ UA = "OnePieceDeckBase/1.0 (+https://onepiecedeckbase.com; public OPTCG list scr
 API = "https://tcg-portal.jp/api/onepiece/tournament-results"
 ALT_RE = re.compile(r'alt="[^"]*\(((?:OP|ST|EB|PRB)\d{2}-\d{3})\)"')
 HREF_RE = re.compile(r'href="/onepiece/cards/((?:OP|ST|EB|PRB)\d{2}-\d{3})"')
-SINCE = "2026-09-03"
+SINCE = "2026-09-04"
 
 
 def load(name: str, path: str):

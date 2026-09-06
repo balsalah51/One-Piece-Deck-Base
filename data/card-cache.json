@@ -15552,5 +15552,37 @@
     "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP15/OP15-090_EN.webp",
     "source": "https://onepiece.limitlesstcg.com/cards/OP15-090",
     "tcgplayer_id": 685443
+  },
+  "OP13-100": {
+    "id": "OP13-100",
+    "name": "Jewelry Bonney",
+    "category": "Leader",
+    "color": "Yellow",
+    "life": "5",
+    "cost": null,
+    "power": "5000",
+    "counter": null,
+    "attribute": "Special",
+    "types": "Egghead/Bonney Pirates",
+    "effect": "[Your Turn] [Once Per Turn] This effect can be activated when you play a Character with a [Trigger]. Give up to 2 rested DON!! cards to 1 of your Leader or Character cards.",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP13/OP13-100_EN.webp",
+    "source": "https://onepiece.limitlesstcg.com/cards/OP13-100",
+    "tcgplayer_id": 657377
+  },
+  "OP13-108": {
+    "id": "OP13-108",
+    "name": "Jewelry Bonney",
+    "category": "Character",
+    "color": "Yellow",
+    "life": null,
+    "cost": "9",
+    "power": "10000",
+    "counter": null,
+    "attribute": "Special",
+    "types": "Egghead/Bonney Pirates",
+    "effect": "[On Play] If your Leader has the {Egghead} type, this Character gains [Rush] during this turn. Then, your opponent adds 1 card from the top of their Life cards to their hand. [Trigger] If you have 1 or less Life cards, rest up to 1 of your opponent's Characters with a cost of 7 or less.",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP13/OP13-108_EN.webp",
+    "source": "https://onepiece.limitlesstcg.com/cards/OP13-108",
+    "tcgplayer_id": 657386
   }
 }

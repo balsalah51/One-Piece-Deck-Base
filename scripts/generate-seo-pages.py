@@ -210,6 +210,13 @@ TOPICS = [
         "copy": "Green Mihawk is the rest/control deck people call the OP17 problem. Limitless pairings in this window say Robin, Ace, and Sabo are the leaders that actually beat him; Rocks is a Mihawk-favored game.",
     },
     {
+        "slug": "nico-robin-strategy",
+        "title": "Nico Robin strategy | OP17 OPTCG",
+        "h2": "Nico Robin strategy",
+        "desc": "OP17 Nico Robin strategy: Purple/Yellow OP09-062 ramps with Triggers, then drops yellow Big Mom. Lists, curve, and the Mihawk matchup.",
+        "copy": "Purple/Yellow OP09 Nico Robin is the Ohara ramp deck in OP17. Hosted lists splash yellow Big Mom; Limitless pairings say she is the volume answer to Mihawk.",
+    },
+    {
         "slug": "treasure-cup",
         "title": "Treasure Cup One Piece TCG | OPTCG lists",
         "h2": "Treasure Cup",
@@ -827,7 +834,7 @@ def main() -> None:
         raise SystemExit("duplicate topic slugs")
     topic_links = []
     urls = []
-    handwritten = {"op17-mihawk-matchups"}
+    handwritten = {"op17-mihawk-matchups", "nico-robin-strategy"}
 
     for topic in TOPICS:
         rel = f"guides/{topic['slug']}.html"
