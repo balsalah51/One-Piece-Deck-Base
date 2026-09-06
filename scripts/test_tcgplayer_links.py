@@ -170,8 +170,8 @@ class TcgplayerPlacementTest(unittest.TestCase):
     def test_keeps_helper_mass_entry_page(self):
         html = '<textarea id="mass-text"></textarea></body>'
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer-names.js?v=tcg-catalog", out)
-        self.assertIn("/js/tcgplayer.js?v=tcg-catalog", out)
+        self.assertIn("/js/tcgplayer-names.js?v=tcg-quiet", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-quiet", out)
 
     def test_skips_homepage_without_lists(self):
         html = '<main class="single home" role="main"><section id="recent"></section></main></body>'
@@ -181,8 +181,8 @@ class TcgplayerPlacementTest(unittest.TestCase):
     def test_adds_to_leader_hub(self):
         html = '<li class="list-row"></li></body>'
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer.js?v=tcg-catalog", out)
-        self.assertIn("/js/tcgplayer-names.js?v=tcg-catalog", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-quiet", out)
+        self.assertIn("/js/tcgplayer-names.js?v=tcg-quiet", out)
 
     def test_adds_to_individual_decklist(self):
         html = (
@@ -191,7 +191,7 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("/js/tcgplayer.js?v=tcg-catalog", out)
+        self.assertIn("/js/tcgplayer.js?v=tcg-quiet", out)
         self.assertEqual(out.count("tcgplayer.js"), 1)
 
     def test_refreshes_stale_script_version(self):
@@ -203,8 +203,8 @@ class TcgplayerPlacementTest(unittest.TestCase):
             "</body>"
         )
         out = self.up.ensure_tcgplayer_scripts(html)
-        self.assertIn("v=tcg-catalog", out)
-        self.assertIn("/js/tcgplayer-names.js?v=tcg-catalog", out)
+        self.assertIn("v=tcg-quiet", out)
+        self.assertIn("/js/tcgplayer-names.js?v=tcg-quiet", out)
         self.assertNotIn("v=tcg-buy", out)
 
     def test_js_restores_pills_and_always_affiliates(self):
@@ -226,6 +226,8 @@ class TcgplayerPlacementTest(unittest.TestCase):
         self.assertIn("tcgSetCode", src)
         self.assertIn("affiliate", src)
         self.assertIn("text-deck-leader", src)
+        self.assertNotIn("Buy list opens TCGplayer", src)
+        self.assertNotIn("Hover or tap a card name", Path("/workspace/scripts/generate-tournament-lists.py").read_text())
         helper = Path("/workspace/shop/buy-list.html").read_text()
         self.assertIn("noindex", helper)
         self.assertIn("Lightning Bolt", helper)

@@ -248,11 +248,6 @@
       if (!cards.length) return;
       title.appendChild(listBuyLink(cards, "Buy list on TCGplayer", "buy-tcg"));
     });
-    document.querySelectorAll(".text-deck > p.muted").forEach(function (p) {
-      if (p.dataset.tcgNote) return;
-      p.dataset.tcgNote = "1";
-      p.appendChild(document.createTextNode(" Buy list opens TCGplayer Mass Entry with this list filled. Individual Buy links open that printing when TCGplayer has it. TCGplayer links are affiliate links."));
-    });
   }
 
   function addHubButtons() {
