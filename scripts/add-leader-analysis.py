@@ -41,6 +41,21 @@ STRATEGY_PAGES = {
         "Which decks beat OP17 Mihawk",
         "Limitless pairings · Robin, Ace, Sabo",
     ),
+    "OP13-004": (
+        "/guides/sabo-strategy.html",
+        "Sabo strategy",
+        "OP17 Elbaph curve, mulligan, 52.1% vs Mihawk",
+    ),
+    "OP17-039": (
+        "/guides/rocks-d-xebec-strategy.html",
+        "Rocks D. Xebec strategy",
+        "Even/odd Rocks Pirates curve · 33.6% vs Mihawk",
+    ),
+    "OP16-001": (
+        "/guides/portgas-d-ace-strategy.html",
+        "Portgas D. Ace strategy",
+        "Rush Whitebeard curve, mulligan, 57.8% vs Mihawk",
+    ),
 }
 
 TAKES = {
