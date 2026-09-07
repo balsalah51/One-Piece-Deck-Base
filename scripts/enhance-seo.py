@@ -275,6 +275,33 @@ def hub_related_html(leader: dict) -> str:
                 "OP17 curve, Big Mom splash, Mihawk matchup",
             ),
         )
+    if leader.get("key") == "sabo":
+        rows.insert(
+            1,
+            seo.list_row(
+                "/guides/sabo-strategy.html",
+                "Sabo strategy",
+                "OP17 Elbaph curve, mulligan, 52.1% vs Mihawk",
+            ),
+        )
+    if leader.get("key") == "rocks-d-xebec":
+        rows.insert(
+            1,
+            seo.list_row(
+                "/guides/rocks-d-xebec-strategy.html",
+                "Rocks D. Xebec strategy",
+                "Even/odd Rocks Pirates curve · 33.6% vs Mihawk",
+            ),
+        )
+    if leader.get("key") == "portgas-d-ace":
+        rows.insert(
+            1,
+            seo.list_row(
+                "/guides/portgas-d-ace-strategy.html",
+                "Portgas D. Ace strategy",
+                "Rush Whitebeard curve, mulligan, 57.8% vs Mihawk",
+            ),
+        )
     rows.append(seo.list_row("/format.html", "Format and banlist", "Standard constructed rules"))
     rows.append(seo.list_row("/tier-list.html", "OP17 tier list", "Aggregated S through D with leader pictures"))
     rows.append(seo.list_row("/#recent", "Recent lists", "Newest 50-card results"))
@@ -326,6 +353,81 @@ def topic_related_extra(slug: str) -> str:
                 "/guides/nico-robin-strategy.html",
                 "Nico Robin strategy",
                 "The volume hawk hunter in this sample",
+            ),
+        )
+        rows.insert(
+            1,
+            seo.list_row(
+                "/guides/sabo-strategy.html",
+                "Sabo strategy",
+                "52.1% vs Mihawk · 165 pairings",
+            ),
+        )
+        rows.insert(
+            2,
+            seo.list_row(
+                "/guides/portgas-d-ace-strategy.html",
+                "Portgas D. Ace strategy",
+                "57.8% vs Mihawk · 45 pairings",
+            ),
+        )
+        rows.insert(
+            3,
+            seo.list_row(
+                "/guides/rocks-d-xebec-strategy.html",
+                "Rocks D. Xebec strategy",
+                "33.6% vs Mihawk · 149 pairings",
+            ),
+        )
+    if slug == "sabo-strategy":
+        rows.insert(
+            0,
+            seo.list_row(
+                "/decklists/sabo.html",
+                "Sabo decklists",
+                "OP13-004 hub · 124 OP17 lists",
+            ),
+        )
+        rows.insert(
+            1,
+            seo.list_row(
+                "/guides/op17-mihawk-matchups.html",
+                "Which decks beat OP17 Mihawk",
+                "Sabo 52.1% in 165 pairings",
+            ),
+        )
+    if slug == "rocks-d-xebec-strategy":
+        rows.insert(
+            0,
+            seo.list_row(
+                "/decklists/op17/rocks-d-xebec.html",
+                "Rocks D. Xebec decklists",
+                "OP17-039 hub · 169 OP17 lists",
+            ),
+        )
+        rows.insert(
+            1,
+            seo.list_row(
+                "/guides/op17-mihawk-matchups.html",
+                "Which decks beat OP17 Mihawk",
+                "Rocks 33.6% in 149 pairings",
+            ),
+        )
+    if slug == "portgas-d-ace-strategy":
+        rows.insert(
+            0,
+            seo.list_row(
+                "/decklists/portgas-d-ace.html",
+                "Portgas D. Ace decklists",
+                "OP16-001 hub · 143 lists, 67 OP17",
+            ),
+        )
+        rows.insert(
+            1,
+            seo.list_row(
+                "/guides/op17-mihawk-matchups.html",
+                "Which decks beat OP17 Mihawk",
+                "Ace 57.8% in 45 pairings",
             ),
         )
     rows.append(seo.list_row("/guides/characters/", "Character guides", "Names from the manga mapped to OPTCG lists"))

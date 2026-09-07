@@ -28,6 +28,36 @@ TARGET = 50
 MIN_OP17_COPIES = 8
 OP17_SUBSET_MIN = 3
 
+# Leader-hub links to handwritten strategy pages. Shown under the archetype,
+# immediately above the consensus list.
+STRATEGY_PAGES = {
+    "OP09-062": (
+        "/guides/nico-robin-strategy.html",
+        "Nico Robin strategy",
+        "OP17 curve, Big Mom splash, Mihawk matchup",
+    ),
+    "OP14-020": (
+        "/guides/op17-mihawk-matchups.html",
+        "Which decks beat OP17 Mihawk",
+        "Limitless pairings · Robin, Ace, Sabo",
+    ),
+    "OP13-004": (
+        "/guides/sabo-strategy.html",
+        "Sabo strategy",
+        "OP17 Elbaph curve, mulligan, 52.1% vs Mihawk",
+    ),
+    "OP17-039": (
+        "/guides/rocks-d-xebec-strategy.html",
+        "Rocks D. Xebec strategy",
+        "Even/odd Rocks Pirates curve · 33.6% vs Mihawk",
+    ),
+    "OP16-001": (
+        "/guides/portgas-d-ace-strategy.html",
+        "Portgas D. Ace strategy",
+        "Rush Whitebeard curve, mulligan, 57.8% vs Mihawk",
+    ),
+}
+
 TAKES = {
     "OP17-001": (
         "Red OP17 Edward Newgate is a Whitebeard beatstick that keeps 8000-power bodies on the board. "
@@ -481,6 +511,33 @@ def grouped_from_picks(leader: dict, picks: list[tuple[str, int, float]], cache:
     return grouped, totals
 
 
+def strategy_block(leader: dict) -> str:
+    item = STRATEGY_PAGES.get(leader["id"])
+    if not item:
+        return ""
+    href, title, note = item
+    return f"""        <!-- LEADER_STRATEGY -->
+        <section class="leader-strategy" style="margin-top:22px">
+          <div class="section-title">
+            <h3>Strategy</h3>
+            <div class="muted">How this leader plays</div>
+          </div>
+          <ul class="list">
+            <li>
+              <a class="item" href="{html.escape(href)}">
+                <div>
+                  <div style="font-weight:700">{html.escape(title)}</div>
+                  <div class="muted" style="font-size:13px">{html.escape(note)}</div>
+                </div>
+                <div class="link">Open →</div>
+              </a>
+            </li>
+          </ul>
+        </section>
+        <!-- /LEADER_STRATEGY -->
+"""
+
+
 def analysis_block(leader: dict, n: int, take: str, text_deck: str, op17_n: int = 0) -> str:
     text_deck = text_deck.replace("<h3>Text list</h3>", "<h3>Consensus list</h3>", 1)
     if op17_n >= OP17_SUBSET_MIN:
@@ -525,7 +582,7 @@ def analysis_block(leader: dict, n: int, take: str, text_deck: str, op17_n: int 
           <p class="leader-take">{html.escape(take)}</p>
         </section>
         <!-- /LEADER_ANALYSIS -->
-        <!-- CONSENSUS_LIST -->
+{strategy_block(leader)}        <!-- CONSENSUS_LIST -->
 {text_deck}
         <!-- /CONSENSUS_LIST -->
 """
