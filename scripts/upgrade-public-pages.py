@@ -352,6 +352,19 @@ def render_home_body() -> str:
         </a>
 
         <nav class="home-big3" aria-label="Main sections">
+          <a class="home-big home-big-tier" href="/tier-list.html">
+            <span class="home-big-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.1 13.85 5.2h-3.7L12 2.1Z"/>
+                <rect x="10.15" y="5.35" width="3.7" height="1.85" rx="0.4"/>
+                <path d="M9 20.6V8.9h6v11.7H9Z"/>
+                <path d="M3.6 20.6v-6.4H9v6.4H3.6Z" opacity=".88"/>
+                <path d="M15 20.6v-4.7h5.4v4.7H15Z" opacity=".72"/>
+              </svg>
+            </span>
+            <span class="home-big-title">Tier List</span>
+            <span class="home-big-note">OP17 S through D with leader pictures</span>
+          </a>
           <a class="home-big home-big-recent" href="#recent">
             <span class="home-big-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
