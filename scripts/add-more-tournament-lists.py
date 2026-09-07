@@ -115,22 +115,33 @@ def community_entries(leader: dict) -> list[dict]:
     if extra_path.exists():
         extra = json.loads(extra_path.read_text()).get(leader["id"]) or []
         static.extend(extra)
+    by_slug: dict[str, dict] = {}
     for item in static:
         slug = item.get("slug") or ""
+        if not slug:
+            continue
+        prev = by_slug.get(slug) or {}
+        merged = dict(prev)
+        for key, value in item.items():
+            if value not in (None, ""):
+                merged[key] = value
+        by_slug[slug] = merged
+    for slug, item in by_slug.items():
         href = item.get("href") or f"/{leader['dir']}/{slug}.html"
         if slug in seen:
             continue
         if not (ROOT / href.lstrip("/")).exists():
             continue
         seen.add(slug)
+        date = item.get("date") or comm.date_from_slug(slug)
         out.append(
             {
                 "href": href,
                 "title": item.get("title") or slug,
-                "subtitle": item.get("subtitle") or "",
+                "subtitle": comm.dated_subtitle(item.get("subtitle") or "", date),
                 "kind": item.get("kind"),
                 "slug": slug,
-                "date": item.get("date") or "",
+                "date": date,
             }
         )
     out.sort(key=gen.date_sort_key, reverse=True)

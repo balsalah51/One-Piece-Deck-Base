@@ -107,7 +107,7 @@ def parse_page(path: str, comm, gen) -> dict | None:
         "kind": "web",
         "player": player,
         "title": title if title else slug_tail,
-        "subtitle": f"{host} · public list from OPDeckGuide",
+        "subtitle": f"{host} · public list from OPDeckGuide · {date}",
         "source_url": url,
         "slug": f"opdeck-{slug_tail}"[:70],
         "raw": " ".join(f"{n}x{cid}" for cid, n in counts.items()),

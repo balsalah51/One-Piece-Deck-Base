@@ -17,6 +17,44 @@ spec.loader.exec_module(gen)
 
 ROOT = gen.ROOT
 LINE_RE = re.compile(r"(?i)(\d+)\s*[x×]\s*((?:OP|ST|EB|PRB)\d{2}-\d{3}|P-\d{3})")
+ISO_DATE_RE = re.compile(r"\b(20\d{2}-\d{2}-\d{2})\b")
+SLUG_MONTH_RE = re.compile(r"(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)(\d{1,2})", re.I)
+MONTH_NUM = {
+    "jan": "01",
+    "feb": "02",
+    "mar": "03",
+    "apr": "04",
+    "may": "05",
+    "jun": "06",
+    "jul": "07",
+    "aug": "08",
+    "sep": "09",
+    "oct": "10",
+    "nov": "11",
+    "dec": "12",
+}
+
+
+def dated_subtitle(subtitle: str, date: str) -> str:
+    """Append YYYY-MM-DD to a community/YouTube blurb when it is missing."""
+    text = (subtitle or "").strip()
+    day = (date or "").strip()
+    if not day or not re.fullmatch(r"20\d{2}-\d{2}-\d{2}", day):
+        return text
+    if day in text:
+        return text
+    return f"{text} · {day}" if text else day
+
+
+def date_from_slug(slug: str) -> str:
+    text = slug or ""
+    iso = ISO_DATE_RE.search(text)
+    if iso:
+        return iso.group(1)
+    month = SLUG_MONTH_RE.search(text)
+    if not month:
+        return ""
+    return f"2026-{MONTH_NUM[month.group(1).lower()]}-{int(month.group(2)):02d}"
 
 COMMUNITY = {
     "OP17-001": [
@@ -388,7 +426,7 @@ def community_section(leader: dict, lists: list[dict], tournament_html: str) -> 
     for entry in lists:
         href = entry["href"]
         title = entry.get("title_override") or entry.get("title")
-        subtitle = entry.get("subtitle") or ""
+        subtitle = dated_subtitle(entry.get("subtitle") or "", entry.get("date") or "")
         badge = {"youtube": "YouTube", "x": "X"}.get(entry.get("kind"), "Web")
         copy_btn = gen.copy_sim_button(gen.sim_text_for_entry(leader, entry))
         rows.append(
