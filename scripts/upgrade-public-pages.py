@@ -332,7 +332,7 @@ def render_home_body() -> str:
     nico = gen.card_image_url("OP09-062")
     return f"""        <!-- HOME_BODY -->
         <section class="home-splash" aria-label="One Piece Deck Base">
-          <img class="home-splash-bg" src="/img/opdb-hero.jpg" alt="One Piece Deck Base, an OPTCG decklist site" />
+          <img class="home-splash-bg" src="/img/opdb-hero.jpg" alt="One Piece Deck Base, an OPTCG decklist site" width="1400" height="636" fetchpriority="high" decoding="async">
           <a class="home-splash-luffy" href="/decklists/nico-robin.html">
             <img src="{nico}" alt="Nico Robin" />
           </a>
@@ -404,6 +404,14 @@ def render_home_body() -> str:
             <span class="home-big-note">Talk lists, flair, and the crew</span>
           </a>
         </nav>
+
+        <form class="site-search home-search" method="get" action="/search.html" role="search">
+          <label class="site-search-label" for="home-q">Search OPTCG decklists</label>
+          <div class="site-search-row">
+            <input id="home-q" type="search" name="q" placeholder="Leader, player, character, or event" aria-label="Search OPTCG decklists" />
+            <button type="submit">Search</button>
+          </div>
+        </form>
 
         <section class="home-leaders-flow" id="leaders">
           <div class="home-leaders-intro">
