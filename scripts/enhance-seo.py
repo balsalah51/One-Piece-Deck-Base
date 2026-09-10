@@ -46,6 +46,10 @@ ICON_RE = re.compile(
     re.I,
 )
 THEME_RE = re.compile(r'\s*<meta name="theme-color" content="[^"]*"\s*/?>', re.I)
+THEME_BOOT_RE = re.compile(
+    r'\s*<script>try\{var t=localStorage\.getItem\("opdb-theme"\).*?</script>',
+    re.S,
+)
 IMG_RE = re.compile(r"<img\b([^>]*)>", re.I)
 SKIP_PARTS = {".git", "scripts", "node_modules", "discord-bot", "ballkeep"}
 SKIP_FILES = {"shop/custom-leaders.html"}
@@ -436,7 +440,13 @@ def ensure_head(text: str, rel: str, title: str, desc: str, by_href: dict) -> st
     text = ROBOTS_META_RE.sub("", text)
     text = ICON_RE.sub("", text)
     text = THEME_RE.sub("", text)
+    text = THEME_BOOT_RE.sub("", text)
     text = re.sub(r'(<link rel="stylesheet"[^>]*>)(?=<)', r"\1\n", text)
+    if seo.THEME_BOOT not in text:
+        if "<head>" in text:
+            text = text.replace("<head>", "<head>\n  " + seo.THEME_BOOT, 1)
+        elif "<head " in text:
+            text = re.sub(r"(<head[^>]*>)", r"\1\n  " + seo.THEME_BOOT, text, count=1)
     if TITLE_RE.search(text):
         text = TITLE_RE.sub(f"<title>{html.escape(title)}</title>", text, count=1)
     else:

@@ -27,7 +27,11 @@ META_RE = re.compile(
     r'<span class="meta-label"[^>]*>(.*?)</span>\s*<[^>]+>(.*?)</',
     re.S,
 )
-DATE_RE = re.compile(r"aug(\d{1,2})", re.I)
+DATE_RE = re.compile(r"(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)(\d{1,2})", re.I)
+MONTHS = {
+    "jan": "01", "feb": "02", "mar": "03", "apr": "04", "may": "05", "jun": "06",
+    "jul": "07", "aug": "08", "sep": "09", "oct": "10", "nov": "11", "dec": "12",
+}
 TAG_RE = re.compile(r"<[^>]+>")
 NEW_IDS = {"ST30-001"}
 
@@ -54,7 +58,8 @@ def clean(text: str) -> str:
 
 def collect_paths() -> list[str]:
     paths: list[str] = []
-    for page in (HUB, HUB + "op17-east/", HUB + "op17-west/"):
+    # The east index 404s; the hub and west pages still list every list URL.
+    for page in (HUB, HUB + "op17-west/"):
         body = fetch(page)
         for href in HREF_RE.findall(body):
             if href not in paths and href.rstrip("/") != "/tournaments-decklists/op17-east":
@@ -97,7 +102,10 @@ def parse_page(path: str, comm, gen) -> dict | None:
     host = meta.get("Host") or meta.get("Location") or "OPDeckGuide"
     slug_tail = path.rstrip("/").split("/")[-1]
     month = DATE_RE.search(slug_tail)
-    date = f"2026-08-{int(month.group(1)):02d}" if month else "2026-08-22"
+    if month:
+        date = f"2026-{MONTHS[month.group(1).lower()]}-{int(month.group(2)):02d}"
+    else:
+        date = "2026-08-22"
     return {
         "leader": lid,
         "kind": "web",

@@ -8,14 +8,36 @@
   --radius:12px;
   --maxw:980px;
   --shadow:0 6px 20px rgba(16,22,26,0.08);
+  --border:rgba(0,0,0,0.08);
+  --input-bg:#ffffff;
   --leader: var(--accent);
+  color-scheme: light;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+html[data-theme="dark"]{
+  --bg:#121416;
+  --surface:#1c2024;
+  --text:#ece8e4;
+  --muted:#a8adb3;
+  --accent:#ef5350;
+  --accent-bleed: rgba(239,83,80,0.16);
+  --shadow:0 8px 24px rgba(0,0,0,0.42);
+  --border:rgba(255,255,255,0.1);
+  --input-bg:#16191c;
+  color-scheme: dark;
 }
 html{box-sizing:border-box}
 *,*::before,*::after{box-sizing:inherit}
 html,body{height:100%;margin:0;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .wrap{max-width:var(--maxw);width:100%;margin:36px auto;padding:28px;min-width:0}
-header{display:flex;align-items:center;justify-content:space-between;gap:18px}
+header{display:flex;align-items:center;justify-content:space-between;gap:18px;position:relative}
+.theme-toggle{
+  width:40px;height:40px;padding:0;border-radius:10px;flex-shrink:0;
+  border:1px solid var(--border);background:var(--surface);color:var(--text);
+  display:inline-flex;align-items:center;justify-content:center;cursor:pointer
+}
+.theme-toggle svg{width:20px;height:20px;display:block}
+.theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
 .logo, img.logo{
   width:56px;height:56px;border-radius:50%;
@@ -253,7 +275,7 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
 .card-entry h4{margin:0 0 4px;font-size:15px}
 .card-entry .id{color:var(--accent);font-weight:700;font-size:12px}
 .card-entry .stats{color:var(--muted);font-size:12px;margin:4px 0}
-.card-entry .text{font-size:13px;line-height:1.45;color:#333}
+.card-entry .text{font-size:13px;line-height:1.45;color:var(--text)}
 .qty{
   display:inline-flex;align-items:center;justify-content:center;
   min-width:28px;height:22px;padding:0 6px;border-radius:6px;margin-right:6px;
@@ -508,4 +530,52 @@ a.shop-card:hover{border-color:rgba(183,28,28,0.28);box-shadow:var(--shadow)}
   .custom-wrap{grid-template-columns:1fr}
   .site-search-row{flex-direction:column}
   .site-search button{width:100%}
+  .theme-toggle{position:absolute;top:0;right:0}
+  header{padding-right:48px}
 }
+html[data-theme="dark"] .home-ghost,
+html[data-theme="dark"] .home-jump-recent,
+html[data-theme="dark"] .home-big-recent,
+html[data-theme="dark"] .home-big-discord,
+html[data-theme="dark"] .home-big-shop,
+html[data-theme="dark"] .recent-item,
+html[data-theme="dark"] .leader-card-link,
+html[data-theme="dark"] .leader-tile,
+html[data-theme="dark"] .card-entry,
+html[data-theme="dark"] .copy-sim,
+html[data-theme="dark"] .deck-stats,
+html[data-theme="dark"] .list-filters input,
+html[data-theme="dark"] .list-filters select,
+html[data-theme="dark"] .meta-strip,
+html[data-theme="dark"] .meta-blurbs li,
+html[data-theme="dark"] .shop-card,
+html[data-theme="dark"] .site-search input[type="search"],
+html[data-theme="dark"] .faq details,
+html[data-theme="dark"] .custom-form input,
+html[data-theme="dark"] .custom-form select,
+html[data-theme="dark"] .custom-form textarea{
+  background:var(--surface);color:var(--text);border-color:var(--border)
+}
+html[data-theme="dark"] .hero{
+  background:linear-gradient(180deg,rgba(239,83,80,0.08),transparent);
+  border-color:var(--border)
+}
+html[data-theme="dark"] .item{
+  background:linear-gradient(180deg,rgba(255,255,255,0.03),transparent);
+  border-color:var(--border)
+}
+html[data-theme="dark"] a.item:hover{border-color:rgba(239,83,80,0.42)}
+html[data-theme="dark"] .text-line{border-bottom-color:var(--border)}
+html[data-theme="dark"] .text-leader-list li{border-bottom-color:var(--border)}
+html[data-theme="dark"] .picture-summary{border-top-color:var(--border)}
+html[data-theme="dark"] .card-pop,
+html[data-theme="dark"] .text-line .card-pop{background:var(--surface);border-color:var(--border)}
+html[data-theme="dark"] .shop-photo{background:#1a1d20}
+html[data-theme="dark"] .home-splash-luffy img{border-color:#2a2f34;background:#1a1d20}
+html[data-theme="dark"] .recent-item:hover{border-color:color-mix(in srgb, var(--tile, var(--accent)) 55%, #121416)}
+html[data-theme="dark"] .leader-card-link:hover{border-color:color-mix(in srgb, var(--accent) 40%, #121416)}
+html[data-theme="dark"] .leader-tile:hover{border-color:color-mix(in srgb, var(--tile, var(--accent)) 45%, #121416)}
+html[data-theme="dark"] a.shop-card:hover{border-color:rgba(239,83,80,0.42)}
+html[data-theme="dark"] .policy code{background:rgba(239,83,80,0.16)}
+html[data-theme="dark"] .home-big-discord{color:#b4b0ff;border-color:rgba(180,176,255,0.32)}
+html[data-theme="dark"] .home-big-shop{color:#e0c36a;border-color:rgba(224,195,106,0.4)}

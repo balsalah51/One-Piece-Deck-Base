@@ -74,12 +74,13 @@ def chrome(title: str, description: str, body: str) -> str:
     return f"""<!doctype html>
 <html lang="en">
 <head>
+  <script>try{{var t=localStorage.getItem("opdb-theme");if(t!=="dark"&&t!=="light")t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t);}}catch(e){{}}</script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}" />
   <link rel="canonical" href="{html.escape(SITE)}" />
-  <link rel="stylesheet" href="/css/site.css?v=seo-links" />
+  <link rel="stylesheet" href="/css/site.css?v=theme" />
 </head>
 <body>
   <div class="wrap">
@@ -112,7 +113,7 @@ def chrome(title: str, description: str, body: str) -> str:
     </footer>
   </div>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-  <script src="/js/site.js?v=amazon-shop"></script>
+  <script src="/js/site.js?v=theme"></script>
 </body>
 </html>
 """
