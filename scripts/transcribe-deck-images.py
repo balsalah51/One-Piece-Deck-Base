@@ -108,6 +108,86 @@ TRANSCRIPTS = [
         ),
         "cards": 50,
     },
+    {
+        "leader": "OP17-079",
+        "kind": "reddit",
+        "player": "Svinci",
+        "title": "Utrecht Regionals 2026 1st - Svinci Monkey.D.Luffy",
+        "subtitle": "List read from the public r/OnePieceTCG Top 8 graphic · 2026-09-09",
+        "source_url": "https://www.reddit.com/r/OnePieceTCG/comments/1wbn1t7/utrecht_regionals_2026_top_8_decklists/",
+        "slug": "reddit-luffy-regionals-svinci-1wbn1t7",
+        "date": "2026-09-09",
+        "raw": (
+            "1xOP17-079 4xOP17-086 4xOP17-094 4xOP17-080 4xOP17-081 4xOP17-082 "
+            "4xOP17-087 2xOP17-091 4xOP17-095 4xOP17-089 4xOP15-088 4xOP17-119 "
+            "3xOP17-093 2xOP17-098 3xST14-017"
+        ),
+        "cards": 50,
+    },
+    {
+        "leader": "OP09-062",
+        "kind": "reddit",
+        "player": "Polar",
+        "title": "Utrecht Regionals 2026 Top 8 - Polar Nico Robin",
+        "subtitle": "List read from the public r/OnePieceTCG Top 8 graphic · 2026-09-09",
+        "source_url": "https://www.reddit.com/r/OnePieceTCG/comments/1wbn1t7/utrecht_regionals_2026_top_8_decklists/",
+        "slug": "reddit-robin-regionals-polar-1wbn1t7",
+        "date": "2026-09-09",
+        "raw": (
+            "1xOP09-062 4xOP17-113 2xST34-003 4xOP17-074 4xOP17-107 4xOP17-109 "
+            "2xOP17-111 3xOP05-073 4xOP17-102 4xOP17-106 4xOP17-114 2xOP17-110 "
+            "4xOP16-119 4xOP17-112 4xOP09-078 1xOP07-076"
+        ),
+        "cards": 50,
+    },
+    {
+        "leader": "OP15-058",
+        "kind": "reddit",
+        "player": "park777",
+        "title": "Utrecht Regionals 2026 Top 4 - park777 Enel",
+        "subtitle": "List read from the public r/OnePieceTCG Top 8 graphic · 2026-09-09",
+        "source_url": "https://www.reddit.com/r/OnePieceTCG/comments/1wbn1t7/utrecht_regionals_2026_top_8_decklists/",
+        "slug": "reddit-enel-regionals-park777-1wbn1t7",
+        "date": "2026-09-09",
+        "raw": (
+            "1xOP15-058 3xOP12-071 4xOP15-061 3xOP15-066 4xOP15-067 3xOP15-071 "
+            "3xST10-010 4xOP10-067 3xOP07-064 1xOP13-076 2xOP15-074 4xOP15-075 "
+            "4xOP15-076 4xOP15-077 4xOP15-078 3xOP05-077 1xOP09-077"
+        ),
+        "cards": 50,
+    },
+    {
+        "leader": "OP14-020",
+        "kind": "reddit",
+        "player": "Josh Graham",
+        "title": "Utrecht Regionals 2026 Top 4 - Josh Graham Mihawk",
+        "subtitle": "List read from the public r/OnePieceTCG Top 8 graphic · 2026-09-09",
+        "source_url": "https://www.reddit.com/r/OnePieceTCG/comments/1wbn1t7/utrecht_regionals_2026_top_8_decklists/",
+        "slug": "reddit-mihawk-regionals-josh-graham-1wbn1t7",
+        "date": "2026-09-09",
+        "raw": (
+            "1xOP14-020 4xOP07-022 4xOP12-034 4xST32-001 3xOP06-033 4xOP12-023 "
+            "3xOP14-033 3xOP17-031 4xST32-002 3xOP13-031 3xST32-003 3xOP17-022 "
+            "4xOP01-055 3xOP06-038 3xOP08-036 2xOP14-039"
+        ),
+        "cards": 50,
+    },
+    {
+        "leader": "OP16-001",
+        "kind": "reddit",
+        "player": "BetterCallSaul",
+        "title": "Utrecht Regionals 2026 Top 8 - BetterCallSaul Ace",
+        "subtitle": "List read from the public r/OnePieceTCG Top 8 graphic · 2026-09-09",
+        "source_url": "https://www.reddit.com/r/OnePieceTCG/comments/1wbn1t7/utrecht_regionals_2026_top_8_decklists/",
+        "slug": "reddit-ace-regionals-bettercallsaul-1wbn1t7",
+        "date": "2026-09-09",
+        "raw": (
+            "1xOP16-001 4xOP13-016 2xOP10-005 3xOP17-016 4xOP16-015 4xOP16-017 "
+            "1xEB01-002 3xOP16-011 4xOP16-014 4xOP16-004 4xOP17-006 4xOP16-003 "
+            "4xOP17-005 3xOP16-020 2xOP17-017 4xOP16-021"
+        ),
+        "cards": 50,
+    },
 ]
 
 
