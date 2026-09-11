@@ -228,7 +228,31 @@
     applyTheme(saved === "dark" || saved === "light" ? saved : themeCurrent(), false);
   }
 
+  var NEW_SITE = "https://onepiecedecklists.com";
+
+  function movedUrl() {
+    return NEW_SITE + location.pathname + location.search + location.hash;
+  }
+
+  function initMoveNotice() {
+    if (document.querySelector("[data-move-banner]")) return;
+    var wrap = document.querySelector(".wrap");
+    if (!wrap) return;
+    var a = document.createElement("a");
+    a.className = "move-banner";
+    a.setAttribute("data-move-banner", "");
+    a.href = movedUrl();
+    a.textContent = "This site is dormant. Open this page on OnePieceDeckLists.com →";
+    wrap.insertBefore(a, wrap.firstChild);
+  }
+
+  function redirectMoved() {
+    location.replace(movedUrl());
+  }
+
   function ready() {
+    initMoveNotice();
+    redirectMoved();
     initTheme();
     ensureCopyButtons();
     initCopy();
