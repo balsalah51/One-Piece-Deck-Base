@@ -50,6 +50,11 @@ THEME_BOOT_RE = re.compile(
     r'\s*<script>try\{var t=localStorage\.getItem\("opdb-theme"\).*?</script>',
     re.S,
 )
+MOVE_BOOT_RE = re.compile(
+    r'\s*<script>location\.replace\("https://onepiecedecklists\.com".*?</script>',
+    re.S,
+)
+REFRESH_RE = re.compile(r'\s*<meta http-equiv="refresh"[^>]*>', re.I)
 ADSENSE_RE = re.compile(
     r"\s*<script[^>]*adsbygoogle\.js[^>]*>\s*</script>",
     re.I,
@@ -479,8 +484,8 @@ def page_title_desc(text: str, rel: str) -> tuple[str, str]:
         if not desc:
             desc = f"{leader['name']} OPTCG decklist. {ptxt}"[:160]
     elif rel == "index.html":
-        title = title or "One Piece TCG Decklists (OPTCG) | One Piece Deck Base"
-        desc = desc or "OPTCG decklists for the Bandai ONE PIECE CARD GAME. Leader pictures and recent 50-card lists."
+        title = "One Piece Deck Base is dormant | Go to OnePieceDeckLists.com"
+        desc = "One Piece Deck Base is no longer updated. Current OPTCG decklists live at OnePieceDeckLists.com."
     elif not title or title in ("Home", "Untitled"):
         title = f"{h2t or 'One Piece TCG'} | One Piece Deck Base"
     if not desc:
@@ -580,7 +585,9 @@ def ensure_head(text: str, rel: str, title: str, desc: str, by_href: dict) -> st
             f'  <meta property="article:published_time" content="{html.escape(date_s)}" />\n'
             f'  <meta property="article:modified_time" content="{html.escape(date_s)}" />\n'
         )
+    dest = seo.NEW_SITE + "/" if rel == "index.html" else seo.NEW_SITE + "/" + rel
     extras = (
+        f'  <meta http-equiv="refresh" content="0;url={html.escape(dest, quote=True)}" />\n'
         f'  <link rel="canonical" href="{html.escape(url, quote=True)}" />\n'
         + seo.google_head_tags(url, indexable=indexable)
         + seo.social_tags(title, desc, url, image)
@@ -595,6 +602,8 @@ def ensure_head(text: str, rel: str, title: str, desc: str, by_href: dict) -> st
     text = ICON_RE.sub("", text)
     text = THEME_RE.sub("", text)
     text = THEME_BOOT_RE.sub("", text)
+    text = MOVE_BOOT_RE.sub("", text)
+    text = REFRESH_RE.sub("", text)
     text = ADSENSE_RE.sub("", text)
     text = re.sub(r'(<link rel="stylesheet"[^>]*>)(?=<)', r"\1\n", text)
     if seo.THEME_BOOT not in text:
@@ -602,6 +611,13 @@ def ensure_head(text: str, rel: str, title: str, desc: str, by_href: dict) -> st
             text = text.replace("<head>", "<head>\n  " + seo.THEME_BOOT, 1)
         elif "<head " in text:
             text = re.sub(r"(<head[^>]*>)", r"\1\n  " + seo.THEME_BOOT, text, count=1)
+    if seo.MOVE_BOOT not in text:
+        if seo.THEME_BOOT in text:
+            text = text.replace(seo.THEME_BOOT, seo.THEME_BOOT + "\n  " + seo.MOVE_BOOT, 1)
+        elif "<head>" in text:
+            text = text.replace("<head>", "<head>\n  " + seo.MOVE_BOOT, 1)
+        elif "<head " in text:
+            text = re.sub(r"(<head[^>]*>)", r"\1\n  " + seo.MOVE_BOOT, text, count=1)
     if TITLE_RE.search(text):
         text = TITLE_RE.sub(f"<title>{html.escape(title)}</title>", text, count=1)
     else:
@@ -720,6 +736,19 @@ def patch_nav_footer(text: str) -> str:
             )
     if "<footer" in text:
         pre, foot = text.rsplit("<footer", 1)
+        if "onepiecedecklists.com" not in foot:
+            if '<a href="/tier-list.html">Tier List</a>' in foot:
+                foot = foot.replace(
+                    '<a href="/tier-list.html">Tier List</a>',
+                    '<a href="https://onepiecedecklists.com/">OnePieceDeckLists.com</a> · <a href="/tier-list.html">Tier List</a>',
+                    1,
+                )
+            elif '<a href="/guides/">Guides</a>' in foot:
+                foot = foot.replace(
+                    '<a href="/guides/">Guides</a>',
+                    '<a href="https://onepiecedecklists.com/">OnePieceDeckLists.com</a> · <a href="/guides/">Guides</a>',
+                    1,
+                )
         if 'href="/tier-list.html"' not in foot:
             if '<a href="/guides/">Guides</a>' in foot:
                 foot = foot.replace(

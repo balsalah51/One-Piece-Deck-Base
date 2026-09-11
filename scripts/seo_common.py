@@ -10,18 +10,22 @@ from pathlib import Path
 
 ROOT = Path("/workspace")
 SITE = "https://onepiecedeckbase.com"
+NEW_SITE = "https://onepiecedecklists.com"
 DEFAULT_OG = f"{SITE}/img/opdb-hero.jpg"
 AVATAR = f"{SITE}/img/opdb-avatar.png"
 LOGO_SVG = f"{SITE}/img/opdb-logo.svg"
 LOGO_48 = f"{SITE}/img/opdb-logo-48.png"
 LOGO_192 = f"{SITE}/img/opdb-logo-192.png"
 LOGO_512 = f"{SITE}/img/opdb-logo-512.png"
-CSS_VER = "theme"
-JS_VER = "theme"
+CSS_VER = "moved"
+JS_VER = "moved"
 THEME_BOOT = (
     '<script>try{var t=localStorage.getItem("opdb-theme");'
     'if(t!=="dark"&&t!=="light")t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";'
     'document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>'
+)
+MOVE_BOOT = (
+    f'<script>location.replace("{NEW_SITE}"+location.pathname+location.search+location.hash)</script>'
 )
 BRAND_LOGO_HTML = (
     '<img class="logo" src="/img/opdb-avatar.png" width="56" height="56" alt="One Piece Deck Base" />'
@@ -483,7 +487,8 @@ def parse_crumbs(text: str) -> list[tuple[str, str]]:
 
 
 FOOTER_LINKS = (
-    '      <a href="/tier-list.html">Tier List</a> · '
+    '      <a href="https://onepiecedecklists.com/">OnePieceDeckLists.com</a> · '
+    '<a href="/tier-list.html">Tier List</a> · '
     '<a href="/guides/">Guides</a> · '
     '<a href="/decklists/op17.html">Leaders</a> · '
     '<a href="/format.html">Format</a> · '

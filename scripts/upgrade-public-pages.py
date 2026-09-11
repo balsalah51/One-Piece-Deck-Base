@@ -22,8 +22,8 @@ aspec.loader.exec_module(ana)
 
 ROOT = gen.ROOT
 LINE_RE = ana.LINE_RE
-CSS_NEW = "/css/site.css?v=utrecht-x"
-JS_NEW = "/js/site.js?v=utrecht-x"
+CSS_NEW = "/css/site.css?v=moved"
+JS_NEW = "/js/site.js?v=moved"
 TCG_VER = "tcg-quiet"
 TCG_SCRIPTS = (
     f'  <script src="/js/tcgplayer-config.js?v={TCG_VER}"></script>\n'
@@ -327,119 +327,12 @@ def recent_rows_html(rows: list[dict]) -> str:
 
 
 def render_home_body() -> str:
-    cards = leader_cards_html()
-    recent = pick_recent_lists(collect_home_lists())
-    nico = gen.card_image_url("OP09-062")
-    return f"""        <!-- HOME_BODY -->
-        <section class="home-splash" aria-label="One Piece Deck Base">
-          <img class="home-splash-bg" src="/img/opdb-hero.jpg" alt="One Piece Deck Base, an OPTCG decklist site" width="1400" height="636" fetchpriority="high" decoding="async">
-          <a class="home-splash-luffy" href="/decklists/nico-robin.html">
-            <img src="{nico}" alt="Nico Robin" />
-          </a>
-          <div class="home-splash-bar">
-            <h2>One Piece Deck Base</h2>
-            <p>OPTCG decklists. Jump a section, or keep scrolling into the leaders.</p>
-          </div>
-        </section>
-
-        <a class="events-banner" id="events" href="https://en.onepiece-cardgame.com/events/" target="_blank" rel="noopener">
-          <div>
-            <div class="kicker">Official Bandai site</div>
-            <div class="title">ONE PIECE CARD GAME events</div>
-            <div class="muted" style="color:rgba(255,255,255,0.82);margin-top:4px">Championships, regionals, Treasure Cups, and store tournaments</div>
-          </div>
-          <div class="go">Official events →</div>
-        </a>
-
-        <nav class="home-big3" aria-label="Main sections">
-          <a class="home-big home-big-tier" href="/tier-list.html">
-            <span class="home-big-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2.1 13.85 5.2h-3.7L12 2.1Z"/>
-                <rect x="10.15" y="5.35" width="3.7" height="1.85" rx="0.4"/>
-                <path d="M9 20.6V8.9h6v11.7H9Z"/>
-                <path d="M3.6 20.6v-6.4H9v6.4H3.6Z" opacity=".88"/>
-                <path d="M15 20.6v-4.7h5.4v4.7H15Z" opacity=".72"/>
-              </svg>
-            </span>
-            <span class="home-big-title">Tier List</span>
-            <span class="home-big-note">OP17 S through D with leader pictures</span>
-          </a>
-          <a class="home-big home-big-recent" href="#recent">
-            <span class="home-big-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-                <path d="M8 7h11M8 12h11M8 17h11M4 7h.01M4 12h.01M4 17h.01"/>
-              </svg>
-            </span>
-            <span class="home-big-title">Recent Lists</span>
-            <span class="home-big-note">Newest 50-card results from every leader</span>
-          </a>
-          <a class="home-big home-big-leaders" href="#leaders">
-            <span class="home-big-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="5" width="12" height="16" rx="2"/>
-                <rect x="9" y="3" width="12" height="16" rx="2"/>
-              </svg>
-            </span>
-            <span class="home-big-title">Leaders</span>
-            <span class="home-big-note">Every leader picture on this site</span>
-          </a>
-          <a class="home-big home-big-shop" href="/shop/">
-            <span class="home-big-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 8h12l-1 12H7L6 8Z"/>
-                <path d="M9 8V7a3 3 0 0 1 6 0v1"/>
-              </svg>
-            </span>
-            <span class="home-big-title">Shop</span>
-            <span class="home-big-note">Sleeves, dice, playmats, and deck boxes</span>
-          </a>
-          <a class="home-big home-big-discord" href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">
-            <span class="home-big-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19.3 5.2A17.4 17.4 0 0 0 14.9 4l-.2.4a15.2 15.2 0 0 1 3.6 1.1c-3.3-1.5-6.6-1.5-9.8 0 .4-.2.9-.4 1.3-.6l-.2-.4A17.3 17.3 0 0 0 4.7 5.2C1.9 9.4 1.1 13.5 1.5 17.5a17.7 17.7 0 0 0 5.4 2.7l.7-1.1a11.5 11.5 0 0 1-2.1-1l.2-.1c1.6.7 3.3 1.2 5.1 1.2s3.5-.4 5.1-1.2l.2.1a11.5 11.5 0 0 1-2.1 1l.7 1.1a17.7 17.7 0 0 0 5.4-2.7c.5-4.6-.7-8.7-3.8-12.3ZM8.8 14.8c-1 0-1.9-.9-1.9-2s.8-2 1.9-2 1.9.9 1.9 2-.8 2-1.9 2Zm6.4 0c-1 0-1.9-.9-1.9-2s.8-2 1.9-2 1.9.9 1.9 2-.8 2-1.9 2Z"/>
-              </svg>
-            </span>
-            <span class="home-big-title">Discord</span>
-            <span class="home-big-note">Talk lists, flair, and the crew</span>
-          </a>
-        </nav>
-
-        <form class="site-search home-search" method="get" action="/search.html" role="search">
-          <label class="site-search-label" for="home-q">Search OPTCG decklists</label>
-          <div class="site-search-row">
-            <input id="home-q" type="search" name="q" placeholder="Leader, player, character, or event" aria-label="Search OPTCG decklists" />
-            <button type="submit">Search</button>
-          </div>
-        </form>
-
-        <section class="home-leaders-flow" id="leaders">
-          <div class="home-leaders-intro">
-            <p class="home-leaders-kicker">The crew</p>
-            <div class="home-leaders-intro-row">
-              <div>
-                <h3>Leaders</h3>
-                <p>Pick a picture. Each page has lists for that leader. Character names live in the <a href="/guides/">guides</a>.</p>
-              </div>
-              <a href="/decklists/op17.html">All leader pages →</a>
-            </div>
-          </div>
-          <div class="card home-panel home-leaders-grid">
-            <div class="leader-cards home-cards" aria-label="All leader card pictures">
-{cards}
-            </div>
-          </div>
-        </section>
-
-        <section class="card home-panel" id="recent">
-          <div class="section-title">
-            <h3>Recent lists</h3>
-            <div class="muted">{len(recent)} lists</div>
-          </div>
-          <p class="muted">Newest first. At least one list from each leader, then the latest results.</p>
-          <ul class="recent-list" aria-label="Recent decklists">
-{recent_rows_html(recent)}
-          </ul>
+    return """        <!-- HOME_BODY -->
+        <section class="card hero dormant-hero" aria-label="This site is dormant">
+          <p class="dormant-kicker">One Piece Deck Base</p>
+          <h2>This site is dormant</h2>
+          <p>One Piece Deck Base is no longer updated. Current OPTCG decklists live at One Piece Decklists.</p>
+          <p><a class="dormant-go" href="https://onepiecedecklists.com/">Continue to OnePieceDeckLists.com</a></p>
         </section>
         <!-- /HOME_BODY -->"""
 
