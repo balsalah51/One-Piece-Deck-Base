@@ -61,18 +61,18 @@ STRATEGY_PAGES = {
 TAKES = {
     "OP17-001": (
         "Red OP17 Edward Newgate is a Whitebeard beatstick that keeps 8000-power bodies on the board. "
-        "Core lists play 4 Sanji, 4 Portgas D. Ace, 4 Izo, 4 ten-cost Edward Newgate, 4 Kouzuki Oden, plus Marco, Uta, and Moby Dick. "
-        "Flex is Namule/Curiel search, Rakuyo beatdown, or an Ivankov/Zoro package."
+        "Averaged lists lock 4 Izo, 4 ten-cost Edward Newgate, 4 Portgas D. Ace, plus Jozu, Moby Dick, and I Don't Have Time to Chat. "
+        "Marco, Uta, Inuarashi & Nekomamushi, and Ga Ha Ha Ha!! are the next cuts."
     ),
     "OP17-020": (
         "Green OP17 Shanks rests the board and plays Red Hair Pirates. "
-        "Every list locks Benn Beckman, Yasopp, and the ten-cost Shanks; most also play Limejuice, Lucky Roux, Crone Oli, and rest events. "
-        "The split is staying in-theme versus splashing Perona, Smoker, and Law like Mihawk."
+        "Every list locks Yasopp and the Shanks character; most also play Benn Beckman, Limejuice, Lucky Roux, Crone Oli, Hongo, and rest events. "
+        "The split is staying in-theme versus splashing Perona, Kin'emon, Oden, and Law like Mihawk."
     ),
     "OP17-039": (
-        "Blue OP17 Rocks D. Xebec is the densest Limitless pile on this site. "
-        "Lists play 4 Edward Newgate, 4 Shiki, 4 Charlotte Linlin, 4 Gloriosa, 4 Miss Buckingham Stussy, 4 Rocks D. Xebec, the Rocks Pirates stage, and There's No Authority. "
-        "Kaido, Streusen, Don Marlon, and Captain John are the usual ratio fights."
+        "Blue OP17 Rocks D. Xebec is the densest current-format pile on this site. "
+        "Lists lock 4 Edward Newgate, 4 Kyo, 4 Gloriosa, 4 Shiki, 4 Charlotte Linlin, 4 Miss Buckingham Stussy, 4 Rocks D. Xebec, Rocks Pirates (event OP17-056), and There's No Authority. "
+        "Kaido, Captain John, Streusen, Don Marlon, and Buckin are the usual ratio fights."
     ),
     "OP17-058": (
         "Purple OP17 Kaido is All-Star midrange with a tight tournament core. "
@@ -81,13 +81,13 @@ TAKES = {
     ),
     "OP17-079": (
         "Black OP17 Monkey D. Luffy is the Elbaph blocker deck, not Imu. "
-        "Usopp, Gerd, and Loki are 4-ofs; most lists also play Jaguar D. Saul, a Luffy beater, Zoro, Nico Robin, Rodo, Sanji, and Chopper. "
-        "Flex is extra giants versus events like Gum-Gum Kong Gun, Tempest Kick, or Thousand Sunny."
+        "Usopp, Gerd, Loki, Zoro, Sanji, Nami, and the Luffy beater are 4-ofs; Saul and Rodo are close. "
+        "Robin, Brook, Chopper, Pirates Docking Six, and Gum-Gum Kong Gun fill the rest."
     ),
     "OP17-099": (
         "Yellow OP17 Charlotte Linlin is a Big Mom swarm leader. "
-        "Pudding, the on-color Linlin, and Cracker are in every averaged list; Katakuri, Oven, Sweet 3 Generals, Daifuku, and Zeus are close behind. "
-        "Perospero, Smoothie, Streusen, Teach, and Brulee fill the rest."
+        "Pudding, the on-color Linlin, and Cracker are 4-ofs in every averaged list; Katakuri, Oven, Sweet 3 Generals, Daifuku, Streusen, and Zeus are close behind. "
+        "Perospero, Smoothie, Maser Saber, and Teach fill the rest."
     ),
     "OP13-001": (
         "RG Luffy is a Straw Hat value pile that still posts in current format. "
@@ -100,14 +100,14 @@ TAKES = {
         "Mr. 3, Marco, Kikunojo, and Gravity Blade are the next tier."
     ),
     "OP14-020": (
-        "Green Mihawk is a rest/control pile. "
-        "Limitless lists play Perona (both printings), Law & Bepo, Kin'emon, Kouzuki Oden, the Mihawk character, and Dead Man's Game. "
-        "Otama, Kikunojo, You Can Be My Samurai, Coffin Boat, and the rush event show up in most lists; Smoker, Zoro, and the ten-cost Mihawk are flex."
+        "Green Mihawk is a rest/control pile that now splashes OP17 Red Hair cards. "
+        "OP17-format lists lock 4 Perona, 4 Kin'emon, 4 Kouzuki Oden, 4 Otama, and 4 OP17 Shanks. "
+        "Kawamatsu, the Mihawk character, Yasopp, You Can Be My Samurai, Trichiliocosm, and Coffin Boat finish the 50."
     ),
     "OP16-001": (
-        "Red OP16 Portgas D. Ace is Whitebeard rush - not the red/blue OP13 Ace. "
-        "Lists lock 4 Monkey D. Luffy, 4 Edward Newgate, 4 Vista, and Moby Dick; Garp, Little Oars Jr., Curiel, Marco, and Thatch are close to required. "
-        "The 10-cost Ace is usually a 3-of; Namule, Time for the Counterattack, Uta, and Izo are flex."
+        "Red OP16 Portgas D. Ace is Whitebeard rush — not the red/blue OP13 Ace. "
+        "OP17-format lists lock 4 Garp, 4 Curiel, 4 Marco, 4 Little Oars Jr., both Newgate bodies, Moby Dick, and Monkey D. Luffy. "
+        "Vista and the 10-cost Ace are 3-ofs; Kingdew is the OP17 splash; Uta and Ga Ha Ha Ha!! are flex."
     ),
     "OP15-058": (
         "Purple OP15 Enel is Sky Island ramp: a 6-card DON!! deck that floods DON!! from turn two and rests the board. "

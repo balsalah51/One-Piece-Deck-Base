@@ -46,6 +46,10 @@ ICON_RE = re.compile(
     re.I,
 )
 THEME_RE = re.compile(r'\s*<meta name="theme-color" content="[^"]*"\s*/?>', re.I)
+THEME_BOOT_RE = re.compile(
+    r'\s*<script>try\{var t=localStorage\.getItem\("opdb-theme"\).*?</script>',
+    re.S,
+)
 ADSENSE_RE = re.compile(
     r"\s*<script[^>]*adsbygoogle\.js[^>]*>\s*</script>",
     re.I,
@@ -590,8 +594,14 @@ def ensure_head(text: str, rel: str, title: str, desc: str, by_href: dict) -> st
     text = ROBOTS_META_RE.sub("", text)
     text = ICON_RE.sub("", text)
     text = THEME_RE.sub("", text)
+    text = THEME_BOOT_RE.sub("", text)
     text = ADSENSE_RE.sub("", text)
     text = re.sub(r'(<link rel="stylesheet"[^>]*>)(?=<)', r"\1\n", text)
+    if seo.THEME_BOOT not in text:
+        if "<head>" in text:
+            text = text.replace("<head>", "<head>\n  " + seo.THEME_BOOT, 1)
+        elif "<head " in text:
+            text = re.sub(r"(<head[^>]*>)", r"\1\n  " + seo.THEME_BOOT, text, count=1)
     if TITLE_RE.search(text):
         text = TITLE_RE.sub(f"<title>{html.escape(title)}</title>", text, count=1)
     else:
@@ -646,6 +656,28 @@ def patch_nav_footer(text: str) -> str:
             '        <a href="/search.html">Search</a>\n        <a href="https://discord.gg/adZ2WUQ3D"',
             1,
         )
+    nav = text.split("<nav", 1)[-1].split("</nav>", 1)[0] if "<nav" in text else ""
+    if 'href="/tier-list.html"' not in nav:
+        text = text.replace(
+            '      <nav aria-label="Primary">\n        <a href="#recent">Recent lists</a>',
+            '      <nav aria-label="Primary">\n        <a href="/tier-list.html">Tier List</a>\n        <a href="#recent">Recent lists</a>',
+        )
+        text = text.replace(
+            '      <nav aria-label="Primary">\n        <a href="/#recent">Recent lists</a>',
+            '      <nav aria-label="Primary">\n        <a href="/tier-list.html">Tier List</a>\n        <a href="/#recent">Recent lists</a>',
+        )
+        text = text.replace(
+            '      <nav aria-label="Primary">\n        <a href="/#recent" aria-current="page">Recent lists</a>',
+            '      <nav aria-label="Primary">\n        <a href="/tier-list.html">Tier List</a>\n        <a href="/#recent" aria-current="page">Recent lists</a>',
+        )
+        text = text.replace(
+            '      <nav aria-label="Primary">\n        <a href="/decklists/op17.html">Leaders</a>',
+            '      <nav aria-label="Primary">\n        <a href="/tier-list.html">Tier List</a>\n        <a href="/decklists/op17.html">Leaders</a>',
+        )
+        text = text.replace(
+            '      <nav aria-label="Primary">\n        <a href="/decklists/op17.html" aria-current="page">Leaders</a>',
+            '      <nav aria-label="Primary">\n        <a href="/tier-list.html">Tier List</a>\n        <a href="/decklists/op17.html" aria-current="page">Leaders</a>',
+        )
     text = text.replace('<div class="logo">OP</div>', seo.BRAND_LOGO_HTML)
     if '<img class="logo"' not in text:
         text = re.sub(
@@ -686,6 +718,22 @@ def patch_nav_footer(text: str) -> str:
                 text,
                 count=1,
             )
+    if "<footer" in text:
+        pre, foot = text.rsplit("<footer", 1)
+        if 'href="/tier-list.html"' not in foot:
+            if '<a href="/guides/">Guides</a>' in foot:
+                foot = foot.replace(
+                    '<a href="/guides/">Guides</a>',
+                    '<a href="/tier-list.html">Tier List</a> · <a href="/guides/">Guides</a>',
+                    1,
+                )
+            elif '<a href="/decklists/op17.html">Leaders</a>' in foot:
+                foot = foot.replace(
+                    '<a href="/decklists/op17.html">Leaders</a>',
+                    '<a href="/tier-list.html">Tier List</a> · <a href="/decklists/op17.html">Leaders</a>',
+                    1,
+                )
+        text = pre + "<footer" + foot
     return text
 
 

@@ -51,6 +51,11 @@ def main() -> None:
     )
     more.save_index(index)
 
+    print("=== TCG PORTAL shop results ===")
+    portal = load("portal", "/workspace/scripts/add-tcgportal-lists.py")
+    portal_found = portal.collect_lists(more.gen, commsrc)
+    commsrc.write_lists(portal_found)
+
     print("=== X / YouTube / OnePieceDB / weird sources ===")
     commsrc.main()
 

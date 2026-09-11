@@ -20,7 +20,7 @@ UA = "OnePieceDeckBase/1.0 (+https://onepiecedeckbase.com; public OPTCG list scr
 API = "https://tcg-portal.jp/api/onepiece/tournament-results"
 ALT_RE = re.compile(r'alt="[^"]*\(((?:OP|ST|EB|PRB)\d{2}-\d{3})\)"')
 HREF_RE = re.compile(r'href="/onepiece/cards/((?:OP|ST|EB|PRB)\d{2}-\d{3})"')
-SINCE = "2026-09-04"
+SINCE = "2026-08-16"
 
 
 def load(name: str, path: str):
@@ -118,7 +118,7 @@ def collect_lists(gen, commsrc) -> list[dict]:
             "leader": lid,
             "kind": "web",
             "player": shop,
-            "title": f"{guide} {event} winner - {shop}",
+            "title": f"{guide} {event} winner — {shop}",
             "subtitle": f"Public TCG PORTAL list · {day}",
             "source_url": url,
             "slug": gen.slugify(f"tcgportal-{day}-{shop}-{pid[-6:]}")[:70],
