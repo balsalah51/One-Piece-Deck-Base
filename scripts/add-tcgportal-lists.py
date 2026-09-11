@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """Host complete OP17-splash lists from public TCG PORTAL shop-battle pages.
 
-Limitless 8/28–29 events have no submitted lists. This pulls the newest
-published Japanese results (8/25–26 as of the scrape) plus any later dates.
+Only writes a page when the public recipe is 1 leader + 50 cards and has no bans.
 Does not invent cards. Does not wipe existing pages.
 """
 
@@ -21,7 +20,7 @@ UA = "OnePieceDeckBase/1.0 (+https://onepiecedeckbase.com; public OPTCG list scr
 API = "https://tcg-portal.jp/api/onepiece/tournament-results"
 ALT_RE = re.compile(r'alt="[^"]*\(((?:OP|ST|EB|PRB)\d{2}-\d{3})\)"')
 HREF_RE = re.compile(r'href="/onepiece/cards/((?:OP|ST|EB|PRB)\d{2}-\d{3})"')
-SINCE = "2026-08-25"
+SINCE = "2026-08-16"
 
 
 def load(name: str, path: str):
@@ -58,7 +57,7 @@ def collect_rows() -> list[dict]:
                 stop = True
                 break
             rows.append(row)
-        print("portal page", page, "kept", len(rows), "stop", stop)
+        print("portal page", page, "kept", len(rows), "stop", stop, flush=True)
         if stop:
             break
         page += 1
@@ -78,9 +77,9 @@ def counts_from_html(html: str) -> dict[str, int]:
 
 def collect_lists(gen, commsrc) -> list[dict]:
     hosted = {L["id"] for L in gen.LEADERS}
-    print("=== TCG PORTAL ===")
+    print("=== TCG PORTAL since", SINCE, "===", flush=True)
     rows = collect_rows()
-    print("rows", len(rows), Counter((r.get("date") or "")[:10] for r in rows))
+    print("rows", len(rows), Counter((r.get("date") or "")[:10] for r in rows), flush=True)
 
     found = []
     seen: set[str] = set()
@@ -92,7 +91,7 @@ def collect_lists(gen, commsrc) -> list[dict]:
         try:
             html = fetch(url)
         except Exception as exc:  # noqa: BLE001
-            print("fail", pid, exc)
+            print("fail", pid, exc, flush=True)
             continue
         counts = counts_from_html(html)
         lids = [cid for cid, n in counts.items() if cid in hosted and n == 1]
@@ -103,12 +102,12 @@ def collect_lists(gen, commsrc) -> list[dict]:
         main_n = sum(n for cid, n in counts.items() if cid != lid) if lid else 0
         has_op17 = any(cid.startswith("OP17-") for cid in counts)
         banned = [cid for cid in counts if cid in gen.BANNED_CARDS]
-        print(pid, (row.get("date") or "")[:10], lid, "cards", main_n, "op17", has_op17, "banned", banned)
-        if not lid or counts.get(lid) != 1 or main_n != 50 or banned:
+        print(pid, (row.get("date") or "")[:10], lid, "cards", main_n, "op17", has_op17, "banned", banned, flush=True)
+        if not lid or counts.get(lid) != 1 or main_n != 50 or banned or not has_op17:
             time.sleep(0.1)
             continue
         if lid not in hosted:
-            print("skip unhosted", lid, "op17", has_op17)
+            print("skip unhosted", lid, "op17", has_op17, flush=True)
             time.sleep(0.1)
             continue
         shop = (row.get("shop") or {}).get("name") or row.get("location") or "TCG PORTAL"
@@ -132,47 +131,16 @@ def collect_lists(gen, commsrc) -> list[dict]:
 
     log_path = ROOT / "data/tcgportal-log.json"
     log_path.write_text(json.dumps({"hosted": found}, indent=2, ensure_ascii=False) + "\n")
-    print("ready", len(found), "log", log_path)
+    print("ready", len(found), "log", log_path, flush=True)
     return found
 
 
 def main() -> None:
     gen = load("genlists", "/workspace/scripts/generate-tournament-lists.py")
     commsrc = load("commsrc", "/workspace/scripts/scrape-community-sources.py")
-    more = load("morelists", "/workspace/scripts/add-more-tournament-lists.py")
-    ana = load("analysis", "/workspace/scripts/add-leader-analysis.py")
-    up = load("upgrade", "/workspace/scripts/upgrade-public-pages.py")
-
     found = collect_lists(gen, commsrc)
-
-    print("=== Limitless since 2026-08-26 ===")
-    index = more.load_index()
-    index = more.fetch_more(
-        index,
-        pages=6,
-        extra_limit=400,
-        per_event=99,
-        since="2026-08-26",
-    )
-    more.save_index(index)
-
-    print("=== write portal lists ===")
     commsrc.write_lists(found)
-    index = more.load_index()
-    more.rebuild_hubs(index)
-    more.rewrite_sitemap()
-    print("=== consensus ===")
-    ana.main()
-    print("=== homepage ===")
-    up.patch_home()
-    up.patch_op17()
-    seo = load("seo", "/workspace/scripts/generate-seo-pages.py")
-    seo.main()
-    buy = load("tcgbuy", "/workspace/scripts/add-tcgplayer-buy.py")
-    buy.main()
-    seofix = load("seofix", "/workspace/scripts/enhance-seo.py")
-    seofix.main()
-    print("tcgportal + limitless recrape done")
+    print("tcgportal ingest done", flush=True)
 
 
 if __name__ == "__main__":

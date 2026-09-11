@@ -81,6 +81,7 @@ def chrome(title: str, description: str, body: str) -> str:
   <meta name="description" content="{html.escape(description)}" />
   <link rel="canonical" href="{html.escape(SITE)}" />
   <link rel="stylesheet" href="/css/site.css?v=theme" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1074015774205047" crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="wrap">
@@ -93,9 +94,11 @@ def chrome(title: str, description: str, body: str) -> str:
         </div>
       </a>
       <nav aria-label="Primary">
+        <a href="/tier-list.html">Tier List</a>
         <a href="/#recent">Recent lists</a>
         <a href="/decklists/op17.html">Leaders</a>
         <a href="/format.html">Format</a>
+        <a href="https://en.onepiece-cardgame.com/events/" target="_blank" rel="noopener">Events</a>
         <a href="/guides/">Guides</a>
         <a href="/shop/">Shop</a>
         <a href="/search.html">Search</a>
@@ -108,8 +111,8 @@ def chrome(title: str, description: str, body: str) -> str:
       </div>
     </main>
     <footer>
-      © <span id="year"></span> One Piece Deck Base — Fan site for the Bandai ONE PIECE CARD GAME (OPTCG). Not affiliated with Bandai.
-      <a href="/guides/">Guides</a> · <a href="/decklists/op17.html">Leaders</a> · <a href="/format.html">Format</a> · <a href="/search.html">Search</a> · <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a>
+      © <span id="year"></span> One Piece Deck Base - Fan site for the Bandai ONE PIECE CARD GAME (OPTCG). Not affiliated with Bandai.
+      <a href="/tier-list.html">Tier List</a> · <a href="/guides/">Guides</a> · <a href="/decklists/op17.html">Leaders</a> · <a href="/format.html">Format</a> · <a href="/search.html">Search</a> · <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a>
     </footer>
   </div>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
@@ -199,6 +202,41 @@ TOPICS = [
         "h2": "One Piece TCG meta",
         "desc": "OP17 OPTCG meta leaders with tournament and community decklists.",
         "copy": "The early OP17 meta is still moving. Rocks, Kaido, Black Luffy, Linlin, Shanks, RG Luffy, Nami, Mihawk, OP16 Ace, Enel, and Katakuri all have recent Limitless lists here. Newgate is mostly YouTube lists until more events post standings.",
+    },
+    {
+        "slug": "op17-mihawk-matchups",
+        "title": "Which decks beat OP17 Mihawk | OPTCG matchups",
+        "h2": "OP17 Mihawk matchups",
+        "desc": "OP17 Mihawk matchups from Limitless pairings: Robin, Ace, and Sabo beat green Dracule Mihawk. Rocks does not.",
+        "copy": "Green Mihawk is the rest/control deck people call the OP17 problem. Limitless pairings in this window say Robin, Ace, and Sabo are the leaders that actually beat him; Rocks is a Mihawk-favored game.",
+    },
+    {
+        "slug": "nico-robin-strategy",
+        "title": "Nico Robin strategy | OP17 OPTCG",
+        "h2": "Nico Robin strategy",
+        "desc": "OP17 Nico Robin strategy: Purple/Yellow OP09-062 ramps with Triggers, then drops yellow Big Mom. Lists, curve, and the Mihawk matchup.",
+        "copy": "Purple/Yellow OP09 Nico Robin is the Ohara ramp deck in OP17. Hosted lists splash yellow Big Mom; Limitless pairings say she is the volume answer to Mihawk.",
+    },
+    {
+        "slug": "sabo-strategy",
+        "title": "Sabo strategy | OP17 OPTCG",
+        "h2": "Sabo strategy",
+        "desc": "OP17 Sabo strategy: Red/Black OP13-004 plays Elbaph Straw Hats plus Loki. Curve, mulligan, tech, and the 52.1% Mihawk pairing.",
+        "copy": "Red/Black OP13 Sabo is Elbaph midrange in OP17. Hosted lists play Saul and Loki to turn the 12-cost switch on; Limitless pairings have him slightly ahead of Mihawk.",
+    },
+    {
+        "slug": "rocks-d-xebec-strategy",
+        "title": "Rocks D. Xebec strategy | OP17 OPTCG",
+        "h2": "Rocks D. Xebec strategy",
+        "desc": "OP17 Rocks D. Xebec strategy: Blue OP17-039 even and odd Rocks Pirates curves, 10-cost Xebec, mulligan, tech, and the 33.6% Mihawk pairing.",
+        "copy": "Blue OP17 Rocks D. Xebec is a Rocks Pirates type deck. Hosted lists curve Kyo into Newgate into Shiki, then 10-cost Xebec; Limitless pairings have Mihawk well ahead.",
+    },
+    {
+        "slug": "portgas-d-ace-strategy",
+        "title": "Portgas D. Ace strategy | OP17 OPTCG",
+        "h2": "Portgas D. Ace strategy",
+        "desc": "OP17 Portgas D. Ace strategy: Red OP16-001 Garp into Rush Whitebeard Pirates curve, mulligan, tech, and the 57.8% Mihawk pairing.",
+        "copy": "Red OP16 Portgas D. Ace is the Rush Whitebeard leader in OP17, not red/blue OP13 Ace. Hosted lists play Garp and Moby Dick into Rush Newgate; Limitless pairings have him ahead of Mihawk.",
     },
     {
         "slug": "treasure-cup",
@@ -818,8 +856,20 @@ def main() -> None:
         raise SystemExit("duplicate topic slugs")
     topic_links = []
     urls = []
+    handwritten = {
+        "op17-mihawk-matchups",
+        "nico-robin-strategy",
+        "sabo-strategy",
+        "rocks-d-xebec-strategy",
+        "portgas-d-ace-strategy",
+    }
+
     for topic in TOPICS:
         rel = f"guides/{topic['slug']}.html"
+        if topic["slug"] in handwritten and (ROOT / rel).exists():
+            topic_links.append((topic["h2"], "/" + rel))
+            urls.append(SITE + "/" + rel)
+            continue
         url = write_page(rel, topic["title"], topic["desc"], topic_body(topic))
         topic_links.append((topic["h2"], "/" + rel))
         urls.append(url)

@@ -15,7 +15,7 @@ DISCORD = "https://discord.gg/adZ2WUQ3D"
 CSS = "/css/site.css?v=seo-links"
 SITE = "https://onepiecedeckbase.com"
 
-# Keep amzn.to URLs — they carry the Associates tag (opdb07-20).
+# Keep amzn.to URLs - they carry the Associates tag (opdb07-20).
 SLEEVES = [
     {
         "name": "Dragon Shield Matte Jet",
@@ -106,7 +106,7 @@ DECK_BOXES = [
     },
     {
         "name": "4-pack magnetic deck boxes",
-        "blurb": "Four magnetic boxes. Each holds 100+ double-sleeved cards — enough for several OPTCG lists.",
+        "blurb": "Four magnetic boxes. Each holds 100+ double-sleeved cards - enough for several OPTCG lists.",
         "url": "https://amzn.to/3SSyyJ0",
         "img": "/img/shop/deckbox-4pack.jpg",
     },
@@ -142,9 +142,11 @@ def nav_html(current: str) -> str:
 
     return "\n".join(
         [
+            item("/tier-list.html", "Tier List", "tier"),
             item("/#recent", "Recent lists", "recent"),
             item("/decklists/op17.html", "Leaders", "leaders"),
             item("/format.html", "Format", "format"),
+            item("https://en.onepiece-cardgame.com/events/", "Events", "events"),
             item("/guides/", "Guides", "guides"),
             item("/shop/", "Shop", "shop"),
             item("/search.html", "Search", "search"),
@@ -197,6 +199,7 @@ def chrome(title: str, desc: str, canonical: str, body: str, *, indexable: bool,
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(desc)}" />
 {robots}{canon}  <link rel="stylesheet" href="{CSS}" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1074015774205047" crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="wrap">
@@ -218,8 +221,8 @@ def chrome(title: str, desc: str, canonical: str, body: str, *, indexable: bool,
       </div>
     </main>
     <footer>
-      © <span id="year"></span> One Piece Deck Base — Fan site, not affiliated with Bandai or Shueisha.
-{amazon_line}      <a href="/guides/">Guides</a> · <a href="/decklists/op17.html">Leaders</a> · <a href="/format.html">Format</a> · <a href="/search.html">Search</a> · <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a> · <a href="{DISCORD}" target="_blank" rel="noopener">Discord</a>
+      © <span id="year"></span> One Piece Deck Base - Fan site, not affiliated with Bandai or Shueisha.
+{amazon_line}      <a href="/tier-list.html">Tier List</a> · <a href="/guides/">Guides</a> · <a href="/decklists/op17.html">Leaders</a> · <a href="/format.html">Format</a> · <a href="/search.html">Search</a> · <a href="/shop/">Shop</a> · <a href="/privacy.html">Privacy</a> · <a href="{DISCORD}" target="_blank" rel="noopener">Discord</a>
     </footer>
   </div>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>

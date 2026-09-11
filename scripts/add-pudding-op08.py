@@ -95,7 +95,7 @@ def main() -> None:
                 "leader": PUDDING,
                 "kind": "web",
                 "player": "r/OnePieceTCG",
-                "title": "Purple/Yellow Pudding — r/OnePieceTCG",
+                "title": "Purple/Yellow Pudding - r/OnePieceTCG",
                 "subtitle": "Community screenshot from r/OnePieceTCG · 2026-08-24",
                 "source_url": "https://www.reddit.com/r/OnePieceTCG/s/wjyx7BRKbb",
                 "slug": "reddit-pudding-wjyx7brkbb",

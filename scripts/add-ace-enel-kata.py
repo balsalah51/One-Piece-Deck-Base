@@ -75,7 +75,7 @@ def write_hub(leader: dict, card: dict) -> None:
 """
     page = gen.page_chrome(
         f"{name} decklist",
-        f"{name} — {color} leader page and tournament lists."[:160],
+        f"{name} - {color} leader page and tournament lists."[:160],
         leader["color"],
         leader["nav_op17"],
         body,

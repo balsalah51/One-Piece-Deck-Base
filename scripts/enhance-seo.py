@@ -50,14 +50,19 @@ THEME_BOOT_RE = re.compile(
     r'\s*<script>try\{var t=localStorage\.getItem\("opdb-theme"\).*?</script>',
     re.S,
 )
+ADSENSE_RE = re.compile(
+    r"\s*<script[^>]*adsbygoogle\.js[^>]*>\s*</script>",
+    re.I,
+)
 IMG_RE = re.compile(r"<img\b([^>]*)>", re.I)
 SKIP_PARTS = {".git", "scripts", "node_modules", "discord-bot", "ballkeep"}
-SKIP_FILES = {"shop/custom-leaders.html"}
+SKIP_FILES = {"shop/custom-leaders.html", "shop/buy-list.html"}
 CORE_RELS = {
     "index.html",
     "format.html",
     "privacy.html",
     "search.html",
+    "tier-list.html",
     "decklists/op17.html",
 }
 
@@ -118,7 +123,7 @@ def event_siblings(index: dict, leader: dict, slug: str, limit: int = 5) -> list
         player = r.get("player") or "List"
         place = r.get("placing")
         place_s = f"{place}" if place is not None else "list"
-        out.append((href_for_entry(leader, r), f"{player} — {leader['name']}", f"{event} · {place_s}"))
+        out.append((href_for_entry(leader, r), f"{player} - {leader['name']}", f"{event} · {place_s}"))
         if len(out) >= limit:
             break
     return out
@@ -150,7 +155,7 @@ def other_leaders_same_event(index: dict, leader: dict, slug: str, limit: int = 
                 continue
             seen.add(lid)
             player = r.get("player") or L["name"]
-            out.append((href_for_entry(L, r), f"{player} — {L['name']}", f"Same event · {L['name']}"))
+            out.append((href_for_entry(L, r), f"{player} - {L['name']}", f"Same event · {L['name']}"))
             break
         if len(out) >= limit:
             break
@@ -236,6 +241,7 @@ def deck_related_html(rel: str, index: dict) -> str:
     for href, title, note in other_leaders_same_event(index, leader, slug):
         rows.append(seo.list_row(href, title, note))
     rows.extend(related_leader_rows(leader)[:3])
+    rows.append(seo.list_row("/tier-list.html", "OP17 tier list", "Aggregated S through D with leader pictures"))
     rows.append(seo.list_row("/format.html", "OPTCG format and banlist", "Standard rules, banned cards, rotation"))
     rows.append(seo.list_row("/shop/sleeves.html", "Sleeves for a 50-card list", "Shop · Dragon Shield packs"))
     return seo.related_section("Related pages", "More lists and guides", rows)
@@ -243,6 +249,7 @@ def deck_related_html(rel: str, index: dict) -> str:
 
 def hub_related_html(leader: dict) -> str:
     rows = related_leader_rows(leader)
+    rows.append(seo.list_row("/tier-list.html", "OP17 tier list", "Aggregated S through D with leader pictures"))
     rows.append(seo.list_row("/decklists/op17.html", "All leader pages", "Every constructed leader on this site"))
     guide = seo.LEADER_GUIDE.get(leader["key"])
     if guide:
@@ -254,7 +261,53 @@ def hub_related_html(leader: dict) -> str:
             )
         )
     rows.append(seo.list_row("/guides/", "One Piece TCG guides", "Topics and character pages"))
+    if leader.get("key") == "mihawk":
+        rows.insert(
+            1,
+            seo.list_row(
+                "/guides/op17-mihawk-matchups.html",
+                "Which decks beat OP17 Mihawk",
+                "Limitless pairings · Robin, Ace, Sabo",
+            ),
+        )
+    if leader.get("key") == "nico-robin":
+        rows.insert(
+            1,
+            seo.list_row(
+                "/guides/nico-robin-strategy.html",
+                "Nico Robin strategy",
+                "OP17 curve, Big Mom splash, Mihawk matchup",
+            ),
+        )
+    if leader.get("key") == "sabo":
+        rows.insert(
+            1,
+            seo.list_row(
+                "/guides/sabo-strategy.html",
+                "Sabo strategy",
+                "OP17 Elbaph curve, mulligan, 52.1% vs Mihawk",
+            ),
+        )
+    if leader.get("key") == "rocks-d-xebec":
+        rows.insert(
+            1,
+            seo.list_row(
+                "/guides/rocks-d-xebec-strategy.html",
+                "Rocks D. Xebec strategy",
+                "Even/odd Rocks Pirates curve · 33.6% vs Mihawk",
+            ),
+        )
+    if leader.get("key") == "portgas-d-ace":
+        rows.insert(
+            1,
+            seo.list_row(
+                "/guides/portgas-d-ace-strategy.html",
+                "Portgas D. Ace strategy",
+                "Rush Whitebeard curve, mulligan, 57.8% vs Mihawk",
+            ),
+        )
     rows.append(seo.list_row("/format.html", "Format and banlist", "Standard constructed rules"))
+    rows.append(seo.list_row("/tier-list.html", "OP17 tier list", "Aggregated S through D with leader pictures"))
     rows.append(seo.list_row("/#recent", "Recent lists", "Newest 50-card results"))
     return seo.related_section("Related pages", "Other leaders and guides", rows)
 
@@ -280,6 +333,107 @@ def character_related_extra(slug: str) -> str:
 
 def topic_related_extra(slug: str) -> str:
     rows = topic_siblings(slug)
+    if slug == "nico-robin-strategy":
+        rows.insert(
+            0,
+            seo.list_row(
+                "/decklists/nico-robin.html",
+                "Nico Robin decklists",
+                "OP09-062 hub · consensus list and every hosted 50",
+            ),
+        )
+        rows.insert(
+            1,
+            seo.list_row(
+                "/guides/op17-mihawk-matchups.html",
+                "Which decks beat OP17 Mihawk",
+                "Robin 58.8% in 80 pairings",
+            ),
+        )
+    if slug == "op17-mihawk-matchups":
+        rows.insert(
+            0,
+            seo.list_row(
+                "/guides/nico-robin-strategy.html",
+                "Nico Robin strategy",
+                "The volume hawk hunter in this sample",
+            ),
+        )
+        rows.insert(
+            1,
+            seo.list_row(
+                "/guides/sabo-strategy.html",
+                "Sabo strategy",
+                "52.1% vs Mihawk · 165 pairings",
+            ),
+        )
+        rows.insert(
+            2,
+            seo.list_row(
+                "/guides/portgas-d-ace-strategy.html",
+                "Portgas D. Ace strategy",
+                "57.8% vs Mihawk · 45 pairings",
+            ),
+        )
+        rows.insert(
+            3,
+            seo.list_row(
+                "/guides/rocks-d-xebec-strategy.html",
+                "Rocks D. Xebec strategy",
+                "33.6% vs Mihawk · 149 pairings",
+            ),
+        )
+    if slug == "sabo-strategy":
+        rows.insert(
+            0,
+            seo.list_row(
+                "/decklists/sabo.html",
+                "Sabo decklists",
+                "OP13-004 hub · 124 OP17 lists",
+            ),
+        )
+        rows.insert(
+            1,
+            seo.list_row(
+                "/guides/op17-mihawk-matchups.html",
+                "Which decks beat OP17 Mihawk",
+                "Sabo 52.1% in 165 pairings",
+            ),
+        )
+    if slug == "rocks-d-xebec-strategy":
+        rows.insert(
+            0,
+            seo.list_row(
+                "/decklists/op17/rocks-d-xebec.html",
+                "Rocks D. Xebec decklists",
+                "OP17-039 hub · 169 OP17 lists",
+            ),
+        )
+        rows.insert(
+            1,
+            seo.list_row(
+                "/guides/op17-mihawk-matchups.html",
+                "Which decks beat OP17 Mihawk",
+                "Rocks 33.6% in 149 pairings",
+            ),
+        )
+    if slug == "portgas-d-ace-strategy":
+        rows.insert(
+            0,
+            seo.list_row(
+                "/decklists/portgas-d-ace.html",
+                "Portgas D. Ace decklists",
+                "OP16-001 hub · 143 lists, 67 OP17",
+            ),
+        )
+        rows.insert(
+            1,
+            seo.list_row(
+                "/guides/op17-mihawk-matchups.html",
+                "Which decks beat OP17 Mihawk",
+                "Ace 57.8% in 45 pairings",
+            ),
+        )
     rows.append(seo.list_row("/guides/characters/", "Character guides", "Names from the manga mapped to OPTCG lists"))
     rows.append(seo.list_row("/decklists/op17.html", "All leader pages", "Constructed OPTCG hubs"))
     return seo.related_section("More guides", "Same series of One Piece TCG pages", rows)
@@ -441,6 +595,7 @@ def ensure_head(text: str, rel: str, title: str, desc: str, by_href: dict) -> st
     text = ICON_RE.sub("", text)
     text = THEME_RE.sub("", text)
     text = THEME_BOOT_RE.sub("", text)
+    text = ADSENSE_RE.sub("", text)
     text = re.sub(r'(<link rel="stylesheet"[^>]*>)(?=<)', r"\1\n", text)
     if seo.THEME_BOOT not in text:
         if "<head>" in text:
@@ -485,11 +640,43 @@ def patch_nav_footer(text: str) -> str:
             '        <a href="/format.html">Format</a>\n        <a href="/guides/">Guides</a>\n        <a href="/shop/" aria-current="page">Shop</a>',
         )
     nav = text.split("<nav", 1)[-1].split("</nav>", 1)[0] if "<nav" in text else ""
+    if "onepiece-cardgame.com/events" not in nav:
+        text = text.replace(
+            '        <a href="/format.html">Format</a>\n        <a href="/guides/">Guides</a>',
+            '        <a href="/format.html">Format</a>\n        <a href="https://en.onepiece-cardgame.com/events/" target="_blank" rel="noopener">Events</a>\n        <a href="/guides/">Guides</a>',
+        )
+        text = text.replace(
+            '        <a href="/format.html" aria-current="page">Format</a>\n        <a href="/guides/">Guides</a>',
+            '        <a href="/format.html" aria-current="page">Format</a>\n        <a href="https://en.onepiece-cardgame.com/events/" target="_blank" rel="noopener">Events</a>\n        <a href="/guides/">Guides</a>',
+        )
+    nav = text.split("<nav", 1)[-1].split("</nav>", 1)[0] if "<nav" in text else ""
     if 'href="/search.html"' not in nav:
         text = text.replace(
             '        <a href="https://discord.gg/adZ2WUQ3D"',
             '        <a href="/search.html">Search</a>\n        <a href="https://discord.gg/adZ2WUQ3D"',
             1,
+        )
+    nav = text.split("<nav", 1)[-1].split("</nav>", 1)[0] if "<nav" in text else ""
+    if 'href="/tier-list.html"' not in nav:
+        text = text.replace(
+            '      <nav aria-label="Primary">\n        <a href="#recent">Recent lists</a>',
+            '      <nav aria-label="Primary">\n        <a href="/tier-list.html">Tier List</a>\n        <a href="#recent">Recent lists</a>',
+        )
+        text = text.replace(
+            '      <nav aria-label="Primary">\n        <a href="/#recent">Recent lists</a>',
+            '      <nav aria-label="Primary">\n        <a href="/tier-list.html">Tier List</a>\n        <a href="/#recent">Recent lists</a>',
+        )
+        text = text.replace(
+            '      <nav aria-label="Primary">\n        <a href="/#recent" aria-current="page">Recent lists</a>',
+            '      <nav aria-label="Primary">\n        <a href="/tier-list.html">Tier List</a>\n        <a href="/#recent" aria-current="page">Recent lists</a>',
+        )
+        text = text.replace(
+            '      <nav aria-label="Primary">\n        <a href="/decklists/op17.html">Leaders</a>',
+            '      <nav aria-label="Primary">\n        <a href="/tier-list.html">Tier List</a>\n        <a href="/decklists/op17.html">Leaders</a>',
+        )
+        text = text.replace(
+            '      <nav aria-label="Primary">\n        <a href="/decklists/op17.html" aria-current="page">Leaders</a>',
+            '      <nav aria-label="Primary">\n        <a href="/tier-list.html">Tier List</a>\n        <a href="/decklists/op17.html" aria-current="page">Leaders</a>',
         )
     text = text.replace('<div class="logo">OP</div>', seo.BRAND_LOGO_HTML)
     if '<img class="logo"' not in text:
@@ -531,6 +718,22 @@ def patch_nav_footer(text: str) -> str:
                 text,
                 count=1,
             )
+    if "<footer" in text:
+        pre, foot = text.rsplit("<footer", 1)
+        if 'href="/tier-list.html"' not in foot:
+            if '<a href="/guides/">Guides</a>' in foot:
+                foot = foot.replace(
+                    '<a href="/guides/">Guides</a>',
+                    '<a href="/tier-list.html">Tier List</a> · <a href="/guides/">Guides</a>',
+                    1,
+                )
+            elif '<a href="/decklists/op17.html">Leaders</a>' in foot:
+                foot = foot.replace(
+                    '<a href="/decklists/op17.html">Leaders</a>',
+                    '<a href="/tier-list.html">Tier List</a> · <a href="/decklists/op17.html">Leaders</a>',
+                    1,
+                )
+        text = pre + "<footer" + foot
     return text
 
 
@@ -625,6 +828,7 @@ def patch_file(path: Path, index: dict, by_href: dict) -> tuple[bool, str]:
         block = topic_related_extra(slug)
     elif rel == "decklists/op17.html":
         rows = [
+            seo.list_row("/tier-list.html", "OP17 tier list", "Aggregated S through D with leader pictures"),
             seo.list_row("/#recent", "Recent lists", "Newest 50-card results on the homepage"),
             seo.list_row("/format.html", "Format and banlist", "Standard constructed rules"),
             seo.list_row("/guides/", "One Piece TCG guides", "Topics and character names"),
@@ -762,6 +966,7 @@ def rewrite_sitemap(by_href: dict) -> None:
 """
     (ROOT / "sitemap.xml").write_text(index_xml)
     (ROOT / "robots.txt").write_text(seo.ROBOTS_TXT)
+    (ROOT / "ads.txt").write_text(seo.ADS_TXT)
     log("sitemap core", len(core), "lists", len(lists), "images", len(images))
 
 
@@ -827,6 +1032,7 @@ def write_discovery_files() -> None:
         )
         + "\n"
     )
+    (ROOT / "ads.txt").write_text(seo.ADS_TXT)
     (ROOT / "opensearch.xml").write_text(
         f"""<?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
@@ -853,6 +1059,7 @@ def search_catalog(index: dict) -> tuple[list[dict], list[dict]]:
                 "q": f"{L['name']} {L['id']} {L['key']} decklist optcg",
             }
         )
+    pages.append({"kind": "page", "title": "OP17 tier list", "note": "Aggregated S-A-B-C-D with leader pictures", "href": "/tier-list.html", "q": "tier list meta op17 mihawk rocks sabo"})
     pages.append({"kind": "page", "title": "Format and banlist", "note": "Standard OPTCG rules", "href": "/format.html", "q": "format banlist rotation pudding"})
     pages.append({"kind": "page", "title": "All leader pages", "note": "Every constructed hub", "href": "/decklists/op17.html", "q": "leaders op17 decklists"})
     pages.append({"kind": "page", "title": "Guides", "note": "Topics and characters", "href": "/guides/", "q": "guides one piece tcg optcg"})
@@ -882,25 +1089,50 @@ def search_catalog(index: dict) -> tuple[list[dict], list[dict]]:
             }
         )
     lists = []
+    seen_href = set()
     for lid, rows in index.items():
         leader = BY_ID.get(lid)
         lname = leader["name"] if leader else lid
         for row in rows:
             href = row.get("href") or (f"/{leader['dir']}/{row['slug']}.html" if leader and row.get("slug") else "")
-            if not href:
+            if not href or href in seen_href:
                 continue
+            seen_href.add(href)
             player = row.get("player") or "List"
             event = row.get("tournament") or ""
             date_s = row.get("date") or ""
             lists.append(
                 {
-                    "title": f"{player} — {lname}",
+                    "title": f"{player} - {lname}",
                     "note": " · ".join(x for x in (event, date_s) if x),
                     "href": href,
                     "q": f"{player} {lname} {event} {lid}",
                     "date": date_s,
                 }
             )
+    comm_path = ROOT / "data/community-decks.json"
+    if comm_path.exists():
+        community = json.loads(comm_path.read_text())
+        for lid, rows in community.items():
+            leader = BY_ID.get(lid)
+            lname = leader["name"] if leader else lid
+            for row in rows:
+                href = row.get("href") or ""
+                if not href or href in seen_href:
+                    continue
+                seen_href.add(href)
+                title = row.get("title") or row.get("slug") or "List"
+                note = row.get("subtitle") or ""
+                date_s = row.get("date") or ""
+                lists.append(
+                    {
+                        "title": title,
+                        "note": note,
+                        "href": href,
+                        "q": f"{title} {lname} {note} {lid}",
+                        "date": date_s,
+                    }
+                )
     lists.sort(key=lambda r: r.get("date") or "", reverse=True)
     return pages, lists
 
@@ -974,6 +1206,7 @@ def write_search_page(index: dict) -> None:
   <title>Search OPTCG decklists | One Piece Deck Base</title>
   <meta name="description" content="Search One Piece TCG decklists, leaders, characters, and events on One Piece Deck Base." />
   <link rel="stylesheet" href="/css/site.css?v={seo.CSS_VER}" />
+{seo.ADSENSE_SCRIPT.rstrip()}
 </head>
 <body>
   <div class="wrap">
@@ -985,15 +1218,7 @@ def write_search_page(index: dict) -> None:
           <div class="subtitle">OPTCG decklists</div>
         </div>
       </a>
-      <nav aria-label="Primary">
-        <a href="/#recent">Recent lists</a>
-        <a href="/decklists/op17.html">Leaders</a>
-        <a href="/format.html">Format</a>
-        <a href="/guides/">Guides</a>
-        <a href="/shop/">Shop</a>
-        <a href="/search.html" aria-current="page">Search</a>
-        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>
-      </nav>
+{seo.primary_nav_html(current="search")}
     </header>
     <main class="single">
       <div class="card hero">
@@ -1001,7 +1226,7 @@ def write_search_page(index: dict) -> None:
       </div>
     </main>
     <footer>
-      © <span id="year"></span> One Piece Deck Base — Fan site for the Bandai ONE PIECE CARD GAME (OPTCG). Not affiliated with Bandai.
+      © <span id="year"></span> One Piece Deck Base - Fan site for the Bandai ONE PIECE CARD GAME (OPTCG). Not affiliated with Bandai.
 {seo.FOOTER_LINKS}
     </footer>
   </div>

@@ -21,4 +21,7 @@ Allow: /favicon.ico
 Allow: /img/
 Allow: /
 
+User-agent: Mediapartners-Google
+Allow: /
+
 Sitemap: https://onepiecedeckbase.com/sitemap.xml

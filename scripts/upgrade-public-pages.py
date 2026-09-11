@@ -22,20 +22,22 @@ aspec.loader.exec_module(ana)
 
 ROOT = gen.ROOT
 LINE_RE = ana.LINE_RE
-CSS_NEW = "/css/site.css?v=seo-links"
-JS_NEW = "/js/site.js?v=amazon-shop"
-TCG_VER = "tcg-pills"
+CSS_NEW = "/css/site.css?v=utrecht-x"
+JS_NEW = "/js/site.js?v=utrecht-x"
+TCG_VER = "tcg-quiet"
 TCG_SCRIPTS = (
     f'  <script src="/js/tcgplayer-config.js?v={TCG_VER}"></script>\n'
     f'  <script src="/js/tcgplayer-ids.js?v={TCG_VER}"></script>\n'
+    f'  <script src="/js/tcgplayer-names.js?v={TCG_VER}"></script>\n'
     f'  <script src="/js/tcgplayer.js?v={TCG_VER}"></script>\n'
 )
 TCG_SCRIPT_RE = re.compile(
-    r'  <script src="/js/tcgplayer(?:-config|-ids)?\.js(?:\?[^"]*)?"></script>\n'
+    r'  <script src="/js/tcgplayer(?:-config|-ids|-names)?\.js(?:\?[^"]*)?"></script>\n'
 )
 NAV_LEADERS_SHOP = (
     '        <a href="/decklists/op17.html">Leaders</a>\n'
     '        <a href="/format.html">Format</a>\n'
+    '        <a href="https://en.onepiece-cardgame.com/events/" target="_blank" rel="noopener">Events</a>\n'
     '        <a href="/guides/">Guides</a>\n'
     '        <a href="/shop/">Shop</a>\n'
     '        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>'
@@ -43,6 +45,7 @@ NAV_LEADERS_SHOP = (
 NAV_LEADERS_SHOP_CURRENT = (
     '        <a href="/decklists/op17.html" aria-current="page">Leaders</a>\n'
     '        <a href="/format.html">Format</a>\n'
+    '        <a href="https://en.onepiece-cardgame.com/events/" target="_blank" rel="noopener">Events</a>\n'
     '        <a href="/guides/">Guides</a>\n'
     '        <a href="/shop/">Shop</a>\n'
     '        <a href="https://discord.gg/adZ2WUQ3D" target="_blank" rel="noopener">Discord</a>'
@@ -112,7 +115,15 @@ def strip_tcgplayer_scripts(text: str) -> str:
 
 def ensure_tcgplayer_scripts(text: str) -> str:
     text = strip_tcgplayer_scripts(text)
-    if not any(mark in text for mark in ('class="text-deck"', 'class="list-row"', 'class="card-entry"')):
+    if not any(
+        mark in text
+        for mark in (
+            'class="text-deck"',
+            'class="list-row"',
+            'class="card-entry"',
+            'id="mass-text"',
+        )
+    ):
         return text
     return text.replace("</body>", TCG_SCRIPTS + "</body>")
 
@@ -318,12 +329,12 @@ def recent_rows_html(rows: list[dict]) -> str:
 def render_home_body() -> str:
     cards = leader_cards_html()
     recent = pick_recent_lists(collect_home_lists())
-    rocks = gen.card_image_url("OP17-039")
+    nico = gen.card_image_url("OP09-062")
     return f"""        <!-- HOME_BODY -->
         <section class="home-splash" aria-label="One Piece Deck Base">
-          <img class="home-splash-bg" src="/img/opdb-hero.jpg" alt="One Piece Deck Base, an OPTCG decklist site" />
-          <a class="home-splash-luffy" href="/decklists/op17/rocks-d-xebec.html">
-            <img src="{rocks}" alt="Rocks D. Xebec" />
+          <img class="home-splash-bg" src="/img/opdb-hero.jpg" alt="One Piece Deck Base, an OPTCG decklist site" width="1400" height="636" fetchpriority="high" decoding="async">
+          <a class="home-splash-luffy" href="/decklists/nico-robin.html">
+            <img src="{nico}" alt="Nico Robin" />
           </a>
           <div class="home-splash-bar">
             <h2>One Piece Deck Base</h2>
@@ -331,7 +342,29 @@ def render_home_body() -> str:
           </div>
         </section>
 
+        <a class="events-banner" id="events" href="https://en.onepiece-cardgame.com/events/" target="_blank" rel="noopener">
+          <div>
+            <div class="kicker">Official Bandai site</div>
+            <div class="title">ONE PIECE CARD GAME events</div>
+            <div class="muted" style="color:rgba(255,255,255,0.82);margin-top:4px">Championships, regionals, Treasure Cups, and store tournaments</div>
+          </div>
+          <div class="go">Official events →</div>
+        </a>
+
         <nav class="home-big3" aria-label="Main sections">
+          <a class="home-big home-big-tier" href="/tier-list.html">
+            <span class="home-big-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.1 13.85 5.2h-3.7L12 2.1Z"/>
+                <rect x="10.15" y="5.35" width="3.7" height="1.85" rx="0.4"/>
+                <path d="M9 20.6V8.9h6v11.7H9Z"/>
+                <path d="M3.6 20.6v-6.4H9v6.4H3.6Z" opacity=".88"/>
+                <path d="M15 20.6v-4.7h5.4v4.7H15Z" opacity=".72"/>
+              </svg>
+            </span>
+            <span class="home-big-title">Tier List</span>
+            <span class="home-big-note">OP17 S through D with leader pictures</span>
+          </a>
           <a class="home-big home-big-recent" href="#recent">
             <span class="home-big-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
@@ -371,6 +404,14 @@ def render_home_body() -> str:
             <span class="home-big-note">Talk lists, flair, and the crew</span>
           </a>
         </nav>
+
+        <form class="site-search home-search" method="get" action="/search.html" role="search">
+          <label class="site-search-label" for="home-q">Search OPTCG decklists</label>
+          <div class="site-search-row">
+            <input id="home-q" type="search" name="q" placeholder="Leader, player, character, or event" aria-label="Search OPTCG decklists" />
+            <button type="submit">Search</button>
+          </div>
+        </form>
 
         <section class="home-leaders-flow" id="leaders">
           <div class="home-leaders-intro">

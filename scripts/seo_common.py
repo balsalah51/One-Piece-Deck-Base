@@ -50,8 +50,17 @@ Allow: /favicon.ico
 Allow: /img/
 Allow: /
 
+User-agent: Mediapartners-Google
+Allow: /
+
 Sitemap: https://onepiecedeckbase.com/sitemap.xml
 """
+ADSENSE_CLIENT = "ca-pub-1074015774205047"
+ADSENSE_SCRIPT = (
+    f'  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_CLIENT}" '
+    'crossorigin="anonymous"></script>\n'
+)
+ADS_TXT = "google.com, pub-1074015774205047, DIRECT, f08c47fec0942fa0\n"
 
 # Leader id -> nearby constructed pages (same color family, same set, or same character).
 RELATED_LEADERS: dict[str, list[str]] = {
@@ -244,6 +253,7 @@ def google_head_tags(url: str, *, indexable: bool = True) -> str:
         f'  <link rel="search" type="application/opensearchdescription+xml" title="One Piece Deck Base" href="/opensearch.xml" />\n'
         f'  <link rel="alternate" hreflang="en" href="{u}" />\n'
         f'  <link rel="alternate" hreflang="x-default" href="{u}" />\n'
+        f"{ADSENSE_SCRIPT}"
     )
 
 
@@ -473,13 +483,37 @@ def parse_crumbs(text: str) -> list[tuple[str, str]]:
 
 
 FOOTER_LINKS = (
-    '      <a href="/guides/">Guides</a> · '
+    '      <a href="/tier-list.html">Tier List</a> · '
+    '<a href="/guides/">Guides</a> · '
     '<a href="/decklists/op17.html">Leaders</a> · '
     '<a href="/format.html">Format</a> · '
     '<a href="/search.html">Search</a> · '
     '<a href="/shop/">Shop</a> · '
     '<a href="/privacy.html">Privacy</a>'
 )
+
+
+def primary_nav_html(*, current: str | None = None, home: bool = False) -> str:
+    recent = "#recent" if home else "/#recent"
+    leaders = "#leaders" if home else "/decklists/op17.html"
+    items = [
+        ("/tier-list.html", "Tier List", "tier"),
+        (recent, "Recent lists", "recent"),
+        (leaders, "Leaders", "leaders"),
+        ("/format.html", "Format", "format"),
+        ("https://en.onepiece-cardgame.com/events/", "Events", "events"),
+        ("/guides/", "Guides", "guides"),
+        ("/shop/", "Shop", "shop"),
+        ("/search.html", "Search", "search"),
+        ("https://discord.gg/adZ2WUQ3D", "Discord", "discord"),
+    ]
+    lines = ['      <nav aria-label="Primary">']
+    for href, label, key in items:
+        cur = ' aria-current="page"' if key == current else ""
+        extra = ' target="_blank" rel="noopener"' if href.startswith("http") else ""
+        lines.append(f'        <a href="{href}"{cur}{extra}>{label}</a>')
+    lines.append("      </nav>")
+    return "\n".join(lines)
 
 FORMAT_FAQ = [
     (
